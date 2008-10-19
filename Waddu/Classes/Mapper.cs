@@ -292,7 +292,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("OmniCC", "4836", AddonSiteId.wowinterface));
             AddMapping(new Mapping("Possessions", "6443", AddonSiteId.wowinterface));
             AddMapping(new Mapping("QuestHelper", "9896", AddonSiteId.wowinterface));
-            AddMapping(new Mapping("TomTom", "7302", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("TomTom", "7032", AddonSiteId.wowinterface));
             AddMapping(new Mapping("TotemManager", "10080", AddonSiteId.wowinterface));
             AddMapping(new Mapping("TourGuide", "7674", AddonSiteId.wowinterface));
 
