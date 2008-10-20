@@ -237,5 +237,10 @@ namespace Waddu.BusinessObjects
             if (obj.GetType() != typeof(Addon)) { return false; }
             return (this as Addon).Name.Equals((obj as Addon).Name);
         }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

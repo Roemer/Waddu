@@ -260,12 +260,16 @@ namespace Waddu.Classes
             AddMapping(new Mapping("ZOMGBuffs", "zomgbuffs", AddonSiteId.wowace));
 
             // Blizzard
+            AddMapping(new Mapping("Blizzard_AchievementUI", "Blizzard_AchievementUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_AuctionUI", "Blizzard_AuctionUI", AddonSiteId.blizzard));
+            AddMapping(new Mapping("Blizzard_BarbershopUI", "Blizzard_BarbershopUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_BattlefieldMinimap", "Blizzard_BattlefieldMinimap", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_BindingUI", "Blizzard_BindingUI", AddonSiteId.blizzard));
+            AddMapping(new Mapping("Blizzard_Calendar", "Blizzard_Calendar", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_CombatLog", "Blizzard_CombatLog", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_CombatText", "Blizzard_CombatText", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_CraftUI", "Blizzard_CraftUI", AddonSiteId.blizzard));
+            AddMapping(new Mapping("Blizzard_GlyphUI", "Blizzard_GlyphUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_GMSurveyUI", "Blizzard_GMSurveyUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_GuildBankUI", "Blizzard_GuildBankUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_InspectUI", "Blizzard_InspectUI", AddonSiteId.blizzard));
@@ -274,6 +278,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("Blizzard_RaidUI", "Blizzard_RaidUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_TalentUI", "Blizzard_TalentUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_TimeManager", "Blizzard_TimeManager", AddonSiteId.blizzard));
+            AddMapping(new Mapping("Blizzard_TokenUI", "Blizzard_TokenUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_TradeSkillUI", "Blizzard_TradeSkillUI", AddonSiteId.blizzard));
             AddMapping(new Mapping("Blizzard_TrainerUI", "Blizzard_TrainerUI", AddonSiteId.blizzard));
 
@@ -298,6 +303,7 @@ namespace Waddu.Classes
 
             // WoWUI
             AddMapping(new Mapping("Atlas", "400", AddonSiteId.wowui));
+            AddMapping(new Mapping("QuestGuru", "4855", AddonSiteId.curse));
             AddMapping(new Mapping("QuestHelper", "6271", AddonSiteId.wowui));
             AddMapping(new Mapping("RogueFocus", "6060", AddonSiteId.wowui));
             AddMapping(new Mapping("Venantes", "4692", AddonSiteId.wowui));
@@ -320,6 +326,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("ItemRack", "item-rack", AddonSiteId.curse));
             AddMapping(new Mapping("Necrosis", "necrosis-ld-c", AddonSiteId.curse));
             AddMapping(new Mapping("OmniCC", "omni-cc", AddonSiteId.curse));
+            AddMapping(new Mapping("QuestGuru", "quest-guru", AddonSiteId.curse));
             AddMapping(new Mapping("QuestHelper", "quest-helper", AddonSiteId.curse));
             AddMapping(new Mapping("QuickStatsV2", "quick-stats-v2", AddonSiteId.curse));
             AddMapping(new Mapping("SimpleRaidTargetIcons", "simple-raid-target-icons", AddonSiteId.curse));
