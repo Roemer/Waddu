@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using Waddu.Classes;
+using Waddu.Classes.Win32;
 using Waddu.Types;
 
 namespace Waddu.BusinessObjects
@@ -186,12 +187,17 @@ namespace Waddu.BusinessObjects
             }
             if (Config.Instance.MoveToTrash)
             {
-                Win32.MoveFileToRecycleBin(addonPath);
+                int ret = NativeMethods.MoveToRecycleBin(addonPath);
+                if (ret != 0)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format("Move to bin failed: {0}", ret));
+                    return DeleteType.Failed;
+                }
                 return DeleteType.MovedToTrash;
             }
             else
             {
-                File.Delete(addonPath);
+                Directory.Delete(addonPath, true);
                 return DeleteType.Deleted;
             }
         }

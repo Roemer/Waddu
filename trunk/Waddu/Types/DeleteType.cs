@@ -6,6 +6,7 @@ namespace Waddu.Types
     {
         Deleted,
         MovedToTrash,
-        Inexistent
+        Inexistent,
+        Failed
     }
 }
