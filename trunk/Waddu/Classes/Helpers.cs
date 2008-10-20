@@ -46,17 +46,25 @@ namespace Waddu.Classes
         }
         public static List<string> GetHtml(string url, AddonSiteId addonSiteId)
         {
-            HttpWebRequest webRequest = WebRequest.Create(url) as HttpWebRequest;
-            webRequest.CookieContainer = CookieManager.GetCookies(addonSiteId);
-            WebResponse responseHtml = webRequest.GetResponse();
-            StreamReader reader = new StreamReader(responseHtml.GetResponseStream());
             List<string> lineList = new List<string>();
-            string line = null;
-            while ((line = reader.ReadLine()) != null)
+            try
             {
-                lineList.Add(line);
+                HttpWebRequest webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.CookieContainer = CookieManager.GetCookies(addonSiteId);
+                WebResponse responseHtml = webRequest.GetResponse();
+                StreamReader reader = new StreamReader(responseHtml.GetResponseStream());
+
+                string line = null;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lineList.Add(line);
+                }
+                reader.Close();
             }
-            reader.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Getting URL {0} failed:{1}{2}", url, Environment.NewLine, ex.Message));
+            }
             return lineList;
         }
 

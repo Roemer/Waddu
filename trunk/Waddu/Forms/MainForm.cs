@@ -19,7 +19,7 @@ namespace Waddu.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Used to Create a new Mapping File
-            Mapper.CreateMapping(@"c:\waddu_mappings.xml");
+            //Mapper.CreateMapping(@"c:\waddu_mappings.xml");
         }
 
         protected override void OnLoad(EventArgs e)
