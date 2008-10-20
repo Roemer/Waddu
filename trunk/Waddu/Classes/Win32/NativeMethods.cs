@@ -48,7 +48,7 @@ namespace Waddu.Classes.Win32
             SHFILEOPSTRUCT shf = new SHFILEOPSTRUCT();
             shf.wFunc = SHFileOperationType.FO_DELETE;
             shf.fFlags = ShFileOperationFlags.FOF_ALLOWUNDO | ShFileOperationFlags.FOF_NOCONFIRMATION;
-            shf.pFrom = filePath + "\0";
+            shf.pFrom = filePath + "\0" + "\0";
 
             int ret = SHFileOperation(shf);
             return ret;

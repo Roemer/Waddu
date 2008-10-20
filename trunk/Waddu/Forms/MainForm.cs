@@ -218,14 +218,21 @@ namespace Waddu.Forms
                 {
                     if (addon.IsSubAddon)
                     {
-                        e.CellStyle.ForeColor = Color.Gray;
+                        e.CellStyle.ForeColor = Color.LightGray;
+                    }
+                    else if (!addon.IsInstalled)
+                    {
                         e.CellStyle.BackColor = Color.LightGray;
                     }
-
-                    if (addon.Mappings.Count > 0)
+                    else if (addon.IsUnhandled)
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                    }
+                    else if (addon.Mappings.Count > 0)
                     {
                         if (addon.Mappings[0].AddonSiteId == AddonSiteId.blizzard)
                         {
+                            e.CellStyle.ForeColor = Color.Gray;
                             e.CellStyle.BackColor = Color.LightGray;
                         }
                     }

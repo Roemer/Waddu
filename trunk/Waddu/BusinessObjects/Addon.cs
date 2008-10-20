@@ -42,6 +42,14 @@ namespace Waddu.BusinessObjects
             }
         }
 
+        private bool _isUnhandled = false;
+        [Browsable(false)]
+        public bool IsUnhandled
+        {
+            get { return _isUnhandled; }
+            set { _isUnhandled = value; }
+        }
+
         private string _remoteVersions;
         public string RemoteVersions
         {
@@ -222,5 +230,12 @@ namespace Waddu.BusinessObjects
             }
         }
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) { return false; }
+            if (obj.GetType() != typeof(Addon)) { return false; }
+            return (this as Addon).Name.Equals((obj as Addon).Name);
+        }
     }
 }
