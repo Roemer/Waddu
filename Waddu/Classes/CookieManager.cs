@@ -58,7 +58,7 @@ namespace Waddu.Classes
             responseReader.Close();
 
             // Build POST Data
-            string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", loginName, loginPassword);
+            string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
 
             // Post to the Login Form
             string loginUrl = "http://www.wowace.com/home/login/";

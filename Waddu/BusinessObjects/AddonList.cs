@@ -32,6 +32,15 @@ namespace Waddu.BusinessObjects
             // Initialize List
             Addons = new List<Addon>();
 
+            // Get all Local Addons
+            string addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
+            List<Addon> localAddons = new List<Addon>();
+            foreach (string addonPath in Directory.GetDirectories(addonFolderPath))
+            {
+                Addon addon = new Addon(Path.GetFileName(addonPath));
+                localAddons.Add(addon);
+            }
+
             // Load XML File
             XmlDocument doc = new XmlDocument();
             try
@@ -56,6 +65,8 @@ namespace Waddu.BusinessObjects
                         // Create Addon
                         string addonName = addonNode.Attributes["Name"].Value;
                         Addon addon = new Addon(addonName);
+                        // Remove the Addon from the Local Addons List
+                        localAddons.Remove(addon);
 
                         // Loop thru the Mappings
                         XmlNode mappingListElement = addonNode.SelectSingleNode("Mappings");
@@ -80,6 +91,8 @@ namespace Waddu.BusinessObjects
                                 Addon subAddon = new Addon(subAddonElement.Attributes["Name"].Value);
                                 subAddon.IsSubAddon = true;
                                 addon.SubAddons.Add(subAddon);
+                                // Remove the SubAddon from the Local Addons List
+                                localAddons.Remove(subAddon);
                             }
                         }
 
@@ -89,6 +102,15 @@ namespace Waddu.BusinessObjects
                 }
             }
 
+            // We now have removed all Addons with Mapping and their SubAddons from the Local Addon List
+            // Add the remaining Local Addons (with no Mapping) to the AddonList
+            foreach (Addon addon in localAddons)
+            {
+                addon.IsUnhandled = true;
+                addonList.Add(addon);
+            }
+
+            // Sort the List
             addonList.Sort(
                 delegate(Addon x, Addon y)
                 {

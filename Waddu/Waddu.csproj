@@ -82,9 +82,9 @@
     <Compile Include="Classes\CookieManager.cs" />
     <Compile Include="Classes\IDownloadProgress.cs" />
     <Compile Include="Classes\Logger.cs" />
-    <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Classes\ThreadManager.cs" />
     <Compile Include="Classes\Helpers.cs" />
+    <Compile Include="Classes\Win32\NativeMethods.cs" />
     <Compile Include="Classes\Win32\Types\ShFileOperationFlags.cs" />
     <Compile Include="Classes\Win32\Types\SHFileOperationType.cs" />
     <Compile Include="Classes\Win32\Types\SHFILEOPSTRUCT.cs" />
