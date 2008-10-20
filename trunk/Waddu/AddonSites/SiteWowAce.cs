@@ -24,11 +24,11 @@ namespace Waddu.AddonSites
                     int start = line.IndexOf("/\">") + 3;
                     int end = line.IndexOf("</a>", start);
                     versionString = line.Substring(start, (end - start));
-                    if (versionString.Contains("-r"))
+                    /*if (versionString.Contains("-r"))
                     {
                         start = versionString.IndexOf("-r") + 1;
                         versionString = versionString.Substring(start);
-                    }
+                    }*/
                     break;
                 }
             }

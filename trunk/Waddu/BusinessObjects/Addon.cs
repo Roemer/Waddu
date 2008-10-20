@@ -121,7 +121,8 @@ namespace Waddu.BusinessObjects
             // Try by Changelog
             foreach (string file in Directory.GetFiles(addonFolderPath, "Changelog*"))
             {
-                int start = file.LastIndexOf("-") + 1;
+                int start = file.IndexOf("-") + 1;
+                start = file.IndexOf("-", start) + 1;
                 int end = file.LastIndexOf(".txt");
                 if (start > 0 && end > 0)
                 {
