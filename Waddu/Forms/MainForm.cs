@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using Waddu.AddonSites;
@@ -19,7 +20,7 @@ namespace Waddu.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Used to Create a new Mapping File
-            //Mapper.CreateMapping(@"c:\waddu_mappings.xml");
+            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
@@ -27,38 +28,59 @@ namespace Waddu.Forms
             base.OnLoad(e);
 
             // Initialize Logger
-            Logger.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
+            Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
+            Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntryFile);
 
             // Initialize the Thread Manager
             ThreadManager.Initialize();
 
             // Initialize the WorkerThread Status Display
-            dgvThreadActivity.DataSource = ThreadManager.Instance.WorkerThreadList;
+            dgvThreadActivity.AutoGenerateColumns = false;
+            dgvThreadActivity.Columns[0].DataPropertyName = "ThreadID";
+            dgvThreadActivity.Columns[1].DataPropertyName = "ThreadStatus";
+            dgvThreadActivity.Columns[2].DataPropertyName = "InfoText";
             dgvThreadActivity.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvThreadActivity.DataSource = ThreadManager.Instance.WorkerThreadList;
 
             // Setup Log Display
             dgvLog.ColumnHeadersVisible = false;
-            dgvLog.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLog.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            if (!Directory.Exists(Config.Instance.WowFolderPath))
+            {
+                Config.Instance.WowFolderPath = GetWoWFolder();
+                Config.Instance.SaveSettings();
+            }
 
             // Load local Addons
             LoadLocalAddons();
         }
 
-        private void Logger_LogEntry(string message)
+        private void Logger_LogEntry(LogEntry entry)
         {
             if (InvokeRequired)
             {
-                Invoke(new LogEntryEventHandler(Logger_LogEntry), message);
+                Invoke(new LogEntryEventHandler(Logger_LogEntry), entry);
                 return;
             }
-            dgvLog.Rows.Add(DateTime.Now.ToLongTimeString() + "." + DateTime.Now.Millisecond, message);
+            dgvLog.Rows.Add(entry.Date, entry.Type, entry.Message);
             dgvLog.CurrentCell = dgvLog.Rows[dgvLog.Rows.Count - 1].Cells[0];
+        }
+
+        private void Logger_LogEntryFile(LogEntry entry)
+        {
+            string logFileName = "log.txt";
+            string logFilePath = Path.Combine(Application.StartupPath, logFileName);
+            lock (Logger.Instance)
+            {
+                File.AppendAllText(logFilePath, entry.ToString() + Environment.NewLine);
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             // Stop Logging
-            Logger.LogEntry -= Logger_LogEntry;
+            Logger.Instance.LogEntry -= Logger_LogEntry;
             // Cleanup the Thread Manager (Close all Threads)
             ThreadManager.Instance.Dispose();
             // Base Closing
@@ -153,7 +175,7 @@ namespace Waddu.Forms
             }
         }
 
-        private void tsmWadduSingleAddon_Click(object sender, EventArgs e)
+        private void tsmiUpdateSingleAddon_Click(object sender, EventArgs e)
         {
             if (dgvAddons.SelectedRows.Count > 0)
             {
@@ -179,7 +201,7 @@ namespace Waddu.Forms
             }
         }
 
-        private void tsmWadduAllAddons_Click(object sender, EventArgs e)
+        private void tsmiUpdateAllAddons_Click(object sender, EventArgs e)
         {
             BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
             foreach (Addon addon in addonList)

@@ -44,6 +44,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -81,6 +83,7 @@
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\CookieManager.cs" />
     <Compile Include="Classes\IDownloadProgress.cs" />
+    <Compile Include="Classes\LogEntry.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\ThreadManager.cs" />
     <Compile Include="Classes\Helpers.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Types\AddonSiteId.cs" />
     <Compile Include="Types\DeleteType.cs" />
     <Compile Include="Types\GameType.cs" />
+    <Compile Include="Types\LogType.cs" />
     <Compile Include="Types\ThreadStatus.cs" />
     <Compile Include="Types\WorkItemType.cs" />
   </ItemGroup>
@@ -171,6 +175,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,7 +30,7 @@ namespace Waddu.Classes
 
         public static void Initialize()
         {
-            Logger.AddLog("Initializing ThreadManager with {0} Threads", Config.Instance.NumberOfThreads);
+            Logger.Instance.AddLog("Initializing ThreadManager with {0} Threads", Config.Instance.NumberOfThreads);
             _instance = new ThreadManager();
 
             for (int i = 0; i < Config.Instance.NumberOfThreads; i++)
