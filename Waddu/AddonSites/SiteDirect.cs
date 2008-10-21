@@ -2,7 +2,7 @@
 
 namespace Waddu.AddonSites
 {
-    public class SiteBlizzard : AddonSiteBase
+    public class SiteDirect : AddonSiteBase
     {
         #region AddonSiteBase Overrides
         public override string GetVersion(string tag)

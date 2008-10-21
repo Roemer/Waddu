@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,21 +58,24 @@
             this.tsmiFilterSubAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFilterBlizzard = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAddonDetails = new System.Windows.Forms.GroupBox();
+            this.linkDownload = new System.Windows.Forms.LinkLabel();
+            this.linkInfo = new System.Windows.Forms.LinkLabel();
             this.lbSubAddons = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtRemoteVersion = new System.Windows.Forms.TextBox();
             this.splitContainerEx3 = new Waddu.Controls.SplitContainerEx();
             this.dgvThreadActivity = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Info = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvLog = new System.Windows.Forms.DataGridView();
             this.dgcTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsLog = new System.Windows.Forms.ToolStrip();
             this.tsddLogLevel = new System.Windows.Forms.ToolStripDropDownButton();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Info = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ttMainForm = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -366,6 +369,8 @@
             // 
             // gbAddonDetails
             // 
+            this.gbAddonDetails.Controls.Add(this.linkDownload);
+            this.gbAddonDetails.Controls.Add(this.linkInfo);
             this.gbAddonDetails.Controls.Add(this.lbSubAddons);
             this.gbAddonDetails.Controls.Add(this.label1);
             this.gbAddonDetails.Controls.Add(this.label2);
@@ -378,6 +383,28 @@
             this.gbAddonDetails.TabStop = false;
             this.gbAddonDetails.Text = "Addon Details";
             // 
+            // linkDownload
+            // 
+            this.linkDownload.AutoSize = true;
+            this.linkDownload.Location = new System.Drawing.Point(7, 58);
+            this.linkDownload.Name = "linkDownload";
+            this.linkDownload.Size = new System.Drawing.Size(55, 13);
+            this.linkDownload.TabIndex = 5;
+            this.linkDownload.TabStop = true;
+            this.linkDownload.Text = "Download";
+            this.linkDownload.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDownload_LinkClicked);
+            // 
+            // linkInfo
+            // 
+            this.linkInfo.AutoSize = true;
+            this.linkInfo.Location = new System.Drawing.Point(7, 41);
+            this.linkInfo.Name = "linkInfo";
+            this.linkInfo.Size = new System.Drawing.Size(25, 13);
+            this.linkInfo.TabIndex = 4;
+            this.linkInfo.TabStop = true;
+            this.linkInfo.Text = "Info";
+            this.linkInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkInfo_LinkClicked);
+            // 
             // lbSubAddons
             // 
             this.lbSubAddons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -385,9 +412,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbSubAddons.FormattingEnabled = true;
             this.lbSubAddons.IntegralHeight = false;
-            this.lbSubAddons.Location = new System.Drawing.Point(9, 56);
+            this.lbSubAddons.Location = new System.Drawing.Point(9, 118);
             this.lbSubAddons.Name = "lbSubAddons";
-            this.lbSubAddons.Size = new System.Drawing.Size(315, 208);
+            this.lbSubAddons.Size = new System.Drawing.Size(315, 146);
             this.lbSubAddons.TabIndex = 1;
             // 
             // label1
@@ -402,7 +429,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 40);
+            this.label2.Location = new System.Drawing.Point(6, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 3;
@@ -466,6 +493,28 @@
             this.dgvThreadActivity.Size = new System.Drawing.Size(447, 132);
             this.dgvThreadActivity.TabIndex = 0;
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 50;
+            // 
+            // State
+            // 
+            this.State.HeaderText = "State";
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            this.State.Width = 80;
+            // 
+            // Info
+            // 
+            this.Info.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Info.HeaderText = "Info";
+            this.Info.Name = "Info";
+            this.Info.ReadOnly = true;
+            this.Info.Width = 50;
+            // 
             // dgvLog
             // 
             this.dgvLog.AllowUserToAddRows = false;
@@ -476,14 +525,14 @@
             this.Type,
             this.dgcMessage});
             this.dgvLog.ContextMenuStrip = this.ctxLog;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLog.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLog.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLog.Location = new System.Drawing.Point(0, 25);
             this.dgvLog.MultiSelect = false;
@@ -535,28 +584,6 @@
             this.tsddLogLevel.Name = "tsddLogLevel";
             this.tsddLogLevel.Size = new System.Drawing.Size(70, 22);
             this.tsddLogLevel.Text = "Log Level";
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 50;
-            // 
-            // State
-            // 
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
-            this.State.Width = 80;
-            // 
-            // Info
-            // 
-            this.Info.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Info.HeaderText = "Info";
-            this.Info.Name = "Info";
-            this.Info.ReadOnly = true;
-            this.Info.Width = 50;
             // 
             // MainForm
             // 
@@ -643,6 +670,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.DataGridViewTextBoxColumn Info;
+        private System.Windows.Forms.LinkLabel linkDownload;
+        private System.Windows.Forms.LinkLabel linkInfo;
+        private System.Windows.Forms.ToolTip ttMainForm;
 
     }
 }

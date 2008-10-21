@@ -8,6 +8,7 @@ using Waddu.AddonSites;
 using Waddu.BusinessObjects;
 using Waddu.Classes;
 using Waddu.Types;
+using System.Diagnostics;
 
 namespace Waddu.Forms
 {
@@ -288,6 +289,10 @@ namespace Waddu.Forms
                     }
 
                     txtRemoteVersion.Text = addon.RemoteVersions;
+
+                    ttMainForm.SetToolTip(linkInfo, addon.Name);
+                    linkInfo.Tag = addon;
+                    linkDownload.Tag = addon;
                 }
             }
         }
@@ -295,6 +300,22 @@ namespace Waddu.Forms
         private void tsmiFilter_CheckedChanged(object sender, EventArgs e)
         {
             LoadLocalAddons();
+        }
+
+        private void linkInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Addon addon = (sender as LinkLabel).Tag as Addon;
+            AddonSiteBase site = AddonSiteBase.GetSite(addon.Mappings[0].AddonSiteId);
+            string infoUrl = site.GetInfoLink(addon.Mappings[0].AddonTag);
+            Process.Start(infoUrl);
+        }
+
+        private void linkDownload_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Addon addon = (sender as LinkLabel).Tag as Addon;
+            AddonSiteBase site = AddonSiteBase.GetSite(addon.Mappings[0].AddonSiteId);
+            string downloadUrl = site.GetDownloadLink(addon.Mappings[0].AddonTag);
+            Process.Start(downloadUrl);
         }
     }
 }

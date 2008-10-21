@@ -35,6 +35,12 @@ namespace Waddu.AddonSites
             throw new NotImplementedException();
         }
 
+        public override string GetInfoLink(string tag)
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
+
         public override string GetDownloadLink(string tag)
         {
             // Mars

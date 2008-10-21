@@ -1,5 +1,9 @@
 ﻿Version History:
 
+??? - 0.3.0.0 (Alpha 3)
+- Fixed Crash when default WoW Folder doesn't exist
+- Save the Log
+
 20.10.2008 - 0.2.0.0 (Alpha 2)
 - Propably fixed the curse login with Special Chars
 - Fixed old Addon deleting
@@ -17,7 +21,6 @@
 Task List:
 - Function to send missing Mappings
 - Store Window and Column Sizes
-- Save the Log
 - Proxy Support
 - Cleanup Saved Variables (with Backup)
 - Ignoring Addons
@@ -29,5 +32,4 @@ Task List:
 - Create Editor for Mappings
 
 Bugs:
-- Crash when default WoW Folder doesn't exist
 - Catch protected (unreadable) Folders when deleting / extracting
