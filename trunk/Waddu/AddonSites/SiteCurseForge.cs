@@ -35,6 +35,11 @@ namespace Waddu.AddonSites
             return versionString;
         }
 
+        public override string GetInfoLink(string tag)
+        {
+            return _infoUrl.Replace("{tag}", tag);
+        }
+
         public override string GetDownloadLink(string tag)
         {
             string downloadUrl = string.Empty;

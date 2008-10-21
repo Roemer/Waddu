@@ -10,6 +10,7 @@ namespace Waddu.Types
         curse,
         wowui,
         wowinterface,
-        wowspecial
+        wowspecial,
+        direct
     }
 }

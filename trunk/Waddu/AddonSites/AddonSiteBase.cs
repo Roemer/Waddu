@@ -8,6 +8,8 @@ namespace Waddu.AddonSites
         #region Overridable Functions
         public abstract string GetVersion(string tag);
 
+        public abstract string GetInfoLink(string tag);
+
         public abstract string GetDownloadLink(string tag);
         #endregion
 
