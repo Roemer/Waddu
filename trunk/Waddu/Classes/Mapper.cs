@@ -129,6 +129,7 @@ namespace Waddu.Classes
         {
             // wowAce
             AddMapping(new Mapping("!BugGrabber", "bug-grabber", AddonSiteId.wowace));
+            AddMapping(new Mapping("!SurfaceControl", "surface-control", AddonSiteId.wowace));
             AddMapping(new Mapping("ACP", "acp", AddonSiteId.wowace));
             AddMapping(new Mapping("ag_UnitFrames", "ag_unitframes", AddonSiteId.wowace));
             AddMapping(new Mapping("Aloft", "aloft", AddonSiteId.wowace));
@@ -137,6 +138,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("ArkInventory", "ark-inventory", AddonSiteId.wowace));
             AddMapping(new Mapping("AtlasLoot", "atlasloot-enhanced", AddonSiteId.wowace));
             AddMapping(new Mapping("aUF_Banzai", "a-uf_banzai", AddonSiteId.wowace));
+            AddMapping(new Mapping("BadBoy", "bad-boy", AddonSiteId.wowace));
             AddMapping(new Mapping("Baggins", "baggins", AddonSiteId.wowace));
             AddMapping(new Mapping("Baggins_ClosetGnome", "baggins_closet-gnome", AddonSiteId.wowace));
             AddMapping(new Mapping("BankItems", "bank-items", AddonSiteId.wowace));
@@ -144,15 +146,26 @@ namespace Waddu.Classes
             AddMapping(new Mapping("Bartender4", "bartender4", AddonSiteId.wowace));
             AddMapping(new Mapping("BasicBuffs", "basic-buffs", AddonSiteId.wowace));
             AddMapping(new Mapping("beql", "beql", AddonSiteId.wowace));
+            AddMapping(new Mapping("BetterInbox", "better-inbox", AddonSiteId.wowace));
+            AddMapping(new Mapping("BigBrother", "big-brother", AddonSiteId.wowace));
             AddMapping(new Mapping("BigWigs", "big-wigs", AddonSiteId.wowace));
             AddMapping(new Mapping("BigWigs_KalecgosHealth", "bwkh", AddonSiteId.wowace));
             AddMapping(new Mapping("Broker_Clock", "broker_clock", AddonSiteId.wowace));
             AddMapping(new Mapping("Broker_Mail", "broker_mail", AddonSiteId.wowace));
+            AddMapping(new Mapping("Broker2FuBar", "broker2fubar", AddonSiteId.wowace));
             AddMapping(new Mapping("Buffalo", "buffalo", AddonSiteId.wowace));
             AddMapping(new Mapping("BuffEnough", "buff-enough", AddonSiteId.wowace));
             AddMapping(new Mapping("BugSack", "bugsack", AddonSiteId.wowace));
             AddMapping(new Mapping("ButtonFacade", "buttonfacade", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_Apathy", "buttonfacade_apathy", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_Caith", "buttonfacade_caith", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_Entropy", "buttonfacade_entropy", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_Gears", "buttonfacade_gears", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_HKitty", "button-facade_hkitty", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_LiteStep", "buttonfacade_litestep", AddonSiteId.wowace));
             AddMapping(new Mapping("ButtonFacade_Onyx", "buttonfacade_onyx", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_Serenity", "buttonfacade_serenity", AddonSiteId.wowace));
+            AddMapping(new Mapping("ButtonFacade_simpleSquare", "button-facade_simple-square", AddonSiteId.wowace));
             AddMapping(new Mapping("Capping", "capping", AddonSiteId.wowace));
             AddMapping(new Mapping("Cartographer", "cartographer", AddonSiteId.wowace));
             AddMapping(new Mapping("CCBreaker", "ccbreaker", AddonSiteId.wowace));
@@ -161,6 +174,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("Chinchilla", "chinchilla", AddonSiteId.wowace));
             AddMapping(new Mapping("ClassTimer", "classtimer", AddonSiteId.wowace));
             AddMapping(new Mapping("ClearFont2", "clear-font2", AddonSiteId.wowace));
+            AddMapping(new Mapping("ClearFont2_FontPack", "clear-font2_font-pack", AddonSiteId.wowace));
             AddMapping(new Mapping("Click2Cast", "click2cast", AddonSiteId.wowace));
             AddMapping(new Mapping("ClosetGnome", "closet-gnome", AddonSiteId.wowace));
             AddMapping(new Mapping("ClosetGnome_Banker", "closet-gnome_banker", AddonSiteId.wowace));
@@ -176,8 +190,12 @@ namespace Waddu.Classes
             AddMapping(new Mapping("DBM_API", "deadly-boss-mods", AddonSiteId.wowace));
             AddMapping(new Mapping("Dock", "dock", AddonSiteId.wowace));
             AddMapping(new Mapping("DotDotDot", "dot-dot-dot", AddonSiteId.wowace));
+            AddMapping(new Mapping("DrDamage", "dr-damage", AddonSiteId.wowace));
             AddMapping(new Mapping("EavesDrop", "eaves-drop", AddonSiteId.wowace));
             AddMapping(new Mapping("ElkBuffBars", "elkbuffbars", AddonSiteId.wowace));
+            AddMapping(new Mapping("Fence", "fence", AddonSiteId.wowace));
+            AddMapping(new Mapping("FishermansFriend", "fishermans-friend", AddonSiteId.wowace));
+            AddMapping(new Mapping("Fortress", "fortress", AddonSiteId.wowace));
             AddMapping(new Mapping("FreeRefills", "free-refills", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar", "fubar", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_AmmoFu", "fubar_ammofu", AddonSiteId.wowace));
@@ -188,21 +206,27 @@ namespace Waddu.Classes
             AddMapping(new Mapping("FuBar_FriendsFu", "fubar_friendsfu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_FuXPFu", "fu-bar_fu-xpfu", AddonSiteId.wowace));
             AddMapping(new Mapping("Fubar_GarbageFu", "fu-bar_garbage-fu", AddonSiteId.wowace));
+            AddMapping(new Mapping("FuBar_GroupFu", "fubar_groupfu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_GuildFu", "fubar_guildfu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_HonorFu", "fubar_honorfu", AddonSiteId.wowace));
+            AddMapping(new Mapping("FuBar_ItemBonusesFu", "fu-bar_item-bonuses-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_LocationFu", "fubar_locationfu", AddonSiteId.wowace));
             AddMapping(new Mapping("Fubar_MicroMenuFu", "fubar_micromenufu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_MoneyFu", "fu-bar_money-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_PerformanceFu", "fubar_performancefu", AddonSiteId.wowace));
             AddMapping(new Mapping("Fubar_PetFu", "fu-bar_pet-fu", AddonSiteId.wowace));
+            AddMapping(new Mapping("FuBar_QuestsFu", "fu-bar_quests-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("Fubar_RaidBuffFu", "fu-bar_raid-buff-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_ReagentFu", "fu-bar_reagent-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_ToFu", "fu-bar_to-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("FuBar_TopScoreFu", "fu-bar_top-score-fu", AddonSiteId.wowace));
             AddMapping(new Mapping("Fubar_TrainerFu", "fu-bar_trainer-fu", AddonSiteId.wowace));
-            AddMapping(new Mapping("Fubar_VolumeFu", "fu-bar_volume-fu", AddonSiteId.wowace));
+            AddMapping(new Mapping("FuBar_VolumeFu", "fu-bar_volume-fu", AddonSiteId.wowace));
+            AddMapping(new Mapping("FuBar2Broker", "fubar2broker", AddonSiteId.wowace));
+            AddMapping(new Mapping("FuTextures", "futextures", AddonSiteId.wowace));
             AddMapping(new Mapping("GatherMate", "gathermate", AddonSiteId.wowace));
             AddMapping(new Mapping("GatherMate_Data", "gathermate_data", AddonSiteId.wowace));
+            AddMapping(new Mapping("GatherMate_Sharing", "gathermate_sharing", AddonSiteId.wowace));
             AddMapping(new Mapping("GloryLib", "glorylib", AddonSiteId.wowace));
             AddMapping(new Mapping("Grid", "grid", AddonSiteId.wowace));
             AddMapping(new Mapping("GridIndicatorSideIcons", "grid-indicator-side-icons", AddonSiteId.wowace));
@@ -211,14 +235,23 @@ namespace Waddu.Classes
             AddMapping(new Mapping("GridStatusHots", "grid-status-hots", AddonSiteId.wowace));
             AddMapping(new Mapping("GridStatusMissingBuffs", "grid-status-missing-buffs", AddonSiteId.wowace));
             AddMapping(new Mapping("GridStatusReadyCheck", "grid-status-ready-check", AddonSiteId.wowace));
+            AddMapping(new Mapping("Grid2", "grid2", AddonSiteId.wowace));
             AddMapping(new Mapping("GrimReaper", "grim-reaper", AddonSiteId.wowace));
             AddMapping(new Mapping("HandyNotes", "handynotes", AddonSiteId.wowace));
+            AddMapping(new Mapping("HandyNotes_FlightMasters", "handy-notes_flight-masters", AddonSiteId.wowace));
+            AddMapping(new Mapping("HandyNotes_Guild", "handynotes_guild", AddonSiteId.wowace));
+            AddMapping(new Mapping("HandyNotes_Mailboxes", "handy-notes_mailboxes", AddonSiteId.wowace));
             AddMapping(new Mapping("HeadCount", "head-count", AddonSiteId.wowace));
+            AddMapping(new Mapping("InstanceMaps", "instance-maps", AddonSiteId.wowace));
             AddMapping(new Mapping("ItemPriceTooltip", "item-price-tooltip", AddonSiteId.wowace));
+            AddMapping(new Mapping("kgPanels", "kg-panels", AddonSiteId.wowace));
             AddMapping(new Mapping("LD50_abar", "ld50_abar", AddonSiteId.wowace));
+            AddMapping(new Mapping("Links", "links", AddonSiteId.wowace));
+            AddMapping(new Mapping("LittleWigs", "little-wigs", AddonSiteId.wowace));
             AddMapping(new Mapping("MagicDKP", "magic-dk", AddonSiteId.wowace));
             AddMapping(new Mapping("Manufac", "manufac", AddonSiteId.wowace));
             AddMapping(new Mapping("Mapster", "mapster", AddonSiteId.wowace));
+            AddMapping(new Mapping("Mendeleev", "mendeleev", AddonSiteId.wowace));
             AddMapping(new Mapping("Minimalist", "minimalist", AddonSiteId.wowace));
             AddMapping(new Mapping("MiniMapster", "minimapster", AddonSiteId.wowace));
             AddMapping(new Mapping("MobSpells", "mob-spells", AddonSiteId.wowace));
@@ -227,6 +260,8 @@ namespace Waddu.Classes
             AddMapping(new Mapping("Numen", "numen", AddonSiteId.wowace));
             AddMapping(new Mapping("nQuestLog", "n-quest-log", AddonSiteId.wowace));
             AddMapping(new Mapping("Omen", "omen-threat-meter", AddonSiteId.wowace));
+            AddMapping(new Mapping("OneBag3", "onebag3", AddonSiteId.wowace));
+            AddMapping(new Mapping("OptiTaunt", "opti-taunt", AddonSiteId.wowace));
             AddMapping(new Mapping("oRA2", "ora2", AddonSiteId.wowace));
             AddMapping(new Mapping("Parrot", "parrot", AddonSiteId.wowace));
             AddMapping(new Mapping("PitBull", "pit-bull", AddonSiteId.wowace));
@@ -239,14 +274,19 @@ namespace Waddu.Classes
             AddMapping(new Mapping("RangeRecolor", "range-recolor", AddonSiteId.wowace));
             AddMapping(new Mapping("RatingBuster", "rating-buster", AddonSiteId.wowace));
             AddMapping(new Mapping("Recount", "recount", AddonSiteId.wowace));
+            AddMapping(new Mapping("Rep2", "rep2", AddonSiteId.wowace));
+            AddMapping(new Mapping("Reslack", "reslack", AddonSiteId.wowace));
             AddMapping(new Mapping("RightWing", "right-wing", AddonSiteId.wowace));
             AddMapping(new Mapping("Routes", "routes", AddonSiteId.wowace));
             AddMapping(new Mapping("rSelfCast", "r-self-cast", AddonSiteId.wowace));
+            AddMapping(new Mapping("SalvationKiller", "salvation-killer", AddonSiteId.wowace));
             AddMapping(new Mapping("sct", "sct", AddonSiteId.wowace));
             AddMapping(new Mapping("sct_options", "sct_options", AddonSiteId.wowace));
             AddMapping(new Mapping("SharedMedia", "sharedmedia", AddonSiteId.wowace));
+            AddMapping(new Mapping("SharedMediaAdditionalFonts", "shared-media-additional-fonts", AddonSiteId.wowace));
             AddMapping(new Mapping("simpleMinimap", "simple-minimap", AddonSiteId.wowace));
             AddMapping(new Mapping("Skinner", "skinner", AddonSiteId.wowace));
+            AddMapping(new Mapping("SnapshotBar", "snapshot-bar", AddonSiteId.wowace));
             AddMapping(new Mapping("Sphere", "sphere", AddonSiteId.wowace));
             AddMapping(new Mapping("sRaidFrames", "sraidframes", AddonSiteId.wowace));
             AddMapping(new Mapping("StatBlockCore", "stat-block-core", AddonSiteId.wowace));
@@ -258,12 +298,15 @@ namespace Waddu.Classes
             AddMapping(new Mapping("Talented_Data", "talented_data", AddonSiteId.wowace));
             AddMapping(new Mapping("Talented_Loader", "talented_loader", AddonSiteId.wowace));
             AddMapping(new Mapping("TouristLib", "touristlib", AddonSiteId.wowace));
+            AddMapping(new Mapping("Transcriptor", "transcriptor", AddonSiteId.wowace));
+            AddMapping(new Mapping("WitchHunt", "witch-hunt", AddonSiteId.wowace));
             AddMapping(new Mapping("WoWEquip", "wowequip", AddonSiteId.wowace));
             AddMapping(new Mapping("XLoot", "xloot", AddonSiteId.wowace));
             AddMapping(new Mapping("XLootGroup", "xloot-group", AddonSiteId.wowace));
             AddMapping(new Mapping("XLootMaster", "xloot-master", AddonSiteId.wowace));
             AddMapping(new Mapping("XLootMonitor", "xloot-monitor", AddonSiteId.wowace));
             AddMapping(new Mapping("XPerl", "xperl", AddonSiteId.wowace));
+            AddMapping(new Mapping("XRS", "xrs", AddonSiteId.wowace));
             AddMapping(new Mapping("YurrCombatLog", "yurr-combat-log", AddonSiteId.wowace));
             AddMapping(new Mapping("ZOMGBuffs", "zomgbuffs", AddonSiteId.wowace));
 
@@ -294,7 +337,12 @@ namespace Waddu.Classes
             AddMapping(new Mapping("!!Warmup", "4939", AddonSiteId.wowinterface)); // RAR
             AddMapping(new Mapping("AddonManager", "7164", AddonSiteId.wowinterface));
             AddMapping(new Mapping("Afflicted2", "8063", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("Aloft", "10864", AddonSiteId.wowinterface));
             AddMapping(new Mapping("Atlas", "3896", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("ButtonFacade_Elegance", "9623", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("ButtonFacade_Sleek", "11010", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("ButtonFacade_Tones", "9712", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("Capping", "11177", AddonSiteId.wowinterface));
             AddMapping(new Mapping("Clique", "5108", AddonSiteId.wowinterface));
             AddMapping(new Mapping("DPS", "11059", AddonSiteId.wowinterface));
             AddMapping(new Mapping("DRTracker", "8901", AddonSiteId.wowinterface));
@@ -302,9 +350,13 @@ namespace Waddu.Classes
             AddMapping(new Mapping("FuBar_AuditorFu", "5429", AddonSiteId.wowinterface));
             AddMapping(new Mapping("GFW_FeedOMatic", "4160", AddonSiteId.wowinterface));
             AddMapping(new Mapping("Hack", "11101", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("InFlight", "11178", AddonSiteId.wowinterface));
             AddMapping(new Mapping("ItemRack", "6818", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("Ludwig", "5174", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("MikScrollingBattleText", "5153", AddonSiteId.wowinterface));
             AddMapping(new Mapping("MTLove", "7024", AddonSiteId.wowinterface));
             AddMapping(new Mapping("OmniCC", "4836", AddonSiteId.wowinterface));
+            AddMapping(new Mapping("OPie", "9094", AddonSiteId.wowinterface));
             AddMapping(new Mapping("Possessions", "6443", AddonSiteId.wowinterface));
             AddMapping(new Mapping("QuestHelper", "9896", AddonSiteId.wowinterface));
             AddMapping(new Mapping("TomTom", "7032", AddonSiteId.wowinterface));
@@ -334,6 +386,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("FocusFrame", "focus-frame", AddonSiteId.curse));
             AddMapping(new Mapping("GoGoMount", "go-go-mount", AddonSiteId.curse));
             AddMapping(new Mapping("ItemRack", "item-rack", AddonSiteId.curse));
+            AddMapping(new Mapping("MikScrollingBattleText", "mik-scrolling-battle-text", AddonSiteId.curse));
             AddMapping(new Mapping("Necrosis", "necrosis-ld-c", AddonSiteId.curse));
             AddMapping(new Mapping("OmniCC", "omni-cc", AddonSiteId.curse));
             AddMapping(new Mapping("Outfitter", "outfitter", AddonSiteId.curse));
@@ -344,6 +397,7 @@ namespace Waddu.Classes
             AddMapping(new Mapping("SW_Stats", "sw-stats", AddonSiteId.curse));
             AddMapping(new Mapping("WhoHas", "who-has", AddonSiteId.curse));
             AddMapping(new Mapping("WIM", "wim-wo-w-instant-messenger", AddonSiteId.curse));
+            AddMapping(new Mapping("XLoot", "xloot", AddonSiteId.curse));
             AddMapping(new Mapping("ZHunterMod", "zhunter-mod", AddonSiteId.curse));
 
             // Special
@@ -377,6 +431,7 @@ namespace Waddu.Classes
             AddSubAddon("BigWigs", "BigWigs_Extras");
             AddSubAddon("BigWigs", "BigWigs_Hyjal");
             AddSubAddon("BigWigs", "BigWigs_Karazhan");
+            AddSubAddon("BigWigs", "BigWigs_Naxxramas");
             AddSubAddon("BigWigs", "BigWigs_Outland");
             AddSubAddon("BigWigs", "BigWigs_Plugins");
             AddSubAddon("BigWigs", "BigWigs_SC");
@@ -412,8 +467,23 @@ namespace Waddu.Classes
             AddSubAddon("DBM_API", "DBM_Sunwell");
             AddSubAddon("DBM_API", "DBM_TheEye");
             AddSubAddon("DBM_API", "DBM_ZulAman");
+            // Grid2
+            AddSubAddon("Grid2", "Grid2Options");
+            // InFlight
+            AddSubAddon("InFlight", "InFlight_Load");
             // ItemRack
             AddSubAddon("ItemRack", "ItemRackOptions");
+            // kgPanels
+            AddSubAddon("kgPanels", "kgPanelsConfig");
+            // LittleWigs
+            AddSubAddon("LittleWigs", "LittleWigs_Auchindoun");
+            AddSubAddon("LittleWigs", "LittleWigs_Coilfang");
+            AddSubAddon("LittleWigs", "LittleWigs_CoT");
+            AddSubAddon("LittleWigs", "LittleWigs_HellfireCitadel");
+            AddSubAddon("LittleWigs", "LittleWigs_MagistersTerrace");
+            AddSubAddon("LittleWigs", "LittleWigs_TempestKeep");
+            // MikScrollingBattleText
+            AddSubAddon("MikScrollingBattleText", "MSBTOptions");
             // MobMap
             AddSubAddon("MobMap", "MobMapDatabaseStub1");
             AddSubAddon("MobMap", "MobMapDatabaseStub2");
@@ -431,6 +501,10 @@ namespace Waddu.Classes
             AddSubAddon("MobMap", "MobMapDatabaseStub14");
             // OmniCC
             AddSubAddon("OmniCC", "OmniCC_Options");
+            // oRA2
+            AddSubAddon("oRA2", "oRA2_Leader");
+            AddSubAddon("oRA2", "oRA2_Optional");
+            AddSubAddon("oRA2", "oRA2_Participant");
             // Prat
             AddSubAddon("Prat-3.0", "Prat-3.0_HighCPUUsageModules");
             AddSubAddon("Prat-3.0", "Prat-3.0_Libraries");
@@ -492,9 +566,6 @@ namespace Waddu.Classes
             //Informant
             //Minimalist_ButtonFrame
             //Minimalist_ButtonFrameTitanPlugin
-            //oRA2_Leader
-            //oRA2_Optional
-            //oRA2_Participant
             //Stubby
             //-Shantalya-Infoleiste
             //AckisRecipeList

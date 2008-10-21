@@ -496,6 +496,5 @@ namespace Waddu.Controls
                 base.SplitterDistance = value;
             }
         }
-
     }
 }
