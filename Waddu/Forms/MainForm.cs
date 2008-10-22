@@ -28,6 +28,21 @@ namespace Waddu.Forms
         {
             base.OnLoad(e);
 
+            // Initialize the WorkerThread Status Display
+            dgvThreadActivity.AutoGenerateColumns = false;
+            dgvThreadActivity.Columns[0].DataPropertyName = "ThreadID";
+            dgvThreadActivity.Columns[1].DataPropertyName = "ThreadStatus";
+            dgvThreadActivity.Columns[2].DataPropertyName = "InfoText";
+            dgvThreadActivity.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            // Setup Log Display
+            dgvLog.AutoGenerateColumns = false;
+            dgvLog.ColumnHeadersVisible = false;
+            dgvThreadActivity.Columns[0].DataPropertyName = "Date";
+            dgvThreadActivity.Columns[1].DataPropertyName = "Type";
+            dgvThreadActivity.Columns[2].DataPropertyName = "Message";
+            dgvLog.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             // Initialize Logger
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntryFile);
@@ -35,17 +50,8 @@ namespace Waddu.Forms
             // Initialize the Thread Manager
             ThreadManager.Initialize();
 
-            // Initialize the WorkerThread Status Display
-            dgvThreadActivity.AutoGenerateColumns = false;
-            dgvThreadActivity.Columns[0].DataPropertyName = "ThreadID";
-            dgvThreadActivity.Columns[1].DataPropertyName = "ThreadStatus";
-            dgvThreadActivity.Columns[2].DataPropertyName = "InfoText";
-            dgvThreadActivity.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            // Associate DataSources
             dgvThreadActivity.DataSource = ThreadManager.Instance.WorkerThreadList;
-
-            // Setup Log Display
-            dgvLog.ColumnHeadersVisible = false;
-            dgvLog.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (!Directory.Exists(Config.Instance.WowFolderPath))
             {
@@ -64,8 +70,8 @@ namespace Waddu.Forms
                 Invoke(new LogEntryEventHandler(Logger_LogEntry), entry);
                 return;
             }
-            dgvLog.Rows.Add(entry.Date, entry.Type, entry.Message);
-            dgvLog.CurrentCell = dgvLog.Rows[dgvLog.Rows.Count - 1].Cells[0];
+            // Reload Log
+            dgvLog.DataSource = Logger.Instance.GetEntries(LogType.Debug);
         }
 
         private void Logger_LogEntryFile(LogEntry entry)
@@ -316,6 +322,24 @@ namespace Waddu.Forms
             AddonSiteBase site = AddonSiteBase.GetSite(addon.Mappings[0].AddonSiteId);
             string downloadUrl = site.GetDownloadLink(addon.Mappings[0].AddonTag);
             Process.Start(downloadUrl);
+        }
+
+        private void tsmiLogLevelItem_Click(object sender, EventArgs e)
+        {
+            tsmiLogDebug.Checked = false;
+            tsmiLogInformation.Checked = false;
+            tsmiLogWarning.Checked = false;
+            tsmiLogError.Checked = false;
+
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            if (tsmi != null)
+            {
+                tsmi.Checked = true;
+            }
+
+            // Reload Log
+            dgvLog.Rows.Clear();
+            dgvLog.DataSource = Logger.Instance.GetEntries(LogType.Information);
         }
     }
 }

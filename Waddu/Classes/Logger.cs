@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Waddu.Types;
+using System.ComponentModel;
 
 namespace Waddu.Classes
 {
@@ -29,11 +30,23 @@ namespace Waddu.Classes
             _entryList = new List<LogEntry>();
         }
 
-        public void AddLog(string message, params object[] strParams)
+        public BindingList<LogEntry> GetEntries(LogType type)
         {
-            AddLog(message, LogType.Information, strParams);
+            BindingList<LogEntry> retList = new BindingList<LogEntry>();
+            lock (_entryList)
+            {
+                foreach (LogEntry entry in _entryList)
+                {
+                    if ((int)entry.Type >= (int)type)
+                    {
+                        retList.Add(entry);
+                    }
+                }
+            }
+            return retList;
         }
-        public void AddLog(string message, LogType logType, params object[] strParams)
+
+        public void AddLog(LogType logType, string message, params object[] strParams)
         {
             LogEntry newEntry = new LogEntry(string.Format(message, strParams), logType);
             _entryList.Add(newEntry);
