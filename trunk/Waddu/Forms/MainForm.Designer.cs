@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +47,7 @@
             this.tsmiClearLog = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxThread = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAbortThread = new System.Windows.Forms.ToolStripMenuItem();
+            this.ttMainForm = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainerEx2 = new Waddu.Controls.SplitContainerEx();
             this.splitContainerEx1 = new Waddu.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
@@ -75,7 +76,10 @@
             this.dgcMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsLog = new System.Windows.Forms.ToolStrip();
             this.tsddLogLevel = new System.Windows.Forms.ToolStripDropDownButton();
-            this.ttMainForm = new System.Windows.Forms.ToolTip(this.components);
+            this.tsmiLogDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -525,14 +529,14 @@
             this.Type,
             this.dgcMessage});
             this.dgvLog.ContextMenuStrip = this.ctxLog;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLog.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLog.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLog.Location = new System.Drawing.Point(0, 25);
             this.dgvLog.MultiSelect = false;
@@ -579,11 +583,48 @@
             // tsddLogLevel
             // 
             this.tsddLogLevel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddLogLevel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiLogDebug,
+            this.tsmiLogInformation,
+            this.tsmiLogWarning,
+            this.tsmiLogError});
             this.tsddLogLevel.Image = ((System.Drawing.Image)(resources.GetObject("tsddLogLevel.Image")));
             this.tsddLogLevel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddLogLevel.Name = "tsddLogLevel";
             this.tsddLogLevel.Size = new System.Drawing.Size(70, 22);
             this.tsddLogLevel.Text = "Log Level";
+            // 
+            // tsmiLogDebug
+            // 
+            this.tsmiLogDebug.CheckOnClick = true;
+            this.tsmiLogDebug.Name = "tsmiLogDebug";
+            this.tsmiLogDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogDebug.Text = "Debug";
+            this.tsmiLogDebug.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
+            // 
+            // tsmiLogInformation
+            // 
+            this.tsmiLogInformation.CheckOnClick = true;
+            this.tsmiLogInformation.Name = "tsmiLogInformation";
+            this.tsmiLogInformation.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogInformation.Text = "Information";
+            this.tsmiLogInformation.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
+            // 
+            // tsmiLogWarning
+            // 
+            this.tsmiLogWarning.CheckOnClick = true;
+            this.tsmiLogWarning.Name = "tsmiLogWarning";
+            this.tsmiLogWarning.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogWarning.Text = "Warning";
+            this.tsmiLogWarning.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
+            // 
+            // tsmiLogError
+            // 
+            this.tsmiLogError.CheckOnClick = true;
+            this.tsmiLogError.Name = "tsmiLogError";
+            this.tsmiLogError.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogError.Text = "Error";
+            this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
             // MainForm
             // 
@@ -673,6 +714,10 @@
         private System.Windows.Forms.LinkLabel linkDownload;
         private System.Windows.Forms.LinkLabel linkInfo;
         private System.Windows.Forms.ToolTip ttMainForm;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLogDebug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLogInformation;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLogWarning;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLogError;
 
     }
 }
