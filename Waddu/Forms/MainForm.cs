@@ -20,7 +20,7 @@ namespace Waddu.Forms
 
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
-            // Used to Create a new Mapping File
+            // Create / Update the Mapping File
             Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
@@ -28,7 +28,7 @@ namespace Waddu.Forms
         {
             base.OnLoad(e);
 
-            // Initialize the WorkerThread Status Display
+            // Setup WorkerThread Status Display
             dgvThreadActivity.AutoGenerateColumns = false;
             dgvThreadActivity.Columns[0].DataPropertyName = "ThreadID";
             dgvThreadActivity.Columns[1].DataPropertyName = "ThreadStatus";
@@ -38,10 +38,14 @@ namespace Waddu.Forms
             // Setup Log Display
             dgvLog.AutoGenerateColumns = false;
             dgvLog.ColumnHeadersVisible = false;
-            dgvThreadActivity.Columns[0].DataPropertyName = "Date";
-            dgvThreadActivity.Columns[1].DataPropertyName = "Type";
-            dgvThreadActivity.Columns[2].DataPropertyName = "Message";
+            dgvLog.Columns[0].DataPropertyName = "Date";
+            dgvLog.Columns[1].DataPropertyName = "Type";
+            dgvLog.Columns[2].DataPropertyName = "Message";
             dgvLog.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            // Setup Mappings Display
+            //dgvMappings.AutoGenerateColumns = false;
+            //dgvMappings.ColumnHeadersVisible = false;
 
             // Initialize Logger
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
@@ -71,7 +75,7 @@ namespace Waddu.Forms
                 return;
             }
             // Reload Log
-            dgvLog.DataSource = Logger.Instance.GetEntries(LogType.Debug);
+            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
         }
 
         private void Logger_LogEntryFile(LogEntry entry)
@@ -295,7 +299,7 @@ namespace Waddu.Forms
                     }
 
                     txtRemoteVersion.Text = addon.RemoteVersions;
-
+                    dgvMappings.DataSource = addon.Mappings;
                     ttMainForm.SetToolTip(linkInfo, addon.Name);
                     linkInfo.Tag = addon;
                     linkDownload.Tag = addon;
@@ -337,9 +341,26 @@ namespace Waddu.Forms
                 tsmi.Checked = true;
             }
 
+            if (tsmiLogDebug.Checked)
+            {
+                Config.Instance.LogLevel = LogType.Debug;
+            }
+            else if (tsmiLogInformation.Checked)
+            {
+                Config.Instance.LogLevel = LogType.Information;
+            }
+            else if (tsmiLogWarning.Checked)
+            {
+                Config.Instance.LogLevel = LogType.Warning;
+            }
+            else if (tsmiLogError.Checked)
+            {
+                Config.Instance.LogLevel = LogType.Error;
+            }
+            Config.Instance.SaveSettings();
+
             // Reload Log
-            dgvLog.Rows.Clear();
-            dgvLog.DataSource = Logger.Instance.GetEntries(LogType.Information);
+            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using Waddu.Types;
 
 namespace Waddu.Classes
 {
@@ -81,6 +82,13 @@ namespace Waddu.Classes
             get { return _mappingFile; }
             set { _mappingFile = value; }
         }
+
+        private LogType _logLevel = LogType.Information;
+        public LogType LogLevel
+        {
+            get { return _logLevel; }
+            set { _logLevel = value; }
+        }
         #endregion
 
         // Constructor
@@ -143,6 +151,10 @@ namespace Waddu.Classes
             {
                 MappingFile = value;
             }
+            if (GetSetting("LogLevel", out value))
+            {
+                LogLevel = (LogType)Enum.Parse(typeof(LogType), value);
+            }
         }
 
         private bool GetSetting(string settingName, out string value)
@@ -174,6 +186,7 @@ namespace Waddu.Classes
             }
             SaveSetting("SavePassword", SavePassword);
             SaveSetting("MappingFile", MappingFile);
+            SaveSetting("LogLevel", LogLevel);
             _xmlDoc.Save(_configFilePath);
         }
 

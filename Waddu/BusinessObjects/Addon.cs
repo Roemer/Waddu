@@ -57,6 +57,13 @@ namespace Waddu.BusinessObjects
             set { _remoteVersions = value; NotifyPropertyChanged("RemoteVersions"); }
         }
 
+        private Mapping _bestMapping;
+        public Mapping BestMapping
+        {
+            get { return _bestMapping; }
+            set { _bestMapping = value; NotifyPropertyChanged("BestMapping"); }
+        }
+
         private BindingList<Addon> _subAddonList;
         public BindingList<Addon> SubAddons
         {
