@@ -2,6 +2,7 @@
 using Waddu.AddonSites;
 using Waddu.Classes;
 using Waddu.Types;
+using System;
 
 namespace Waddu.BusinessObjects
 {
@@ -33,6 +34,13 @@ namespace Waddu.BusinessObjects
         {
             get { return GetRemoteVersion(); }
         }
+
+        private DateTime _lastUpdated;
+        public DateTime LastUpdated
+        {
+            get { return _lastUpdated; }
+            set { _lastUpdated = value; }
+        }
         #endregion
 
         #region Constructors
@@ -62,6 +70,7 @@ namespace Waddu.BusinessObjects
         /// </summary>
         private string GetRemoteVersion()
         {
+            return "sasdf";
             AddonSiteBase addonSite = AddonSiteBase.GetSite(AddonSiteId);
             return addonSite.GetVersion(AddonTag);
         }

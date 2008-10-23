@@ -59,6 +59,7 @@
             this.tsmiFilterSubAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFilterBlizzard = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAddonDetails = new System.Windows.Forms.GroupBox();
+            this.dgvMappings = new System.Windows.Forms.DataGridView();
             this.linkDownload = new System.Windows.Forms.LinkLabel();
             this.linkInfo = new System.Windows.Forms.LinkLabel();
             this.lbSubAddons = new System.Windows.Forms.ListBox();
@@ -94,6 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddons)).BeginInit();
             this.tsAddon.SuspendLayout();
             this.gbAddonDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMappings)).BeginInit();
             this.splitContainerEx3.Panel1.SuspendLayout();
             this.splitContainerEx3.Panel2.SuspendLayout();
             this.splitContainerEx3.SuspendLayout();
@@ -300,7 +302,6 @@
             this.dgvAddons.ContextMenuStrip = this.ctxAddon;
             this.dgvAddons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAddons.Location = new System.Drawing.Point(3, 41);
-            this.dgvAddons.MultiSelect = false;
             this.dgvAddons.Name = "dgvAddons";
             this.dgvAddons.ReadOnly = true;
             this.dgvAddons.RowHeadersVisible = false;
@@ -373,6 +374,7 @@
             // 
             // gbAddonDetails
             // 
+            this.gbAddonDetails.Controls.Add(this.dgvMappings);
             this.gbAddonDetails.Controls.Add(this.linkDownload);
             this.gbAddonDetails.Controls.Add(this.linkInfo);
             this.gbAddonDetails.Controls.Add(this.lbSubAddons);
@@ -387,10 +389,25 @@
             this.gbAddonDetails.TabStop = false;
             this.gbAddonDetails.Text = "Addon Details";
             // 
+            // dgvMappings
+            // 
+            this.dgvMappings.AllowUserToAddRows = false;
+            this.dgvMappings.AllowUserToDeleteRows = false;
+            this.dgvMappings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvMappings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMappings.Location = new System.Drawing.Point(10, 57);
+            this.dgvMappings.Name = "dgvMappings";
+            this.dgvMappings.ReadOnly = true;
+            this.dgvMappings.RowHeadersVisible = false;
+            this.dgvMappings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMappings.Size = new System.Drawing.Size(308, 109);
+            this.dgvMappings.TabIndex = 6;
+            // 
             // linkDownload
             // 
             this.linkDownload.AutoSize = true;
-            this.linkDownload.Location = new System.Drawing.Point(7, 58);
+            this.linkDownload.Location = new System.Drawing.Point(38, 41);
             this.linkDownload.Name = "linkDownload";
             this.linkDownload.Size = new System.Drawing.Size(55, 13);
             this.linkDownload.TabIndex = 5;
@@ -416,9 +433,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbSubAddons.FormattingEnabled = true;
             this.lbSubAddons.IntegralHeight = false;
-            this.lbSubAddons.Location = new System.Drawing.Point(9, 118);
+            this.lbSubAddons.Location = new System.Drawing.Point(9, 185);
             this.lbSubAddons.Name = "lbSubAddons";
-            this.lbSubAddons.Size = new System.Drawing.Size(315, 146);
+            this.lbSubAddons.Size = new System.Drawing.Size(315, 79);
             this.lbSubAddons.TabIndex = 1;
             // 
             // label1
@@ -433,7 +450,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 102);
+            this.label2.Location = new System.Drawing.Point(7, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 3;
@@ -598,7 +615,7 @@
             // 
             this.tsmiLogDebug.CheckOnClick = true;
             this.tsmiLogDebug.Name = "tsmiLogDebug";
-            this.tsmiLogDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogDebug.Size = new System.Drawing.Size(137, 22);
             this.tsmiLogDebug.Text = "Debug";
             this.tsmiLogDebug.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
@@ -606,7 +623,7 @@
             // 
             this.tsmiLogInformation.CheckOnClick = true;
             this.tsmiLogInformation.Name = "tsmiLogInformation";
-            this.tsmiLogInformation.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogInformation.Size = new System.Drawing.Size(137, 22);
             this.tsmiLogInformation.Text = "Information";
             this.tsmiLogInformation.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
@@ -614,7 +631,7 @@
             // 
             this.tsmiLogWarning.CheckOnClick = true;
             this.tsmiLogWarning.Name = "tsmiLogWarning";
-            this.tsmiLogWarning.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogWarning.Size = new System.Drawing.Size(137, 22);
             this.tsmiLogWarning.Text = "Warning";
             this.tsmiLogWarning.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
@@ -622,7 +639,7 @@
             // 
             this.tsmiLogError.CheckOnClick = true;
             this.tsmiLogError.Name = "tsmiLogError";
-            this.tsmiLogError.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLogError.Size = new System.Drawing.Size(137, 22);
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
@@ -654,6 +671,7 @@
             this.tsAddon.PerformLayout();
             this.gbAddonDetails.ResumeLayout(false);
             this.gbAddonDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMappings)).EndInit();
             this.splitContainerEx3.Panel1.ResumeLayout(false);
             this.splitContainerEx3.Panel2.ResumeLayout(false);
             this.splitContainerEx3.Panel2.PerformLayout();
@@ -718,6 +736,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiLogInformation;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogWarning;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogError;
+        private System.Windows.Forms.DataGridView dgvMappings;
 
     }
 }
