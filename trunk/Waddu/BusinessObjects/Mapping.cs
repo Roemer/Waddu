@@ -30,16 +30,18 @@ namespace Waddu.BusinessObjects
             set { _addonSiteId = value; NotifyPropertyChanged("AddonSiteId"); }
         }
 
+        private string _remoteVersion;
         public string RemoteVersion
         {
-            get { return GetRemoteVersion(); }
+            get { return _remoteVersion; }
+            set { _remoteVersion = value; NotifyPropertyChanged("RemoteVersion"); }
         }
 
         private DateTime _lastUpdated;
         public DateTime LastUpdated
         {
             get { return _lastUpdated; }
-            set { _lastUpdated = value; }
+            set { _lastUpdated = value; NotifyPropertyChanged("LastUpdated"); }
         }
         #endregion
 
@@ -68,11 +70,11 @@ namespace Waddu.BusinessObjects
         /// <summary>
         /// Get the Remote Version of an Addon
         /// </summary>
-        private string GetRemoteVersion()
+        public void CheckRemote()
         {
-            return "sasdf";
             AddonSiteBase addonSite = AddonSiteBase.GetSite(AddonSiteId);
-            return addonSite.GetVersion(AddonTag);
+            RemoteVersion = addonSite.GetVersion(AddonTag);
+            //LastUpdated = addonSite.GetLastUpdated(AddonTag);
         }
 
         public override string ToString()

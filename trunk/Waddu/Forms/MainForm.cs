@@ -298,11 +298,13 @@ namespace Waddu.Forms
                         lbSubAddons.Items.Add(subAddon.Name);
                     }
 
-                    txtRemoteVersion.Text = addon.RemoteVersions;
-                    dgvMappings.DataSource = addon.Mappings;
-                    ttMainForm.SetToolTip(linkInfo, addon.Name);
+                    txtName.Text = addon.Name;
+                    txtLocalVersion.Text = addon.LocalVersion;
                     linkInfo.Tag = addon;
                     linkDownload.Tag = addon;
+                    ttMainForm.SetToolTip(linkInfo, addon.Name);
+                    ttMainForm.SetToolTip(linkDownload, addon.Name);
+                    dgvMappings.DataSource = addon.Mappings;
                 }
             }
         }

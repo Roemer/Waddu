@@ -59,13 +59,16 @@
             this.tsmiFilterSubAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFilterBlizzard = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAddonDetails = new System.Windows.Forms.GroupBox();
+            this.txtLocalVersion = new System.Windows.Forms.TextBox();
+            this.lblLocalVersion = new System.Windows.Forms.Label();
+            this.gbMappings = new System.Windows.Forms.GroupBox();
             this.dgvMappings = new System.Windows.Forms.DataGridView();
+            this.gbSubAddons = new System.Windows.Forms.GroupBox();
+            this.lbSubAddons = new System.Windows.Forms.ListBox();
             this.linkDownload = new System.Windows.Forms.LinkLabel();
             this.linkInfo = new System.Windows.Forms.LinkLabel();
-            this.lbSubAddons = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtRemoteVersion = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.splitContainerEx3 = new Waddu.Controls.SplitContainerEx();
             this.dgvThreadActivity = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +84,9 @@
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
+            this.Site = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -95,7 +101,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddons)).BeginInit();
             this.tsAddon.SuspendLayout();
             this.gbAddonDetails.SuspendLayout();
+            this.gbMappings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMappings)).BeginInit();
+            this.gbSubAddons.SuspendLayout();
             this.splitContainerEx3.Panel1.SuspendLayout();
             this.splitContainerEx3.Panel2.SuspendLayout();
             this.splitContainerEx3.SuspendLayout();
@@ -111,7 +119,7 @@
             this.tsmiAddons});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(797, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(787, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -248,8 +256,8 @@
             // 
             this.splitContainerEx2.Panel2.Controls.Add(this.splitContainerEx3);
             this.splitContainerEx2.Panel2MaxSize = 0;
-            this.splitContainerEx2.Size = new System.Drawing.Size(797, 422);
-            this.splitContainerEx2.SplitterDistance = 270;
+            this.splitContainerEx2.Size = new System.Drawing.Size(787, 524);
+            this.splitContainerEx2.SplitterDistance = 335;
             this.splitContainerEx2.SplitterWidth = 20;
             this.splitContainerEx2.TabIndex = 13;
             this.splitContainerEx2.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
@@ -276,8 +284,8 @@
             // 
             this.splitContainerEx1.Panel2.Controls.Add(this.gbAddonDetails);
             this.splitContainerEx1.Panel2MaxSize = 0;
-            this.splitContainerEx1.Size = new System.Drawing.Size(797, 270);
-            this.splitContainerEx1.SplitterDistance = 447;
+            this.splitContainerEx1.Size = new System.Drawing.Size(787, 335);
+            this.splitContainerEx1.SplitterDistance = 441;
             this.splitContainerEx1.SplitterWidth = 20;
             this.splitContainerEx1.TabIndex = 0;
             this.splitContainerEx1.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
@@ -289,7 +297,7 @@
             this.gbAddons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAddons.Location = new System.Drawing.Point(0, 0);
             this.gbAddons.Name = "gbAddons";
-            this.gbAddons.Size = new System.Drawing.Size(447, 270);
+            this.gbAddons.Size = new System.Drawing.Size(441, 335);
             this.gbAddons.TabIndex = 10;
             this.gbAddons.TabStop = false;
             this.gbAddons.Text = "Addons";
@@ -307,7 +315,7 @@
             this.dgvAddons.RowHeadersVisible = false;
             this.dgvAddons.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAddons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAddons.Size = new System.Drawing.Size(441, 226);
+            this.dgvAddons.Size = new System.Drawing.Size(435, 291);
             this.dgvAddons.TabIndex = 4;
             this.dgvAddons.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAddons_CellMouseDown);
             this.dgvAddons.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAddons_CellPainting);
@@ -320,7 +328,7 @@
             this.tsddFilter});
             this.tsAddon.Location = new System.Drawing.Point(3, 16);
             this.tsAddon.Name = "tsAddon";
-            this.tsAddon.Size = new System.Drawing.Size(441, 25);
+            this.tsAddon.Size = new System.Drawing.Size(435, 25);
             this.tsAddon.TabIndex = 5;
             this.tsAddon.Text = "toolStrip1";
             // 
@@ -374,35 +382,91 @@
             // 
             // gbAddonDetails
             // 
-            this.gbAddonDetails.Controls.Add(this.dgvMappings);
+            this.gbAddonDetails.Controls.Add(this.txtLocalVersion);
+            this.gbAddonDetails.Controls.Add(this.lblLocalVersion);
+            this.gbAddonDetails.Controls.Add(this.gbMappings);
+            this.gbAddonDetails.Controls.Add(this.gbSubAddons);
             this.gbAddonDetails.Controls.Add(this.linkDownload);
             this.gbAddonDetails.Controls.Add(this.linkInfo);
-            this.gbAddonDetails.Controls.Add(this.lbSubAddons);
-            this.gbAddonDetails.Controls.Add(this.label1);
-            this.gbAddonDetails.Controls.Add(this.label2);
-            this.gbAddonDetails.Controls.Add(this.txtRemoteVersion);
+            this.gbAddonDetails.Controls.Add(this.lblName);
+            this.gbAddonDetails.Controls.Add(this.txtName);
             this.gbAddonDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAddonDetails.Location = new System.Drawing.Point(0, 0);
             this.gbAddonDetails.Name = "gbAddonDetails";
-            this.gbAddonDetails.Size = new System.Drawing.Size(330, 270);
+            this.gbAddonDetails.Size = new System.Drawing.Size(326, 335);
             this.gbAddonDetails.TabIndex = 11;
             this.gbAddonDetails.TabStop = false;
             this.gbAddonDetails.Text = "Addon Details";
+            // 
+            // txtLocalVersion
+            // 
+            this.txtLocalVersion.Location = new System.Drawing.Point(216, 13);
+            this.txtLocalVersion.Name = "txtLocalVersion";
+            this.txtLocalVersion.ReadOnly = true;
+            this.txtLocalVersion.Size = new System.Drawing.Size(98, 20);
+            this.txtLocalVersion.TabIndex = 10;
+            // 
+            // lblLocalVersion
+            // 
+            this.lblLocalVersion.AutoSize = true;
+            this.lblLocalVersion.Location = new System.Drawing.Point(139, 16);
+            this.lblLocalVersion.Name = "lblLocalVersion";
+            this.lblLocalVersion.Size = new System.Drawing.Size(71, 13);
+            this.lblLocalVersion.TabIndex = 9;
+            this.lblLocalVersion.Text = "Local Version";
+            // 
+            // gbMappings
+            // 
+            this.gbMappings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbMappings.Controls.Add(this.dgvMappings);
+            this.gbMappings.Location = new System.Drawing.Point(6, 57);
+            this.gbMappings.Name = "gbMappings";
+            this.gbMappings.Size = new System.Drawing.Size(311, 162);
+            this.gbMappings.TabIndex = 8;
+            this.gbMappings.TabStop = false;
+            this.gbMappings.Text = "Mappings";
             // 
             // dgvMappings
             // 
             this.dgvMappings.AllowUserToAddRows = false;
             this.dgvMappings.AllowUserToDeleteRows = false;
-            this.dgvMappings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMappings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMappings.Location = new System.Drawing.Point(10, 57);
+            this.dgvMappings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Site,
+            this.Version,
+            this.LastUpdated});
+            this.dgvMappings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMappings.Location = new System.Drawing.Point(3, 16);
             this.dgvMappings.Name = "dgvMappings";
             this.dgvMappings.ReadOnly = true;
             this.dgvMappings.RowHeadersVisible = false;
             this.dgvMappings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMappings.Size = new System.Drawing.Size(308, 109);
+            this.dgvMappings.Size = new System.Drawing.Size(305, 143);
             this.dgvMappings.TabIndex = 6;
+            // 
+            // gbSubAddons
+            // 
+            this.gbSubAddons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbSubAddons.Controls.Add(this.lbSubAddons);
+            this.gbSubAddons.Location = new System.Drawing.Point(6, 225);
+            this.gbSubAddons.Name = "gbSubAddons";
+            this.gbSubAddons.Size = new System.Drawing.Size(314, 104);
+            this.gbSubAddons.TabIndex = 7;
+            this.gbSubAddons.TabStop = false;
+            this.gbSubAddons.Text = "SubAddons";
+            // 
+            // lbSubAddons
+            // 
+            this.lbSubAddons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbSubAddons.FormattingEnabled = true;
+            this.lbSubAddons.IntegralHeight = false;
+            this.lbSubAddons.Location = new System.Drawing.Point(3, 16);
+            this.lbSubAddons.Name = "lbSubAddons";
+            this.lbSubAddons.Size = new System.Drawing.Size(308, 85);
+            this.lbSubAddons.TabIndex = 1;
             // 
             // linkDownload
             // 
@@ -426,44 +490,22 @@
             this.linkInfo.Text = "Info";
             this.linkInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkInfo_LinkClicked);
             // 
-            // lbSubAddons
+            // lblName
             // 
-            this.lbSubAddons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbSubAddons.FormattingEnabled = true;
-            this.lbSubAddons.IntegralHeight = false;
-            this.lbSubAddons.Location = new System.Drawing.Point(9, 185);
-            this.lbSubAddons.Name = "lbSubAddons";
-            this.lbSubAddons.Size = new System.Drawing.Size(315, 79);
-            this.lbSubAddons.TabIndex = 1;
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(6, 16);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 2;
+            this.lblName.Text = "Name";
             // 
-            // label1
+            // txtName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Remote Version";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 169);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "SubAddons";
-            // 
-            // txtRemoteVersion
-            // 
-            this.txtRemoteVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRemoteVersion.Location = new System.Drawing.Point(94, 13);
-            this.txtRemoteVersion.Name = "txtRemoteVersion";
-            this.txtRemoteVersion.Size = new System.Drawing.Size(230, 20);
-            this.txtRemoteVersion.TabIndex = 0;
+            this.txtName.Location = new System.Drawing.Point(47, 13);
+            this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
+            this.txtName.Size = new System.Drawing.Size(86, 20);
+            this.txtName.TabIndex = 0;
             // 
             // splitContainerEx3
             // 
@@ -488,8 +530,8 @@
             this.splitContainerEx3.Panel2.Controls.Add(this.dgvLog);
             this.splitContainerEx3.Panel2.Controls.Add(this.tsLog);
             this.splitContainerEx3.Panel2MaxSize = 0;
-            this.splitContainerEx3.Size = new System.Drawing.Size(797, 132);
-            this.splitContainerEx3.SplitterDistance = 447;
+            this.splitContainerEx3.Size = new System.Drawing.Size(787, 169);
+            this.splitContainerEx3.SplitterDistance = 441;
             this.splitContainerEx3.SplitterWidth = 20;
             this.splitContainerEx3.TabIndex = 0;
             this.splitContainerEx3.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
@@ -511,7 +553,7 @@
             this.dgvThreadActivity.ReadOnly = true;
             this.dgvThreadActivity.RowHeadersVisible = false;
             this.dgvThreadActivity.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvThreadActivity.Size = new System.Drawing.Size(447, 132);
+            this.dgvThreadActivity.Size = new System.Drawing.Size(441, 169);
             this.dgvThreadActivity.TabIndex = 0;
             // 
             // ID
@@ -562,7 +604,7 @@
             this.dgvLog.RowHeadersVisible = false;
             this.dgvLog.RowTemplate.Height = 20;
             this.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLog.Size = new System.Drawing.Size(330, 107);
+            this.dgvLog.Size = new System.Drawing.Size(326, 144);
             this.dgvLog.TabIndex = 0;
             // 
             // dgcTime
@@ -593,7 +635,7 @@
             this.tsddLogLevel});
             this.tsLog.Location = new System.Drawing.Point(0, 0);
             this.tsLog.Name = "tsLog";
-            this.tsLog.Size = new System.Drawing.Size(330, 25);
+            this.tsLog.Size = new System.Drawing.Size(326, 25);
             this.tsLog.TabIndex = 1;
             this.tsLog.Text = "toolStrip1";
             // 
@@ -643,11 +685,29 @@
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
+            // Site
+            // 
+            this.Site.HeaderText = "Site";
+            this.Site.Name = "Site";
+            this.Site.ReadOnly = true;
+            // 
+            // Version
+            // 
+            this.Version.HeaderText = "Version";
+            this.Version.Name = "Version";
+            this.Version.ReadOnly = true;
+            // 
+            // LastUpdated
+            // 
+            this.LastUpdated.HeaderText = "LastUpdated";
+            this.LastUpdated.Name = "LastUpdated";
+            this.LastUpdated.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 446);
+            this.ClientSize = new System.Drawing.Size(787, 548);
             this.Controls.Add(this.splitContainerEx2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -671,7 +731,9 @@
             this.tsAddon.PerformLayout();
             this.gbAddonDetails.ResumeLayout(false);
             this.gbAddonDetails.PerformLayout();
+            this.gbMappings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMappings)).EndInit();
+            this.gbSubAddons.ResumeLayout(false);
             this.splitContainerEx3.Panel1.ResumeLayout(false);
             this.splitContainerEx3.Panel2.ResumeLayout(false);
             this.splitContainerEx3.Panel2.PerformLayout();
@@ -693,14 +755,13 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.DataGridView dgvAddons;
-        private System.Windows.Forms.TextBox txtRemoteVersion;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddons;
         private System.Windows.Forms.ToolStripMenuItem tsmiCheckForUpdates;
         private System.Windows.Forms.ToolStripMenuItem tsmWadduAllAddons;
         private System.Windows.Forms.DataGridView dgvThreadActivity;
         private System.Windows.Forms.ListBox lbSubAddons;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.DataGridView dgvLog;
         private System.Windows.Forms.ContextMenuStrip ctxAddon;
         private System.Windows.Forms.ToolStripMenuItem tsmWadduSingleAddon;
@@ -737,6 +798,13 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiLogWarning;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogError;
         private System.Windows.Forms.DataGridView dgvMappings;
+        private System.Windows.Forms.GroupBox gbSubAddons;
+        private System.Windows.Forms.GroupBox gbMappings;
+        private System.Windows.Forms.TextBox txtLocalVersion;
+        private System.Windows.Forms.Label lblLocalVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Site;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
 
     }
 }

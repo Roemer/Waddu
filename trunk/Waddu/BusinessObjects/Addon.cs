@@ -183,6 +183,7 @@ namespace Waddu.BusinessObjects
                     List<string> remoteVersionList = new List<string>();
                     foreach (Mapping mapping in Mappings)
                     {
+                        mapping.CheckRemote();
                         remoteVersionList.Add(mapping.RemoteVersion);
                     }
                     RemoteVersions = String.Join(Environment.NewLine, remoteVersionList.ToArray());
