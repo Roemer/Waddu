@@ -55,5 +55,10 @@ namespace Waddu.Classes
                 LogEntry(newEntry);
             }
         }
+
+        public void Clear()
+        {
+            _entryList.Clear();
+        }
     }
 }

@@ -10,6 +10,11 @@ namespace Waddu.AddonSites
             return "None";
         }
 
+        public override DateTime GetLastUpdated(string tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string GetInfoLink(string tag)
         {
             throw new NotImplementedException();

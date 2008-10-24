@@ -28,26 +28,36 @@ namespace Waddu.Forms
         {
             base.OnLoad(e);
 
+            // Setup Addon Display
+            dgvAddons.AutoGenerateColumns = false;
+            dgvColAddonName.DataPropertyName = "Name";
+            dgvColAddonLocalVersion.DataPropertyName = "LocalVersion";
+            dgvColAddonBestMapping.DataPropertyName = "BestMapping";
+            dgvColAddonBestMapping.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             // Setup WorkerThread Status Display
             dgvThreadActivity.AutoGenerateColumns = false;
-            dgvThreadActivity.Columns[0].DataPropertyName = "ThreadID";
-            dgvThreadActivity.Columns[1].DataPropertyName = "ThreadStatus";
-            dgvThreadActivity.Columns[2].DataPropertyName = "InfoText";
-            dgvThreadActivity.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvColThreadID.DataPropertyName = "ThreadID";
+            dgvColThreadState.DataPropertyName = "ThreadStatus";
+            dgvColThreadInfo.DataPropertyName = "InfoText";
+            dgvColThreadInfo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Setup Log Display
             dgvLog.AutoGenerateColumns = false;
             dgvLog.ColumnHeadersVisible = false;
-            dgvLog.Columns[0].DataPropertyName = "Date";
-            dgvLog.Columns[1].DataPropertyName = "Type";
-            dgvLog.Columns[2].DataPropertyName = "Message";
-            dgvLog.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvColLogTime.DataPropertyName = "Date";
+            dgvColLogType.DataPropertyName = "Type";
+            dgvColLogMessage.DataPropertyName = "Message";
+            dgvColLogMessage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Setup Mappings Display
-            //dgvMappings.AutoGenerateColumns = false;
-            //dgvMappings.ColumnHeadersVisible = false;
+            dgvMappings.AutoGenerateColumns = false;
+            dgvColMappingSite.DataPropertyName = "AddonSiteId";
+            dgvColMappingVersion.DataPropertyName = "RemoteVersion";
+            dgvColMappingLastUpdated.DataPropertyName = "LastUpdated";
 
             // Initialize Logger
+            SetLogLevel(Config.Instance.LogLevel);
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntryFile);
 
@@ -75,7 +85,7 @@ namespace Waddu.Forms
                 return;
             }
             // Reload Log
-            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
+            RefreshLog();
         }
 
         private void Logger_LogEntryFile(LogEntry entry)
@@ -119,6 +129,12 @@ namespace Waddu.Forms
 
                 // Filter out Installed Addons
                 if (!tsmiFilterInstalled.Checked && addonExists)
+                {
+                    continue;
+                }
+
+                // Filter out by name
+                if (!addon.Name.ToUpper().Contains(txtAddonFilter.Text.ToUpper()))
                 {
                     continue;
                 }
@@ -233,6 +249,12 @@ namespace Waddu.Forms
         {
             if (e.RowIndex >= 0)
             {
+                /*if (e.ColumnIndex == dgvColAddonMappings.Index)
+                {
+                    dgvColAddonMappings.Items.Add("something");
+                    Console.WriteLine("asdf");
+                }*/
+
                 if (e.Button == MouseButtons.Right)
                 {
                     // Select Row with RightClick
@@ -275,7 +297,13 @@ namespace Waddu.Forms
 
         private void tsmiClearLog_Click(object sender, EventArgs e)
         {
-            dgvLog.Rows.Clear();
+            Logger.Instance.Clear();
+            RefreshLog();
+        }
+
+        private void RefreshLog()
+        {
+            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
         }
 
         private void tsmiAbortThread_Click(object sender, EventArgs e)
@@ -314,6 +342,12 @@ namespace Waddu.Forms
             LoadLocalAddons();
         }
 
+
+        private void txtAddonFilter_TextChanged(object sender, EventArgs e)
+        {
+            LoadLocalAddons();
+        }
+
         private void linkInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Addon addon = (sender as LinkLabel).Tag as Addon;
@@ -330,6 +364,35 @@ namespace Waddu.Forms
             Process.Start(downloadUrl);
         }
 
+        private void SetLogLevel(LogType logLevel)
+        {
+            tsmiLogDebug.Checked = logLevel == LogType.Debug;
+            tsmiLogInformation.Checked = logLevel == LogType.Information;
+            tsmiLogWarning.Checked = logLevel == LogType.Warning;
+            tsmiLogError.Checked = logLevel == LogType.Error;
+        }
+
+        private LogType GetLogLevel()
+        {
+            if (tsmiLogDebug.Checked)
+            {
+                return LogType.Debug;
+            }
+            else if (tsmiLogInformation.Checked)
+            {
+                return LogType.Information;
+            }
+            else if (tsmiLogWarning.Checked)
+            {
+                return LogType.Warning;
+            }
+            else if (tsmiLogError.Checked)
+            {
+                return LogType.Error;
+            }
+            return LogType.Information;
+        }
+
         private void tsmiLogLevelItem_Click(object sender, EventArgs e)
         {
             tsmiLogDebug.Checked = false;
@@ -343,26 +406,13 @@ namespace Waddu.Forms
                 tsmi.Checked = true;
             }
 
-            if (tsmiLogDebug.Checked)
-            {
-                Config.Instance.LogLevel = LogType.Debug;
-            }
-            else if (tsmiLogInformation.Checked)
-            {
-                Config.Instance.LogLevel = LogType.Information;
-            }
-            else if (tsmiLogWarning.Checked)
-            {
-                Config.Instance.LogLevel = LogType.Warning;
-            }
-            else if (tsmiLogError.Checked)
-            {
-                Config.Instance.LogLevel = LogType.Error;
-            }
+            LogType logLevel = GetLogLevel();
+
+            Config.Instance.LogLevel = logLevel;
             Config.Instance.SaveSettings();
 
             // Reload Log
-            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
+            RefreshLog();
         }
     }
 }

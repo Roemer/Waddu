@@ -34,6 +34,21 @@ namespace Waddu.Classes
             return newPath;
         }
 
+        public static void AddOrUpdate<T, T2>(IDictionary<T, T2> dict, T key, T2 value)
+        {
+            lock (dict)
+            {
+                if (dict.ContainsKey(key))
+                {
+                    dict[key] = value;
+                }
+                else
+                {
+                    dict.Add(key, value);
+                }
+            }
+        }
+
         public static void Unzip(string zipFile, string targetFolder)
         {
             FastZip fz = new FastZip();
