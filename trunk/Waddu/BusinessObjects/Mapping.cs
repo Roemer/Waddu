@@ -9,11 +9,11 @@ namespace Waddu.BusinessObjects
     public class Mapping : INotifyPropertyChanged
     {
         #region Members
-        private string _addonName;
-        public string AddonName
+        private Addon _addon;
+        public Addon Addon
         {
-            get { return _addonName; }
-            set { _addonName = value; NotifyPropertyChanged("AddonName"); }
+            get { return _addon; }
+            set { _addon = value; }
         }
 
         private string _addonTag;
@@ -48,22 +48,10 @@ namespace Waddu.BusinessObjects
         #region Constructors
         public Mapping()
         {
+            _remoteVersion = string.Empty;
+            _lastUpdated = DateTime.MinValue;
         }
-        public Mapping(string addonName)
-            : this()
-        {
-            AddonName = addonName;
-        }
-        public Mapping(string addonName, string addonTag)
-            : this(addonName)
-        {
-            AddonTag = addonTag;
-        }
-        public Mapping(string addonName, string addonTag, AddonSiteId addonSiteId)
-            : this(addonName, addonTag)
-        {
-            AddonSiteId = addonSiteId;
-        }
+        
         #endregion
 
         #region Functions
@@ -74,12 +62,23 @@ namespace Waddu.BusinessObjects
         {
             AddonSiteBase addonSite = AddonSiteBase.GetSite(AddonSiteId);
             RemoteVersion = addonSite.GetVersion(AddonTag);
-            //LastUpdated = addonSite.GetLastUpdated(AddonTag);
+            LastUpdated = addonSite.GetLastUpdated(AddonTag);
+
+            // Hack to fire Property Changed
+            Addon.BestMapping = Addon.BestMapping;
         }
 
         public override string ToString()
         {
-            return AddonSiteId.ToString();
+            if (RemoteVersion == string.Empty)
+            {
+
+            }
+            return string.Format("{0}/{1}/{2}", 
+                AddonSiteId,
+                RemoteVersion == string.Empty ? "?" : RemoteVersion,
+                LastUpdated == DateTime.MinValue ? "?" : LastUpdated.ToShortDateString()
+            );
         }
         #endregion
 

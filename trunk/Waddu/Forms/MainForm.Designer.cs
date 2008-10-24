@@ -52,17 +52,24 @@
             this.splitContainerEx1 = new Waddu.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
             this.dgvAddons = new System.Windows.Forms.DataGridView();
+            this.dgvColAddonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColAddonLocalVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColAddonBestMapping = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsAddon = new System.Windows.Forms.ToolStrip();
             this.tsddFilter = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiFilterInstalled = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFilterNotInstalled = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFilterSubAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFilterBlizzard = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtAddonFilter = new System.Windows.Forms.ToolStripTextBox();
             this.gbAddonDetails = new System.Windows.Forms.GroupBox();
             this.txtLocalVersion = new System.Windows.Forms.TextBox();
             this.lblLocalVersion = new System.Windows.Forms.Label();
             this.gbMappings = new System.Windows.Forms.GroupBox();
             this.dgvMappings = new System.Windows.Forms.DataGridView();
+            this.dgvColMappingSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColMappingVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColMappingLastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbSubAddons = new System.Windows.Forms.GroupBox();
             this.lbSubAddons = new System.Windows.Forms.ListBox();
             this.linkDownload = new System.Windows.Forms.LinkLabel();
@@ -71,22 +78,19 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.splitContainerEx3 = new Waddu.Controls.SplitContainerEx();
             this.dgvThreadActivity = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Info = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColThreadID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColThreadState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColThreadInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvLog = new System.Windows.Forms.DataGridView();
-            this.dgcTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColLogTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColLogType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColLogMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsLog = new System.Windows.Forms.ToolStrip();
             this.tsddLogLevel = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiLogDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
-            this.Site = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -307,6 +311,10 @@
             this.dgvAddons.AllowUserToAddRows = false;
             this.dgvAddons.AllowUserToDeleteRows = false;
             this.dgvAddons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAddons.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvColAddonName,
+            this.dgvColAddonLocalVersion,
+            this.dgvColAddonBestMapping});
             this.dgvAddons.ContextMenuStrip = this.ctxAddon;
             this.dgvAddons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAddons.Location = new System.Drawing.Point(3, 41);
@@ -321,11 +329,30 @@
             this.dgvAddons.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAddons_CellPainting);
             this.dgvAddons.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvAddons_RowStateChanged);
             // 
+            // dgvColAddonName
+            // 
+            this.dgvColAddonName.HeaderText = "Name";
+            this.dgvColAddonName.Name = "dgvColAddonName";
+            this.dgvColAddonName.ReadOnly = true;
+            // 
+            // dgvColAddonLocalVersion
+            // 
+            this.dgvColAddonLocalVersion.HeaderText = "Local Version";
+            this.dgvColAddonLocalVersion.Name = "dgvColAddonLocalVersion";
+            this.dgvColAddonLocalVersion.ReadOnly = true;
+            // 
+            // dgvColAddonBestMapping
+            // 
+            this.dgvColAddonBestMapping.HeaderText = "Best Mapping";
+            this.dgvColAddonBestMapping.Name = "dgvColAddonBestMapping";
+            this.dgvColAddonBestMapping.ReadOnly = true;
+            // 
             // tsAddon
             // 
             this.tsAddon.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsAddon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsddFilter});
+            this.tsddFilter,
+            this.txtAddonFilter});
             this.tsAddon.Location = new System.Drawing.Point(3, 16);
             this.tsAddon.Name = "tsAddon";
             this.tsAddon.Size = new System.Drawing.Size(435, 25);
@@ -379,6 +406,13 @@
             this.tsmiFilterBlizzard.Size = new System.Drawing.Size(141, 22);
             this.tsmiFilterBlizzard.Text = "Blizzard";
             this.tsmiFilterBlizzard.CheckedChanged += new System.EventHandler(this.tsmiFilter_CheckedChanged);
+            // 
+            // txtAddonFilter
+            // 
+            this.txtAddonFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAddonFilter.Name = "txtAddonFilter";
+            this.txtAddonFilter.Size = new System.Drawing.Size(200, 25);
+            this.txtAddonFilter.TextChanged += new System.EventHandler(this.txtAddonFilter_TextChanged);
             // 
             // gbAddonDetails
             // 
@@ -434,9 +468,9 @@
             this.dgvMappings.AllowUserToDeleteRows = false;
             this.dgvMappings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMappings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Site,
-            this.Version,
-            this.LastUpdated});
+            this.dgvColMappingSite,
+            this.dgvColMappingVersion,
+            this.dgvColMappingLastUpdated});
             this.dgvMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMappings.Location = new System.Drawing.Point(3, 16);
             this.dgvMappings.Name = "dgvMappings";
@@ -445,6 +479,24 @@
             this.dgvMappings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMappings.Size = new System.Drawing.Size(305, 143);
             this.dgvMappings.TabIndex = 6;
+            // 
+            // dgvColMappingSite
+            // 
+            this.dgvColMappingSite.HeaderText = "Site";
+            this.dgvColMappingSite.Name = "dgvColMappingSite";
+            this.dgvColMappingSite.ReadOnly = true;
+            // 
+            // dgvColMappingVersion
+            // 
+            this.dgvColMappingVersion.HeaderText = "Version";
+            this.dgvColMappingVersion.Name = "dgvColMappingVersion";
+            this.dgvColMappingVersion.ReadOnly = true;
+            // 
+            // dgvColMappingLastUpdated
+            // 
+            this.dgvColMappingLastUpdated.HeaderText = "Last Updated";
+            this.dgvColMappingLastUpdated.Name = "dgvColMappingLastUpdated";
+            this.dgvColMappingLastUpdated.ReadOnly = true;
             // 
             // gbSubAddons
             // 
@@ -543,9 +595,9 @@
             this.dgvThreadActivity.AllowUserToResizeRows = false;
             this.dgvThreadActivity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThreadActivity.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.State,
-            this.Info});
+            this.dgvColThreadID,
+            this.dgvColThreadState,
+            this.dgvColThreadInfo});
             this.dgvThreadActivity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvThreadActivity.Location = new System.Drawing.Point(0, 0);
             this.dgvThreadActivity.MultiSelect = false;
@@ -556,27 +608,27 @@
             this.dgvThreadActivity.Size = new System.Drawing.Size(441, 169);
             this.dgvThreadActivity.TabIndex = 0;
             // 
-            // ID
+            // dgvColThreadID
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 50;
+            this.dgvColThreadID.HeaderText = "ID";
+            this.dgvColThreadID.Name = "dgvColThreadID";
+            this.dgvColThreadID.ReadOnly = true;
+            this.dgvColThreadID.Width = 50;
             // 
-            // State
+            // dgvColThreadState
             // 
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
-            this.State.Width = 80;
+            this.dgvColThreadState.HeaderText = "State";
+            this.dgvColThreadState.Name = "dgvColThreadState";
+            this.dgvColThreadState.ReadOnly = true;
+            this.dgvColThreadState.Width = 80;
             // 
-            // Info
+            // dgvColThreadInfo
             // 
-            this.Info.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Info.HeaderText = "Info";
-            this.Info.Name = "Info";
-            this.Info.ReadOnly = true;
-            this.Info.Width = 50;
+            this.dgvColThreadInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvColThreadInfo.HeaderText = "Info";
+            this.dgvColThreadInfo.Name = "dgvColThreadInfo";
+            this.dgvColThreadInfo.ReadOnly = true;
+            this.dgvColThreadInfo.Width = 50;
             // 
             // dgvLog
             // 
@@ -584,9 +636,9 @@
             this.dgvLog.AllowUserToDeleteRows = false;
             this.dgvLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgcTime,
-            this.Type,
-            this.dgcMessage});
+            this.dgvColLogTime,
+            this.dgvColLogType,
+            this.dgvColLogMessage});
             this.dgvLog.ContextMenuStrip = this.ctxLog;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -607,26 +659,26 @@
             this.dgvLog.Size = new System.Drawing.Size(326, 144);
             this.dgvLog.TabIndex = 0;
             // 
-            // dgcTime
+            // dgvColLogTime
             // 
-            this.dgcTime.HeaderText = "Time";
-            this.dgcTime.Name = "dgcTime";
-            this.dgcTime.ReadOnly = true;
+            this.dgvColLogTime.HeaderText = "Time";
+            this.dgvColLogTime.Name = "dgvColLogTime";
+            this.dgvColLogTime.ReadOnly = true;
             // 
-            // Type
+            // dgvColLogType
             // 
-            this.Type.HeaderText = "Type";
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            this.Type.Width = 80;
+            this.dgvColLogType.HeaderText = "Type";
+            this.dgvColLogType.Name = "dgvColLogType";
+            this.dgvColLogType.ReadOnly = true;
+            this.dgvColLogType.Width = 80;
             // 
-            // dgcMessage
+            // dgvColLogMessage
             // 
-            this.dgcMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dgcMessage.HeaderText = "Message";
-            this.dgcMessage.Name = "dgcMessage";
-            this.dgcMessage.ReadOnly = true;
-            this.dgcMessage.Width = 75;
+            this.dgvColLogMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvColLogMessage.HeaderText = "Message";
+            this.dgvColLogMessage.Name = "dgvColLogMessage";
+            this.dgvColLogMessage.ReadOnly = true;
+            this.dgvColLogMessage.Width = 75;
             // 
             // tsLog
             // 
@@ -684,24 +736,6 @@
             this.tsmiLogError.Size = new System.Drawing.Size(137, 22);
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
-            // 
-            // Site
-            // 
-            this.Site.HeaderText = "Site";
-            this.Site.Name = "Site";
-            this.Site.ReadOnly = true;
-            // 
-            // Version
-            // 
-            this.Version.HeaderText = "Version";
-            this.Version.Name = "Version";
-            this.Version.ReadOnly = true;
-            // 
-            // LastUpdated
-            // 
-            this.LastUpdated.HeaderText = "LastUpdated";
-            this.LastUpdated.Name = "LastUpdated";
-            this.LastUpdated.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -784,12 +818,6 @@
         private Waddu.Controls.SplitContainerEx splitContainerEx3;
         private System.Windows.Forms.ToolStrip tsLog;
         private System.Windows.Forms.ToolStripDropDownButton tsddLogLevel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgcTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgcMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn State;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Info;
         private System.Windows.Forms.LinkLabel linkDownload;
         private System.Windows.Forms.LinkLabel linkInfo;
         private System.Windows.Forms.ToolTip ttMainForm;
@@ -802,9 +830,19 @@
         private System.Windows.Forms.GroupBox gbMappings;
         private System.Windows.Forms.TextBox txtLocalVersion;
         private System.Windows.Forms.Label lblLocalVersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Site;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColMappingSite;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColMappingVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColMappingLastUpdated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColThreadID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColThreadState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColThreadInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogMessage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonBestMapping;
+        private System.Windows.Forms.ToolStripTextBox txtAddonFilter;
 
     }
 }

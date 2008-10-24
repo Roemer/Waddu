@@ -86,7 +86,18 @@ namespace Waddu.BusinessObjects
 
             _subAddonList = new BindingList<Addon>();
             _mappingList = new BindingList<Mapping>();
+
+            _mappingList.ListChanged += new ListChangedEventHandler(_mappingList_ListChanged);
         }
+
+        private void _mappingList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                BestMapping = _mappingList[e.NewIndex];
+            }
+        }
+
         public Addon(string name)
             : this()
         {

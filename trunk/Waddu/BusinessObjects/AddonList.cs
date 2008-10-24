@@ -75,7 +75,7 @@ namespace Waddu.BusinessObjects
                             foreach (XmlNode mappingElement in mappingListElement.ChildNodes)
                             {
                                 Mapping mapping = new Mapping();
-                                mapping.AddonName = addonName;
+                                mapping.Addon = addon;
                                 mapping.AddonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
                                 mapping.AddonTag = mappingElement.Attributes["Tag"].Value;
                                 addon.Mappings.Add(mapping);

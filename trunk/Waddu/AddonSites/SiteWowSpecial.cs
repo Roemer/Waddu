@@ -41,6 +41,11 @@ namespace Waddu.AddonSites
             throw new NotImplementedException();
         }
 
+        public override DateTime GetLastUpdated(string tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string GetDownloadLink(string tag)
         {
             // Mars

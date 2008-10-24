@@ -8,6 +8,8 @@ namespace Waddu.AddonSites
         #region Overridable Functions
         public abstract string GetVersion(string tag);
 
+        public abstract DateTime GetLastUpdated(string tag);
+
         public abstract string GetInfoLink(string tag);
 
         public abstract string GetDownloadLink(string tag);
@@ -49,6 +51,10 @@ namespace Waddu.AddonSites
             else if (addonSiteId == AddonSiteId.wowspecial)
             {
                 site = new SiteWowSpecial();
+            }
+            else if (addonSiteId == AddonSiteId.direct)
+            {
+                site = new SiteDirect();
             }
             return site;
         }

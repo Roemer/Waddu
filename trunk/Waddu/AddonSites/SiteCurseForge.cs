@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Waddu.Classes;
 using Waddu.Types;
 
@@ -33,6 +34,11 @@ namespace Waddu.AddonSites
                 }
             }
             return versionString;
+        }
+
+        public override DateTime GetLastUpdated(string tag)
+        {
+            throw new NotImplementedException();
         }
 
         public override string GetInfoLink(string tag)
