@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Waddu.Classes;
 using Waddu.Types;
-using System.Text.RegularExpressions;
 
 namespace Waddu.AddonSites
 {
     public class SiteWowAce : AddonSiteBase
     {
         private string _infoUrl = "http://www.wowace.com/projects/{tag}/files/";
+        private string _fileUrl = "http://www.wowace.com{0}";
+        private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
+        private string _datePattern = @"<span class=""date"" title="".*"">(.*)</span>";
+        private string _downloadPattern = @"<a href=""(.*)""><span>Download</span></a>";
         private Dictionary<string, string> _versionCache = new Dictionary<string, string>();
         private Dictionary<string, DateTime> _dateCache = new Dictionary<string, DateTime>();
+        private Dictionary<string, string> _fileLinkCache = new Dictionary<string, string>();
 
         #region AddonSiteBase Overrides
 
         private void ParseInfoSite(string tag)
         {
             string url = _infoUrl.Replace("{tag}", tag);
-
-            bool nameFound = false;
-
-            Regex regexDate = new Regex("<span class=\"date\" title=\".*\">(.*)</span>");
+            bool versionFound = false;
             bool dateFound = false;
 
             List<string> infoPage = Helpers.GetHtml(url, AddonSiteId.wowace);
@@ -29,25 +31,23 @@ namespace Waddu.AddonSites
                 string line = infoPage[i];
 
                 // Version Check
-                //<td class="first"><a href="/projects/gathermate/files/153-v1-03/">v1.03</a></td>
-                if (line.Contains("<td class=\"first\">") && !nameFound)
+                if (!versionFound)
                 {
-                    int start = line.IndexOf("/\">") + 3;
-                    int end = line.IndexOf("</a>", start);
-                    string versionString = line.Substring(start, (end - start));
-                    Helpers.AddOrUpdate<string, string>(_versionCache, tag, versionString);
-                    nameFound = true;
-                    /*if (versionString.Contains("-r"))
+                    Match m = Regex.Match(line, _versionPattern);
+                    if (m.Success)
                     {
-                        start = versionString.IndexOf("-r") + 1;
-                        versionString = versionString.Substring(start);
-                    }*/
+                        string versionString = m.Groups[2].Captures[0].Value;
+                        Helpers.AddOrUpdate<string, string>(_versionCache, tag, versionString);
+                        string fileUrl = m.Groups[1].Captures[0].Value;
+                        Helpers.AddOrUpdate<string, string>(_fileLinkCache, tag, string.Format(_fileUrl, fileUrl));
+                        versionFound = true;
+                    }
                 }
 
                 // Last Update Check
                 if (!dateFound)
                 {
-                    Match m = regexDate.Match(line);
+                    Match m = Regex.Match(line, _datePattern);
                     if (m.Success)
                     {
                         string dateStr = m.Groups[1].Captures[0].Value;
@@ -85,36 +85,21 @@ namespace Waddu.AddonSites
 
         public override string GetDownloadLink(string tag)
         {
-            string downloadUrl = string.Empty;
-            string url = _infoUrl.Replace("{tag}", tag);
-            List<string> infoPage = Helpers.GetHtml(url, AddonSiteId.wowace);
-            for (int i = 0; i < infoPage.Count; i++)
+            if (!_fileLinkCache.ContainsKey(tag))
             {
-                string line = infoPage[i];
+                ParseInfoSite(tag);
+            }
+            string fileUrl = _fileLinkCache[tag];
 
-                //<td class="first"><a href="/projects/gathermate/files/153-v1-03/">v1.03</a></td>
-                if (line.Contains("<td class=\"first\">"))
+            string downloadUrl = string.Empty;
+            List<string> filePage = Helpers.GetHtml(fileUrl, AddonSiteId.wowace);
+            for (int i = 0; i < filePage.Count; i++)
+            {
+                string line = filePage[i];
+                Match m = Regex.Match(line, _downloadPattern);
+                if (m.Success)
                 {
-                    // Get File Url
-                    string fileUrl = "http://www.wowace.com";
-                    int start = line.IndexOf("/");
-                    int end = line.IndexOf("/\">");
-                    fileUrl += line.Substring(start, (end - start));
-
-                    // Get DownloadURL
-                    List<string> filePage = Helpers.GetHtml(fileUrl, AddonSiteId.wowace);
-                    for (int ii = 0; ii < filePage.Count; ii++)
-                    {
-                        string line2 = filePage[ii];
-                        //<a href="http://static.wowace.com/uploads/18/201/533/GatherMate-v1.03.zip"><span>Download</span></a>
-                        if (line2.Contains("<span>Download</span>"))
-                        {
-                            int start2 = line2.IndexOf("http");
-                            int end2 = line2.IndexOf(".zip") + 4;
-                            downloadUrl = line2.Substring(start2, (end2 - start2));
-                            break;
-                        }
-                    }
+                    downloadUrl = m.Groups[1].Captures[0].Value;
                     break;
                 }
             }

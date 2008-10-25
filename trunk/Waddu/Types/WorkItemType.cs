@@ -6,6 +6,6 @@ namespace Waddu.Types
     {
         Cancel,
         VersionCheck,
-        Update
+        Update,
     }
 }

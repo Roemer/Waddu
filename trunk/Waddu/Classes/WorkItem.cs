@@ -1,6 +1,6 @@
-﻿using Waddu.BusinessObjects;
+﻿using System;
+using Waddu.BusinessObjects;
 using Waddu.Types;
-using System;
 
 namespace Waddu.Classes
 {
@@ -12,30 +12,36 @@ namespace Waddu.Classes
             get { return _workItemType; }
         }
 
-        private Addon _addon;
+        private Addon _addon = null;
         public Addon Addon
         {
             get { return _addon; }
         }
 
-        private AddonSiteId _addonSiteId;
-        public AddonSiteId AddonSiteId
+        private Mapping _mapping = null;
+        public Mapping Mapping
         {
-            get { return _addonSiteId; }
+            get { return _mapping; }
+            set { _mapping = value; }
         }
 
         public WorkItem(WorkItemType workItemType)
         {
             if (workItemType != WorkItemType.Cancel)
             {
-                throw new Exception("WorkItem needs Addon and AddonSiteId");
+                throw new Exception("WorkItem needs an Addon");
             }
         }
-        public WorkItem(WorkItemType workItemType, Addon addon, AddonSiteId addonSiteId)
+        public WorkItem(WorkItemType workItemType, Addon addon)
         {
             _workItemType = workItemType;
             _addon = addon;
-            _addonSiteId = AddonSiteId;
+
+        }
+        public WorkItem(WorkItemType workItemType, Addon addon, Mapping mapping)
+            : this(workItemType, addon)
+        {
+            _mapping = mapping;
         }
     }
 }

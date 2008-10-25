@@ -40,14 +40,21 @@
             this.tsmiReloadLocalAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmWadduAllAddons = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCollectUnknownAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxAddon = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiCheckSingleAddon = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmWadduSingleAddon = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAddonCheckForUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAddonUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAddonMappings = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxLog = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiClearLog = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxThread = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAbortThread = new System.Windows.Forms.ToolStripMenuItem();
-            this.ttMainForm = new System.Windows.Forms.ToolTip(this.components);
+            this.ctxMapping = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiMappingCheckVersion = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMappingUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMappingInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMappingDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerEx2 = new Waddu.Controls.SplitContainerEx();
             this.splitContainerEx1 = new Waddu.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
@@ -72,8 +79,6 @@
             this.dgvColMappingLastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbSubAddons = new System.Windows.Forms.GroupBox();
             this.lbSubAddons = new System.Windows.Forms.ListBox();
-            this.linkDownload = new System.Windows.Forms.LinkLabel();
-            this.linkInfo = new System.Windows.Forms.LinkLabel();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.splitContainerEx3 = new Waddu.Controls.SplitContainerEx();
@@ -91,10 +96,12 @@
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMappingSetAsBest = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
             this.ctxThread.SuspendLayout();
+            this.ctxMapping.SuspendLayout();
             this.splitContainerEx2.Panel1.SuspendLayout();
             this.splitContainerEx2.Panel2.SuspendLayout();
             this.splitContainerEx2.SuspendLayout();
@@ -120,7 +127,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
-            this.tsmiAddons});
+            this.tsmiAddons,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(787, 24);
@@ -187,27 +195,49 @@
             this.tsmWadduAllAddons.Text = "&Update all Addons";
             this.tsmWadduAllAddons.Click += new System.EventHandler(this.tsmiUpdateAllAddons_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCollectUnknownAddons});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // tsmiCollectUnknownAddons
+            // 
+            this.tsmiCollectUnknownAddons.Name = "tsmiCollectUnknownAddons";
+            this.tsmiCollectUnknownAddons.Size = new System.Drawing.Size(208, 22);
+            this.tsmiCollectUnknownAddons.Text = "Collect unknown Addons";
+            this.tsmiCollectUnknownAddons.Click += new System.EventHandler(this.tsmiCollectUnknownAddons_Click);
+            // 
             // ctxAddon
             // 
             this.ctxAddon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCheckSingleAddon,
-            this.tsmWadduSingleAddon});
+            this.tsmiAddonCheckForUpdate,
+            this.tsmiAddonUpdate,
+            this.tsmiAddonMappings});
             this.ctxAddon.Name = "ctxAddon";
-            this.ctxAddon.Size = new System.Drawing.Size(167, 48);
+            this.ctxAddon.Size = new System.Drawing.Size(167, 70);
             // 
-            // tsmiCheckSingleAddon
+            // tsmiAddonCheckForUpdate
             // 
-            this.tsmiCheckSingleAddon.Name = "tsmiCheckSingleAddon";
-            this.tsmiCheckSingleAddon.Size = new System.Drawing.Size(166, 22);
-            this.tsmiCheckSingleAddon.Text = "&Check for Update";
-            this.tsmiCheckSingleAddon.Click += new System.EventHandler(this.tsmiCheckSingleAddon_Click);
+            this.tsmiAddonCheckForUpdate.Name = "tsmiAddonCheckForUpdate";
+            this.tsmiAddonCheckForUpdate.Size = new System.Drawing.Size(166, 22);
+            this.tsmiAddonCheckForUpdate.Text = "&Check for Update";
+            this.tsmiAddonCheckForUpdate.Click += new System.EventHandler(this.tsmiAddonCheckForUpdate_Click);
             // 
-            // tsmWadduSingleAddon
+            // tsmiAddonUpdate
             // 
-            this.tsmWadduSingleAddon.Name = "tsmWadduSingleAddon";
-            this.tsmWadduSingleAddon.Size = new System.Drawing.Size(166, 22);
-            this.tsmWadduSingleAddon.Text = "&Update";
-            this.tsmWadduSingleAddon.Click += new System.EventHandler(this.tsmiUpdateSingleAddon_Click);
+            this.tsmiAddonUpdate.Name = "tsmiAddonUpdate";
+            this.tsmiAddonUpdate.Size = new System.Drawing.Size(166, 22);
+            this.tsmiAddonUpdate.Text = "&Update";
+            this.tsmiAddonUpdate.Click += new System.EventHandler(this.tsmiAddonUpdate_Click);
+            // 
+            // tsmiAddonMappings
+            // 
+            this.tsmiAddonMappings.Name = "tsmiAddonMappings";
+            this.tsmiAddonMappings.Size = new System.Drawing.Size(166, 22);
+            this.tsmiAddonMappings.Text = "Mappings";
             // 
             // ctxLog
             // 
@@ -237,6 +267,45 @@
             this.tsmiAbortThread.Text = "&Abort";
             this.tsmiAbortThread.Click += new System.EventHandler(this.tsmiAbortThread_Click);
             // 
+            // ctxMapping
+            // 
+            this.ctxMapping.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMappingCheckVersion,
+            this.tsmiMappingUpdate,
+            this.tsmiMappingSetAsBest,
+            this.tsmiMappingInfo,
+            this.tsmiMappingDownload});
+            this.ctxMapping.Name = "ctxMapping";
+            this.ctxMapping.Size = new System.Drawing.Size(153, 136);
+            // 
+            // tsmiMappingCheckVersion
+            // 
+            this.tsmiMappingCheckVersion.Name = "tsmiMappingCheckVersion";
+            this.tsmiMappingCheckVersion.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingCheckVersion.Text = "Check Version";
+            this.tsmiMappingCheckVersion.Click += new System.EventHandler(this.tsmiMappingCheckVersion_Click);
+            // 
+            // tsmiMappingUpdate
+            // 
+            this.tsmiMappingUpdate.Name = "tsmiMappingUpdate";
+            this.tsmiMappingUpdate.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingUpdate.Text = "Update";
+            this.tsmiMappingUpdate.Click += new System.EventHandler(this.tsmiMappingUpdate_Click);
+            // 
+            // tsmiMappingInfo
+            // 
+            this.tsmiMappingInfo.Name = "tsmiMappingInfo";
+            this.tsmiMappingInfo.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingInfo.Text = "Info";
+            this.tsmiMappingInfo.Click += new System.EventHandler(this.tsmiMappingInfo_Click);
+            // 
+            // tsmiMappingDownload
+            // 
+            this.tsmiMappingDownload.Name = "tsmiMappingDownload";
+            this.tsmiMappingDownload.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingDownload.Text = "Download";
+            this.tsmiMappingDownload.Click += new System.EventHandler(this.tsmiMappingDownload_Click);
+            // 
             // splitContainerEx2
             // 
             this.splitContainerEx2.AlternativeCollapseDefault = false;
@@ -260,8 +329,8 @@
             // 
             this.splitContainerEx2.Panel2.Controls.Add(this.splitContainerEx3);
             this.splitContainerEx2.Panel2MaxSize = 0;
-            this.splitContainerEx2.Size = new System.Drawing.Size(787, 524);
-            this.splitContainerEx2.SplitterDistance = 335;
+            this.splitContainerEx2.Size = new System.Drawing.Size(787, 481);
+            this.splitContainerEx2.SplitterDistance = 303;
             this.splitContainerEx2.SplitterWidth = 20;
             this.splitContainerEx2.TabIndex = 13;
             this.splitContainerEx2.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
@@ -288,7 +357,7 @@
             // 
             this.splitContainerEx1.Panel2.Controls.Add(this.gbAddonDetails);
             this.splitContainerEx1.Panel2MaxSize = 0;
-            this.splitContainerEx1.Size = new System.Drawing.Size(787, 335);
+            this.splitContainerEx1.Size = new System.Drawing.Size(787, 303);
             this.splitContainerEx1.SplitterDistance = 441;
             this.splitContainerEx1.SplitterWidth = 20;
             this.splitContainerEx1.TabIndex = 0;
@@ -301,7 +370,7 @@
             this.gbAddons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAddons.Location = new System.Drawing.Point(0, 0);
             this.gbAddons.Name = "gbAddons";
-            this.gbAddons.Size = new System.Drawing.Size(441, 335);
+            this.gbAddons.Size = new System.Drawing.Size(441, 303);
             this.gbAddons.TabIndex = 10;
             this.gbAddons.TabStop = false;
             this.gbAddons.Text = "Addons";
@@ -315,17 +384,17 @@
             this.dgvColAddonName,
             this.dgvColAddonLocalVersion,
             this.dgvColAddonBestMapping});
-            this.dgvAddons.ContextMenuStrip = this.ctxAddon;
             this.dgvAddons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAddons.Location = new System.Drawing.Point(3, 41);
+            this.dgvAddons.MultiSelect = false;
             this.dgvAddons.Name = "dgvAddons";
             this.dgvAddons.ReadOnly = true;
             this.dgvAddons.RowHeadersVisible = false;
             this.dgvAddons.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAddons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAddons.Size = new System.Drawing.Size(435, 291);
+            this.dgvAddons.Size = new System.Drawing.Size(435, 259);
             this.dgvAddons.TabIndex = 4;
-            this.dgvAddons.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAddons_CellMouseDown);
+            this.dgvAddons.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvAddons_MouseClick);
             this.dgvAddons.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAddons_CellPainting);
             this.dgvAddons.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvAddons_RowStateChanged);
             // 
@@ -420,14 +489,12 @@
             this.gbAddonDetails.Controls.Add(this.lblLocalVersion);
             this.gbAddonDetails.Controls.Add(this.gbMappings);
             this.gbAddonDetails.Controls.Add(this.gbSubAddons);
-            this.gbAddonDetails.Controls.Add(this.linkDownload);
-            this.gbAddonDetails.Controls.Add(this.linkInfo);
             this.gbAddonDetails.Controls.Add(this.lblName);
             this.gbAddonDetails.Controls.Add(this.txtName);
             this.gbAddonDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAddonDetails.Location = new System.Drawing.Point(0, 0);
             this.gbAddonDetails.Name = "gbAddonDetails";
-            this.gbAddonDetails.Size = new System.Drawing.Size(326, 335);
+            this.gbAddonDetails.Size = new System.Drawing.Size(326, 303);
             this.gbAddonDetails.TabIndex = 11;
             this.gbAddonDetails.TabStop = false;
             this.gbAddonDetails.Text = "Addon Details";
@@ -455,9 +522,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbMappings.Controls.Add(this.dgvMappings);
-            this.gbMappings.Location = new System.Drawing.Point(6, 57);
+            this.gbMappings.Location = new System.Drawing.Point(6, 39);
             this.gbMappings.Name = "gbMappings";
-            this.gbMappings.Size = new System.Drawing.Size(311, 162);
+            this.gbMappings.Size = new System.Drawing.Size(311, 118);
             this.gbMappings.TabIndex = 8;
             this.gbMappings.TabStop = false;
             this.gbMappings.Text = "Mappings";
@@ -477,8 +544,9 @@
             this.dgvMappings.ReadOnly = true;
             this.dgvMappings.RowHeadersVisible = false;
             this.dgvMappings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMappings.Size = new System.Drawing.Size(305, 143);
+            this.dgvMappings.Size = new System.Drawing.Size(305, 99);
             this.dgvMappings.TabIndex = 6;
+            this.dgvMappings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvMappings_MouseClick);
             // 
             // dgvColMappingSite
             // 
@@ -503,9 +571,9 @@
             this.gbSubAddons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbSubAddons.Controls.Add(this.lbSubAddons);
-            this.gbSubAddons.Location = new System.Drawing.Point(6, 225);
+            this.gbSubAddons.Location = new System.Drawing.Point(6, 163);
             this.gbSubAddons.Name = "gbSubAddons";
-            this.gbSubAddons.Size = new System.Drawing.Size(314, 104);
+            this.gbSubAddons.Size = new System.Drawing.Size(314, 134);
             this.gbSubAddons.TabIndex = 7;
             this.gbSubAddons.TabStop = false;
             this.gbSubAddons.Text = "SubAddons";
@@ -517,30 +585,8 @@
             this.lbSubAddons.IntegralHeight = false;
             this.lbSubAddons.Location = new System.Drawing.Point(3, 16);
             this.lbSubAddons.Name = "lbSubAddons";
-            this.lbSubAddons.Size = new System.Drawing.Size(308, 85);
+            this.lbSubAddons.Size = new System.Drawing.Size(308, 115);
             this.lbSubAddons.TabIndex = 1;
-            // 
-            // linkDownload
-            // 
-            this.linkDownload.AutoSize = true;
-            this.linkDownload.Location = new System.Drawing.Point(38, 41);
-            this.linkDownload.Name = "linkDownload";
-            this.linkDownload.Size = new System.Drawing.Size(55, 13);
-            this.linkDownload.TabIndex = 5;
-            this.linkDownload.TabStop = true;
-            this.linkDownload.Text = "Download";
-            this.linkDownload.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDownload_LinkClicked);
-            // 
-            // linkInfo
-            // 
-            this.linkInfo.AutoSize = true;
-            this.linkInfo.Location = new System.Drawing.Point(7, 41);
-            this.linkInfo.Name = "linkInfo";
-            this.linkInfo.Size = new System.Drawing.Size(25, 13);
-            this.linkInfo.TabIndex = 4;
-            this.linkInfo.TabStop = true;
-            this.linkInfo.Text = "Info";
-            this.linkInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkInfo_LinkClicked);
             // 
             // lblName
             // 
@@ -582,7 +628,7 @@
             this.splitContainerEx3.Panel2.Controls.Add(this.dgvLog);
             this.splitContainerEx3.Panel2.Controls.Add(this.tsLog);
             this.splitContainerEx3.Panel2MaxSize = 0;
-            this.splitContainerEx3.Size = new System.Drawing.Size(787, 169);
+            this.splitContainerEx3.Size = new System.Drawing.Size(787, 158);
             this.splitContainerEx3.SplitterDistance = 441;
             this.splitContainerEx3.SplitterWidth = 20;
             this.splitContainerEx3.TabIndex = 0;
@@ -605,7 +651,7 @@
             this.dgvThreadActivity.ReadOnly = true;
             this.dgvThreadActivity.RowHeadersVisible = false;
             this.dgvThreadActivity.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvThreadActivity.Size = new System.Drawing.Size(441, 169);
+            this.dgvThreadActivity.Size = new System.Drawing.Size(441, 158);
             this.dgvThreadActivity.TabIndex = 0;
             // 
             // dgvColThreadID
@@ -656,7 +702,7 @@
             this.dgvLog.RowHeadersVisible = false;
             this.dgvLog.RowTemplate.Height = 20;
             this.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLog.Size = new System.Drawing.Size(326, 144);
+            this.dgvLog.Size = new System.Drawing.Size(326, 133);
             this.dgvLog.TabIndex = 0;
             // 
             // dgvColLogTime
@@ -737,11 +783,18 @@
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
+            // tsmiMappingSetAsBest
+            // 
+            this.tsmiMappingSetAsBest.Name = "tsmiMappingSetAsBest";
+            this.tsmiMappingSetAsBest.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingSetAsBest.Text = "Set as Best";
+            this.tsmiMappingSetAsBest.Click += new System.EventHandler(this.tsmiMappingSetAsBest_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 548);
+            this.ClientSize = new System.Drawing.Size(787, 505);
             this.Controls.Add(this.splitContainerEx2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -752,6 +805,7 @@
             this.ctxAddon.ResumeLayout(false);
             this.ctxLog.ResumeLayout(false);
             this.ctxThread.ResumeLayout(false);
+            this.ctxMapping.ResumeLayout(false);
             this.splitContainerEx2.Panel1.ResumeLayout(false);
             this.splitContainerEx2.Panel2.ResumeLayout(false);
             this.splitContainerEx2.ResumeLayout(false);
@@ -798,8 +852,8 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.DataGridView dgvLog;
         private System.Windows.Forms.ContextMenuStrip ctxAddon;
-        private System.Windows.Forms.ToolStripMenuItem tsmWadduSingleAddon;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCheckSingleAddon;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddonUpdate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddonCheckForUpdate;
         private System.Windows.Forms.ContextMenuStrip ctxLog;
         private System.Windows.Forms.ToolStripMenuItem tsmiClearLog;
         private System.Windows.Forms.ContextMenuStrip ctxThread;
@@ -818,9 +872,6 @@
         private Waddu.Controls.SplitContainerEx splitContainerEx3;
         private System.Windows.Forms.ToolStrip tsLog;
         private System.Windows.Forms.ToolStripDropDownButton tsddLogLevel;
-        private System.Windows.Forms.LinkLabel linkDownload;
-        private System.Windows.Forms.LinkLabel linkInfo;
-        private System.Windows.Forms.ToolTip ttMainForm;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogDebug;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogInformation;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogWarning;
@@ -843,6 +894,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonBestMapping;
         private System.Windows.Forms.ToolStripTextBox txtAddonFilter;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCollectUnknownAddons;
+        private System.Windows.Forms.ContextMenuStrip ctxMapping;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingCheckVersion;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingUpdate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingInfo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingDownload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddonMappings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingSetAsBest;
 
     }
 }

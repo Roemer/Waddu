@@ -35,10 +35,13 @@ namespace Waddu.BusinessObjects
             // Get all Local Addons
             string addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
             List<Addon> localAddons = new List<Addon>();
-            foreach (string addonPath in Directory.GetDirectories(addonFolderPath))
+            if (Directory.Exists(addonFolderPath))
             {
-                Addon addon = new Addon(Path.GetFileName(addonPath));
-                localAddons.Add(addon);
+                foreach (string addonPath in Directory.GetDirectories(addonFolderPath))
+                {
+                    Addon addon = new Addon(Path.GetFileName(addonPath));
+                    localAddons.Add(addon);
+                }
             }
 
             // Load XML File

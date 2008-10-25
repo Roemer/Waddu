@@ -21,7 +21,7 @@ namespace Waddu.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
@@ -54,12 +54,12 @@ namespace Waddu.Forms
             dgvMappings.AutoGenerateColumns = false;
             dgvColMappingSite.DataPropertyName = "AddonSiteId";
             dgvColMappingVersion.DataPropertyName = "RemoteVersion";
+            dgvColMappingVersion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvColMappingLastUpdated.DataPropertyName = "LastUpdated";
 
             // Initialize Logger
             SetLogLevel(Config.Instance.LogLevel);
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
-            Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntryFile);
 
             // Initialize the Thread Manager
             ThreadManager.Initialize();
@@ -75,27 +75,6 @@ namespace Waddu.Forms
 
             // Load local Addons
             LoadLocalAddons();
-        }
-
-        private void Logger_LogEntry(LogEntry entry)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new LogEntryEventHandler(Logger_LogEntry), entry);
-                return;
-            }
-            // Reload Log
-            RefreshLog();
-        }
-
-        private void Logger_LogEntryFile(LogEntry entry)
-        {
-            string logFileName = "log.txt";
-            string logFilePath = Path.Combine(Application.StartupPath, logFileName);
-            lock (Logger.Instance)
-            {
-                File.AppendAllText(logFilePath, entry.ToString() + Environment.NewLine);
-            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -172,11 +151,6 @@ namespace Waddu.Forms
             return localWoWPath;
         }
 
-        private string GetRemoteVersion(Addon addon)
-        {
-            return addon.GetRemoteVersions();
-        }
-
         private void tsmiExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -190,26 +164,26 @@ namespace Waddu.Forms
             }
         }
 
-        private void tsmiCheckSingleAddon_Click(object sender, EventArgs e)
+        private void tsmiAddonCheckForUpdate_Click(object sender, EventArgs e)
         {
             if (dgvAddons.SelectedRows.Count > 0)
             {
                 Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, addon, AddonSiteId.wowace));
+                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, addon));
                 }
             }
         }
 
-        private void tsmiUpdateSingleAddon_Click(object sender, EventArgs e)
+        private void tsmiAddonUpdate_Click(object sender, EventArgs e)
         {
             if (dgvAddons.SelectedRows.Count > 0)
             {
                 Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon, AddonSiteId.wowace));
+                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
                 }
             }
         }
@@ -224,7 +198,7 @@ namespace Waddu.Forms
             BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
             foreach (Addon addon in addonList)
             {
-                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, addon, AddonSiteId.blizzard));
+                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, addon));
             }
         }
 
@@ -233,33 +207,7 @@ namespace Waddu.Forms
             BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
             foreach (Addon addon in addonList)
             {
-                foreach (Mapping mapping in addon.Mappings)
-                {
-                    AddonSiteBase site = AddonSiteBase.GetSite(mapping.AddonSiteId);
-                    if (site != null)
-                    {
-                        ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon, mapping.AddonSiteId));
-                        break;
-                    }
-                }
-            }
-        }
-
-        private void dgvAddons_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                /*if (e.ColumnIndex == dgvColAddonMappings.Index)
-                {
-                    dgvColAddonMappings.Items.Add("something");
-                    Console.WriteLine("asdf");
-                }*/
-
-                if (e.Button == MouseButtons.Right)
-                {
-                    // Select Row with RightClick
-                    dgvAddons.Rows[e.RowIndex].Selected = true;
-                }
+                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
             }
         }
 
@@ -295,17 +243,6 @@ namespace Waddu.Forms
             }
         }
 
-        private void tsmiClearLog_Click(object sender, EventArgs e)
-        {
-            Logger.Instance.Clear();
-            RefreshLog();
-        }
-
-        private void RefreshLog()
-        {
-            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
-        }
-
         private void tsmiAbortThread_Click(object sender, EventArgs e)
         {
 
@@ -328,10 +265,6 @@ namespace Waddu.Forms
 
                     txtName.Text = addon.Name;
                     txtLocalVersion.Text = addon.LocalVersion;
-                    linkInfo.Tag = addon;
-                    linkDownload.Tag = addon;
-                    ttMainForm.SetToolTip(linkInfo, addon.Name);
-                    ttMainForm.SetToolTip(linkDownload, addon.Name);
                     dgvMappings.DataSource = addon.Mappings;
                 }
             }
@@ -348,22 +281,7 @@ namespace Waddu.Forms
             LoadLocalAddons();
         }
 
-        private void linkInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Addon addon = (sender as LinkLabel).Tag as Addon;
-            AddonSiteBase site = AddonSiteBase.GetSite(addon.Mappings[0].AddonSiteId);
-            string infoUrl = site.GetInfoLink(addon.Mappings[0].AddonTag);
-            Process.Start(infoUrl);
-        }
-
-        private void linkDownload_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Addon addon = (sender as LinkLabel).Tag as Addon;
-            AddonSiteBase site = AddonSiteBase.GetSite(addon.Mappings[0].AddonSiteId);
-            string downloadUrl = site.GetDownloadLink(addon.Mappings[0].AddonTag);
-            Process.Start(downloadUrl);
-        }
-
+        #region Log
         private void SetLogLevel(LogType logLevel)
         {
             tsmiLogDebug.Checked = logLevel == LogType.Debug;
@@ -393,6 +311,28 @@ namespace Waddu.Forms
             return LogType.Information;
         }
 
+        private void RefreshLog()
+        {
+            dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
+        }
+
+        private void Logger_LogEntry(LogEntry entry)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new LogEntryEventHandler(Logger_LogEntry), entry);
+                return;
+            }
+            // Reload Log
+            RefreshLog();
+        }
+
+        private void tsmiClearLog_Click(object sender, EventArgs e)
+        {
+            Logger.Instance.Clear();
+            RefreshLog();
+        }
+
         private void tsmiLogLevelItem_Click(object sender, EventArgs e)
         {
             tsmiLogDebug.Checked = false;
@@ -414,5 +354,142 @@ namespace Waddu.Forms
             // Reload Log
             RefreshLog();
         }
+        #endregion
+
+        #region Help
+        private void tsmiCollectUnknownAddons_Click(object sender, EventArgs e)
+        {
+            string unkAddons = string.Empty;
+            foreach (Addon addon in AddonList.Instance.Addons)
+            {
+                if (addon.Mappings.Count == 0)
+                {
+                    unkAddons += "- " + addon.Name + Environment.NewLine;
+                }
+            }
+            if (unkAddons != string.Empty)
+            {
+                using (UnknownAddonsForm dlg = new UnknownAddonsForm())
+                {
+                    dlg.UnknownAddonsText = unkAddons;
+                    dlg.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have no unknown Addons!");
+            }
+        }
+        #endregion
+
+        #region Addon
+        private void dgvAddons_MouseClick(object sender, MouseEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (e.Button == MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
+                if (h.RowIndex >= 0)
+                {
+                    dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
+                    tsmiAddonMappings.DropDownItems.Clear();
+
+                    Addon addon = dgv.CurrentRow.DataBoundItem as Addon;
+                    if (addon.Mappings.Count > 1)
+                    {
+                        tsmiAddonMappings.Visible = true;
+                        foreach (Mapping map in addon.Mappings)
+                        {
+                            ToolStripMenuItem item = new ToolStripMenuItem();
+                            item.Text = map.AddonSiteId.ToString();
+                            item.Tag = map;
+                            item.Click += new EventHandler(tsmiAddonMappingsItem_Click);
+                            tsmiAddonMappings.DropDownItems.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        tsmiAddonMappings.Visible = false;
+                    }
+
+                    ctxAddon.Show(dgv, e.Location);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the selected Mapping as the Best Mapping for the Addon
+        /// </summary>
+        private void tsmiAddonMappingsItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            Mapping map = tsmi.Tag as Mapping;
+            map.Addon.BestMapping = map;
+        }
+        #endregion
+
+        #region Mappings
+        /// <summary>
+        /// Shows the Context Menu when clicked on a Mapping
+        /// </summary>
+        private void dgvMappings_MouseClick(object sender, MouseEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (e.Button == MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
+                if (h.RowIndex >= 0)
+                {
+                    dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
+                    ctxMapping.Show(dgv, e.Location);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds an Version Request for a specific Mapping to the WorkQueue
+        /// </summary>
+        private void tsmiMappingCheckVersion_Click(object sender, EventArgs e)
+        {
+            if (dgvMappings.SelectedRows.Count > 0)
+            {
+                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, map.Addon, map));
+            }
+        }
+
+        /// <summary>
+        /// Adds an Update for a specific Mapping to the WorkQueue
+        /// </summary>
+        private void tsmiMappingUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgvMappings.SelectedRows.Count > 0)
+            {
+                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, map.Addon, map));
+            }
+        }
+
+        private void tsmiMappingSetAsBest_Click(object sender, EventArgs e)
+        {
+            if (dgvMappings.SelectedRows.Count > 0)
+            {
+                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                map.Addon.BestMapping = map;
+            }
+        }
+
+        private void tsmiMappingInfo_Click(object sender, EventArgs e)
+        {
+            Mapping map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
+            Process.Start(map.GetInfoLink());
+        }
+
+        private void tsmiMappingDownload_Click(object sender, EventArgs e)
+        {
+            Mapping map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
+            Process.Start(map.GetDownloadLink());
+        }
+        #endregion
     }
 }

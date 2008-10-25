@@ -88,6 +88,7 @@
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\ThreadManager.cs" />
     <Compile Include="Classes\Helpers.cs" />
+    <Compile Include="Classes\UnixTimeStamp.cs" />
     <Compile Include="Classes\Win32\NativeMethods.cs" />
     <Compile Include="Classes\Win32\Types\ShFileOperationFlags.cs" />
     <Compile Include="Classes\Win32\Types\SHFileOperationType.cs" />
@@ -107,10 +108,20 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Mapper.cs" />
+    <Compile Include="Forms\UnknownAddonsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UnknownAddonsForm.Designer.cs">
+      <DependentUpon>UnknownAddonsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UnknownAddonsForm.resx">
+      <DependentUpon>UnknownAddonsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

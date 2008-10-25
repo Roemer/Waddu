@@ -68,6 +68,18 @@ namespace Waddu.BusinessObjects
             Addon.BestMapping = Addon.BestMapping;
         }
 
+        public string GetInfoLink()
+        {
+            AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
+            return site.GetInfoLink(AddonTag);
+        }
+
+        public string GetDownloadLink()
+        {
+            AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
+            return site.GetDownloadLink(AddonTag);
+        }
+
         public override string ToString()
         {
             if (RemoteVersion == string.Empty)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Waddu.Classes;
 using Waddu.Types;
 
@@ -8,37 +9,74 @@ namespace Waddu.AddonSites
     public class SiteCurseForge : AddonSiteBase
     {
         private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
+        private string _fileUrl = "http://wow.curseforge.com{0}";
+        private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
+        private string _datePattern = @"<span class=""date"" title="".*"">(.*)</span>";
+        private string _downloadPrePattern = @"<th>Filename:</th>";
+        private string _downloadPattern = @"<td><a href=""(.*)"">.*</a></td>";
+        private Dictionary<string, string> _versionCache = new Dictionary<string, string>();
+        private Dictionary<string, DateTime> _dateCache = new Dictionary<string, DateTime>();
+        private Dictionary<string, string> _fileLinkCache = new Dictionary<string, string>();
 
         #region AddonSiteBase Overrides
 
-        public override string GetVersion(string tag)
+        private void ParseInfoSite(string tag)
         {
-            string versionString = string.Empty;
             string url = _infoUrl.Replace("{tag}", tag);
+            bool versionFound = false;
+            bool dateFound = false;
+
             List<string> infoPage = Helpers.GetHtml(url, AddonSiteId.curseforge);
             for (int i = 0; i < infoPage.Count; i++)
             {
                 string line = infoPage[i];
-                //<td class="first"><a href="/projects/quest-helper/files/72-0-57/">0.57</a></td>
-                if (line.Contains("<td class=\"first\">"))
+
+                // Version Check
+                if (!versionFound)
                 {
-                    int start = line.IndexOf("/\">") + 3;
-                    int end = line.IndexOf("</a>", start);
-                    versionString = line.Substring(start, (end - start));
-                    if (versionString.Contains("-r"))
+                    Match m = Regex.Match(line, _versionPattern);
+                    if (m.Success)
                     {
-                        start = versionString.IndexOf("-r") + 1;
-                        versionString = versionString.Substring(start);
+                        string versionString = m.Groups[2].Captures[0].Value;
+                        Helpers.AddOrUpdate<string, string>(_versionCache, tag, versionString);
+                        string fileUrl = m.Groups[1].Captures[0].Value;
+                        Helpers.AddOrUpdate<string, string>(_fileLinkCache, tag, string.Format(_fileUrl, fileUrl));
+                        versionFound = true;
                     }
-                    break;
+                }
+
+                // Last Update Check
+                if (!dateFound)
+                {
+                    Match m = Regex.Match(line, _datePattern);
+                    if (m.Success)
+                    {
+                        string dateStr = m.Groups[1].Captures[0].Value;
+                        string[] dateList = dateStr.Split('/');
+                        DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
+                        Helpers.AddOrUpdate<string, DateTime>(_dateCache, tag, dt);
+                        dateFound = true;
+                    }
                 }
             }
-            return versionString;
+        }
+
+        public override string GetVersion(string tag)
+        {
+            if (!_versionCache.ContainsKey(tag))
+            {
+                ParseInfoSite(tag);
+            }
+            return _versionCache[tag];
         }
 
         public override DateTime GetLastUpdated(string tag)
         {
-            throw new NotImplementedException();
+            if (!_dateCache.ContainsKey(tag))
+            {
+                ParseInfoSite(tag);
+            }
+            return _dateCache[tag];
         }
 
         public override string GetInfoLink(string tag)
@@ -48,39 +86,27 @@ namespace Waddu.AddonSites
 
         public override string GetDownloadLink(string tag)
         {
-            string downloadUrl = string.Empty;
-            string url = _infoUrl.Replace("{tag}", tag);
-            List<string> infoPage = Helpers.GetHtml(url, AddonSiteId.curseforge);
-            for (int i = 0; i < infoPage.Count; i++)
+            if (!_fileLinkCache.ContainsKey(tag))
             {
-                string line = infoPage[i];
-                //<td class="first"><a href="/projects/quest-helper/files/72-0-57/">0.57</a></td>
-                if (line.Contains("<td class=\"first\">"))
+                ParseInfoSite(tag);
+            }
+            string fileUrl = _fileLinkCache[tag];
+
+            string downloadUrl = string.Empty;
+            List<string> filePage = Helpers.GetHtml(fileUrl, AddonSiteId.curseforge);
+            for (int i = 0; i < filePage.Count; i++)
+            {
+                string line = filePage[i];
+                Match m = Regex.Match(line, _downloadPrePattern);
+                if (m.Success)
                 {
-                    // Get File Url
-                    string fileUrl = "http://wow.curseforge.com";
-                    int start = line.IndexOf("/");
-                    int end = line.IndexOf("/\">");
-                    fileUrl += line.Substring(start, (end - start));
-
-                    // Get DownloadURL
-                    List<string> filePage = Helpers.GetHtml(fileUrl, AddonSiteId.curseforge);
-                    for (int ii = 0; ii < filePage.Count; ii++)
+                    string realLine = filePage[i + 1];
+                    m = Regex.Match(realLine, _downloadPattern);
+                    if (m.Success)
                     {
-                        string line2 = filePage[ii];
-
-                        //<th>Filename:</th>
-                        //<td><a href="http://static.curseforge.net/uploads/18/263/436/QuestHelper-0.59.zip">QuestHelper-0.59.zip</a></td>
-                        if (line2.Contains("<th>Filename:</th>"))
-                        {
-                            string realLine = filePage[ii + 1];
-                            int start2 = realLine.IndexOf("http");
-                            int end2 = realLine.IndexOf(".zip") + 4;
-                            downloadUrl = realLine.Substring(start2, (end2 - start2));
-                            break;
-                        }
+                        downloadUrl = m.Groups[1].Captures[0].Value;
+                        break;
                     }
-                    break;
                 }
             }
             return downloadUrl;
