@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Waddu.Classes;
 
 namespace Waddu.AddonSites
@@ -8,12 +9,21 @@ namespace Waddu.AddonSites
     {
         private string _infoUrl = "http://wow.curse.com/downloads/wow-addons/details/{tag}.aspx";
         private string _downUrl = "http://wow.curse.com{0}";
+        private string _versionPrePattern = @"<th>Current Version:</th>";
+        private string _versionPattern = @"<a href=""(.*.aspx)"">(.*)</a>";
+        private string _updatedPattern = @"<td><script>document.write\(Curse.Utils.getDateSince\((.*)000\)\);</script>(.*)</td>";
+        private string _downloadPattern = @"<a class=""button button-pop"" href=""(.*)""><span>Manual Install</span></a>";
+        private Dictionary<string, string> _versionCache = new Dictionary<string, string>();
+        private Dictionary<string, DateTime> _dateCache = new Dictionary<string, DateTime>();
+        private Dictionary<string, string> _fileLinkCache = new Dictionary<string, string>();
 
         #region AddonSiteBase Overrides
 
-        public override string GetVersion(string tag)
+        private void ParseInfoSite(string tag)
         {
-            string versionString = string.Empty;
+            bool versionFound = false;
+            bool dateFound = false;
+
             string url = _infoUrl.Replace("{tag}", tag);
             List<string> infoPage = Helpers.GetHtml(url);
 
@@ -21,23 +31,56 @@ namespace Waddu.AddonSites
             {
                 string line = infoPage[i];
 
-                //<th>Current Version:</th>
-                if (line.Contains("<th>Current Version:</th>"))
+                // Version Check / Download Url
+                if (!versionFound)
                 {
-                    //<a href="/downloads/wow-addons/details/quest-helper/download/213635.aspx">0.57</a>
-                    string realLine = infoPage[i + 2];
-                    int start = realLine.IndexOf("aspx\">") + 6;
-                    int end = realLine.IndexOf("</a>", start);
-                    versionString = realLine.Substring(start, (end - start));
-                    break;
+                    Match m = Regex.Match(line, _versionPrePattern);
+                    if (m.Success)
+                    {
+                        string realLine = infoPage[i + 2];
+                        m = Regex.Match(realLine, _versionPattern);
+                        if (m.Success)
+                        {
+                            string version = m.Groups[2].Captures[0].Value;
+                            Helpers.AddOrUpdate<string, string>(_versionCache, tag, version);
+                            string file = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
+                            Helpers.AddOrUpdate<string, string>(_fileLinkCache, tag, file);
+                            versionFound = true;
+                        }
+                    }
+                }
+
+                // Last Update Check
+                if (!dateFound)
+                {
+                    Match m = Regex.Match(line, _updatedPattern);
+                    if (m.Success)
+                    {
+                        string date = m.Groups[1].Captures[0].Value;
+                        DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(date));
+                        Helpers.AddOrUpdate<string, DateTime>(_dateCache, tag, dt);
+                        dateFound = true;
+                    }
                 }
             }
-            return versionString;
+        }
+
+        public override string GetVersion(string tag)
+        {
+            if (!_versionCache.ContainsKey(tag))
+            {
+                ParseInfoSite(tag);
+            }
+            return _versionCache[tag];
         }
 
         public override DateTime GetLastUpdated(string tag)
         {
-            throw new NotImplementedException();
+            if (!_dateCache.ContainsKey(tag))
+            {
+                ParseInfoSite(tag);
+            }
+            return _dateCache[tag];
         }
 
         public override string GetInfoLink(string tag)
@@ -47,38 +90,22 @@ namespace Waddu.AddonSites
 
         public override string GetDownloadLink(string tag)
         {
-            string downloadUrl = string.Empty;
-            string url = _infoUrl.Replace("{tag}", tag);
-            List<string> infoPage = Helpers.GetHtml(url);
-
-            for (int i = 0; i < infoPage.Count; i++)
+            if (!_fileLinkCache.ContainsKey(tag))
             {
-                string line = infoPage[i];
+                ParseInfoSite(tag);
+            }
+            string fileUrl = _fileLinkCache[tag];
 
-                //<th>Current Version:</th>
-                if (line.Contains("<th>Current Version:</th>"))
+            string downloadUrl = string.Empty;
+            List<string> filePage = Helpers.GetHtml(fileUrl);
+            for (int i = 0; i < filePage.Count; i++)
+            {
+                string line = filePage[i];
+                Match m = Regex.Match(line, _downloadPattern);
+                if (m.Success)
                 {
-                    //<a href="/downloads/wow-addons/details/quest-helper/download/213635.aspx">0.57</a>
-                    string realLine = infoPage[i + 2];
-                    int start = realLine.IndexOf("href=\"") + 6;
-                    int end = realLine.IndexOf("\">", start);
-                    downloadUrl = realLine.Substring(start, (end - start));
-                    downloadUrl = string.Format(_downUrl, downloadUrl);
-
-                    // Get real Download Link
-                    List<string> filePage = Helpers.GetHtml(downloadUrl);
-                    foreach (string line2 in filePage)
-                    {
-                        //<a class="button button-pop" href="/downloads/download.aspx?pi=7436&amp;fi=246034"><span>Manual Install</span></a>
-                        if (line2.Contains("<span>Manual Install</span>"))
-                        {
-                            int start2 = line2.IndexOf("href=\"") + 6;
-                            int end2 = line2.IndexOf("\">", start2);
-                            downloadUrl = string.Format(_downUrl, line2.Substring(start2, (end2 - start2)));
-                            downloadUrl = downloadUrl.Replace("&amp;", "&");
-                            break;
-                        }
-                    }
+                    downloadUrl = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
+                    downloadUrl = downloadUrl.Replace("&amp;", "&");
                     break;
                 }
             }

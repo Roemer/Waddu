@@ -12,17 +12,17 @@ namespace Waddu.AddonSites
 
         public override DateTime GetLastUpdated(string tag)
         {
-            throw new NotImplementedException();
+            return DateTime.Now;
         }
 
         public override string GetInfoLink(string tag)
         {
-            throw new NotImplementedException();
+            return "http://www.worldofwarcraft.com";
         }
 
         public override string GetDownloadLink(string tag)
         {
-            throw new NotImplementedException();
+            return "http://www.worldofwarcraft.com";
         }
         #endregion
     }

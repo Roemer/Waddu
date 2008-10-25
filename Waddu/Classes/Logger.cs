@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
-using Waddu.Types;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Windows.Forms;
+using Waddu.Types;
 
 namespace Waddu.Classes
 {
@@ -24,16 +27,19 @@ namespace Waddu.Classes
         public event LogEntryEventHandler LogEntry;
 
         private List<LogEntry> _entryList;
+        private string _logFilePath;
 
         private Logger()
         {
+            string logFileName = "log.txt";
+            _logFilePath = Path.Combine(Application.StartupPath, logFileName);
             _entryList = new List<LogEntry>();
         }
 
         public BindingList<LogEntry> GetEntries(LogType type)
         {
             BindingList<LogEntry> retList = new BindingList<LogEntry>();
-            lock (_entryList)
+            lock (this)
             {
                 foreach (LogEntry entry in _entryList)
                 {
@@ -49,7 +55,11 @@ namespace Waddu.Classes
         public void AddLog(LogType logType, string message, params object[] strParams)
         {
             LogEntry newEntry = new LogEntry(string.Format(message, strParams), logType);
-            _entryList.Add(newEntry);
+            lock (this)
+            {
+                _entryList.Add(newEntry);
+                File.AppendAllText(_logFilePath, newEntry.ToString() + Environment.NewLine);
+            }
             if (LogEntry != null)
             {
                 LogEntry(newEntry);

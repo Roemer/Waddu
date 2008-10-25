@@ -50,13 +50,6 @@ namespace Waddu.BusinessObjects
             set { _isUnhandled = value; }
         }
 
-        private string _remoteVersions;
-        public string RemoteVersions
-        {
-            get { return _remoteVersions; }
-            set { _remoteVersions = value; NotifyPropertyChanged("RemoteVersions"); }
-        }
-
         private Mapping _bestMapping;
         public Mapping BestMapping
         {
@@ -82,8 +75,6 @@ namespace Waddu.BusinessObjects
         #region Constructors
         private Addon()
         {
-            _remoteVersions = string.Empty;
-
             _subAddonList = new BindingList<Addon>();
             _mappingList = new BindingList<Mapping>();
 
@@ -172,35 +163,6 @@ namespace Waddu.BusinessObjects
 
             // Unknown
             return "Unknown";
-        }
-
-        /// <summary>
-        /// Get the Remote Versions and fills the Property
-        /// </summary>
-        public string GetRemoteVersions()
-        {
-            if (IsSubAddon)
-            {
-                RemoteVersions = "SubAddon";
-            }
-            else
-            {
-                if (Mappings.Count == 0)
-                {
-                    RemoteVersions = "No Mapping";
-                }
-                else
-                {
-                    List<string> remoteVersionList = new List<string>();
-                    foreach (Mapping mapping in Mappings)
-                    {
-                        mapping.CheckRemote();
-                        remoteVersionList.Add(mapping.RemoteVersion);
-                    }
-                    RemoteVersions = String.Join(Environment.NewLine, remoteVersionList.ToArray());
-                }
-            }
-            return RemoteVersions;
         }
 
         /// <summary>

@@ -64,19 +64,36 @@ namespace Waddu.Classes
                 {
                     // Get Remote Version
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for {1}", workerThread.ThreadID, wi.Addon.Name);
-                    workerThread.InfoText = string.Format("Get Versions for \"{0}\"", wi.Addon.Name);
-                    wi.Addon.GetRemoteVersions();
+                    if (wi.Mapping != null)
+                    {
+                        workerThread.InfoText = string.Format("Get Version for \"{0}\" from {1}", wi.Addon.Name, wi.Mapping.AddonSiteId);
+                        wi.Mapping.CheckRemote();
+                    }
+                    else
+                    {
+                        workerThread.InfoText = string.Format("Get Versions for \"{0}\"", wi.Addon.Name);
+                        foreach (Mapping map in wi.Addon.Mappings)
+                        {
+                            map.CheckRemote();
+                        }
+                    }
                 }
                 else if (wi.WorkItemType == WorkItemType.Update)
                 {
                     // Update Addon
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.Mappings[0]);
-                    workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.Mappings[0], wi.Addon.Name);
-                    AddonSiteBase site = AddonSiteBase.GetSite(wi.Addon.Mappings[0].AddonSiteId);
-                    string downloadUrl = site.GetDownloadLink(wi.Addon.Mappings[0].AddonTag);
+                    // Addon has no Mappings, skip
+                    if (wi.Addon.Mappings.Count <= 0)
+                    {
+                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping", workerThread.ThreadID, wi.Addon.Name);
+                        continue;
+                    }
+
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.BestMapping);
+                    workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.BestMapping, wi.Addon.Name);
+                    string downloadUrl = wi.Addon.BestMapping.GetDownloadLink();
                     if (downloadUrl == string.Empty)
                     {
-                        Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, wi.Addon.Name);
+                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, wi.Addon.Name);
                         continue;
                     }
                     string locUrl = Helpers.DownloadFile(downloadUrl, workerThread);

@@ -402,12 +402,12 @@ namespace Waddu.Classes
 
             // WoWUI
             AddMapping("Atlas", "400", AddonSiteId.wowui);
-            AddMapping("QuestGuru", "4855", AddonSiteId.curse);
+            AddMapping("QuestGuru", "4855", AddonSiteId.wowui);
             AddMapping("QuestHelper", "6271", AddonSiteId.wowui);
             AddMapping("RogueFocus", "6060", AddonSiteId.wowui);
             AddMapping("Venantes", "4692", AddonSiteId.wowui);
 
-            // Cursefor
+            // Curseforge
             AddMapping("BloodyFont", "bloody-font-2-0", AddonSiteId.curseforge);
             AddMapping("Chaman2", "totem-manager", AddonSiteId.curseforge);
             AddMapping("Decursive", "decursive", AddonSiteId.curseforge);
