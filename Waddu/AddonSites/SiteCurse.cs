@@ -71,7 +71,11 @@ namespace Waddu.AddonSites
             {
                 ParseInfoSite(tag);
             }
-            return _versionCache[tag];
+            if (_versionCache.ContainsKey(tag))
+            {
+                return _versionCache[tag];
+            }
+            return string.Empty;
         }
 
         public override DateTime GetLastUpdated(string tag)
@@ -80,7 +84,11 @@ namespace Waddu.AddonSites
             {
                 ParseInfoSite(tag);
             }
-            return _dateCache[tag];
+            if (_dateCache.ContainsKey(tag))
+            {
+                return _dateCache[tag];
+            }
+            return DateTime.MinValue;
         }
 
         public override string GetInfoLink(string tag)

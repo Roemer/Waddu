@@ -95,6 +95,7 @@
     <Compile Include="Classes\Win32\Types\SHFILEOPSTRUCT.cs" />
     <Compile Include="Classes\WorkerThread.cs" />
     <Compile Include="Classes\WorkItem.cs" />
+    <Compile Include="Classes\ZipHelper.cs" />
     <Compile Include="Controls\SeparatorControl.cs">
       <SubType>Component</SubType>
     </Compile>
