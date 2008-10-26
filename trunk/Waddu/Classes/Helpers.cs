@@ -49,12 +49,6 @@ namespace Waddu.Classes
             }
         }
 
-        public static void Unzip(string zipFile, string targetFolder)
-        {
-            FastZip fz = new FastZip();
-            fz.ExtractZip(zipFile, targetFolder, "");
-        }
-
         public static List<string> GetHtml(string url)
         {
             return GetHtml(url, AddonSiteId.wowspecial);
