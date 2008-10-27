@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
+using System.Diagnostics;
 
 namespace Waddu.Classes
 {
@@ -14,41 +15,34 @@ namespace Waddu.Classes
             FastZip fz = new FastZip();
             fz.ExtractZip(zipFile, targetFolder, "");
         }
+
+        public static void ShowContent(string zipFile)
+        {
+            string appPath = @"C:\Program Files\7-Zip\7z.exe";
+            string cmdArgs = "-l " + zipFile;
+
+            // Create a new process object
+            Process ProcessObj = new Process();
+            ProcessObj.StartInfo.FileName = appPath;
+            ProcessObj.StartInfo.Arguments = cmdArgs;
+
+            // Hide DOS Window
+            ProcessObj.StartInfo.UseShellExecute = false;
+            ProcessObj.StartInfo.CreateNoWindow = true;
+
+            // This ensures that you get the output from the DOS application
+            ProcessObj.StartInfo.RedirectStandardOutput = true;
+
+            // Start the process
+            ProcessObj.Start();
+
+            // Now read the output of the DOS application
+            string Result = ProcessObj.StandardOutput.ReadToEnd();
+
+            // Wait that the process exits
+            ProcessObj.WaitForExit();
+
+            Console.WriteLine(Result);
+        }
     }
 }
-/*
-// This snippet needs the "System.Diagnostics"
-// library
- 
-// Application path and command line arguments
-string ApplicationPath = "C:\\example.exe";
-string ApplicationArguments = "-c -x";
- 
-// Create a new process object
-Process ProcessObj = new Process();
- 
-// StartInfo contains the startup information of
-// the new process
-ProcessObj.StartInfo.FileName = ApplicationPath;
-ProcessObj.StartInfo.Arguments = ApplicationArguments;
- 
-// These two optional flags ensure that no DOS window
-// appears
-ProcessObj.StartInfo.UseShellExecute = false;
-ProcessObj.StartInfo.CreateNoWindow = true;
- 
-// If this option is set the DOS window appears again :-/
-// ProcessObj.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
- 
-// This ensures that you get the output from the DOS application
-ProcessObj.StartInfo.RedirectStandardOutput = true;
- 
-// Start the process
-ProcessObj.Start();
- 
-// Wait that the process exits
-ProcessObj.WaitForExit();
- 
-// Now read the output of the DOS application
-string Result = ProcessObj.StandardOutput.ReadToEnd();
-*/

@@ -33,6 +33,7 @@ Task List:
 - Add Mappings
 - Create Editor for Mappings
 - no-lib Support?
+- Use 7Zip for rar extracting and check for wrong Packages (like xchar)
 
 Bugs:
 - Catch protected (unreadable) Folders when deleting / extracting
