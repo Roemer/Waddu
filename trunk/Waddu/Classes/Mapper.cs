@@ -127,9 +127,10 @@ namespace Waddu.Classes
 
         private void FillInitialMappings()
         {
-            // wowAce
+            // WoWAce
             AddMapping("!BugGrabber", "bug-grabber", AddonSiteId.wowace);
             AddMapping("!SurfaceControl", "surface-control", AddonSiteId.wowace);
+            AddMapping("Ace", "ace", AddonSiteId.wowace);
             AddMapping("Ace2", "ace2", AddonSiteId.wowace);
             AddMapping("Ace3", "ace3", AddonSiteId.wowace);
             AddMapping("ACP", "acp", AddonSiteId.wowace);
@@ -142,6 +143,7 @@ namespace Waddu.Classes
             AddMapping("ArkInventory", "ark-inventory", AddonSiteId.wowace);
             AddMapping("AtlasLoot", "atlasloot-enhanced", AddonSiteId.wowace);
             AddMapping("aUF_Banzai", "a-uf_banzai", AddonSiteId.wowace);
+            AddMapping("AutoBar", "auto-bar", AddonSiteId.wowace);
             AddMapping("BadBoy", "bad-boy", AddonSiteId.wowace);
             AddMapping("Baggins", "baggins", AddonSiteId.wowace);
             AddMapping("Baggins_ClosetGnome", "baggins_closet-gnome", AddonSiteId.wowace);
@@ -206,6 +208,7 @@ namespace Waddu.Classes
             AddMapping("ElkBuffBars", "elkbuffbars", AddonSiteId.wowace);
             AddMapping("EQCompare", "eqcompare", AddonSiteId.wowace);
             AddMapping("ErrorMonster", "error-monster", AddonSiteId.wowace);
+            AddMapping("EveryQuest", "everyquest", AddonSiteId.wowace);
             AddMapping("Fence", "fence", AddonSiteId.wowace);
             AddMapping("FishermansFriend", "fishermans-friend", AddonSiteId.wowace);
             AddMapping("Fortress", "fortress", AddonSiteId.wowace);
@@ -335,6 +338,8 @@ namespace Waddu.Classes
             AddMapping("XLootMonitor", "xloot-monitor", AddonSiteId.wowace);
             AddMapping("XPerl", "xperl", AddonSiteId.wowace);
             AddMapping("XRS", "xrs", AddonSiteId.wowace);
+            AddMapping("Yata", "yata", AddonSiteId.wowace);
+            AddMapping("Yatba", "yatba", AddonSiteId.wowace);
             AddMapping("YurrCombatLog", "yurr-combat-log", AddonSiteId.wowace);
             AddMapping("ZOMGBuffs", "zomgbuffs", AddonSiteId.wowace);
 
@@ -362,7 +367,7 @@ namespace Waddu.Classes
             AddMapping("Blizzard_TradeSkillUI", "Blizzard_TradeSkillUI", AddonSiteId.blizzard);
             AddMapping("Blizzard_TrainerUI", "Blizzard_TrainerUI", AddonSiteId.blizzard);
 
-            // WoWInter
+            // WoWInterface
             AddMapping("!!Warmup", "4939", AddonSiteId.wowinterface); // RAR
             AddMapping("!StopTheSpam", "4077", AddonSiteId.wowinterface);
             AddMapping("AckisRecipeList", "8512", AddonSiteId.wowinterface);
@@ -412,7 +417,7 @@ namespace Waddu.Classes
             AddMapping("Chaman2", "totem-manager", AddonSiteId.curseforge);
             AddMapping("Decursive", "decursive", AddonSiteId.curseforge);
             AddMapping("QuestHelper", "quest-helper", AddonSiteId.curseforge);
-            AddMapping("AuctionMaster", "vendor", AddonSiteId.curseforge); // Renamed from Vendor
+            AddMapping("AuctionMaster", "vendor", AddonSiteId.curseforge);
 
             // Curse
             AddMapping("Atlas", "atlas", AddonSiteId.curse);
@@ -523,6 +528,18 @@ namespace Waddu.Classes
             AddSubAddon("DBM_API", "DBM_Sunwell");
             AddSubAddon("DBM_API", "DBM_TheEye");
             AddSubAddon("DBM_API", "DBM_ZulAman");
+            // EveryQuest
+            AddSubAddon("EveryQuest", "EveryQuest_Battlegrounds");
+            AddSubAddon("EveryQuest", "EveryQuest_Classes");
+            AddSubAddon("EveryQuest", "EveryQuest_Dungeons");
+            AddSubAddon("EveryQuest", "EveryQuest_Eastern_Kingdoms");
+            AddSubAddon("EveryQuest", "EveryQuest_Kalimdor");
+            AddSubAddon("EveryQuest", "EveryQuest_Miscellaneous");
+            AddSubAddon("EveryQuest", "EveryQuest_Northrend");
+            AddSubAddon("EveryQuest", "EveryQuest_Outland");
+            AddSubAddon("EveryQuest", "EveryQuest_Professions");
+            AddSubAddon("EveryQuest", "EveryQuest_Raids");
+            AddSubAddon("EveryQuest", "EveryQuest_Seasonal");
             // Grid2
             AddSubAddon("Grid2", "Grid2Options");
             // InFlight
@@ -642,269 +659,24 @@ namespace Waddu.Classes
             AddSubAddon("XPerl", "XPerl_TargetTarget");
             AddSubAddon("XPerl", "XPerl_Tutorial");
 
+            // Depreciated:
+            // Vendor -> new AuctionMaster
+
+            //Acheron,acheron,wowace
+            //ActionCombat,action-combat,wowace
+            //AddonLoader,addon-loader,wowace
+            //Analyst,analyst,wowace
+            //Automaton,automaton,wowace
+
             // TODO: Mappings
-            //- AutoBar
-            //- Automaton
-            //- CastYeller
-            //- ClassLoot
-            //- epgp
-            //- FeedMachine
-            //- Fizzle
-            //- GridStatusHotStack
-            //- GridStatusIncomingHeals
-            //- GridStatusLifebloom
-            //- IceHUD
-            //- KC_Items
-            //- SLDataText
-            //- SmartMount
-            //- Spyglass
-            //- StarTip
-            //- Accountant
-            //- ActionBarSaver
-            //- ActionCombat
-            //- AddonLoader
-            //- Afflicted
-            //- Align
-            //- Altoholic
-            //- Analyst
-            //- ArenaHistorian
-            //- Attrition
-            //- AutoBar
-            //- Automaton
-            //- Bagsy
-            //- BangArtOfWar
-            //- Broker_Money
-            //- Broker_Recount
-            //- Broker_Regen
-            //- Broker_SysMon
-            //- buffet
-            //- Butsu
-            //- ButtonBin
-            //- ButtonFacade_DsmFade-v141
-            //- ButtonFacade_ItemRack
-            //- ButtonFacade_LayerTest
-            //- ButtonFacade_Trinity
-            //- CandyBar
-            //- cargoHonor
-            //- Cartographer3
-            //- Cartographer3_InstancePOIs
-            //- Cartographer3_Notes
-            //- Cartographer3_Waypoints
-            //- CCTracker
-            //- ChatBar
-            //- ChatThrottleLib
-            //- Combuctor_Config
-            //- Combuctor_Sets
-            //- Comix
-            //- CursorCastbar
-            //- Dominos
-            //- Dominos_Buff
-            //- Dominos_Cast
-            //- Dominos_Config
-            //- Dominos_Roll
-            //- Dominos_XP
-            //- DoTimer
-            //- DoTimer_Options
-            //- eCastingBar
-            //- EveryQuest
-            //- EveryQuest_Battlegrounds
-            //- EveryQuest_Classes
-            //- EveryQuest_Dungeons
-            //- EveryQuest_Eastern_Kingdoms
-            //- EveryQuest_Kalimdor
-            //- EveryQuest_Miscellaneous
-            //- EveryQuest_Northrend
-            //- EveryQuest_Outland
-            //- EveryQuest_Professions
-            //- EveryQuest_Raids
-            //- EveryQuest_Seasonal
-            //- Fane
-            //- FloatingFrames
-            //- fontain
-            //- FuBar_AlchemyFu
-            //- FuBar_HealBotFu
-            //- FuBar_ItemRackFu
-            //- FuBar_LastPlayedFu
-            //- FuBar_MailExpiryFu
-            //- FuBar_WindFuryFu
-            //- FuBarPlugin-2.0
-            //- GatherHud
-            //- GFW_FactionFriend
-            //- HealBot
-            //- Heatsink
-            //- HKCounter
-            //- JebusMail
-            //- KillLog
-            //- LearningAid
-            //- LibAbacus-3.0
-            //- LibAboutPanel
-            //- LibBabble-Boss-3.0
-            //- LibBabble-Class-3.0
-            //- LibBabble-Faction-3.0
-            //- LibBabble-Inventory-3.0
-            //- LibBabble-Zone-3.0
-            //- LibBanzai-2.0
-            //- LibCrayon-3.0
-            //- LibDogTag-3.0
-            //- LibDogTag-Items-3.0
-            //- LibDogTag-Unit-3.0
-            //- LibFilter-1.0
-            //- LibFuBarPlugin-3.0
-            //- LibGraph-2.0
-            //- LibGratuity-3.0
-            //- LibGuildPositions-1.0
-            //- LibHealComm-3.0
-            //- LibItemBonus-2.0
-            //- LibJostle-3.0
-            //- LibPeriodicTable-3.1
-            //- LibPeriodicTable-3.1-ClassSpell
-            //- LibPeriodicTable-3.1-Consumable
-            //- LibPeriodicTable-3.1-Gear
-            //- LibPeriodicTable-3.1-GearSet
-            //- LibPeriodicTable-3.1-InstanceLoot
-            //- LibPeriodicTable-3.1-InstanceLootHeroic
-            //- LibPeriodicTable-3.1-Misc
-            //- LibPeriodicTable-3.1-Reputation
-            //- LibPeriodicTable-3.1-Tradeskill
-            //- LibPeriodicTable-3.1-TradeskillResultMats
-            //- LibRangeCheck-2.0
-            //- LibRock-1.0
-            //- LibRockComm-1.0
-            //- LibRockConfig-1.0
-            //- LibRockConsole-1.0
-            //- LibRockDB-1.0
-            //- LibRockEvent-1.0
-            //- LibRockHook-1.0
-            //- LibRockLocale-1.0
-            //- LibRockModuleCore-1.0
-            //- LibRockTimer-1.0
-            //- LibSharedMedia-3.0
-            //- LibSimpleOptions-1.0
-            //- LibSimpleTimer-1.0
-            //- LibSink-2.0
-            //- libtooltip
-            //- LibTooltip-1.0
-            //- LibTourist-3.0
-            //- LinkWrangler
-            //- MacaroonBound
-            //- MacaroonCB
-            //- MacaroonXP
-            //- MacaroonXtras
-            //- MaterialsTracker
-            //- Minimalisque_v3
-            //- MinimapButtonFrame
-            //- MinimapButtonFrame_SkinPack
-            //- MinimapButtonFrameFu
-            //- MinimapButtonFrameTitanPlugin
-            //- MoveAnything
-            //- naiCombo
-            //- NowCarrying
-            //- NugEnergy
-            //- oGlow
-            //- Overachiever
-            //- PartySpotter
-            //- picoDPS
-            //- picoEXP
-            //- picoFriends
-            //- picoGuild
-            //- pRogue
-            //- QuesterJester
-            //- RangeDisplay
-            //- RosterLib
-            //- Scorecard
-            //- SellFish
-            //- ShockAndAwe
-            //- SickOfClickingDailies
-            //- SimpleBuffBars
-            //- SlashConflict
-            //- SmartBuff
-            //- Snoopy
-            //- SpecialEvents-Aura-2.0
-            //- SpecialEvents-Bags-2.0
-            //- SpecialEventsEmbed
-            //- SpecialEvents-Equipped-2.0
-            //- SpecialEvents-LearnSpell-2.0
-            //- SpecialEvents-Loot-1.0
-            //- SpecialEvents-Mail-2.0
-            //- SpecialEvents-Mount-2.0
-            //- SpecialEvents-Movement-2.0
-            //- SSPVP3
-            //- StatBlock_Factions
-            //- StatLogicLib
-            //- teksLoot
-            //- TipTac
-            //- TipTacOptions
-            //- TipTacTalents
-            //- TipTop
-            //- TotemTimers
-            //- UrbanAchiever
-            //- VendorBait
-            //- VuhDo
-            //- WeaponRebuff
-            //- WhoLib
-            //- WindowLib
-            //- Yata
-            //- Yatba
-            //- Broker_Bags
-            //- Broker_CalendarEvents
-            //- Broker_Durability
-            //- Broker_Group
-            //- Broker_Money
-            //- Broker_Professions
-            //- Broker_PvP
-            //- Broker_SysMon
-            //- Broker_Tracking
-            //- ItemDB
-            //- StatBlock_DPS
-            //- StatBlock_RaidDPS
-            //- StatBlock_ZoneText
-            //- TankWarnings
-            //- Ace
-            //- HitsMode
-            //- lern2count
-            //- MonkeyBuddy
-            //- MonkeyLibrary
-            //- MonkeyQuest
-            //- MonkeyQuestLog
-            //- TotemTimers
-            //- LuckyCharms2
-            //- Mirror
-            //- SimpleSelfRebuff
-            //- SimpleSelfRebuff_CastBinding
-            //- SimpleSelfRebuff_DataObject
-            //- SimpleSelfRebuff_ItemBuffs
-            //- SimpleSelfRebuff_Reminder
-            //- Acheron
-            //- Afflicted
-            //- Attrition
-            //- Auc-Advanced
-            //- Auc-ScanData
-            //- Auc-Stat-Histogram
-            //- Auc-Stat-StdDev
-            //- Bagsy
-            //- Broker_Group
-            //- Buffet
-            //- EnhTooltip
-            //- GridLayoutPlus
-            //- Haggler
-            //- IHML
-            //- Incubator
-            //- Junkie
-            //- RaidBuffStatus
-            //- StatBlock_Ammo
-            //- StatBlock_Money
-            //- StatBlock_RaidDPS
-            //- Stubby
-            //- UnderHood
-            //- Violation
-            //BtmScan
-            //FuBar_MailFu
-            //Informant
-            //LannySimpleMicroMenuFu
-            //MacaroonBound
-            //MacaroonXtras
-            //Stubby
+            //Accountant
+            //ActionBarSaver
+            //Afflicted
+            //Align
+            //Altoholic
+            //ArenaHistorian
             //AtlasLootFu
+            //Attrition
             //Auc-Advanced
             //Auc-Filter-Basic
             //Auc-ScanData
@@ -913,32 +685,240 @@ namespace Waddu.Classes
             //Auc-Stat-Purchased
             //Auc-Stat-Simple
             //Auc-Stat-StdDev
-            //BeanCounter
-            //Enchantrix
-            //Enchantrix-Barker
-            //EnhTooltip
-            //Informant
-            //Minimalist_ButtonFrame
-            //Minimalist_ButtonFrameTitanPlugin
-            //-Shantalya-Infoleiste
-            //ActionBarSaver
             //AuldLangSye
             //Babble-3.3
+            //Bagsy
+            //BangArtOfWar
+            //BeanCounter
             //Bejeweled
+            //Broker_Bags
+            //Broker_CalendarEvents
+            //Broker_Durability
+            //Broker_Group
+            //Broker_Money
+            //Broker_Professions
+            //Broker_PvP
+            //Broker_Recount
+            //Broker_Regen
+            //Broker_SysMon
+            //Broker_Tracking
+            //BtmScan
+            //buffet
+            //Butsu
+            //ButtonBin
+            //ButtonFacade_DsmFade-v141
+            //ButtonFacade_ItemRack
+            //ButtonFacade_LayerTest
+            //ButtonFacade_Trinity
+            //CandyBar
+            //cargoHonor
+            //Cartographer3
+            //Cartographer3_InstancePOIs
+            //Cartographer3_Notes
+            //Cartographer3_Waypoints
+            //CastYeller
+            //CCTracker
+            //ChatBar
+            //ChatThrottleLib
             //Chinchilla
+            //ClassLoot
+            //Combuctor_Config
+            //Combuctor_Sets
+            //Comix
             //CreatureComforts
+            //CursorCastbar
+            //Dominos
+            //Dominos_Buff
+            //Dominos_Cast
+            //Dominos_Config
+            //Dominos_Roll
+            //Dominos_XP
+            //DoTimer
+            //DoTimer_Options
             //EasyMother
+            //eCastingBar
+            //Enchantrix
+            //Enchantrix-Barker
             //Engravings
+            //EnhTooltip
+            //epgp
             //ExpressMail
+            //Fane
+            //FeedMachine
+            //Fizzle
+            //FloatingFrames
+            //fontain
+            //FuBar_AlchemyFu
+            //FuBar_HealBotFu
+            //FuBar_ItemRackFu
+            //FuBar_LastPlayedFu
             //Fubar_MacroFu
+            //FuBar_MailExpiryFu
+            //FuBar_MailFu
             //Fubar_ProfessionsBookFu
+            //FuBar_WindFuryFu
+            //FuBarPlugin-2.0
+            //GatherHud
+            //GFW_FactionFriend
+            //GridLayoutPlus
+            //GridStatusHotStack
+            //GridStatusIncomingHeals
+            //GridStatusLifebloom
+            //Haggler
+            //HealBot
+            //Heatsink
+            //HitsMode
+            //HKCounter
+            //IceHUD
+            //IHML
+            //Incubator
+            //Informant
+            //ItemDB
+            //JebusMail
+            //Junkie
+            //KC_Items
+            //KillLog
+            //LannySimpleMicroMenuFu
+            //LearningAid
+            //lern2count
+            //LibAbacus-3.0
+            //LibAboutPanel
+            //LibBabble-Boss-3.0
+            //LibBabble-Class-3.0
+            //LibBabble-Faction-3.0
+            //LibBabble-Inventory-3.0
+            //LibBabble-Zone-3.0
+            //LibBanzai-2.0
             //LibCrayon-3.0
-            //LibRockCOnsole-1.0
+            //LibDogTag-3.0
+            //LibDogTag-Items-3.0
+            //LibDogTag-Unit-3.0
+            //LibFilter-1.0
+            //LibFuBarPlugin-3.0
+            //LibGraph-2.0
+            //LibGratuity-3.0
+            //LibGuildPositions-1.0
+            //LibHealComm-3.0
+            //LibItemBonus-2.0
+            //LibJostle-3.0
+            //LibPeriodicTable-3.1
+            //LibPeriodicTable-3.1-ClassSpell
+            //LibPeriodicTable-3.1-Consumable
+            //LibPeriodicTable-3.1-Gear
+            //LibPeriodicTable-3.1-GearSet
+            //LibPeriodicTable-3.1-InstanceLoot
+            //LibPeriodicTable-3.1-InstanceLootHeroic
+            //LibPeriodicTable-3.1-Misc
+            //LibPeriodicTable-3.1-Reputation
+            //LibPeriodicTable-3.1-Tradeskill
+            //LibPeriodicTable-3.1-TradeskillResultMats
+            //LibRangeCheck-2.0
+            //LibRock-1.0
+            //LibRockComm-1.0
+            //LibRockConfig-1.0
+            //LibRockConsole-1.0
+            //LibRockDB-1.0
+            //LibRockEvent-1.0
+            //LibRockHook-1.0
+            //LibRockLocale-1.0
+            //LibRockModuleCore-1.0
+            //LibRockTimer-1.0
             //LibRollCall2.0
+            //LibSharedMedia-3.0
+            //LibSimpleOptions-1.0
+            //LibSimpleTimer-1.0
+            //LibSink-2.0
+            //libtooltip
+            //LibTooltip-1.0
             //LibTourist-3.0
+            //LinkWrangler
+            //LuckyCharms2
+            //MacaroonBound
+            //MacaroonCB
+            //MacaroonXP
+            //MacaroonXtras
+            //MaterialsTracker
+            //Minimalisque_v3
+            //Minimalist_ButtonFrame
+            //Minimalist_ButtonFrameTitanPlugin
+            //MinimapButtonFrame
+            //MinimapButtonFrame_SkinPack
+            //MinimapButtonFrameFu
+            //MinimapButtonFrameTitanPlugin
+            //Mirror
+            //MonkeyBuddy
+            //MonkeyLibrary
+            //MonkeyQuest
+            //MonkeyQuestLog
+            //MoveAnything
+            //naiCombo
+            //NowCarrying
+            //NugEnergy
+            //oGlow
             //OneClickBuyOut
+            //Overachiever
+            //PartySpotter
+            //picoDPS
+            //picoEXP
+            //picoFriends
+            //picoGuild
             //PoliteWhisper
             //PreformAvEnabler
+            //pRogue
+            //QuesterJester
+            //RaidBuffStatus
+            //RangeDisplay
+            //RosterLib
+            //Scorecard
+            //SellFish
+            //ShockAndAwe
+            //SickOfClickingDailies
+            //SimpleBuffBars
+            //SimpleSelfRebuff
+            //SimpleSelfRebuff_CastBinding
+            //SimpleSelfRebuff_DataObject
+            //SimpleSelfRebuff_ItemBuffs
+            //SimpleSelfRebuff_Reminder
+            //SlashConflict
+            //SLDataText
+            //SmartBuff
+            //SmartMount
+            //Snoopy
+            //SpecialEvents-Aura-2.0
+            //SpecialEvents-Bags-2.0
+            //SpecialEventsEmbed
+            //SpecialEvents-Equipped-2.0
+            //SpecialEvents-LearnSpell-2.0
+            //SpecialEvents-Loot-1.0
+            //SpecialEvents-Mail-2.0
+            //SpecialEvents-Mount-2.0
+            //SpecialEvents-Movement-2.0
+            //Spyglass
+            //SSPVP3
+            //StarTip
+            //StatBlock_Ammo
+            //StatBlock_DPS
+            //StatBlock_Factions
+            //StatBlock_Money
+            //StatBlock_RaidDPS
+            //StatBlock_ZoneText
+            //StatLogicLib
+            //Stubby
+            //TankWarnings
+            //teksLoot
+            //TipTac
+            //TipTacOptions
+            //TipTacTalents
+            //TipTop
+            //TotemTimers
+            //UnderHood
+            //UrbanAchiever
+            //VendorBait
+            //Violation
+            //VuhDo
+            //WeaponRebuff
+            //WhoLib
+            //WindowLib
 
             // Save File
             _xmlDoc.Save(_xmlFile);
