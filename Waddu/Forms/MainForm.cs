@@ -21,7 +21,7 @@ namespace Waddu.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
@@ -237,6 +237,13 @@ namespace Waddu.Forms
                         {
                             e.CellStyle.ForeColor = Color.Gray;
                             e.CellStyle.BackColor = Color.LightGray;
+                        }
+                        if (addon.Mappings.Count > 1)
+                        {
+                            if (e.ColumnIndex == dgvColAddonBestMapping.Index)
+                            {
+                                e.CellStyle.BackColor = Color.LightCoral;
+                            }
                         }
                     }
                 }

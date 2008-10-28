@@ -45,6 +45,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMappingFile = new System.Windows.Forms.TextBox();
+            this.chkNoLib = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt7zPath = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +55,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(299, 193);
+            this.btnOk.Location = new System.Drawing.Point(311, 278);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -64,7 +67,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(380, 193);
+            this.btnCancel.Location = new System.Drawing.Point(392, 278);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -83,7 +86,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(380, 12);
+            this.btnBrowse.Location = new System.Drawing.Point(392, 12);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 3;
@@ -97,7 +100,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWoWPath.Location = new System.Drawing.Point(87, 14);
             this.txtWoWPath.Name = "txtWoWPath";
-            this.txtWoWPath.Size = new System.Drawing.Size(287, 20);
+            this.txtWoWPath.Size = new System.Drawing.Size(299, 20);
             this.txtWoWPath.TabIndex = 4;
             // 
             // chkDelete
@@ -124,7 +127,7 @@
             // 
             this.lblNumOfThreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNumOfThreads.AutoSize = true;
-            this.lblNumOfThreads.Location = new System.Drawing.Point(285, 57);
+            this.lblNumOfThreads.Location = new System.Drawing.Point(297, 57);
             this.lblNumOfThreads.Name = "lblNumOfThreads";
             this.lblNumOfThreads.Size = new System.Drawing.Size(68, 13);
             this.lblNumOfThreads.TabIndex = 7;
@@ -133,7 +136,7 @@
             // numThreads
             // 
             this.numThreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numThreads.Location = new System.Drawing.Point(359, 53);
+            this.numThreads.Location = new System.Drawing.Point(371, 53);
             this.numThreads.Minimum = new decimal(new int[] {
             1,
             0,
@@ -224,8 +227,36 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMappingFile.Location = new System.Drawing.Point(85, 92);
             this.txtMappingFile.Name = "txtMappingFile";
-            this.txtMappingFile.Size = new System.Drawing.Size(370, 20);
+            this.txtMappingFile.Size = new System.Drawing.Size(382, 20);
             this.txtMappingFile.TabIndex = 12;
+            // 
+            // chkNoLib
+            // 
+            this.chkNoLib.AutoSize = true;
+            this.chkNoLib.Location = new System.Drawing.Point(12, 225);
+            this.chkNoLib.Name = "chkNoLib";
+            this.chkNoLib.Size = new System.Drawing.Size(85, 17);
+            this.chkNoLib.TabIndex = 13;
+            this.chkNoLib.Text = "Prefer NoLib";
+            this.chkNoLib.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 252);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Path to 7z.exe";
+            // 
+            // txt7zPath
+            // 
+            this.txt7zPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt7zPath.Location = new System.Drawing.Point(93, 249);
+            this.txt7zPath.Name = "txt7zPath";
+            this.txt7zPath.Size = new System.Drawing.Size(374, 20);
+            this.txt7zPath.TabIndex = 15;
             // 
             // SettingsForm
             // 
@@ -233,7 +264,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(467, 228);
+            this.ClientSize = new System.Drawing.Size(479, 313);
+            this.Controls.Add(this.txt7zPath);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.chkNoLib);
             this.Controls.Add(this.txtMappingFile);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
@@ -278,5 +312,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMappingFile;
+        private System.Windows.Forms.CheckBox chkNoLib;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt7zPath;
     }
 }

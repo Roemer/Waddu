@@ -27,7 +27,7 @@ namespace Waddu.Classes
         private string _configFilePath;
 
         # region Settings
-        private string _wowFolderPath = "C:\\Program Files\\World of Warcraft";
+        private string _wowFolderPath = @"C:\Program Files\World of Warcraft";
         public string WowFolderPath
         {
             get { return _wowFolderPath; }
@@ -88,6 +88,20 @@ namespace Waddu.Classes
         {
             get { return _logLevel; }
             set { _logLevel = value; }
+        }
+
+        private bool _preferNoLib = false;
+        public bool PreferNoLib
+        {
+            get { return _preferNoLib; }
+            set { _preferNoLib = value; }
+        }
+
+        private string _pathTo7z = @"C:\Program Files\7-Zip\7z.exe";
+        public string PathTo7z
+        {
+            get { return _pathTo7z; }
+            set { _pathTo7z = value; }
         }
         #endregion
 
@@ -155,6 +169,14 @@ namespace Waddu.Classes
             {
                 LogLevel = (LogType)Enum.Parse(typeof(LogType), value);
             }
+            if (GetSetting("PreferNoLib", out value))
+            {
+                PreferNoLib = Convert.ToBoolean(value);
+            }
+            if (GetSetting("PathTo7z", out value))
+            {
+                PathTo7z = value;
+            }    
         }
 
         private bool GetSetting(string settingName, out string value)
@@ -187,6 +209,8 @@ namespace Waddu.Classes
             SaveSetting("SavePassword", SavePassword);
             SaveSetting("MappingFile", MappingFile);
             SaveSetting("LogLevel", LogLevel);
+            SaveSetting("PreferNoLib", PreferNoLib);
+            SaveSetting("PathTo7z", PathTo7z);
             _xmlDoc.Save(_configFilePath);
         }
 
