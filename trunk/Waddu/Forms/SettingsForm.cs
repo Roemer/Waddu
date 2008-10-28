@@ -23,6 +23,8 @@ namespace Waddu.Forms
             txtCursePassword.Text = Config.Instance.CursePassword;
             chkSavePassword.Checked = Config.Instance.SavePassword;
             txtMappingFile.Text = Config.Instance.MappingFile;
+            chkNoLib.Checked = Config.Instance.PreferNoLib;
+            txt7zPath.Text = Config.Instance.PathTo7z;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -40,6 +42,8 @@ namespace Waddu.Forms
             Config.Instance.CursePassword = txtCursePassword.Text;
             Config.Instance.SavePassword = chkSavePassword.Checked;
             Config.Instance.MappingFile = txtMappingFile.Text;
+            Config.Instance.PreferNoLib = chkNoLib.Checked;
+            Config.Instance.PathTo7z = txt7zPath.Text;
             Config.Instance.SaveSettings();
             CookieManager.ClearCookies();
             this.Close();

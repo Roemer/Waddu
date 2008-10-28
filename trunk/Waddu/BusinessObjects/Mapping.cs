@@ -86,10 +86,10 @@ namespace Waddu.BusinessObjects
             {
 
             }
-            return string.Format("{0}/{1}/{2}", 
-                AddonSiteId,
+            return string.Format("{0} - {1} ({2})", 
                 RemoteVersion == string.Empty ? "?" : RemoteVersion,
-                LastUpdated == DateTime.MinValue ? "?" : LastUpdated.ToShortDateString()
+                LastUpdated == DateTime.MinValue ? "?" : LastUpdated.ToShortDateString(),
+                AddonSiteId
             );
         }
         #endregion
