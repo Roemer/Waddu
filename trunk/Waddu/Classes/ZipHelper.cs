@@ -16,6 +16,18 @@ namespace Waddu.Classes
             fz.ExtractZip(zipFile, targetFolder, "");
         }
 
+        public static void Open(string zipFile)
+        {
+            string appPath = @"C:\Program Files\7-Zip\7zFM.exe";
+            string cmdArgs = zipFile;
+
+            Process ProcessObj = new Process();
+            ProcessObj.StartInfo.FileName = appPath;
+            ProcessObj.StartInfo.Arguments = cmdArgs;
+
+            ProcessObj.Start();
+        }
+
         public static string ShowContent(string zipFile)
         {
             string appPath = @"C:\Program Files\7-Zip\7z.exe";

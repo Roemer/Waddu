@@ -89,7 +89,7 @@ namespace Waddu.Classes
                     }
 
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.BestMapping);
-                    workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.BestMapping, wi.Addon.Name);
+                    workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.BestMapping.AddonSiteId, wi.Addon.Name);
                     string downloadUrl = wi.Addon.BestMapping.GetDownloadLink();
                     if (downloadUrl == string.Empty)
                     {
