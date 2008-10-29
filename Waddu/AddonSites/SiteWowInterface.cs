@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Waddu.BusinessObjects;
 using Waddu.Classes;
 
 namespace Waddu.AddonSites
@@ -18,9 +19,9 @@ namespace Waddu.AddonSites
 
         #region AddonSiteBase Overrides
 
-        private void ParseInfoSite(string tag)
+        private void ParseInfoSite(Mapping mapping)
         {
-            string url = _infoUrl.Replace("{tag}", tag);
+            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             bool versionFound = false;
             bool dateFound = false;
             List<string> infoPage = Helpers.GetHtml(url);
@@ -39,7 +40,7 @@ namespace Waddu.AddonSites
                         if (m.Success)
                         {
                             string version = m.Groups[1].Captures[0].Value;
-                            Helpers.AddOrUpdate<string, string>(_versionCache, tag, version);
+                            Helpers.AddOrUpdate<string, string>(_versionCache, mapping.AddonTag, version);
                             versionFound = true;
                         }
                     }
@@ -57,7 +58,7 @@ namespace Waddu.AddonSites
                             string dateStr = m.Groups[1].Captures[0].Value;
                             string[] dateList = dateStr.Split('-');
                             DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
-                            Helpers.AddOrUpdate<string, DateTime>(_dateCache, tag, dt);
+                            Helpers.AddOrUpdate<string, DateTime>(_dateCache, mapping.AddonTag, dt);
                             dateFound = true;
                         }
                     }
@@ -65,32 +66,32 @@ namespace Waddu.AddonSites
             }
         }
 
-        public override string GetVersion(string tag)
+        public override string GetVersion(Mapping mapping)
         {
-            if (!_versionCache.ContainsKey(tag))
+            if (!_versionCache.ContainsKey(mapping.AddonTag))
             {
-                ParseInfoSite(tag);
+                ParseInfoSite(mapping);
             }
-            return _versionCache[tag];
+            return _versionCache[mapping.AddonTag];
         }
 
-        public override DateTime GetLastUpdated(string tag)
+        public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_dateCache.ContainsKey(tag))
+            if (!_dateCache.ContainsKey(mapping.AddonTag))
             {
-                ParseInfoSite(tag);
+                ParseInfoSite(mapping);
             }
-            return _dateCache[tag];
+            return _dateCache[mapping.AddonTag];
         }
 
-        public override string GetInfoLink(string tag)
+        public override string GetInfoLink(Mapping mapping)
         {
-            return _infoUrl.Replace("{tag}", tag);
+            return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(string tag)
+        public override string GetDownloadLink(Mapping mapping)
         {
-            return _downUrl.Replace("{tag}", tag);
+            return _downUrl.Replace("{tag}", mapping.AddonTag);
         }
 
         #endregion

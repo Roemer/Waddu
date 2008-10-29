@@ -1,4 +1,5 @@
 ﻿using System;
+using Waddu.BusinessObjects;
 using Waddu.Types;
 
 namespace Waddu.AddonSites
@@ -6,13 +7,13 @@ namespace Waddu.AddonSites
     public abstract class AddonSiteBase
     {
         #region Overridable Functions
-        public abstract string GetVersion(string tag);
+        public abstract string GetVersion(Mapping mapping);
 
-        public abstract DateTime GetLastUpdated(string tag);
+        public abstract DateTime GetLastUpdated(Mapping mapping);
 
-        public abstract string GetInfoLink(string tag);
+        public abstract string GetInfoLink(Mapping mapping);
 
-        public abstract string GetDownloadLink(string tag);
+        public abstract string GetDownloadLink(Mapping mapping);
         #endregion
 
         #region Helper Functions

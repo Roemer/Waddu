@@ -103,6 +103,14 @@ namespace Waddu.Classes
                         continue;
                     }
 
+                    using (Waddu.Forms.ArchiveContentForm f = new Waddu.Forms.ArchiveContentForm(locUrl))
+                    {
+                        if (f.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                        {
+                            continue;
+                        }
+                    }
+
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, locUrl);
                     if (Config.Instance.DeleteBeforeUpdate)
                     {

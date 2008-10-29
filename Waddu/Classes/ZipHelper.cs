@@ -16,10 +16,10 @@ namespace Waddu.Classes
             fz.ExtractZip(zipFile, targetFolder, "");
         }
 
-        public static void ShowContent(string zipFile)
+        public static string ShowContent(string zipFile)
         {
             string appPath = @"C:\Program Files\7-Zip\7z.exe";
-            string cmdArgs = "-l " + zipFile;
+            string cmdArgs = "l " + zipFile;
 
             // Create a new process object
             Process ProcessObj = new Process();
@@ -42,7 +42,7 @@ namespace Waddu.Classes
             // Wait that the process exits
             ProcessObj.WaitForExit();
 
-            Console.WriteLine(Result);
+            return Result;
         }
     }
 }

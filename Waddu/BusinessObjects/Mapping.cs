@@ -61,8 +61,8 @@ namespace Waddu.BusinessObjects
         public void CheckRemote()
         {
             AddonSiteBase addonSite = AddonSiteBase.GetSite(AddonSiteId);
-            RemoteVersion = addonSite.GetVersion(AddonTag);
-            LastUpdated = addonSite.GetLastUpdated(AddonTag);
+            RemoteVersion = addonSite.GetVersion(this);
+            LastUpdated = addonSite.GetLastUpdated(this);
 
             // Hack to fire Property Changed
             Addon.BestMapping = Addon.BestMapping;
@@ -71,13 +71,13 @@ namespace Waddu.BusinessObjects
         public string GetInfoLink()
         {
             AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
-            return site.GetInfoLink(AddonTag);
+            return site.GetInfoLink(this);
         }
 
         public string GetDownloadLink()
         {
             AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
-            return site.GetDownloadLink(AddonTag);
+            return site.GetDownloadLink(this);
         }
 
         public override string ToString()
