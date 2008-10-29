@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Waddu.BusinessObjects;
 using Waddu.Classes;
 
 namespace Waddu.AddonSites
@@ -15,56 +16,56 @@ namespace Waddu.AddonSites
             Download
         }
 
-        private object CallHandler(string tag, Type type)
+        private object CallHandler(Mapping mapping, Type type)
         {
             // MarsPartyBuff
-            if (tag == "MarsPartyBuff")
+            if (mapping.AddonTag == "MarsPartyBuff")
             {
-                return HandleMars(tag, type);
+                return HandleMars(mapping, type);
             }
             // CT
-            else if (tag.StartsWith("CT_"))
+            else if (mapping.AddonTag.StartsWith("CT_"))
             {
-                return HandleCT(tag, type);
+                return HandleCT(mapping, type);
             }
             // xchar
-            else if (tag.StartsWith("xchar"))
+            else if (mapping.AddonTag.StartsWith("xchar"))
             {
-                return Handlexchar(tag, type);
+                return Handlexchar(mapping, type);
             }
             // MobMap
-            else if (tag == "MobMap")
+            else if (mapping.AddonTag == "MobMap")
             {
-                return HandleMobMap(tag, type);
+                return HandleMobMap(mapping, type);
             }
             throw new NotImplementedException();
         }
 
         #region AddonSiteBase Overrides
 
-        public override string GetVersion(string tag)
+        public override string GetVersion(Mapping mapping)
         {
-            return (string)CallHandler(tag, Type.Version);
+            return (string)CallHandler(mapping, Type.Version);
         }
 
-        public override DateTime GetLastUpdated(string tag)
+        public override DateTime GetLastUpdated(Mapping mapping)
         {
-            return (DateTime)CallHandler(tag, Type.Date);
+            return (DateTime)CallHandler(mapping, Type.Date);
         }
 
-        public override string GetInfoLink(string tag)
+        public override string GetInfoLink(Mapping mapping)
         {
-            return (string)CallHandler(tag, Type.Info);
+            return (string)CallHandler(mapping, Type.Info);
         }
 
-        public override string GetDownloadLink(string tag)
+        public override string GetDownloadLink(Mapping mapping)
         {
-            return (string)CallHandler(tag, Type.Download);
+            return (string)CallHandler(mapping, Type.Download);
         }
 
         #endregion
 
-        private object HandleMars(string tag, Type type)
+        private object HandleMars(Mapping mapping, Type type)
         {
             string infoUrl = "http://groups.google.com/group/marsmod/files";
 
@@ -105,7 +106,7 @@ namespace Waddu.AddonSites
             return new object();
         }
 
-        private object HandleCT(string tag, Type type)
+        private object HandleCT(Mapping mapping, Type type)
         {
             if (type == Type.Info)
             {
@@ -122,7 +123,7 @@ namespace Waddu.AddonSites
             {
                 string line = infoPage[i];
 
-                Match m = Regex.Match(line, string.Format(@"<h2><a href=""(.*)"" title=""Click to download"">{0}</a>", tag));
+                Match m = Regex.Match(line, string.Format(@"<h2><a href=""(.*)"" title=""Click to download"">{0}</a>", mapping.AddonTag));
                 if (m.Success)
                 {
                     if (type == Type.Download)
@@ -143,7 +144,7 @@ namespace Waddu.AddonSites
             return new object();
         }
 
-        private object Handlexchar(string tag, Type type)
+        private object Handlexchar(Mapping mapping, Type type)
         {
             if (type == Type.Info)
             {
@@ -155,7 +156,7 @@ namespace Waddu.AddonSites
             }
 
             // Main Addon
-            if (tag == "xchar")
+            if (mapping.AddonTag == "xchar")
             {
                 if (type == Type.Download)
                 {
@@ -171,7 +172,7 @@ namespace Waddu.AddonSites
             {
                 if (type == Type.Download)
                 {
-                    return string.Format("http://faces.xchar.de/zip/eu/{0}.zip", tag);
+                    return string.Format("http://faces.xchar.de/zip/eu/{0}.zip", mapping.AddonTag);
                 }
                 if (type == Type.Date)
                 {
@@ -192,7 +193,7 @@ namespace Waddu.AddonSites
             return new object();
         }
 
-        private object HandleMobMap(string tag, Type type)
+        private object HandleMobMap(Mapping mapping, Type type)
         {
             if (type == Type.Info)
             {

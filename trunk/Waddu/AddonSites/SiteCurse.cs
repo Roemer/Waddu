@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Waddu.BusinessObjects;
 using Waddu.Classes;
 
 namespace Waddu.AddonSites
@@ -19,12 +20,12 @@ namespace Waddu.AddonSites
 
         #region AddonSiteBase Overrides
 
-        private void ParseInfoSite(string tag)
+        private void ParseInfoSite(Mapping mapping)
         {
             bool versionFound = false;
             bool dateFound = false;
 
-            string url = _infoUrl.Replace("{tag}", tag);
+            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             List<string> infoPage = Helpers.GetHtml(url);
 
             for (int i = 0; i < infoPage.Count; i++)
@@ -42,9 +43,9 @@ namespace Waddu.AddonSites
                         if (m.Success)
                         {
                             string version = m.Groups[2].Captures[0].Value;
-                            Helpers.AddOrUpdate<string, string>(_versionCache, tag, version);
+                            Helpers.AddOrUpdate<string, string>(_versionCache, mapping.AddonTag, version);
                             string file = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
-                            Helpers.AddOrUpdate<string, string>(_fileLinkCache, tag, file);
+                            Helpers.AddOrUpdate<string, string>(_fileLinkCache, mapping.AddonTag, file);
                             versionFound = true;
                         }
                     }
@@ -58,51 +59,51 @@ namespace Waddu.AddonSites
                     {
                         string date = m.Groups[1].Captures[0].Value;
                         DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(date));
-                        Helpers.AddOrUpdate<string, DateTime>(_dateCache, tag, dt);
+                        Helpers.AddOrUpdate<string, DateTime>(_dateCache, mapping.AddonTag, dt);
                         dateFound = true;
                     }
                 }
             }
         }
 
-        public override string GetVersion(string tag)
+        public override string GetVersion(Mapping mapping)
         {
-            if (!_versionCache.ContainsKey(tag))
+            if (!_versionCache.ContainsKey(mapping.AddonTag))
             {
-                ParseInfoSite(tag);
+                ParseInfoSite(mapping);
             }
-            if (_versionCache.ContainsKey(tag))
+            if (_versionCache.ContainsKey(mapping.AddonTag))
             {
-                return _versionCache[tag];
+                return _versionCache[mapping.AddonTag];
             }
             return string.Empty;
         }
 
-        public override DateTime GetLastUpdated(string tag)
+        public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_dateCache.ContainsKey(tag))
+            if (!_dateCache.ContainsKey(mapping.AddonTag))
             {
-                ParseInfoSite(tag);
+                ParseInfoSite(mapping);
             }
-            if (_dateCache.ContainsKey(tag))
+            if (_dateCache.ContainsKey(mapping.AddonTag))
             {
-                return _dateCache[tag];
+                return _dateCache[mapping.AddonTag];
             }
             return DateTime.MinValue;
         }
 
-        public override string GetInfoLink(string tag)
+        public override string GetInfoLink(Mapping mapping)
         {
-            return _infoUrl.Replace("{tag}", tag);
+            return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(string tag)
+        public override string GetDownloadLink(Mapping mapping)
         {
-            if (!_fileLinkCache.ContainsKey(tag))
+            if (!_fileLinkCache.ContainsKey(mapping.AddonTag))
             {
-                ParseInfoSite(tag);
+                ParseInfoSite(mapping);
             }
-            string fileUrl = _fileLinkCache[tag];
+            string fileUrl = _fileLinkCache[mapping.AddonTag];
 
             string downloadUrl = string.Empty;
             List<string> filePage = Helpers.GetHtml(fileUrl);
