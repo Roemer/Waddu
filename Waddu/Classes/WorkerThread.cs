@@ -132,11 +132,11 @@ namespace Waddu.Classes
                     // Handle Special Cases
                     if (wi.Addon.Name == "xchar")
                     {
-                        ZipHelper.Unzip(locUrl, Path.Combine(Addon.GetFolderPath(), "xchar"));
+                        ArchiveHelper.Unzip(locUrl, Path.Combine(Addon.GetFolderPath(), "xchar"));
                     }
                     else
                     {
-                        ZipHelper.Unzip(locUrl, Addon.GetFolderPath());
+                        ArchiveHelper.Unzip(locUrl, Addon.GetFolderPath());
                     }
                     
                     // Delete Temp File

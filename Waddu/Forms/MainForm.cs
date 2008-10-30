@@ -146,7 +146,7 @@ namespace Waddu.Forms
             // If not found, ask for it
             if (localWoWPath == string.Empty)
             {
-                localWoWPath = Helpers.BrowseForWoWFolder(@"c:\");
+                localWoWPath = Helpers.BrowseForFolder(@"c:\", FolderBrowseType.Enum.WoW);
             }
             return localWoWPath;
         }
@@ -321,6 +321,10 @@ namespace Waddu.Forms
         private void RefreshLog()
         {
             dgvLog.DataSource = Logger.Instance.GetEntries(Config.Instance.LogLevel);
+            if (dgvLog.Rows.Count > 0)
+            {
+                dgvLog.FirstDisplayedScrollingRowIndex = dgvLog.Rows.Count - 1;
+            }
         }
 
         private void Logger_LogEntry(LogEntry entry)
