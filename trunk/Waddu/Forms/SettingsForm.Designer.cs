@@ -31,7 +31,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblWoWPath = new System.Windows.Forms.Label();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnBrowseWoW = new System.Windows.Forms.Button();
             this.txtWoWPath = new System.Windows.Forms.TextBox();
             this.chkDelete = new System.Windows.Forms.CheckBox();
             this.chkMoveToTrash = new System.Windows.Forms.CheckBox();
@@ -48,6 +48,7 @@
             this.chkNoLib = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txt7zPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse7z = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(311, 278);
+            this.btnOk.Location = new System.Drawing.Point(320, 276);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -67,7 +68,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(392, 278);
+            this.btnCancel.Location = new System.Drawing.Point(401, 276);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -83,16 +84,16 @@
             this.lblWoWPath.TabIndex = 2;
             this.lblWoWPath.Text = "WoW Path";
             // 
-            // btnBrowse
+            // btnBrowseWoW
             // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(392, 12);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 3;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.btnBrowseWoW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowseWoW.Location = new System.Drawing.Point(401, 12);
+            this.btnBrowseWoW.Name = "btnBrowseWoW";
+            this.btnBrowseWoW.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseWoW.TabIndex = 3;
+            this.btnBrowseWoW.Text = "Browse";
+            this.btnBrowseWoW.UseVisualStyleBackColor = true;
+            this.btnBrowseWoW.Click += new System.EventHandler(this.btnBrowseWoW_Click);
             // 
             // txtWoWPath
             // 
@@ -100,7 +101,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWoWPath.Location = new System.Drawing.Point(87, 14);
             this.txtWoWPath.Name = "txtWoWPath";
-            this.txtWoWPath.Size = new System.Drawing.Size(299, 20);
+            this.txtWoWPath.Size = new System.Drawing.Size(308, 20);
             this.txtWoWPath.TabIndex = 4;
             // 
             // chkDelete
@@ -112,6 +113,7 @@
             this.chkDelete.TabIndex = 5;
             this.chkDelete.Text = "Delete before Updating";
             this.chkDelete.UseVisualStyleBackColor = true;
+            this.chkDelete.CheckedChanged += new System.EventHandler(this.chkDelete_CheckedChanged);
             // 
             // chkMoveToTrash
             // 
@@ -127,7 +129,7 @@
             // 
             this.lblNumOfThreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNumOfThreads.AutoSize = true;
-            this.lblNumOfThreads.Location = new System.Drawing.Point(297, 57);
+            this.lblNumOfThreads.Location = new System.Drawing.Point(306, 57);
             this.lblNumOfThreads.Name = "lblNumOfThreads";
             this.lblNumOfThreads.Size = new System.Drawing.Size(68, 13);
             this.lblNumOfThreads.TabIndex = 7;
@@ -136,7 +138,7 @@
             // numThreads
             // 
             this.numThreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numThreads.Location = new System.Drawing.Point(371, 53);
+            this.numThreads.Location = new System.Drawing.Point(380, 53);
             this.numThreads.Minimum = new decimal(new int[] {
             1,
             0,
@@ -227,7 +229,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMappingFile.Location = new System.Drawing.Point(85, 92);
             this.txtMappingFile.Name = "txtMappingFile";
-            this.txtMappingFile.Size = new System.Drawing.Size(382, 20);
+            this.txtMappingFile.Size = new System.Drawing.Size(391, 20);
             this.txtMappingFile.TabIndex = 12;
             // 
             // chkNoLib
@@ -245,9 +247,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 252);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 13);
+            this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Path to 7z.exe";
+            this.label4.Text = "Path to 7z";
             // 
             // txt7zPath
             // 
@@ -255,8 +257,19 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txt7zPath.Location = new System.Drawing.Point(93, 249);
             this.txt7zPath.Name = "txt7zPath";
-            this.txt7zPath.Size = new System.Drawing.Size(374, 20);
+            this.txt7zPath.Size = new System.Drawing.Size(302, 20);
             this.txt7zPath.TabIndex = 15;
+            // 
+            // btnBrowse7z
+            // 
+            this.btnBrowse7z.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowse7z.Location = new System.Drawing.Point(401, 247);
+            this.btnBrowse7z.Name = "btnBrowse7z";
+            this.btnBrowse7z.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse7z.TabIndex = 16;
+            this.btnBrowse7z.Text = "Browse";
+            this.btnBrowse7z.UseVisualStyleBackColor = true;
+            this.btnBrowse7z.Click += new System.EventHandler(this.btnBrowse7z_Click);
             // 
             // SettingsForm
             // 
@@ -264,7 +277,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(479, 313);
+            this.ClientSize = new System.Drawing.Size(488, 311);
+            this.Controls.Add(this.btnBrowse7z);
             this.Controls.Add(this.txt7zPath);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chkNoLib);
@@ -276,7 +290,7 @@
             this.Controls.Add(this.chkMoveToTrash);
             this.Controls.Add(this.chkDelete);
             this.Controls.Add(this.txtWoWPath);
-            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.btnBrowseWoW);
             this.Controls.Add(this.lblWoWPath);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -298,7 +312,7 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblWoWPath;
-        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnBrowseWoW;
         private System.Windows.Forms.TextBox txtWoWPath;
         private System.Windows.Forms.CheckBox chkDelete;
         private System.Windows.Forms.CheckBox chkMoveToTrash;
@@ -315,5 +329,6 @@
         private System.Windows.Forms.CheckBox chkNoLib;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt7zPath;
+        private System.Windows.Forms.Button btnBrowse7z;
     }
 }

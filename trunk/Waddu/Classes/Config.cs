@@ -97,7 +97,7 @@ namespace Waddu.Classes
             set { _preferNoLib = value; }
         }
 
-        private string _pathTo7z = @"C:\Program Files\7-Zip\7z.exe";
+        private string _pathTo7z = @"C:\Program Files\7-Zip";
         public string PathTo7z
         {
             get { return _pathTo7z; }

@@ -15,7 +15,7 @@ namespace Waddu.Forms
 
             _zipFile = zipFile;
 
-            string str = ZipHelper.ShowContent(zipFile);
+            string str = ArchiveHelper.ShowContent(zipFile);
             string[] lines = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             string ret = string.Empty;
             bool add = false;
@@ -41,7 +41,7 @@ namespace Waddu.Forms
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            ZipHelper.Open(_zipFile);
+            ArchiveHelper.Open(_zipFile);
         }
     }
 }

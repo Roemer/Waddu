@@ -16,16 +16,16 @@ namespace Waddu.Classes
         private Helpers() { }
 
         /// <summary>
-        /// Browse for the WoW Folder
+        /// Browse for a Folder
         /// </summary>
-        public static string BrowseForWoWFolder(string origPath)
+        public static string BrowseForFolder(string origPath, FolderBrowseType.Enum type)
         {
             string newPath = origPath;
             using (FolderBrowserDialog dlg = new FolderBrowserDialog())
             {
                 dlg.SelectedPath = origPath;
                 dlg.ShowNewFolderButton = false;
-                dlg.Description = "Select your World of Warcraft Folder";
+                dlg.Description = FolderBrowseType.GetDescription(type);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     newPath = dlg.SelectedPath;

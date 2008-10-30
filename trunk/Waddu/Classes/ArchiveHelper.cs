@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Diagnostics;
 using ICSharpCode.SharpZipLib.Zip;
-using System.Diagnostics;
+using System.IO;
 
 namespace Waddu.Classes
 {
-    public class ZipHelper
+    public class ArchiveHelper
     {
-        private ZipHelper() { }
+        private ArchiveHelper() { }
 
         public static void Unzip(string zipFile, string targetFolder)
         {
@@ -18,7 +16,7 @@ namespace Waddu.Classes
 
         public static void Open(string zipFile)
         {
-            string appPath = @"C:\Program Files\7-Zip\7zFM.exe";
+            string appPath = Path.Combine(Config.Instance.PathTo7z, "7zFM.exe");
             string cmdArgs = zipFile;
 
             Process ProcessObj = new Process();
@@ -30,7 +28,7 @@ namespace Waddu.Classes
 
         public static string ShowContent(string zipFile)
         {
-            string appPath = @"C:\Program Files\7-Zip\7z.exe";
+            string appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
             string cmdArgs = "l " + zipFile;
 
             // Create a new process object

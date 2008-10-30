@@ -80,6 +80,7 @@
     <Compile Include="BusinessObjects\Addon.cs" />
     <Compile Include="BusinessObjects\AddonList.cs" />
     <Compile Include="BusinessObjects\Mapping.cs" />
+    <Compile Include="Classes\ArchiveHelper.cs" />
     <Compile Include="Classes\BlockingQueue.cs" />
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\CookieManager.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Classes\Win32\Types\SHFILEOPSTRUCT.cs" />
     <Compile Include="Classes\WorkerThread.cs" />
     <Compile Include="Classes\WorkItem.cs" />
-    <Compile Include="Classes\ZipHelper.cs" />
     <Compile Include="Controls\SeparatorControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Types\AddonSiteId.cs" />
     <Compile Include="Types\DeleteType.cs" />
+    <Compile Include="Types\FolderBrowseType.cs" />
     <Compile Include="Types\GameType.cs" />
     <Compile Include="Types\LogType.cs" />
     <Compile Include="Types\ThreadStatus.cs" />
