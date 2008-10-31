@@ -26,7 +26,7 @@ namespace Waddu.Classes
                 {
                     // 7z
                     string appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
-                    string cmdArgs = "x " + archiveFile + " -o" + targetFolder + " -r -y";
+                    string cmdArgs = string.Format(@"x ""{0}"" -o""{1}"" -r -y", archiveFile, targetFolder);
                     Process ProcessObj = new Process();
                     ProcessObj.StartInfo.FileName = appPath;
                     ProcessObj.StartInfo.Arguments = cmdArgs;
