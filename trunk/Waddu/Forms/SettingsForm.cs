@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Waddu.Classes;
 using Waddu.Properties;
 using Waddu.Types;
+using System.Drawing;
 
 namespace Waddu.Forms
 {
@@ -11,8 +12,65 @@ namespace Waddu.Forms
         public SettingsForm()
         {
             InitializeComponent();
+
+            // Initialize Priority List
+            lbPriority.AllowDrop = true;
+            lbPriority.MouseDown += new MouseEventHandler(lbPriority_MouseDown);
+            lbPriority.DragEnter += new DragEventHandler(lbPriority_DragEnter);
+            lbPriority.DragDrop += new DragEventHandler(lbPriority_DragDrop);
+
             InitializeSettings();
             SetChecks();
+        }
+
+        private void lbPriority_MouseDown(object sender, MouseEventArgs e)
+        {
+            ListBox lb = sender as ListBox;
+            if (lb.Items.Count == 0)
+            {
+                return;
+            }
+
+            int index = lb.IndexFromPoint(e.X, e.Y);
+            object o = lb.Items[index];
+            DragDropEffects dde1 = DoDragDrop(o, DragDropEffects.Move);
+            if (dde1 == DragDropEffects.Move)
+            {
+                if (o == ((ListBox)sender).Items[index])
+                {
+                    ((ListBox)sender).Items.RemoveAt(index);
+                }
+                else
+                {
+                    ((ListBox)sender).Items.RemoveAt(index + 1);
+                }
+            }
+        }
+
+        private void lbPriority_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(AddonSiteId)))
+                e.Effect = DragDropEffects.Move;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void lbPriority_DragDrop(object sender, DragEventArgs e)
+        {
+            ListBox lb = sender as ListBox;
+            if (e.Data.GetDataPresent(typeof(AddonSiteId)))
+            {
+                object o = e.Data.GetData(typeof(AddonSiteId));
+                int indexPos = lb.IndexFromPoint(lb.PointToClient(new Point(e.X, e.Y)));
+                if (indexPos > -1)
+                {
+                    lb.Items.Insert(indexPos, o);
+                }
+                else
+                {
+                    lb.Items.Add(o);
+                }
+            }
         }
 
         private void InitializeSettings()
@@ -27,6 +85,10 @@ namespace Waddu.Forms
             txtMappingFile.Text = Config.Instance.MappingFile;
             chkNoLib.Checked = Config.Instance.PreferNoLib;
             txt7zPath.Text = Config.Instance.PathTo7z;
+            foreach (AddonSiteId addonSite in Config.Instance.AddonSites)
+            {
+                lbPriority.Items.Add(addonSite);
+            }
         }
 
         private void SetChecks()
@@ -68,6 +130,13 @@ namespace Waddu.Forms
             Config.Instance.MappingFile = txtMappingFile.Text;
             Config.Instance.PreferNoLib = chkNoLib.Checked;
             Config.Instance.PathTo7z = txt7zPath.Text;
+
+            Config.Instance.AddonSites.Clear();
+            foreach (AddonSiteId addonSite in lbPriority.Items)
+            {
+                Config.Instance.AddonSites.Add(addonSite);
+            }
+
             Config.Instance.SaveSettings();
             CookieManager.ClearCookies();
             this.Close();

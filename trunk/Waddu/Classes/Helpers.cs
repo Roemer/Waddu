@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
-using ICSharpCode.SharpZipLib.Zip;
-using Waddu.AddonSites;
-using Waddu.Properties;
 using Waddu.Types;
 
 namespace Waddu.Classes
@@ -32,6 +30,41 @@ namespace Waddu.Classes
                 }
             }
             return newPath;
+        }
+
+        // Default Join that takes an IEnumerable list and just takes the ToString of each item
+        public static string Join<T>(string separator, IEnumerable<T> list)
+        {
+            return Join<T>(separator, list, false);
+        }
+        public static string Join<T>(string separator, IEnumerable<T> list, bool skipEmpty)
+        {
+            return Join<T>(separator, list, skipEmpty, delegate(T o) { return o.ToString(); });
+        }
+        // Join that takes an IEnumerable list that uses a converter to convert the type to a string
+        public static string Join<T>(string separator, IEnumerable<T> list, Converter<T, string> converter)
+        {
+            return Join<T>(separator, list, false, converter);
+        }
+        public static string Join<T>(string separator, IEnumerable<T> list, bool skipEmpty, Converter<T, string> converter)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T t in list)
+            {
+                string converted = converter(t);
+                if (skipEmpty && converted.Length <= 0) { continue; }
+                if (sb.Length != 0) { sb.Append(separator); }
+                sb.Append(converted);
+            }
+            return sb.ToString();
+        }
+
+        public static void AddIfNeeded<T>(IList<T> list, T value)
+        {
+            if (!list.Contains(value))
+            {
+                list.Add(value);
+            }
         }
 
         public static void AddOrUpdate<T, T2>(IDictionary<T, T2> dict, T key, T2 value)

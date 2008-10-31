@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
 using System.IO;
 using System.Threading;
-using Waddu.AddonSites;
+using System.Windows.Forms;
 using Waddu.BusinessObjects;
+using Waddu.Forms;
 using Waddu.Types;
 
 namespace Waddu.Classes
@@ -78,17 +79,18 @@ namespace Waddu.Classes
                         }
                     }
                 }
+                // Update Addon
                 else if (wi.WorkItemType == WorkItemType.Update)
                 {
-                    // Update Addon
-                    // Addon has no Mappings, skip
                     if (wi.Addon.Mappings.Count <= 0)
                     {
+                        // Addon has no Mappings, skip
                         Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping", workerThread.ThreadID, wi.Addon.Name);
                         continue;
                     }
 
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.BestMapping);
+                    // Download
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.BestMapping.AddonSiteId);
                     workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.BestMapping.AddonSiteId, wi.Addon.Name);
                     string downloadUrl = wi.Addon.BestMapping.GetDownloadLink();
                     if (downloadUrl == string.Empty)
@@ -96,22 +98,33 @@ namespace Waddu.Classes
                         Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, wi.Addon.Name);
                         continue;
                     }
-                    string locUrl = Helpers.DownloadFile(downloadUrl, workerThread);
-                    if (locUrl == string.Empty)
+                    string archiveFilePath = Helpers.DownloadFile(downloadUrl, workerThread);
+                    if (archiveFilePath == string.Empty)
                     {
                         Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, wi.Addon.Name);
                         continue;
                     }
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, archiveFilePath);
 
-                    using (Waddu.Forms.ArchiveContentForm f = new Waddu.Forms.ArchiveContentForm(locUrl))
+                    // Check if 7z Exists
+                    if (ArchiveHelper.Exists7z())
                     {
-                        if (f.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                        // Simple Check if the Archive looks right
+                        if (!ArchiveHelper.CheckIntegrity(archiveFilePath, wi.Addon.Name))
                         {
-                            continue;
+                            // If now, warn us
+                            using (ArchiveContentForm f = new ArchiveContentForm(archiveFilePath))
+                            {
+                                if (f.ShowDialog() != DialogResult.OK)
+                                {
+                                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: cancelled by User Request", workerThread.ThreadID);
+                                    continue;
+                                }
+                            }
                         }
                     }
 
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, locUrl);
+                    // Delete Old
                     if (Config.Instance.DeleteBeforeUpdate)
                     {
                         if (wi.Addon.IsInstalled)
@@ -126,22 +139,14 @@ namespace Waddu.Classes
                             Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadID, wi.Addon.Name, delType.ToString());
                         }
                     }
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Unzipping to {1}", workerThread.ThreadID, Addon.GetFolderPath());
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Expanding to {1}", workerThread.ThreadID, Addon.GetFolderPath());
 
-                    // Unzip
-                    // Handle Special Cases
-                    if (wi.Addon.Name == "xchar")
-                    {
-                        ArchiveHelper.Unzip(locUrl, Path.Combine(Addon.GetFolderPath(), "xchar"));
-                    }
-                    else
-                    {
-                        ArchiveHelper.Unzip(locUrl, Addon.GetFolderPath());
-                    }
-                    
+                    // Expand
+                    ArchiveHelper.Expand(archiveFilePath, Addon.GetFolderPath());
+
                     // Delete Temp File
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Deleting {1}", workerThread.ThreadID, locUrl);
-                    File.Delete(locUrl);
+                    Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Deleting {1}", workerThread.ThreadID, archiveFilePath);
+                    File.Delete(archiveFilePath);
                 }
                 Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Finished", workerThread.ThreadID);
             }

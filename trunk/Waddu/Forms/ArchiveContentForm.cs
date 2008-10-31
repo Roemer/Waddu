@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Waddu.Classes;
-using System.Diagnostics;
 
 namespace Waddu.Forms
 {
@@ -15,28 +15,27 @@ namespace Waddu.Forms
 
             _zipFile = zipFile;
 
-            string str = ArchiveHelper.ShowContent(zipFile);
-            string[] lines = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-            string ret = string.Empty;
-            bool add = false;
+            List<string> lines = ArchiveHelper.GetArchiveContent(zipFile);
+            txtContent.Text = Helpers.Join<string>(Environment.NewLine, lines);
+
+            tvContent.BeginUpdate();
+            tvContent.Nodes.Clear();
+            tvContent.Nodes.Add("Archive", "Archive");
             foreach (string line in lines)
             {
-                if (!add && line.Contains("-------------------"))
+                TreeNode node = tvContent.Nodes[0];
+                string[] nameList = line.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i=0; i<nameList.Length; i++)
                 {
-                    add = true;
-                    continue;
-                }
-                if (add && line.Contains("-------------------"))
-                {
-                    add = false;
-                    continue;
-                }
-                if (add)
-                {
-                    ret += line.Substring(53) + Environment.NewLine;
+                    string name = nameList[i];
+                    if (!node.Nodes.ContainsKey(name))
+                    {
+                        node.Nodes.Add(name, name);
+                    }
+                    node = node.Nodes[name];
                 }
             }
-            txtContent.Text = ret;
+            tvContent.EndUpdate();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
