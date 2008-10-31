@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Waddu.Types;
+using System.Collections.Generic;
 
 namespace Waddu.Classes
 {
@@ -103,6 +104,13 @@ namespace Waddu.Classes
             get { return _pathTo7z; }
             set { _pathTo7z = value; }
         }
+
+        private List<AddonSiteId> _addonSites = new List<AddonSiteId>();
+        public List<AddonSiteId> AddonSites
+        {
+            get { return _addonSites; }
+            set { _addonSites = value; }
+        }
         #endregion
 
         // Constructor
@@ -176,7 +184,24 @@ namespace Waddu.Classes
             if (GetSetting("PathTo7z", out value))
             {
                 PathTo7z = value;
-            }    
+            }
+            // Get Addon Sites
+            if (GetSetting("AddonSites", out value))
+            {
+                string[] addonSiteList = value.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string addonSite in addonSiteList)
+                {
+                    _addonSites.Add((AddonSiteId)Enum.Parse(typeof(AddonSiteId), addonSite));
+                }
+            }
+            // Fill missing AddonSites
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.curse);
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.curseforge);
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.direct);
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowace);
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowinterface);
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowspecial);
+            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowui);
         }
 
         private bool GetSetting(string settingName, out string value)
@@ -211,6 +236,7 @@ namespace Waddu.Classes
             SaveSetting("LogLevel", LogLevel);
             SaveSetting("PreferNoLib", PreferNoLib);
             SaveSetting("PathTo7z", PathTo7z);
+            SaveSetting("AddonSites", Helpers.Join<AddonSiteId>("|", AddonSites));
             _xmlDoc.Save(_configFilePath);
         }
 

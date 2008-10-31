@@ -50,7 +50,7 @@ namespace Waddu.BusinessObjects
             set { _isUnhandled = value; }
         }
 
-        private Mapping _bestMapping;
+        private Mapping _bestMapping = null;
         public Mapping BestMapping
         {
             get { return _bestMapping; }
@@ -81,14 +81,6 @@ namespace Waddu.BusinessObjects
             _mappingList.ListChanged += new ListChangedEventHandler(_mappingList_ListChanged);
         }
 
-        private void _mappingList_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            if (e.ListChangedType == ListChangedType.ItemAdded)
-            {
-                BestMapping = _mappingList[e.NewIndex];
-            }
-        }
-
         public Addon(string name)
             : this()
         {
@@ -98,6 +90,28 @@ namespace Waddu.BusinessObjects
         #endregion
 
         #region Functions
+        private void _mappingList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                Mapping newMapping = _mappingList[e.NewIndex];
+
+                if (_bestMapping == null)
+                {
+                    _bestMapping = newMapping;
+                }
+                else
+                {
+                    int indexOld = Config.Instance.AddonSites.IndexOf(_bestMapping.AddonSiteId);
+                    int indexNew = Config.Instance.AddonSites.IndexOf(newMapping.AddonSiteId);
+                    if (indexNew >= 0 && indexNew < indexOld)
+                    {
+                        _bestMapping = newMapping;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Get the Local Version of an Addon
         /// </summary>

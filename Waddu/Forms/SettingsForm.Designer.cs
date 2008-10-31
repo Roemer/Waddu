@@ -49,14 +49,25 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txt7zPath = new System.Windows.Forms.TextBox();
             this.btnBrowse7z = new System.Windows.Forms.Button();
+            this.lbPriority = new System.Windows.Forms.ListBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(320, 276);
+            this.btnOk.Location = new System.Drawing.Point(283, 240);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -68,7 +79,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(401, 276);
+            this.btnCancel.Location = new System.Drawing.Point(364, 240);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -78,7 +89,7 @@
             // lblWoWPath
             // 
             this.lblWoWPath.AutoSize = true;
-            this.lblWoWPath.Location = new System.Drawing.Point(12, 17);
+            this.lblWoWPath.Location = new System.Drawing.Point(6, 11);
             this.lblWoWPath.Name = "lblWoWPath";
             this.lblWoWPath.Size = new System.Drawing.Size(60, 13);
             this.lblWoWPath.TabIndex = 2;
@@ -87,7 +98,7 @@
             // btnBrowseWoW
             // 
             this.btnBrowseWoW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseWoW.Location = new System.Drawing.Point(401, 12);
+            this.btnBrowseWoW.Location = new System.Drawing.Point(338, 6);
             this.btnBrowseWoW.Name = "btnBrowseWoW";
             this.btnBrowseWoW.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseWoW.TabIndex = 3;
@@ -99,15 +110,15 @@
             // 
             this.txtWoWPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWoWPath.Location = new System.Drawing.Point(87, 14);
+            this.txtWoWPath.Location = new System.Drawing.Point(80, 8);
             this.txtWoWPath.Name = "txtWoWPath";
-            this.txtWoWPath.Size = new System.Drawing.Size(308, 20);
+            this.txtWoWPath.Size = new System.Drawing.Size(252, 20);
             this.txtWoWPath.TabIndex = 4;
             // 
             // chkDelete
             // 
             this.chkDelete.AutoSize = true;
-            this.chkDelete.Location = new System.Drawing.Point(12, 42);
+            this.chkDelete.Location = new System.Drawing.Point(6, 6);
             this.chkDelete.Name = "chkDelete";
             this.chkDelete.Size = new System.Drawing.Size(136, 17);
             this.chkDelete.TabIndex = 5;
@@ -118,7 +129,7 @@
             // chkMoveToTrash
             // 
             this.chkMoveToTrash.AutoSize = true;
-            this.chkMoveToTrash.Location = new System.Drawing.Point(26, 65);
+            this.chkMoveToTrash.Location = new System.Drawing.Point(148, 6);
             this.chkMoveToTrash.Name = "chkMoveToTrash";
             this.chkMoveToTrash.Size = new System.Drawing.Size(95, 17);
             this.chkMoveToTrash.TabIndex = 6;
@@ -127,9 +138,8 @@
             // 
             // lblNumOfThreads
             // 
-            this.lblNumOfThreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNumOfThreads.AutoSize = true;
-            this.lblNumOfThreads.Location = new System.Drawing.Point(306, 57);
+            this.lblNumOfThreads.Location = new System.Drawing.Point(2, 93);
             this.lblNumOfThreads.Name = "lblNumOfThreads";
             this.lblNumOfThreads.Size = new System.Drawing.Size(68, 13);
             this.lblNumOfThreads.TabIndex = 7;
@@ -137,15 +147,14 @@
             // 
             // numThreads
             // 
-            this.numThreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numThreads.Location = new System.Drawing.Point(380, 53);
+            this.numThreads.Location = new System.Drawing.Point(80, 90);
             this.numThreads.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numThreads.Name = "numThreads";
-            this.numThreads.Size = new System.Drawing.Size(96, 20);
+            this.numThreads.Size = new System.Drawing.Size(75, 20);
             this.numThreads.TabIndex = 8;
             this.numThreads.Value = new decimal(new int[] {
             1,
@@ -169,7 +178,7 @@
             this.groupBox1.Controls.Add(this.txtCurseLogin);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 119);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(265, 98);
             this.groupBox1.TabIndex = 10;
@@ -217,7 +226,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 95);
+            this.label3.Location = new System.Drawing.Point(3, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 11;
@@ -227,15 +236,15 @@
             // 
             this.txtMappingFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMappingFile.Location = new System.Drawing.Point(85, 92);
+            this.txtMappingFile.Location = new System.Drawing.Point(80, 64);
             this.txtMappingFile.Name = "txtMappingFile";
-            this.txtMappingFile.Size = new System.Drawing.Size(391, 20);
+            this.txtMappingFile.Size = new System.Drawing.Size(252, 20);
             this.txtMappingFile.TabIndex = 12;
             // 
             // chkNoLib
             // 
             this.chkNoLib.AutoSize = true;
-            this.chkNoLib.Location = new System.Drawing.Point(12, 225);
+            this.chkNoLib.Location = new System.Drawing.Point(6, 29);
             this.chkNoLib.Name = "chkNoLib";
             this.chkNoLib.Size = new System.Drawing.Size(85, 17);
             this.chkNoLib.TabIndex = 13;
@@ -245,7 +254,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 252);
+            this.label4.Location = new System.Drawing.Point(6, 40);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 14;
@@ -255,15 +264,15 @@
             // 
             this.txt7zPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt7zPath.Location = new System.Drawing.Point(93, 249);
+            this.txt7zPath.Location = new System.Drawing.Point(80, 37);
             this.txt7zPath.Name = "txt7zPath";
-            this.txt7zPath.Size = new System.Drawing.Size(302, 20);
+            this.txt7zPath.Size = new System.Drawing.Size(252, 20);
             this.txt7zPath.TabIndex = 15;
             // 
             // btnBrowse7z
             // 
             this.btnBrowse7z.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse7z.Location = new System.Drawing.Point(401, 247);
+            this.btnBrowse7z.Location = new System.Drawing.Point(338, 35);
             this.btnBrowse7z.Name = "btnBrowse7z";
             this.btnBrowse7z.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse7z.TabIndex = 16;
@@ -271,27 +280,98 @@
             this.btnBrowse7z.UseVisualStyleBackColor = true;
             this.btnBrowse7z.Click += new System.EventHandler(this.btnBrowse7z_Click);
             // 
+            // lbPriority
+            // 
+            this.lbPriority.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbPriority.FormattingEnabled = true;
+            this.lbPriority.IntegralHeight = false;
+            this.lbPriority.Location = new System.Drawing.Point(6, 19);
+            this.lbPriority.Name = "lbPriority";
+            this.lbPriority.Size = new System.Drawing.Size(151, 108);
+            this.lbPriority.TabIndex = 17;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(427, 222);
+            this.tabControl1.TabIndex = 18;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.txtWoWPath);
+            this.tabPage1.Controls.Add(this.lblWoWPath);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.numThreads);
+            this.tabPage1.Controls.Add(this.txtMappingFile);
+            this.tabPage1.Controls.Add(this.lblNumOfThreads);
+            this.tabPage1.Controls.Add(this.btnBrowse7z);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.btnBrowseWoW);
+            this.tabPage1.Controls.Add(this.txt7zPath);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(419, 196);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "General";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.chkDelete);
+            this.tabPage2.Controls.Add(this.chkMoveToTrash);
+            this.tabPage2.Controls.Add(this.chkNoLib);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(419, 196);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Updating";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.AutoScroll = true;
+            this.tabPage3.Controls.Add(this.groupBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(419, 196);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Network";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lbPriority);
+            this.groupBox2.Location = new System.Drawing.Point(6, 52);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(163, 133);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Site Priorities";
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(488, 311);
-            this.Controls.Add(this.btnBrowse7z);
-            this.Controls.Add(this.txt7zPath);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.chkNoLib);
-            this.Controls.Add(this.txtMappingFile);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.numThreads);
-            this.Controls.Add(this.lblNumOfThreads);
-            this.Controls.Add(this.chkMoveToTrash);
-            this.Controls.Add(this.chkDelete);
-            this.Controls.Add(this.txtWoWPath);
-            this.Controls.Add(this.btnBrowseWoW);
-            this.Controls.Add(this.lblWoWPath);
+            this.ClientSize = new System.Drawing.Size(451, 275);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Name = "SettingsForm";
@@ -302,8 +382,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -330,5 +416,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt7zPath;
         private System.Windows.Forms.Button btnBrowse7z;
+        private System.Windows.Forms.ListBox lbPriority;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

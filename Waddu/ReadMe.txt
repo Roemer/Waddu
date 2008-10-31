@@ -1,5 +1,10 @@
 ﻿Version History:
 
+xx.11.2008 - 0.4.0.0 (Alpha 4)
+- Use 7Zip for Extracting and check for wrong Packages (like xchar)
+- Implement Site Priorities
+- NoLib Support
+
 25.10.2008 - 0.3.0.0 (Alpha 3)
 - Function to collect missing Mappings
 - Fixed Crash when default WoW Folder doesn't exist
@@ -32,8 +37,6 @@ Task List:
 - Add Local Version if missing (own File / TOC)
 - Add Mappings
 - Create Editor for Mappings
-- no-lib Support?
-- Use 7Zip for rar extracting and check for wrong Packages (like xchar)
 
 Bugs:
 - Catch protected (unreadable) Folders when deleting / extracting

@@ -73,6 +73,11 @@ namespace Waddu.Forms
                 Config.Instance.SaveSettings();
             }
 
+            if (!ArchiveHelper.Exists7z())
+            {
+                MessageBox.Show(@"Please install and check the Path for the Files ""7z.exe and ""7zFM.exe"" in the Settings", "7-Zip not found");
+            }
+
             // Load local Addons
             LoadLocalAddons();
         }
