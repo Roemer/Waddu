@@ -1,6 +1,6 @@
 ﻿Version History:
 
-xx.11.2008 - 0.4.0.0 (Alpha 4)
+01.11.2008 - 0.4.0.0 (Alpha 4)
 - Use 7Zip for Extracting and check for wrong Packages (like xchar)
 - Implement Site Priorities
 - NoLib Support
@@ -29,11 +29,12 @@ xx.11.2008 - 0.4.0.0 (Alpha 4)
 05.10.2008 - Begin of Development
 
 Task List:
-- Store Window and Column Sizes
-- Proxy Support
+- Add Loader for the Mappings File
+- Version Check (instead of update all)
 - Cleanup Saved Variables (with Backup)
 - Ignoring Addons
-- Version Check (instead of update all)
+- Proxy Support
+- Store Window and Column Sizes
 - Add Local Version if missing (own File / TOC)
 - Add Mappings
 - Create Editor for Mappings
