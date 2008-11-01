@@ -133,67 +133,90 @@ namespace Waddu.Classes
             AddMapping("Ace", "ace", AddonSiteId.wowace);
             AddMapping("Ace2", "ace2", AddonSiteId.wowace);
             AddMapping("Ace3", "ace3", AddonSiteId.wowace);
+            AddMapping("Acheron", "acheron", AddonSiteId.wowace);
             AddMapping("ACP", "acp", AddonSiteId.wowace);
+            AddMapping("ActionCombat", "action-combat", AddonSiteId.wowace);
+            AddMapping("AddonLoader", "addon-loader", AddonSiteId.wowace);
             AddMapping("ag_UnitFrames", "ag_unitframes", AddonSiteId.wowace);
             AddMapping("AHsearch", "ahsearch", AddonSiteId.wowace);
             AddMapping("Aloft", "aloft", AddonSiteId.wowace);
             AddMapping("ampere", "ampere", AddonSiteId.wowace);
+            AddMapping("Analyst", "analyst", AddonSiteId.wowace);
             AddMapping("Antagonist", "antagonist", AddonSiteId.wowace);
             AddMapping("ArenaPointer", "arena-pointer", AddonSiteId.wowace);
             AddMapping("ArkInventory", "ark-inventory", AddonSiteId.wowace);
             AddMapping("AtlasLoot", "atlasloot-enhanced", AddonSiteId.wowace);
             AddMapping("aUF_Banzai", "a-uf_banzai", AddonSiteId.wowace);
+            AddMapping("AuldLangSyne", "auld-lang-syne", AddonSiteId.wowace);
             AddMapping("AutoBar", "auto-bar", AddonSiteId.wowace);
+            AddMapping("Automaton", "automaton", AddonSiteId.wowace);
             AddMapping("BadBoy", "bad-boy", AddonSiteId.wowace);
-            AddMapping("Baggins", "baggins", AddonSiteId.wowace);
             AddMapping("Baggins_ClosetGnome", "baggins_closet-gnome", AddonSiteId.wowace);
             AddMapping("Baggins_Outfitter", "baggins_outfitter", AddonSiteId.wowace);
             AddMapping("Baggins_Professions", "baggins_professions", AddonSiteId.wowace);
             AddMapping("Baggins_Search", "baggins_search", AddonSiteId.wowace);
             AddMapping("Baggins_SectionColor", "baggins_section-color", AddonSiteId.wowace);
             AddMapping("Baggins_Usable", "baggins_usable", AddonSiteId.wowace);
+            AddMapping("Baggins", "baggins", AddonSiteId.wowace);
             AddMapping("BankItems", "bank-items", AddonSiteId.wowace);
             AddMapping("BankStack", "bank-stack", AddonSiteId.wowace);
             AddMapping("Bartender4", "bartender4", AddonSiteId.wowace);
             AddMapping("BasicBuffs", "basic-buffs", AddonSiteId.wowace);
             AddMapping("beql", "beql", AddonSiteId.wowace);
             AddMapping("BetterInbox", "better-inbox", AddonSiteId.wowace);
+            AddMapping("BetterQuest", "better-quest", AddonSiteId.wowace);
             AddMapping("BigBrother", "big-brother", AddonSiteId.wowace);
-            AddMapping("BigWigs", "big-wigs", AddonSiteId.wowace);
             AddMapping("BigWigs_KalecgosHealth", "bwkh", AddonSiteId.wowace);
+            AddMapping("BigWigs", "big-wigs", AddonSiteId.wowace);
+            AddMapping("Broker_CalendarEvents", "broker_calendarevents", AddonSiteId.wowace);
             AddMapping("Broker_Clock", "broker_clock", AddonSiteId.wowace);
+            AddMapping("Broker_Durability", "broker_durability", AddonSiteId.wowace);
             AddMapping("Broker_Mail", "broker_mail", AddonSiteId.wowace);
+            AddMapping("Broker_Money", "broker_money", AddonSiteId.wowace);
+            AddMapping("Broker_Professions", "broker_professions", AddonSiteId.wowace);
+            AddMapping("Broker_PvP", "broker_pv-p", AddonSiteId.wowace);
+            AddMapping("Broker_Recount", "broker_recount", AddonSiteId.wowace);
+            AddMapping("Broker_Regen", "broker-regen", AddonSiteId.wowace);
+            AddMapping("Broker_SysMon", "broker_sysmon", AddonSiteId.wowace);
+            AddMapping("Broker_Tracking", "broker_tracking", AddonSiteId.wowace);
             AddMapping("Broker2FuBar", "broker2fubar", AddonSiteId.wowace);
             AddMapping("Buffalo", "buffalo", AddonSiteId.wowace);
             AddMapping("BuffEnough", "buff-enough", AddonSiteId.wowace);
+            AddMapping("buffet", "buffet", AddonSiteId.wowace);
             AddMapping("BugSack", "bugsack", AddonSiteId.wowace);
-            AddMapping("ButtonFacade", "buttonfacade", AddonSiteId.wowace);
+            AddMapping("ButtonBin", "button-bin", AddonSiteId.wowace);
             AddMapping("ButtonFacade_Apathy", "buttonfacade_apathy", AddonSiteId.wowace);
             AddMapping("ButtonFacade_Caith", "buttonfacade_caith", AddonSiteId.wowace);
             AddMapping("ButtonFacade_Entropy", "buttonfacade_entropy", AddonSiteId.wowace);
             AddMapping("ButtonFacade_Gears", "buttonfacade_gears", AddonSiteId.wowace);
             AddMapping("ButtonFacade_HKitty", "button-facade_hkitty", AddonSiteId.wowace);
+            AddMapping("ButtonFacade_LayerTest", "buttonfacade_layertest", AddonSiteId.wowace);
             AddMapping("ButtonFacade_LiteStep", "buttonfacade_litestep", AddonSiteId.wowace);
             AddMapping("ButtonFacade_Onyx", "buttonfacade_onyx", AddonSiteId.wowace);
             AddMapping("ButtonFacade_Serenity", "buttonfacade_serenity", AddonSiteId.wowace);
             AddMapping("ButtonFacade_simpleSquare", "button-facade_simple-square", AddonSiteId.wowace);
+            AddMapping("ButtonFacade", "buttonfacade", AddonSiteId.wowace);
+            AddMapping("CandyBar", "candybar", AddonSiteId.wowace);
             AddMapping("Capping", "capping", AddonSiteId.wowace);
             AddMapping("Cartographer", "cartographer", AddonSiteId.wowace);
+            AddMapping("Cartographer3", "cartographer3", AddonSiteId.wowace);
+            AddMapping("CastYeller", "cast-yeller", AddonSiteId.wowace);
             AddMapping("CCBreaker", "ccbreaker", AddonSiteId.wowace);
             AddMapping("Chaman2", "chaman2", AddonSiteId.wowace);
             AddMapping("Chatter", "chatter", AddonSiteId.wowace);
+            AddMapping("ChatThrottleLib", "chatthrottlelib", AddonSiteId.wowace);
             AddMapping("Chinchilla", "chinchilla", AddonSiteId.wowace);
+            AddMapping("ClassLoot", "classloot", AddonSiteId.wowace);
             AddMapping("ClassTimer", "classtimer", AddonSiteId.wowace);
-            AddMapping("ClearFont2", "clear-font2", AddonSiteId.wowace);
             AddMapping("ClearFont2_FontPack", "clear-font2_font-pack", AddonSiteId.wowace);
+            AddMapping("ClearFont2", "clear-font2", AddonSiteId.wowace);
             AddMapping("Click2Cast", "click2cast", AddonSiteId.wowace);
-            AddMapping("ClosetGnome", "closet-gnome", AddonSiteId.wowace);
             AddMapping("ClosetGnome_Banker", "closet-gnome_banker", AddonSiteId.wowace);
             AddMapping("ClosetGnome_HelmNCloak", "closet-gnome_helm-ncloak", AddonSiteId.wowace);
             AddMapping("ClosetGnome_Mount", "closet-gnome_mount", AddonSiteId.wowace);
             AddMapping("ClosetGnome_Tooltip", "closet-gnome_tooltip", AddonSiteId.wowace);
+            AddMapping("ClosetGnome", "closet-gnome", AddonSiteId.wowace);
             AddMapping("Coconuts", "coconuts", AddonSiteId.wowace);
-            AddMapping("Combuctor", "combuctor", AddonSiteId.wowace);
             AddMapping("CooldownCount", "cooldown-count", AddonSiteId.wowace);
             AddMapping("CooldownTimers2", "cooldown-timers2", AddonSiteId.wowace);
             AddMapping("CowTip", "cowtip", AddonSiteId.wowace);
@@ -211,9 +234,10 @@ namespace Waddu.Classes
             AddMapping("EveryQuest", "everyquest", AddonSiteId.wowace);
             AddMapping("Fence", "fence", AddonSiteId.wowace);
             AddMapping("FishermansFriend", "fishermans-friend", AddonSiteId.wowace);
+            AddMapping("fontain", "fontain", AddonSiteId.wowace);
             AddMapping("Fortress", "fortress", AddonSiteId.wowace);
             AddMapping("FreeRefills", "free-refills", AddonSiteId.wowace);
-            AddMapping("FuBar", "fubar", AddonSiteId.wowace);
+            AddMapping("FuBar_AlchemyFu", "fubar_alchemyfu", AddonSiteId.wowace);
             AddMapping("FuBar_AmmoFu", "fubar_ammofu", AddonSiteId.wowace);
             AddMapping("FuBar_BagFu", "fu-bar_bag-fu", AddonSiteId.wowace);
             AddMapping("FuBar_ClockFu", "fubar_clockfu", AddonSiteId.wowace);
@@ -226,8 +250,10 @@ namespace Waddu.Classes
             AddMapping("FuBar_GarbageFu", "fu-bar_garbage-fu", AddonSiteId.wowace);
             AddMapping("FuBar_GroupFu", "fubar_groupfu", AddonSiteId.wowace);
             AddMapping("FuBar_GuildFu", "fubar_guildfu", AddonSiteId.wowace);
+            AddMapping("FuBar_HealBotFu", "fu-bar_heal-bot-fu", AddonSiteId.wowace);
             AddMapping("FuBar_HonorFu", "fubar_honorfu", AddonSiteId.wowace);
             AddMapping("FuBar_ItemBonusesFu", "fu-bar_item-bonuses-fu", AddonSiteId.wowace);
+            AddMapping("FuBar_ItemRackFu", "itemrackfu", AddonSiteId.wowace);
             AddMapping("FuBar_LocationFu", "fubar_locationfu", AddonSiteId.wowace);
             AddMapping("FuBar_MicroMenuFu", "fubar_micromenufu", AddonSiteId.wowace);
             AddMapping("FuBar_MoneyFu", "fu-bar_money-fu", AddonSiteId.wowace);
@@ -236,8 +262,8 @@ namespace Waddu.Classes
             AddMapping("FuBar_PetFu", "fu-bar_pet-fu", AddonSiteId.wowace);
             AddMapping("FuBar_QuestsFu", "fu-bar_quests-fu", AddonSiteId.wowace);
             AddMapping("FuBar_RaidBuffFu", "fu-bar_raid-buff-fu", AddonSiteId.wowace);
-            AddMapping("FuBar_RecountFu", "fu-bar_recount-fu", AddonSiteId.wowace);
             AddMapping("FuBar_ReagentFu", "fu-bar_reagent-fu", AddonSiteId.wowace);
+            AddMapping("FuBar_RecountFu", "fu-bar_recount-fu", AddonSiteId.wowace);
             AddMapping("FuBar_SkillsPlusFu", "fu-bar_skills-plus-fu", AddonSiteId.wowace);
             AddMapping("FuBar_SpeedFu", "fu-bar_speed-fu", AddonSiteId.wowace);
             AddMapping("FuBar_ToFu", "fu-bar_to-fu", AddonSiteId.wowace);
@@ -245,91 +271,131 @@ namespace Waddu.Classes
             AddMapping("FuBar_TrainerFu", "fu-bar_trainer-fu", AddonSiteId.wowace);
             AddMapping("FuBar_TransporterFu", "fu-bar_transporter-fu", AddonSiteId.wowace);
             AddMapping("FuBar_VolumeFu", "fu-bar_volume-fu", AddonSiteId.wowace);
+            AddMapping("FuBar", "fubar", AddonSiteId.wowace);
             AddMapping("FuBar2Broker", "fubar2broker", AddonSiteId.wowace);
+            AddMapping("FuBarPlugin-2.0", "fubarplugin-2-0", AddonSiteId.wowace);
             AddMapping("FuTextures", "futextures", AddonSiteId.wowace);
-            AddMapping("GatherMate", "gathermate", AddonSiteId.wowace);
+            AddMapping("GatherHud", "gather-hud", AddonSiteId.wowace);
             AddMapping("GatherMate_Data", "gathermate_data", AddonSiteId.wowace);
             AddMapping("GatherMate_Sharing", "gathermate_sharing", AddonSiteId.wowace);
+            AddMapping("GatherMate", "gathermate", AddonSiteId.wowace);
             AddMapping("GloryLib", "glorylib", AddonSiteId.wowace);
             AddMapping("Grid", "grid", AddonSiteId.wowace);
+            AddMapping("Grid2", "grid2", AddonSiteId.wowace);
             AddMapping("GridIndicatorSideIcons", "grid-indicator-side-icons", AddonSiteId.wowace);
             AddMapping("GridIndicatorText3", "grid-indicator-text3", AddonSiteId.wowace);
+            AddMapping("GridLayoutPlus", "grid-layout-plus", AddonSiteId.wowace);
             AddMapping("GridManaBars", "grid-mana-bars", AddonSiteId.wowace);
             AddMapping("GridSideIndicators", "grid-side-indicators", AddonSiteId.wowace);
             AddMapping("GridStatusAFK", "grid-status-afk", AddonSiteId.wowace);
             AddMapping("GridStatusHots", "grid-status-hots", AddonSiteId.wowace);
+            AddMapping("GridStatusHotStack", "grid-status-hot-stack", AddonSiteId.wowace);
+            AddMapping("GridStatusIncomingHeals", "grid-status-incoming-heals", AddonSiteId.wowace);
+            AddMapping("GridStatusLifebloom", "grid-status-lifebloom", AddonSiteId.wowace);
             AddMapping("GridStatusMissingBuffs", "grid-status-missing-buffs", AddonSiteId.wowace);
             AddMapping("GridStatusRaidIcons", "grid-status-raid-icons", AddonSiteId.wowace);
             AddMapping("GridStatusReadyCheck", "grid-status-ready-check", AddonSiteId.wowace);
-            AddMapping("Grid2", "grid2", AddonSiteId.wowace);
             AddMapping("GrimReaper", "grim-reaper", AddonSiteId.wowace);
-            AddMapping("HandyNotes", "handynotes", AddonSiteId.wowace);
             AddMapping("HandyNotes_FlightMasters", "handy-notes_flight-masters", AddonSiteId.wowace);
             AddMapping("HandyNotes_Guild", "handynotes_guild", AddonSiteId.wowace);
             AddMapping("HandyNotes_Mailboxes", "handy-notes_mailboxes", AddonSiteId.wowace);
+            AddMapping("HandyNotes", "handynotes", AddonSiteId.wowace);
             AddMapping("HeadCount", "head-count", AddonSiteId.wowace);
+            AddMapping("Heatsink", "heatsink", AddonSiteId.wowace);
+            AddMapping("HitsMode", "hits-mode", AddonSiteId.wowace);
+            AddMapping("IceHUD", "ice-hud", AddonSiteId.wowace);
+            AddMapping("IHML", "ihml", AddonSiteId.wowace);
+            AddMapping("Incubator", "incubator", AddonSiteId.wowace);
             AddMapping("InstanceMaps", "instance-maps", AddonSiteId.wowace);
+            AddMapping("ItemDB", "itemdb", AddonSiteId.wowace);
             AddMapping("ItemPriceTooltip", "item-price-tooltip", AddonSiteId.wowace);
+            AddMapping("JebusMail", "jebus-mail", AddonSiteId.wowace);
+            AddMapping("KC_Items", "kc_items", AddonSiteId.wowace);
             AddMapping("kgPanels", "kg-panels", AddonSiteId.wowace);
             AddMapping("LD50_abar", "ld50_abar", AddonSiteId.wowace);
+            AddMapping("lern2count", "lern2count", AddonSiteId.wowace);
             AddMapping("Links", "links", AddonSiteId.wowace);
             AddMapping("LittleWigs", "little-wigs", AddonSiteId.wowace);
             AddMapping("MagicDKP", "magic-dk", AddonSiteId.wowace);
             AddMapping("MainAssist", "main-assist", AddonSiteId.wowace);
             AddMapping("Manufac", "manufac", AddonSiteId.wowace);
             AddMapping("Mapster", "mapster", AddonSiteId.wowace);
+            AddMapping("MaterialsTracker", "materials-tracker", AddonSiteId.wowace);
             AddMapping("MBB", "mbb", AddonSiteId.wowace);
             AddMapping("Mendeleev", "mendeleev", AddonSiteId.wowace);
             AddMapping("Minimalist", "minimalist", AddonSiteId.wowace);
             AddMapping("MiniMapster", "minimapster", AddonSiteId.wowace);
-            AddMapping("MobSpells", "mob-spells", AddonSiteId.wowace);
+            AddMapping("Mirror", "mirror", AddonSiteId.wowace);
             AddMapping("MobHealth", "mob-health", AddonSiteId.wowace);
             AddMapping("MobHealth3_BlizzardFrames", "mob-health3_blizzard-frames", AddonSiteId.wowace);
+            AddMapping("MobSpells", "mob-spells", AddonSiteId.wowace);
             AddMapping("Niagara", "niagara", AddonSiteId.wowace);
-            AddMapping("Numen", "numen", AddonSiteId.wowace);
             AddMapping("nQuestLog", "n-quest-log", AddonSiteId.wowace);
+            AddMapping("Numen", "numen", AddonSiteId.wowace);
             AddMapping("Omen", "omen-threat-meter", AddonSiteId.wowace);
             AddMapping("OneBag3", "onebag3", AddonSiteId.wowace);
             AddMapping("OptiTaunt", "opti-taunt", AddonSiteId.wowace);
             AddMapping("oRA2", "ora2", AddonSiteId.wowace);
             AddMapping("Parrot", "parrot", AddonSiteId.wowace);
-            AddMapping("PitBull", "pit-bull", AddonSiteId.wowace);
             AddMapping("PitBull_QuickHealth", "pit-bull_quick-health", AddonSiteId.wowace);
+            AddMapping("PitBull", "pit-bull", AddonSiteId.wowace);
             AddMapping("Postal", "postal", AddonSiteId.wowace);
             AddMapping("Prat-3.0", "prat-3-0", AddonSiteId.wowace);
             AddMapping("ProfessionsBook", "professions-book", AddonSiteId.wowace);
             AddMapping("Proximo", "proximo", AddonSiteId.wowace);
             AddMapping("Quartz", "quartz", AddonSiteId.wowace);
             AddMapping("Quixote", "quixote", AddonSiteId.wowace);
+            AddMapping("RaidBuffStatus", "raidbuffstatus", AddonSiteId.wowace);
+            AddMapping("RangeDisplay", "range-display", AddonSiteId.wowace);
             AddMapping("RangeRecolor", "range-recolor", AddonSiteId.wowace);
             AddMapping("RatingBuster", "rating-buster", AddonSiteId.wowace);
             AddMapping("Recount", "recount", AddonSiteId.wowace);
             AddMapping("Rep2", "rep2", AddonSiteId.wowace);
             AddMapping("Reslack", "reslack", AddonSiteId.wowace);
             AddMapping("RightWing", "right-wing", AddonSiteId.wowace);
+            AddMapping("RosterLib", "rosterlib", AddonSiteId.wowace);
             AddMapping("Routes", "routes", AddonSiteId.wowace);
             AddMapping("rSelfCast", "r-self-cast", AddonSiteId.wowace);
             AddMapping("SalvationKiller", "salvation-killer", AddonSiteId.wowace);
-            AddMapping("sct", "sct", AddonSiteId.wowace);
             AddMapping("sct_options", "sct_options", AddonSiteId.wowace);
+            AddMapping("sct", "sct", AddonSiteId.wowace);
             AddMapping("SharedMedia", "sharedmedia", AddonSiteId.wowace);
             AddMapping("SharedMediaAdditionalFonts", "shared-media-additional-fonts", AddonSiteId.wowace);
+            AddMapping("SickOfClickingDailies", "sick-of-clicking-dailies", AddonSiteId.wowace);
             AddMapping("simpleMinimap", "simple-minimap", AddonSiteId.wowace);
+            AddMapping("SimpleSelfRebuff", "simple-self-rebuff", AddonSiteId.wowace);
             AddMapping("Skillet", "skillet", AddonSiteId.wowace);
             AddMapping("Skinner", "skinner", AddonSiteId.wowace);
+            AddMapping("SlashConflict", "slash-conflict", AddonSiteId.wowace);
+            AddMapping("SmartMount", "smartmount", AddonSiteId.wowace);
             AddMapping("SnapshotBar", "snapshot-bar", AddonSiteId.wowace);
+            AddMapping("SpecialEventsEmbed", "specialeventsembed", AddonSiteId.wowace);
             AddMapping("Sphere", "sphere", AddonSiteId.wowace);
+            AddMapping("Spyglass", "spyglass", AddonSiteId.wowace);
             AddMapping("sRaidFrames", "sraidframes", AddonSiteId.wowace);
-            AddMapping("StatBlockCore", "stat-block-core", AddonSiteId.wowace);
+            AddMapping("StatBlock_Ammo", "stat-block_ammo", AddonSiteId.wowace);
+            AddMapping("StatBlock_DPS", "stat-block_dps", AddonSiteId.wowace);
             AddMapping("StatBlock_Durability", "stat-block_durability", AddonSiteId.wowace);
+            AddMapping("StatBlock_Factions", "stat-block_factions", AddonSiteId.wowace);
             AddMapping("StatBlock_FPS", "stat-block_fps", AddonSiteId.wowace);
             AddMapping("StatBlock_Latency", "stat-block_latency", AddonSiteId.wowace);
             AddMapping("StatBlock_Memory", "stat-block_memory", AddonSiteId.wowace);
-            AddMapping("Talented", "talented", AddonSiteId.wowace);
+            AddMapping("StatBlock_Money", "stat-block_money", AddonSiteId.wowace);
+            AddMapping("StatBlock_RaidDPS", "stat-block_raid-dps", AddonSiteId.wowace);
+            AddMapping("StatBlock_ZoneText", "stat-block_zone-text", AddonSiteId.wowace);
+            AddMapping("StatBlockCore", "stat-block-core", AddonSiteId.wowace);
+            AddMapping("StatLogicLib", "statlogiclib", AddonSiteId.wowace);
             AddMapping("Talented_Data", "talented_data", AddonSiteId.wowace);
             AddMapping("Talented_Loader", "talented_loader", AddonSiteId.wowace);
+            AddMapping("Talented", "talented", AddonSiteId.wowace);
+            AddMapping("TankWarnings", "tankwarnings", AddonSiteId.wowace);
             AddMapping("TouristLib", "touristlib", AddonSiteId.wowace);
             AddMapping("Transcriptor", "transcriptor", AddonSiteId.wowace);
+            AddMapping("UnderHood", "under-hood", AddonSiteId.wowace);
+            AddMapping("Violation", "violation", AddonSiteId.wowace);
+            AddMapping("WeaponRebuff", "weapon-rebuff", AddonSiteId.wowace);
+            AddMapping("WhoLib", "wholib", AddonSiteId.wowace);
+            AddMapping("WindowLib", "windowlib", AddonSiteId.wowace);
             AddMapping("WitchHunt", "witch-hunt", AddonSiteId.wowace);
             AddMapping("WoWEquip", "wowequip", AddonSiteId.wowace);
             AddMapping("XLoot", "xloot", AddonSiteId.wowace);
@@ -371,78 +437,240 @@ namespace Waddu.Classes
             AddMapping("!!Warmup", "4939", AddonSiteId.wowinterface); // RAR
             AddMapping("!StopTheSpam", "4077", AddonSiteId.wowinterface);
             AddMapping("AckisRecipeList", "8512", AddonSiteId.wowinterface);
+            AddMapping("ActionBarSaver", "8075", AddonSiteId.wowinterface);
             AddMapping("AddonManager", "7164", AddonSiteId.wowinterface);
             AddMapping("Afflicted2", "8063", AddonSiteId.wowinterface);
+            AddMapping("Align", "6153", AddonSiteId.wowinterface);
             AddMapping("Aloft", "10864", AddonSiteId.wowinterface);
+            AddMapping("Altoholic", "8533", AddonSiteId.wowinterface);
+            AddMapping("ArenaHistorian", "8224", AddonSiteId.wowinterface);
             AddMapping("Atlas", "3896", AddonSiteId.wowinterface);
+            AddMapping("Attrition", "10598", AddonSiteId.wowinterface);
+            AddMapping("AuldLangSyne", "5320", AddonSiteId.wowinterface);
+            AddMapping("Bagsy", "10599", AddonSiteId.wowinterface);
+            AddMapping("BangArtOfWar", "11246", AddonSiteId.wowinterface);
             AddMapping("Bongos", "8419", AddonSiteId.wowinterface);
+            AddMapping("Broker_Group", "10702", AddonSiteId.wowinterface);
+            AddMapping("Broker_ItemRack", "10610", AddonSiteId.wowinterface);
+            AddMapping("buffet", "8370", AddonSiteId.wowinterface);
+            AddMapping("Butsu", "7976", AddonSiteId.wowinterface);
+            AddMapping("ButtonFacade_DsmFade", "11363", AddonSiteId.wowinterface);
             AddMapping("ButtonFacade_Elegance", "9623", AddonSiteId.wowinterface);
             AddMapping("ButtonFacade_Sleek", "11010", AddonSiteId.wowinterface);
             AddMapping("ButtonFacade_Tones", "9712", AddonSiteId.wowinterface);
             AddMapping("Capping", "11177", AddonSiteId.wowinterface);
+            AddMapping("cargoHonor", "10482", AddonSiteId.wowinterface);
+            AddMapping("CCTracker", "9051", AddonSiteId.wowinterface);
+            AddMapping("ChatBar", "4422", AddonSiteId.wowinterface);
             AddMapping("Clique", "5108", AddonSiteId.wowinterface);
+            AddMapping("Combuctor", "8113", AddonSiteId.wowinterface);
+            AddMapping("CreatureComforts", "9635", AddonSiteId.wowinterface);
+            AddMapping("CursorCastbar", "11067", AddonSiteId.wowinterface);
+            AddMapping("DagAssist", "11358", AddonSiteId.wowinterface);
+            AddMapping("Dominos", "9085", AddonSiteId.wowinterface);
             AddMapping("DPS", "11059", AddonSiteId.wowinterface);
             AddMapping("DRTracker", "8901", AddonSiteId.wowinterface);
+            AddMapping("Engravings", "4858", AddonSiteId.wowinterface);
             AddMapping("EquipCompare", "4392", AddonSiteId.wowinterface);
+            AddMapping("ExpressMail", "6439", AddonSiteId.wowinterface);
+            AddMapping("Fane", "7984", AddonSiteId.wowinterface);
+            AddMapping("Fizzle", "5018", AddonSiteId.wowinterface);
             AddMapping("FuBar_AuditorFu", "5429", AddonSiteId.wowinterface);
+            AddMapping("Fubar_MacroFu", "5039", AddonSiteId.wowinterface);
+            AddMapping("GFW_FactionFriend", "6402", AddonSiteId.wowinterface);
             AddMapping("GFW_FeedOMatic", "4160", AddonSiteId.wowinterface);
             AddMapping("GhostPulse", "8418", AddonSiteId.wowinterface);
             AddMapping("Hack", "11101", AddonSiteId.wowinterface);
             AddMapping("InFlight", "11178", AddonSiteId.wowinterface);
-            AddMapping("ItemRack", "6818", AddonSiteId.wowinterface);
+            AddMapping("ItemRack", "4148", AddonSiteId.wowinterface);
             AddMapping("LitheTooltipDoctor", "5336", AddonSiteId.wowinterface);
             AddMapping("Ludwig", "5174", AddonSiteId.wowinterface);
             AddMapping("Macaroon", "10636", AddonSiteId.wowinterface);
+            AddMapping("MacaroonXtras", "10933", AddonSiteId.wowinterface);
             AddMapping("MikScrollingBattleText", "5153", AddonSiteId.wowinterface);
+            AddMapping("Minimalisque_v3", "11184", AddonSiteId.wowinterface);
+            AddMapping("MinimapButtonFrame", "7929", AddonSiteId.wowinterface);
+            AddMapping("Mirror", "9674", AddonSiteId.wowinterface);
+            AddMapping("MoveAnything", "11208", AddonSiteId.wowinterface);
             AddMapping("MTLove", "7024", AddonSiteId.wowinterface);
+            AddMapping("naiCombo", "8913", AddonSiteId.wowinterface);
+            AddMapping("NowCarrying", "10172", AddonSiteId.wowinterface);
+            AddMapping("NugEnergy", "9099", AddonSiteId.wowinterface);
+            AddMapping("oGlow", "7142", AddonSiteId.wowinterface);
             AddMapping("OmniCC", "4836", AddonSiteId.wowinterface);
             AddMapping("OPie", "9094", AddonSiteId.wowinterface);
+            AddMapping("PartySpotter", "4389", AddonSiteId.wowinterface);
+            AddMapping("picoDPS", "10573", AddonSiteId.wowinterface);
+            AddMapping("picoEXP", "10259", AddonSiteId.wowinterface);
+            AddMapping("picoFriends", "9220", AddonSiteId.wowinterface);
+            AddMapping("picoGuild", "9219", AddonSiteId.wowinterface);
             AddMapping("Possessions", "6443", AddonSiteId.wowinterface);
+            AddMapping("pRogue", "8560", AddonSiteId.wowinterface);
+            AddMapping("QuesterJester", "11005", AddonSiteId.wowinterface);
             AddMapping("QuestHelper", "9896", AddonSiteId.wowinterface);
             AddMapping("ReagentRestocker", "7569", AddonSiteId.wowinterface);
+            AddMapping("RedRange", "4166", AddonSiteId.wowinterface);
+            AddMapping("SimpleBuffBars", "9798", AddonSiteId.wowinterface);
+            AddMapping("SLDataText", "8539", AddonSiteId.wowinterface);
+            AddMapping("Snoopy", "11180", AddonSiteId.wowinterface);
+            AddMapping("SSPVP3", "4569", AddonSiteId.wowinterface);
+            AddMapping("StatBlock_Ammo", "9222", AddonSiteId.wowinterface);
+            AddMapping("teksLoot", "8198", AddonSiteId.wowinterface);
             AddMapping("Tipachu", "8808", AddonSiteId.wowinterface);
+            AddMapping("TipTop", "10627", AddonSiteId.wowinterface);
             AddMapping("TomTom", "7032", AddonSiteId.wowinterface);
             AddMapping("TotemManager", "10080", AddonSiteId.wowinterface);
             AddMapping("TourGuide", "7674", AddonSiteId.wowinterface);
+            AddMapping("UrbanAchiever", "10867", AddonSiteId.wowinterface);
+            AddMapping("VendorBait", "7121", AddonSiteId.wowinterface);
 
             // WoWUI
+            AddMapping("Accountant", "3733", AddonSiteId.wowui);
             AddMapping("Atlas", "400", AddonSiteId.wowui);
+            AddMapping("LuckyCharms2", "4734", AddonSiteId.wowui);
             AddMapping("QuestGuru", "4855", AddonSiteId.wowui);
             AddMapping("QuestHelper", "6271", AddonSiteId.wowui);
             AddMapping("RogueFocus", "6060", AddonSiteId.wowui);
             AddMapping("Venantes", "4692", AddonSiteId.wowui);
 
             // Curseforge
-            AddMapping("BloodyFont", "bloody-font-2-0", AddonSiteId.curseforge);
-            AddMapping("Chaman2", "totem-manager", AddonSiteId.curseforge);
-            AddMapping("Decursive", "decursive", AddonSiteId.curseforge);
-            AddMapping("QuestHelper", "quest-helper", AddonSiteId.curseforge);
             AddMapping("AuctionMaster", "vendor", AddonSiteId.curseforge);
+            AddMapping("BloodyFont", "bloody-font-2-0", AddonSiteId.curseforge);
+            AddMapping("Broker_Bags", "broker_bags", AddonSiteId.curseforge);
+            AddMapping("Chaman2", "totem-manager", AddonSiteId.curseforge);
+            AddMapping("Combuctor", "combuctor", AddonSiteId.curseforge);
+            AddMapping("Decursive", "decursive", AddonSiteId.curseforge);
+            AddMapping("FuBar_LastPlayedFu", "lastplayedfu", AddonSiteId.curseforge);
+            AddMapping("FuBar_MailExpiryFu", "mailexpiryfu", AddonSiteId.curseforge);
+            AddMapping("Haggler", "haggler", AddonSiteId.curseforge);
+            AddMapping("HealBot", "heal-bot-continued", AddonSiteId.curseforge);
+            AddMapping("Junkie", "junkie", AddonSiteId.curseforge);
+            AddMapping("KillLog", "kill-log-reloaded", AddonSiteId.curseforge);
+            AddMapping("LearningAid", "learningaid", AddonSiteId.curseforge);
+            AddMapping("LinkWrangler", "link-wrangler-1-7", AddonSiteId.curseforge);
+            AddMapping("MonkeyBuddy", "monkey-buddy", AddonSiteId.curseforge);
+            AddMapping("MonkeyQuest", "monkey-quest", AddonSiteId.curseforge);
+            AddMapping("OneClickBuyOut", "ocbo", AddonSiteId.curseforge);
+            AddMapping("Overachiever", "overachiever", AddonSiteId.curseforge);
+            AddMapping("PartySpotter", "party-spotter", AddonSiteId.curseforge);
+            AddMapping("QuestHelper", "quest-helper", AddonSiteId.curseforge);
+            AddMapping("SellFish", "sell-fish", AddonSiteId.curseforge);
+            AddMapping("ShockAndAwe", "shockandawe", AddonSiteId.curseforge);
+            AddMapping("SmartBuff", "smart-buff", AddonSiteId.curseforge);
+            AddMapping("startip", "startip", AddonSiteId.curseforge);
+            AddMapping("TipTac", "tip-tac", AddonSiteId.curseforge);
+            AddMapping("TotemTimers", "totemtimers", AddonSiteId.curseforge);
+            AddMapping("VuhDo", "vuhdo", AddonSiteId.curseforge);
 
             // Curse
+            AddMapping("Accountant", "accountant-updated", AddonSiteId.curse);
+            AddMapping("Altoholic", "altoholic", AddonSiteId.curse);
             AddMapping("Atlas", "atlas", AddonSiteId.curse);
+            AddMapping("AtlasLoot", "atlasloot-enhanced", AddonSiteId.curse);
             AddMapping("Bagnon", "bagnon", AddonSiteId.curse);
+            AddMapping("Bagsy", "bagsy", AddonSiteId.curse);
+            AddMapping("Broker_Recount", "broker_recount", AddonSiteId.curse);
+            AddMapping("Broker_Regen", "broker-regen", AddonSiteId.curse);
+            AddMapping("buffet", "buffet", AddonSiteId.curse);
+            AddMapping("ButtonFacade_ItemRack", "bfir", AddonSiteId.curse);
+            AddMapping("ButtonFacade_LayerTest", "buttonfacade_layertest", AddonSiteId.curse);
+            AddMapping("ButtonFacade_Trinity", "button-facade-trinity", AddonSiteId.curse);
+            AddMapping("CandyBar", "candybar", AddonSiteId.curse);
             AddMapping("Carbonite", "carbonite-quest", AddonSiteId.curse);
+            AddMapping("CastYeller", "cast-yeller", AddonSiteId.curse);
+            AddMapping("ChatThrottleLib", "chatthrottlelib", AddonSiteId.curse);
+            AddMapping("Chinchilla", "chinchilla", AddonSiteId.curse);
+            AddMapping("ClassLoot", "classloot", AddonSiteId.curse);
+            AddMapping("Comix", "comix-the-return", AddonSiteId.curse);
+            AddMapping("CreatureComforts", "creaturecomforts", AddonSiteId.curse);
+            AddMapping("Dominos", "dominos", AddonSiteId.curse);
+            AddMapping("DoTimer", "do-timer", AddonSiteId.curse);
             AddMapping("DruidBar", "druid-bar", AddonSiteId.curse);
             AddMapping("DynamicPerformance", "dynamic-performance", AddonSiteId.curse);
+            AddMapping("EasyMother", "easy-mother", AddonSiteId.curse);
+            AddMapping("eCastingBar", "e-casting-bar-for-wo-w-2-0", AddonSiteId.curse);
+            AddMapping("epgp", "epgp-dkp-reloaded", AddonSiteId.curse);
             AddMapping("Examiner", "examiner", AddonSiteId.curse);
+            AddMapping("FeedMachine", "feed-machine", AddonSiteId.curse);
             AddMapping("FlightMap", "flight-map", AddonSiteId.curse);
+            AddMapping("FloatingFrames", "fframes", AddonSiteId.curse);
             AddMapping("FocusFrame", "focus-frame", AddonSiteId.curse);
+            AddMapping("FuBar_AlchemyFu", "fubar_alchemyfu", AddonSiteId.curse);
+            AddMapping("FuBar_HealBotFu", "fu-bar_heal-bot-fu", AddonSiteId.curse);
+            AddMapping("FuBar_ItemRackFu", "itemrackfu", AddonSiteId.curse);
+            AddMapping("FuBar_LastPlayedFu", "lastplayedfu", AddonSiteId.curse);
+            AddMapping("FuBar_MailExpiryFu", "mailexpiryfu", AddonSiteId.curse);
+            AddMapping("FuBarPlugin-2.0", "fubarplugin-2-0", AddonSiteId.curse);
+            AddMapping("GatherHud", "gather-hud", AddonSiteId.curse);
             AddMapping("GoGoMount", "go-go-mount", AddonSiteId.curse);
+            AddMapping("GridLayoutPlus", "grid-layout-plus", AddonSiteId.curse);
+            AddMapping("GridStatusHotStack", "grid-status-hot-stack", AddonSiteId.curse);
+            AddMapping("GridStatusIncomingHeals", "grid-status-incoming-heals", AddonSiteId.curse);
+            AddMapping("GridStatusLifebloom", "grid-status-lifebloom", AddonSiteId.curse);
+            AddMapping("Haggler", "haggler", AddonSiteId.curse);
+            AddMapping("HealBot", "heal-bot-continued", AddonSiteId.curse);
+            AddMapping("Heatsink", "heatsink", AddonSiteId.curse);
+            AddMapping("HitsMode", "hits-mode", AddonSiteId.curse);
+            AddMapping("HKCounter", "honor-kills-counter", AddonSiteId.curse);
+            AddMapping("IceHUD", "ice-hud", AddonSiteId.curse);
+            AddMapping("IHML", "ihml", AddonSiteId.curse);
+            AddMapping("Incubator", "incubator", AddonSiteId.curse);
             AddMapping("ItemRack", "item-rack", AddonSiteId.curse);
+            AddMapping("JebusMail", "jebus-mail", AddonSiteId.curse);
+            AddMapping("Junkie", "junkie", AddonSiteId.curse);
+            AddMapping("KC_Items", "kc_items", AddonSiteId.curse);
+            AddMapping("KillLog", "kill-log-reloaded", AddonSiteId.curse);
+            AddMapping("LearningAid", "learningaid", AddonSiteId.curse);
+            AddMapping("lern2count", "lern2count", AddonSiteId.curse);
+            AddMapping("LinkWrangler", "link-wrangler-1-7", AddonSiteId.curse);
+            AddMapping("LuckyCharms2", "lucky-charms2", AddonSiteId.curse);
+            AddMapping("MaterialsTracker", "materials-tracker", AddonSiteId.curse);
             AddMapping("MikScrollingBattleText", "mik-scrolling-battle-text", AddonSiteId.curse);
+            AddMapping("Mirror", "mirror", AddonSiteId.curse);
+            AddMapping("MonkeyBuddy", "monkey-buddy", AddonSiteId.curse);
+            AddMapping("MonkeyQuest", "monkey-quest", AddonSiteId.curse);
             AddMapping("Necrosis", "necrosis-ld-c", AddonSiteId.curse);
             AddMapping("OmniCC", "omni-cc", AddonSiteId.curse);
+            AddMapping("OneClickBuyOut", "ocbo", AddonSiteId.curse);
             AddMapping("Outfitter", "outfitter", AddonSiteId.curse);
+            AddMapping("Overachiever", "overachiever", AddonSiteId.curse);
+            AddMapping("PartySpotter", "party-spotter", AddonSiteId.curse);
+            AddMapping("PoliteWhisper", "politewhisperfan", AddonSiteId.curse);
+            AddMapping("PoliteWhisper", "powr2", AddonSiteId.curse);
+            AddMapping("PreformAvEnabler", "preform-av-enabler", AddonSiteId.curse);
             AddMapping("QuestGuru", "quest-guru", AddonSiteId.curse);
             AddMapping("QuestHelper", "quest-helper", AddonSiteId.curse);
             AddMapping("QuickStatsV2", "quick-stats-v2", AddonSiteId.curse);
+            AddMapping("RaidBuffStatus", "raidbuffstatus", AddonSiteId.curse);
+            AddMapping("RangeDisplay", "range-display", AddonSiteId.curse);
+            AddMapping("RosterLib", "rosterlib", AddonSiteId.curse);
             AddMapping("sctd", "sct-damage", AddonSiteId.curse);
+            AddMapping("SellFish", "sell-fish", AddonSiteId.curse);
+            AddMapping("ShockAndAwe", "shockandawe", AddonSiteId.curse);
+            AddMapping("SickOfClickingDailies", "sick-of-clicking-dailies", AddonSiteId.curse);
             AddMapping("SimpleRaidTargetIcons", "simple-raid-target-icons", AddonSiteId.curse);
+            AddMapping("SimpleSelfRebuff", "simple-self-rebuff", AddonSiteId.curse);
+            AddMapping("SlashConflict", "slash-conflict", AddonSiteId.curse);
+            AddMapping("SmartBuff", "smart-buff", AddonSiteId.curse);
+            AddMapping("SmartMount", "smartmount", AddonSiteId.curse);
             AddMapping("SpamMeNot", "spam-me-not", AddonSiteId.curse);
+            AddMapping("SpecialEventsEmbed", "specialeventsembed", AddonSiteId.curse);
+            AddMapping("Spyglass", "spyglass", AddonSiteId.curse);
+            AddMapping("startip", "startip", AddonSiteId.curse);
+            AddMapping("StatBlock_Ammo", "stat-block_ammo", AddonSiteId.curse);
+            AddMapping("StatBlock_Factions", "stat-block_factions", AddonSiteId.curse);
+            AddMapping("StatBlock_Money", "stat-block_money", AddonSiteId.curse);
+            AddMapping("StatLogicLib", "statlogiclib", AddonSiteId.curse);
             AddMapping("SW_Stats", "sw-stats", AddonSiteId.curse);
+            AddMapping("TipTac", "tip-tac", AddonSiteId.curse);
+            AddMapping("TotemTimers", "totemtimers", AddonSiteId.curse);
             AddMapping("TrinketMenu", "trinket-menu", AddonSiteId.curse);
+            AddMapping("UnderHood", "under-hood", AddonSiteId.curse);
+            AddMapping("Violation", "violation", AddonSiteId.curse);
+            AddMapping("VuhDo", "vuhdo", AddonSiteId.curse);
+            AddMapping("WeaponRebuff", "weapon-rebuff", AddonSiteId.curse);
             AddMapping("WhoHas", "who-has", AddonSiteId.curse);
+            AddMapping("WhoLib", "wholib", AddonSiteId.curse);
             AddMapping("WIM", "wim-wo-w-instant-messenger", AddonSiteId.curse);
             AddMapping("XLoot", "xloot", AddonSiteId.curse);
             AddMapping("ZHunterMod", "zhunter-mod", AddonSiteId.curse);
@@ -459,6 +687,7 @@ namespace Waddu.Classes
             AddMapping("xchar_MalGanis", "xchar_MalGanis", AddonSiteId.wowspecial);
 
             // Direct
+            AddMapping("Bejeweled", "1.03|24.10.2008|http://www7.popcap.com/promos/wow/|http://images.popcap.com/www/promos/wow/Bejeweled_v1_03.zip", AddonSiteId.direct);
             AddMapping("LunarSphere", "0.803|19.10.2008|http://moongazeaddons.proboards79.com/index.cgi?board=lunarsphere&action=display&thread=728|http://www.lunaraddons.com/LunarSphere_803.zip", AddonSiteId.direct);
 
             // SubAddons
@@ -476,6 +705,7 @@ namespace Waddu.Classes
             AddSubAddon("AtlasLoot", "AtlasLoot_OriginalWoW");
             AddSubAddon("AtlasLoot", "AtlasLoot_WorldEvents");
             AddSubAddon("AtlasLoot", "AtlasLoot_WrathoftheLichKing");
+            AddSubAddon("AtlasLoot", "AtlasLootFu");
             // Bagnon
             AddSubAddon("Bagnon", "Bagnon_Forever");
             AddSubAddon("Bagnon", "Bagnon_Options");
@@ -514,9 +744,15 @@ namespace Waddu.Classes
             AddSubAddon("Cartographer", "Cartographer_Professions");
             AddSubAddon("Cartographer", "Cartographer_Waypoints");
             AddSubAddon("Cartographer", "Cartographer_ZoneInfo");
+            // Cartographer3
+            AddSubAddon("Cartographer3", "Cartographer3_InstancePOIs");
+            AddSubAddon("Cartographer3", "Cartographer3_Notes");
+            AddSubAddon("Cartographer3", "Cartographer3_Waypoints");
             // Combuctor
             AddSubAddon("Combuctor", "Bagnon_Forever");
             AddSubAddon("Combuctor", "Bagnon_Tooltips");
+            AddSubAddon("Combuctor", "Combuctor_Config");
+            AddSubAddon("Combuctor", "Combuctor_Sets");
             // Deadly Boss Mods
             AddSubAddon("DBM_API", "DBM_Battlegrounds");
             AddSubAddon("DBM_API", "DBM_BlackTemple");
@@ -528,6 +764,14 @@ namespace Waddu.Classes
             AddSubAddon("DBM_API", "DBM_Sunwell");
             AddSubAddon("DBM_API", "DBM_TheEye");
             AddSubAddon("DBM_API", "DBM_ZulAman");
+            // Dominos
+            AddSubAddon("Dominos", "Dominos_Buff");
+            AddSubAddon("Dominos", "Dominos_Cast");
+            AddSubAddon("Dominos", "Dominos_Config");
+            AddSubAddon("Dominos", "Dominos_Roll");
+            AddSubAddon("Dominos", "Dominos_XP");
+            // DoTimer
+            AddSubAddon("DoTimer", "DoTimer_Options");
             // EveryQuest
             AddSubAddon("EveryQuest", "EveryQuest_Battlegrounds");
             AddSubAddon("EveryQuest", "EveryQuest_Classes");
@@ -560,8 +804,17 @@ namespace Waddu.Classes
             AddSubAddon("LunarSphere", "LunarSphereImports");
             // Macaroon
             AddSubAddon("Macaroon", "MacaroonProfiles");
+            // MacaroonXtras
+            AddSubAddon("MacaroonXtras", "MacaroonBound");
+            AddSubAddon("MacaroonXtras", "MacaroonCB");
+            AddSubAddon("MacaroonXtras", "MacaroonLoot");
+            AddSubAddon("MacaroonXtras", "MacaroonXP");
             // MikScrollingBattleText
             AddSubAddon("MikScrollingBattleText", "MSBTOptions");
+            // MinimapButtonFrame
+            AddSubAddon("MinimapButtonFrame", "MinimapButtonFrame_SkinPack");
+            AddSubAddon("MinimapButtonFrame", "MinimapButtonFrameFu");
+            AddSubAddon("MinimapButtonFrame", "MinimapButtonFrameTitanPlugin");
             // MobMap
             AddSubAddon("MobMap", "MobMapDatabaseStub1");
             AddSubAddon("MobMap", "MobMapDatabaseStub2");
@@ -577,6 +830,9 @@ namespace Waddu.Classes
             AddSubAddon("MobMap", "MobMapDatabaseStub12");
             AddSubAddon("MobMap", "MobMapDatabaseStub13");
             AddSubAddon("MobMap", "MobMapDatabaseStub14");
+            // MonkeyQuest
+            AddSubAddon("MonkeyQuest", "MonkeyLibrary");
+            AddSubAddon("MonkeyQuest", "MonkeyQuestLog");
             // OmniCC
             AddSubAddon("OmniCC", "OmniCC_Options");
             // oRA2
@@ -633,9 +889,17 @@ namespace Waddu.Classes
             AddSubAddon("Quartz", "Quartz_Tradeskill");
             // sctd
             AddSubAddon("sctd", "sctd_options");
+            // SimpleSelfRebuff
+            AddSubAddon("SimpleSelfRebuff", "SimpleSelfRebuff_CastBinding");
+            AddSubAddon("SimpleSelfRebuff", "SimpleSelfRebuff_DataObject");
+            AddSubAddon("SimpleSelfRebuff", "SimpleSelfRebuff_ItemBuffs");
+            AddSubAddon("SimpleSelfRebuff", "SimpleSelfRebuff_Reminder");
             // SW_Stats
             AddSubAddon("SW_Stats", "SW_Stats_Profiles");
             AddSubAddon("SW_Stats", "SW_UniLog");
+            // TipTac
+            AddSubAddon("TipTac", "TipTacOptions");
+            AddSubAddon("TipTac", "TipTacTalents");
             // Venantes
             AddSubAddon("Venantes", "VenantesOptions");
             AddSubAddon("Venantes", "SphereLoader");
@@ -659,128 +923,70 @@ namespace Waddu.Classes
             AddSubAddon("XPerl", "XPerl_TargetTarget");
             AddSubAddon("XPerl", "XPerl_Tutorial");
 
-            // Depreciated:
-            // Vendor -> new AuctionMaster
-
-            //Acheron,acheron,wowace
-            //ActionCombat,action-combat,wowace
-            //AddonLoader,addon-loader,wowace
-            //Analyst,analyst,wowace
-            //Automaton,automaton,wowace
-
-            // TODO: Mappings
-            //Accountant
-            //ActionBarSaver
-            //Afflicted
-            //Align
-            //Altoholic
-            //ArenaHistorian
-            //AtlasLootFu
-            //Attrition
+            // AuctioneerSuite:
+            //!Swatter
             //Auc-Advanced
             //Auc-Filter-Basic
             //Auc-ScanData
             //Auc-Stat-Classic
             //Auc-Stat-Histogram
+            //Auc-Stat-iLevel
             //Auc-Stat-Purchased
             //Auc-Stat-Simple
             //Auc-Stat-StdDev
-            //AuldLangSye
-            //Babble-3.3
-            //Bagsy
-            //BangArtOfWar
             //BeanCounter
-            //Bejeweled
-            //Broker_Bags
-            //Broker_CalendarEvents
-            //Broker_Durability
-            //Broker_Group
-            //Broker_Money
-            //Broker_Professions
-            //Broker_PvP
-            //Broker_Recount
-            //Broker_Regen
-            //Broker_SysMon
-            //Broker_Tracking
-            //BtmScan
-            //buffet
-            //Butsu
-            //ButtonBin
-            //ButtonFacade_DsmFade-v141
-            //ButtonFacade_ItemRack
-            //ButtonFacade_LayerTest
-            //ButtonFacade_Trinity
-            //CandyBar
-            //cargoHonor
-            //Cartographer3
-            //Cartographer3_InstancePOIs
-            //Cartographer3_Notes
-            //Cartographer3_Waypoints
-            //CastYeller
-            //CCTracker
-            //ChatBar
-            //ChatThrottleLib
-            //Chinchilla
-            //ClassLoot
-            //Combuctor_Config
-            //Combuctor_Sets
-            //Comix
-            //CreatureComforts
-            //CursorCastbar
-            //Dominos
-            //Dominos_Buff
-            //Dominos_Cast
-            //Dominos_Config
-            //Dominos_Roll
-            //Dominos_XP
-            //DoTimer
-            //DoTimer_Options
-            //EasyMother
-            //eCastingBar
             //Enchantrix
             //Enchantrix-Barker
-            //Engravings
             //EnhTooltip
-            //epgp
-            //ExpressMail
-            //Fane
-            //FeedMachine
-            //Fizzle
-            //FloatingFrames
-            //fontain
-            //FuBar_AlchemyFu
-            //FuBar_HealBotFu
-            //FuBar_ItemRackFu
-            //FuBar_LastPlayedFu
-            //Fubar_MacroFu
-            //FuBar_MailExpiryFu
+            //Informant
+            //Stubby
+            // Auctioneer:
+            //!Swatter
+            //Auc-Advanced
+            //Auc-ScanData
+            //Auc-Stat-Histogram
+            //Auc-Stat-iLevel
+            //Auc-Stat-StdDev
+            //EnhTooltip
+            //Stubby
+            // Enchantrix:
+            //!Swatter
+            //Enchantrix
+            //Enchantrix-Barker
+            //EnhTooltip
+            //Stubby
+            // Informant:
+            //!Swatter
+            //Informant
+            //EnhTooltip
+            //Stubby
+            // BottomScanner:
+            //!Swatter
+            //BtmScan
+            //EnhTooltip
+            //Stubby
+
+            // Depreciated:
+            // Vendor -> AuctionMaster
+            // Afflicted -> Afflicted2
+
+            // TODO: Mappings
+            //Babble-3.3
             //FuBar_MailFu
             //Fubar_ProfessionsBookFu
             //FuBar_WindFuryFu
-            //FuBarPlugin-2.0
-            //GatherHud
-            //GFW_FactionFriend
-            //GridLayoutPlus
-            //GridStatusHotStack
-            //GridStatusIncomingHeals
-            //GridStatusLifebloom
-            //Haggler
-            //HealBot
-            //Heatsink
-            //HitsMode
-            //HKCounter
-            //IceHUD
-            //IHML
-            //Incubator
-            //Informant
-            //ItemDB
-            //JebusMail
-            //Junkie
-            //KC_Items
-            //KillLog
             //LannySimpleMicroMenuFu
-            //LearningAid
-            //lern2count
+            //Minimalist_ButtonFrame
+            //Minimalist_ButtonFrameTitanPlugin
+            //Scorecard
+            //SpecialEvents-Aura-2.0
+            //SpecialEvents-Bags-2.0
+            //SpecialEvents-Equipped-2.0
+            //SpecialEvents-LearnSpell-2.0
+            //SpecialEvents-Loot-1.0
+            //SpecialEvents-Mail-2.0
+            //SpecialEvents-Mount-2.0
+            //SpecialEvents-Movement-2.0
             //LibAbacus-3.0
             //LibAboutPanel
             //LibBabble-Boss-3.0
@@ -831,94 +1037,6 @@ namespace Waddu.Classes
             //libtooltip
             //LibTooltip-1.0
             //LibTourist-3.0
-            //LinkWrangler
-            //LuckyCharms2
-            //MacaroonBound
-            //MacaroonCB
-            //MacaroonXP
-            //MacaroonXtras
-            //MaterialsTracker
-            //Minimalisque_v3
-            //Minimalist_ButtonFrame
-            //Minimalist_ButtonFrameTitanPlugin
-            //MinimapButtonFrame
-            //MinimapButtonFrame_SkinPack
-            //MinimapButtonFrameFu
-            //MinimapButtonFrameTitanPlugin
-            //Mirror
-            //MonkeyBuddy
-            //MonkeyLibrary
-            //MonkeyQuest
-            //MonkeyQuestLog
-            //MoveAnything
-            //naiCombo
-            //NowCarrying
-            //NugEnergy
-            //oGlow
-            //OneClickBuyOut
-            //Overachiever
-            //PartySpotter
-            //picoDPS
-            //picoEXP
-            //picoFriends
-            //picoGuild
-            //PoliteWhisper
-            //PreformAvEnabler
-            //pRogue
-            //QuesterJester
-            //RaidBuffStatus
-            //RangeDisplay
-            //RosterLib
-            //Scorecard
-            //SellFish
-            //ShockAndAwe
-            //SickOfClickingDailies
-            //SimpleBuffBars
-            //SimpleSelfRebuff
-            //SimpleSelfRebuff_CastBinding
-            //SimpleSelfRebuff_DataObject
-            //SimpleSelfRebuff_ItemBuffs
-            //SimpleSelfRebuff_Reminder
-            //SlashConflict
-            //SLDataText
-            //SmartBuff
-            //SmartMount
-            //Snoopy
-            //SpecialEvents-Aura-2.0
-            //SpecialEvents-Bags-2.0
-            //SpecialEventsEmbed
-            //SpecialEvents-Equipped-2.0
-            //SpecialEvents-LearnSpell-2.0
-            //SpecialEvents-Loot-1.0
-            //SpecialEvents-Mail-2.0
-            //SpecialEvents-Mount-2.0
-            //SpecialEvents-Movement-2.0
-            //Spyglass
-            //SSPVP3
-            //StarTip
-            //StatBlock_Ammo
-            //StatBlock_DPS
-            //StatBlock_Factions
-            //StatBlock_Money
-            //StatBlock_RaidDPS
-            //StatBlock_ZoneText
-            //StatLogicLib
-            //Stubby
-            //TankWarnings
-            //teksLoot
-            //TipTac
-            //TipTacOptions
-            //TipTacTalents
-            //TipTop
-            //TotemTimers
-            //UnderHood
-            //UrbanAchiever
-            //VendorBait
-            //Violation
-            //VuhDo
-            //WeaponRebuff
-            //WhoLib
-            //WindowLib
 
             // Save File
             _xmlDoc.Save(_xmlFile);
