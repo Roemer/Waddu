@@ -78,7 +78,7 @@ namespace Waddu.Classes
         public static List<string> GetArchiveContent(string archiveFile)
         {
             string appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
-            string cmdArgs = "l " + archiveFile;
+            string cmdArgs = string.Format(@"l ""{0}""", archiveFile);
 
             // Create a new process object
             Process ProcessObj = new Process();
