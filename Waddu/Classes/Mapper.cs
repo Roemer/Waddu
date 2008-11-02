@@ -785,7 +785,9 @@ namespace Waddu.Classes
             AddSubAddon("EveryQuest", "EveryQuest_Raids");
             AddSubAddon("EveryQuest", "EveryQuest_Seasonal");
             // Grid2
+            AddSubAddon("Grid2", "Grid2Alert");
             AddSubAddon("Grid2", "Grid2Options");
+            AddSubAddon("Grid2", "Grid2StatusRaidDebuffs");
             // InFlight
             AddSubAddon("InFlight", "InFlight_Load");
             // ItemRack
@@ -970,6 +972,13 @@ namespace Waddu.Classes
             // Vendor -> AuctionMaster
             // Afflicted -> Afflicted2
 
+            // http://www.kroetenpower.de/download/waadu.txt
+
+            //Broker_Location,broker_location,curseforge
+            //SexyMap,sexymap,wowace
+            //texbrowser,texbrowser,wowace
+            //Examiner,7377,wowinterface
+
             // TODO: Mappings
             //Babble-3.3
             //FuBar_MailFu
@@ -1037,6 +1046,178 @@ namespace Waddu.Classes
             //libtooltip
             //LibTooltip-1.0
             //LibTourist-3.0
+
+            //- ABInform
+            //- AFKFix
+            //- afktimer
+            //- AlarBGHelper
+            //- AlwaysLFG
+            //- AMP
+            //- AMPFu
+            //- AnkhCooldownTimer
+            //- AtlasQuest
+            //- Auc-Advanced
+            //- Auc-Filter-Basic
+            //- Auc-ScanData
+            //- Auc-Stat-Classic
+            //- Auc-Stat-Histogram
+            //- Auc-Stat-iLevel
+            //- Auc-Stat-Purchased
+            //- Auc-Stat-Simple
+            //- Auc-Stat-StdDev
+            //- Auctionator
+            //- Auditor2
+            //- AVbars2
+            //- AzCastBar
+            //- AzCastBarOptions
+            //- BeanCounter
+            //- BGAlerts
+            //- BGJoinTime
+            //- BGSwitch
+            //- CCTimer
+            //- ChainLink
+            //- ChatCopy
+            //- ChatSounds
+            //- Condensed_SpellBook
+            //- CooldownToGo
+            //- Cosplay
+            //- CraftList2
+            //- CRDelay
+            //- Critline
+            //- Cromulent
+            //- CT_BuffMod
+            //- DailyQuestViewer
+            //- DamageMeters
+            //- DetachedMiniButtons
+            //- Enchantrix
+            //- Enchantrix-Barker
+            //- EnhancedFlightMap
+            //- EnhTooltip
+            //- Escape Frustration
+            //- Factionizer
+            //- FB_InfoBar
+            //- FB_MergeDatabase
+            //- FB_OutfitDisplayFrame
+            //- FB_Titan
+            //- FB_TrackingFrame
+            //- FishingBuddy
+            //- Forte_Casting
+            //- Forte_Cooldown
+            //- Forte_Core
+            //- Forte_Druid
+            //- Forte_Healthstone
+            //- Forte_Hunter
+            //- Forte_Mage
+            //- Forte_Priest
+            //- Forte_Shard
+            //- Forte_Soulstone
+            //- Forte_Summon
+            //- Forte_Timer
+            //- Forte_Warlock
+            //- FriendsWithBenefits
+            //- FuBar_AnkhCooldownTimer
+            //- FuBar_BadgeFu
+            //- FuBar_BattlegroundFu
+            //- FuBar_CAFu
+            //- FuBar_CritlineDmg
+            //- FuBar_CritlineHeal
+            //- FuBar_CritlinePet
+            //- FuBar_CTFu
+            //- FuBar_DBMFu
+            //- FuBar_DominosFu
+            //- Fubar_EmoteFu
+            //- FuBar_ExitFu
+            //- FuBar_FactionItemsFu
+            //- FuBar_FishingBuddyFu
+            //- FuBar_GearRating
+            //- FuBar_GroupCalendarFu
+            //- FuBar_HBFu
+            //- FuBar_HonorFuPlus
+            //- FuBar_InstanceInfoFu
+            //- FuBar_IOPFu
+            //- FuBar_MailFu
+            //- FuBar_MarkOfHonorFu
+            //- FuBar_MiniPerfsFu
+            //- FuBar_MoneyDetailFu
+            //- FuBar_OutfitterFu
+            //- FuBar_PointMan
+            //- FuBar_RecipeRadarFu
+            //- FuBar_RegenFu
+            //- FuBar_ReloadUI
+            //- FuBar_RestFu
+            //- FuBar_RoutesFu
+            //- FuBar_uClock
+            //- FuBar_VampwatchFu
+            //- GatherSage
+            //- GemHelper
+            //- GemQuota
+            //- GFW_AdSpace
+            //- GFW_ReagentCost
+            //- GoingPrice
+            //- GoingPrice_Allakhazam
+            //- HandyNotes_Directions
+            //- HandyNotes_Stables
+            //- HandyNotes_Trainers
+            //- HandyNotes_Vendors
+            //- Informant
+            //- InnerFireWatcher
+            //- InventoryOnPar
+            //- KillingBlow
+            //- LightHeaded
+            //- LightHeaded_Data_A
+            //- LightHeaded_Data_B
+            //- LightHeaded_Data_C
+            //- LightHeaded_Data_D
+            //- LightHeaded_Data_E
+            //- Lootcounter
+            //- Lootvalue
+            //- MageAnnounce
+            //- MageFever
+            //- MarkBar
+            //- MetaMap
+            //- MetaMapBKP
+            //- MetaMapBLT
+            //- MetaMapBWP
+            //- MetaMapCVT
+            //- MetaMapEXP
+            //- MetaMapFWM
+            //- MetaMapHLP
+            //- MetaMapNBK
+            //- MetaMapQST
+            //- MetaMapTRK
+            //- MetaMapWKB
+            //- MobInfo2
+            //- myFriends
+            //- Nauticus
+            //- Perl_ArcaneBar
+            //- Perl_CombatDisplay
+            //- Perl_Config
+            //- Perl_Config_Options
+            //- Perl_Focus
+            //- Perl_Party
+            //- Perl_Party_Pet
+            //- Perl_Party_Target
+            //- Perl_Player
+            //- Perl_Player_Pet
+            //- Perl_Target
+            //- Perl_Target_Target
+            //- PriceEach
+            //- Quiknote
+            //- RecipeBook
+            //- RecipeRadar
+            //- SCT_Cooldowns
+            //- SexyMap
+            //- ShamanFriend
+            //- ShieldLeft
+            //- SocketAssistant
+            //- Stubby
+            //- TargetRange
+            //- TradeJunkie
+            //- UnitPrice
+            //- Valuation
+            //- VisualHeal
+            //- WarsongFlags
+            //- WatchTower
 
             // Save File
             _xmlDoc.Save(_xmlFile);

@@ -30,6 +30,7 @@
 
 Task List:
 - Add Loader for the Mappings File
+- Add Changelog Viewing
 - Version Check (instead of update all)
 - Cleanup Saved Variables (with Backup)
 - Ignoring Addons
