@@ -90,9 +90,9 @@ namespace Waddu.Classes
                     }
 
                     // Download
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.BestMapping.AddonSiteId);
-                    workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.BestMapping.AddonSiteId, wi.Addon.Name);
-                    string downloadUrl = wi.Addon.BestMapping.GetDownloadLink();
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, wi.Addon.PreferredMapping.AddonSiteId);
+                    workerThread.InfoText = string.Format("DL from {0}: {1}", wi.Addon.PreferredMapping.AddonSiteId, wi.Addon.Name);
+                    string downloadUrl = wi.Addon.PreferredMapping.GetDownloadLink();
                     if (downloadUrl == string.Empty)
                     {
                         Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, wi.Addon.Name);

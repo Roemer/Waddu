@@ -32,8 +32,8 @@ namespace Waddu.Forms
             dgvAddons.AutoGenerateColumns = false;
             dgvColAddonName.DataPropertyName = "Name";
             dgvColAddonLocalVersion.DataPropertyName = "LocalVersion";
-            dgvColAddonBestMapping.DataPropertyName = "BestMapping";
-            dgvColAddonBestMapping.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvColAddonPreferredMapping.DataPropertyName = "PreferredMapping";
+            dgvColAddonPreferredMapping.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Setup WorkerThread Status Display
             dgvThreadActivity.AutoGenerateColumns = false;
@@ -216,70 +216,9 @@ namespace Waddu.Forms
             }
         }
 
-        private void dgvAddons_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            DataGridView dgv = sender as DataGridView;
-            if (dgv != null && e.RowIndex >= 0)
-            {
-                Addon addon = dgv.Rows[e.RowIndex].DataBoundItem as Addon;
-                if (addon != null)
-                {
-                    if (addon.IsSubAddon)
-                    {
-                        e.CellStyle.ForeColor = Color.LightGray;
-                    }
-                    else if (!addon.IsInstalled)
-                    {
-                        e.CellStyle.BackColor = Color.LightGray;
-                    }
-                    else if (addon.IsUnhandled)
-                    {
-                        e.CellStyle.BackColor = Color.Red;
-                    }
-                    else if (addon.Mappings.Count > 0)
-                    {
-                        if (addon.Mappings[0].AddonSiteId == AddonSiteId.blizzard)
-                        {
-                            e.CellStyle.ForeColor = Color.Gray;
-                            e.CellStyle.BackColor = Color.LightGray;
-                        }
-                        if (addon.Mappings.Count > 1)
-                        {
-                            if (e.ColumnIndex == dgvColAddonBestMapping.Index)
-                            {
-                                e.CellStyle.BackColor = Color.LightCoral;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         private void tsmiAbortThread_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void dgvAddons_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            DataGridView dgv = sender as DataGridView;
-            if (e.StateChanged == DataGridViewElementStates.Selected)
-            {
-                if (dgv.SelectedRows.Count > 0)
-                {
-                    Addon addon = e.Row.DataBoundItem as Addon;
-
-                    lbSubAddons.Items.Clear();
-                    foreach (Addon subAddon in addon.SubAddons)
-                    {
-                        lbSubAddons.Items.Add(subAddon.Name);
-                    }
-
-                    txtName.Text = addon.Name;
-                    txtLocalVersion.Text = addon.LocalVersion;
-                    dgvMappings.DataSource = addon.Mappings;
-                }
-            }
         }
 
         private void tsmiFilter_CheckedChanged(object sender, EventArgs e)
@@ -399,6 +338,67 @@ namespace Waddu.Forms
         #endregion
 
         #region Addon
+        private void dgvAddons_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (dgv != null && e.RowIndex >= 0)
+            {
+                Addon addon = dgv.Rows[e.RowIndex].DataBoundItem as Addon;
+                if (addon != null)
+                {
+                    if (addon.IsSubAddon)
+                    {
+                        e.CellStyle.ForeColor = Color.LightGray;
+                    }
+                    else if (!addon.IsInstalled)
+                    {
+                        e.CellStyle.BackColor = Color.LightGray;
+                    }
+                    else if (addon.IsUnhandled)
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                    }
+                    else if (addon.Mappings.Count > 0)
+                    {
+                        if (addon.Mappings[0].AddonSiteId == AddonSiteId.blizzard)
+                        {
+                            e.CellStyle.ForeColor = Color.Gray;
+                            e.CellStyle.BackColor = Color.LightGray;
+                        }
+                        if (addon.Mappings.Count > 1)
+                        {
+                            if (e.ColumnIndex == dgvColAddonPreferredMapping.Index)
+                            {
+                                e.CellStyle.BackColor = Color.LightCoral;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dgvAddons_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (e.StateChanged == DataGridViewElementStates.Selected)
+            {
+                if (dgv.SelectedRows.Count > 0)
+                {
+                    Addon addon = e.Row.DataBoundItem as Addon;
+
+                    lbSubAddons.Items.Clear();
+                    foreach (Addon subAddon in addon.SubAddons)
+                    {
+                        lbSubAddons.Items.Add(subAddon.Name);
+                    }
+
+                    txtName.Text = addon.Name;
+                    txtLocalVersion.Text = addon.LocalVersion;
+                    dgvMappings.DataSource = addon.Mappings;
+                }
+            }
+        }
+
         private void dgvAddons_MouseClick(object sender, MouseEventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
@@ -407,10 +407,27 @@ namespace Waddu.Forms
                 DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
                 if (h.RowIndex >= 0)
                 {
+                    // Select the Cell
                     dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
-                    tsmiAddonMappings.DropDownItems.Clear();
-
+                    // Get the Addon
                     Addon addon = dgv.CurrentRow.DataBoundItem as Addon;
+
+                    // Handle Ignore
+                    if (Config.Instance.IsIgnored(addon))
+                    {
+                        tsmiAddonUnignore.Tag = addon;
+                        tsmiAddonUnignore.Visible = true;
+                        tsmiAddonIgnore.Visible = false;
+                    }
+                    else
+                    {
+                        tsmiAddonIgnore.Tag = addon;
+                        tsmiAddonIgnore.Visible = true;
+                        tsmiAddonUnignore.Visible = false;
+                    }
+
+                    // Handle Mappings
+                    tsmiAddonMappings.DropDownItems.Clear();
                     if (addon.Mappings.Count > 1)
                     {
                         tsmiAddonMappings.Visible = true;
@@ -428,19 +445,38 @@ namespace Waddu.Forms
                         tsmiAddonMappings.Visible = false;
                     }
 
+                    // Show the Context Menu
                     ctxAddon.Show(dgv, e.Location);
                 }
             }
         }
 
         /// <summary>
-        /// Sets the selected Mapping as the Best Mapping for the Addon
+        /// Sets the selected Mapping as the Preferred Mapping for the Addon
         /// </summary>
         private void tsmiAddonMappingsItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             Mapping map = tsmi.Tag as Mapping;
-            map.Addon.BestMapping = map;
+            map.Addon.PreferredMapping = map;
+            Config.Instance.SetPreferredMapping(map);
+            Config.Instance.SaveSettings();
+        }
+
+        private void tsmiAddonIgnore_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            Addon addon = tsmi.Tag as Addon;
+            Config.Instance.AddIgnored(addon);
+            Config.Instance.SaveSettings();
+        }
+
+        private void tsmiAddonUnignore_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            Addon addon = tsmi.Tag as Addon;
+            Config.Instance.RemoveIgnored(addon);
+            Config.Instance.SaveSettings();
         }
         #endregion
 
@@ -486,12 +522,15 @@ namespace Waddu.Forms
             }
         }
 
-        private void tsmiMappingSetAsBest_Click(object sender, EventArgs e)
+        private void tsmiMappingSetAsPreferred_Click(object sender, EventArgs e)
         {
             if (dgvMappings.SelectedRows.Count > 0)
             {
                 Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
-                map.Addon.BestMapping = map;
+                map.Addon.PreferredMapping = map;
+
+                Config.Instance.SetPreferredMapping(map);
+                Config.Instance.SaveSettings();
             }
         }
 
