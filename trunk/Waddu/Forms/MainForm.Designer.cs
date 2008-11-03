@@ -45,6 +45,8 @@
             this.ctxAddon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAddonCheckForUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddonUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAddonIgnore = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAddonUnignore = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddonMappings = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxLog = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiClearLog = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +55,7 @@
             this.ctxMapping = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMappingCheckVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMappingSetAsPreferred = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerEx2 = new Waddu.Controls.SplitContainerEx();
@@ -61,7 +64,7 @@
             this.dgvAddons = new System.Windows.Forms.DataGridView();
             this.dgvColAddonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvColAddonLocalVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvColAddonBestMapping = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColAddonPreferredMapping = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsAddon = new System.Windows.Forms.ToolStrip();
             this.tsddFilter = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiFilterInstalled = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,7 +99,6 @@
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMappingSetAsBest = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -215,9 +217,11 @@
             this.ctxAddon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAddonCheckForUpdate,
             this.tsmiAddonUpdate,
+            this.tsmiAddonIgnore,
+            this.tsmiAddonUnignore,
             this.tsmiAddonMappings});
             this.ctxAddon.Name = "ctxAddon";
-            this.ctxAddon.Size = new System.Drawing.Size(167, 70);
+            this.ctxAddon.Size = new System.Drawing.Size(167, 114);
             // 
             // tsmiAddonCheckForUpdate
             // 
@@ -233,11 +237,25 @@
             this.tsmiAddonUpdate.Text = "&Update";
             this.tsmiAddonUpdate.Click += new System.EventHandler(this.tsmiAddonUpdate_Click);
             // 
+            // tsmiAddonIgnore
+            // 
+            this.tsmiAddonIgnore.Name = "tsmiAddonIgnore";
+            this.tsmiAddonIgnore.Size = new System.Drawing.Size(166, 22);
+            this.tsmiAddonIgnore.Text = "&Ignore";
+            this.tsmiAddonIgnore.Click += new System.EventHandler(this.tsmiAddonIgnore_Click);
+            // 
+            // tsmiAddonUnignore
+            // 
+            this.tsmiAddonUnignore.Name = "tsmiAddonUnignore";
+            this.tsmiAddonUnignore.Size = new System.Drawing.Size(166, 22);
+            this.tsmiAddonUnignore.Text = "U&nignore";
+            this.tsmiAddonUnignore.Click += new System.EventHandler(this.tsmiAddonUnignore_Click);
+            // 
             // tsmiAddonMappings
             // 
             this.tsmiAddonMappings.Name = "tsmiAddonMappings";
             this.tsmiAddonMappings.Size = new System.Drawing.Size(166, 22);
-            this.tsmiAddonMappings.Text = "Mappings";
+            this.tsmiAddonMappings.Text = "&Mappings";
             // 
             // ctxLog
             // 
@@ -272,37 +290,44 @@
             this.ctxMapping.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiMappingCheckVersion,
             this.tsmiMappingUpdate,
-            this.tsmiMappingSetAsBest,
+            this.tsmiMappingSetAsPreferred,
             this.tsmiMappingInfo,
             this.tsmiMappingDownload});
             this.ctxMapping.Name = "ctxMapping";
-            this.ctxMapping.Size = new System.Drawing.Size(153, 136);
+            this.ctxMapping.Size = new System.Drawing.Size(156, 136);
             // 
             // tsmiMappingCheckVersion
             // 
             this.tsmiMappingCheckVersion.Name = "tsmiMappingCheckVersion";
-            this.tsmiMappingCheckVersion.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingCheckVersion.Size = new System.Drawing.Size(155, 22);
             this.tsmiMappingCheckVersion.Text = "Check Version";
             this.tsmiMappingCheckVersion.Click += new System.EventHandler(this.tsmiMappingCheckVersion_Click);
             // 
             // tsmiMappingUpdate
             // 
             this.tsmiMappingUpdate.Name = "tsmiMappingUpdate";
-            this.tsmiMappingUpdate.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingUpdate.Size = new System.Drawing.Size(155, 22);
             this.tsmiMappingUpdate.Text = "Update";
             this.tsmiMappingUpdate.Click += new System.EventHandler(this.tsmiMappingUpdate_Click);
+            // 
+            // tsmiMappingSetAsPreferred
+            // 
+            this.tsmiMappingSetAsPreferred.Name = "tsmiMappingSetAsPreferred";
+            this.tsmiMappingSetAsPreferred.Size = new System.Drawing.Size(155, 22);
+            this.tsmiMappingSetAsPreferred.Text = "Set as Preferred";
+            this.tsmiMappingSetAsPreferred.Click += new System.EventHandler(this.tsmiMappingSetAsPreferred_Click);
             // 
             // tsmiMappingInfo
             // 
             this.tsmiMappingInfo.Name = "tsmiMappingInfo";
-            this.tsmiMappingInfo.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingInfo.Size = new System.Drawing.Size(155, 22);
             this.tsmiMappingInfo.Text = "Info";
             this.tsmiMappingInfo.Click += new System.EventHandler(this.tsmiMappingInfo_Click);
             // 
             // tsmiMappingDownload
             // 
             this.tsmiMappingDownload.Name = "tsmiMappingDownload";
-            this.tsmiMappingDownload.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMappingDownload.Size = new System.Drawing.Size(155, 22);
             this.tsmiMappingDownload.Text = "Download";
             this.tsmiMappingDownload.Click += new System.EventHandler(this.tsmiMappingDownload_Click);
             // 
@@ -383,7 +408,7 @@
             this.dgvAddons.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvColAddonName,
             this.dgvColAddonLocalVersion,
-            this.dgvColAddonBestMapping});
+            this.dgvColAddonPreferredMapping});
             this.dgvAddons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAddons.Location = new System.Drawing.Point(3, 41);
             this.dgvAddons.MultiSelect = false;
@@ -410,11 +435,12 @@
             this.dgvColAddonLocalVersion.Name = "dgvColAddonLocalVersion";
             this.dgvColAddonLocalVersion.ReadOnly = true;
             // 
-            // dgvColAddonBestMapping
+            // dgvColAddonPreferredMapping
             // 
-            this.dgvColAddonBestMapping.HeaderText = "Best Mapping";
-            this.dgvColAddonBestMapping.Name = "dgvColAddonBestMapping";
-            this.dgvColAddonBestMapping.ReadOnly = true;
+            this.dgvColAddonPreferredMapping.HeaderText = "Preferred Mapping";
+            this.dgvColAddonPreferredMapping.Name = "dgvColAddonPreferredMapping";
+            this.dgvColAddonPreferredMapping.ReadOnly = true;
+            this.dgvColAddonPreferredMapping.Width = 120;
             // 
             // tsAddon
             // 
@@ -783,13 +809,6 @@
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
-            // tsmiMappingSetAsBest
-            // 
-            this.tsmiMappingSetAsBest.Name = "tsmiMappingSetAsBest";
-            this.tsmiMappingSetAsBest.Size = new System.Drawing.Size(152, 22);
-            this.tsmiMappingSetAsBest.Text = "Set as Best";
-            this.tsmiMappingSetAsBest.Click += new System.EventHandler(this.tsmiMappingSetAsBest_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -890,9 +909,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogType;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonBestMapping;
         private System.Windows.Forms.ToolStripTextBox txtAddonFilter;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiCollectUnknownAddons;
@@ -902,7 +918,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiMappingInfo;
         private System.Windows.Forms.ToolStripMenuItem tsmiMappingDownload;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddonMappings;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingSetAsBest;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingSetAsPreferred;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddonIgnore;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddonUnignore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonPreferredMapping;
 
     }
 }

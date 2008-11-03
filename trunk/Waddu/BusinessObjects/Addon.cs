@@ -50,11 +50,11 @@ namespace Waddu.BusinessObjects
             set { _isUnhandled = value; }
         }
 
-        private Mapping _bestMapping = null;
-        public Mapping BestMapping
+        private Mapping _preferredMapping = null;
+        public Mapping PreferredMapping
         {
-            get { return _bestMapping; }
-            set { _bestMapping = value; NotifyPropertyChanged("BestMapping"); }
+            get { return _preferredMapping; }
+            set { _preferredMapping = value; NotifyPropertyChanged("PreferredMapping"); }
         }
 
         private BindingList<Addon> _subAddonList;
@@ -96,17 +96,29 @@ namespace Waddu.BusinessObjects
             {
                 Mapping newMapping = _mappingList[e.NewIndex];
 
-                if (_bestMapping == null)
+                if (_preferredMapping == null)
                 {
-                    _bestMapping = newMapping;
+                    _preferredMapping = newMapping;
                 }
                 else
                 {
-                    int indexOld = Config.Instance.AddonSites.IndexOf(_bestMapping.AddonSiteId);
+                    // Assign by Preferred
+                    AddonSiteId preferred;
+                    if (Config.Instance.GetPreferredMapping(this, out preferred))
+                    {
+                        if (newMapping.AddonSiteId == preferred)
+                        {
+                            _preferredMapping = newMapping;
+                            return;
+                        }
+                    }
+
+                    // Assign by Priority
+                    int indexOld = Config.Instance.AddonSites.IndexOf(_preferredMapping.AddonSiteId);
                     int indexNew = Config.Instance.AddonSites.IndexOf(newMapping.AddonSiteId);
                     if (indexNew >= 0 && indexNew < indexOld)
                     {
-                        _bestMapping = newMapping;
+                        _preferredMapping = newMapping;
                     }
                 }
             }
@@ -226,6 +238,11 @@ namespace Waddu.BusinessObjects
             }
         }
         #endregion
+
+        public override string ToString()
+        {
+            return Name;
+        }
 
         public override bool Equals(object obj)
         {

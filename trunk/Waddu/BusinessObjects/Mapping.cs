@@ -65,7 +65,7 @@ namespace Waddu.BusinessObjects
             LastUpdated = addonSite.GetLastUpdated(this);
 
             // Hack to fire Property Changed
-            Addon.BestMapping = Addon.BestMapping;
+            Addon.PreferredMapping = Addon.PreferredMapping;
         }
 
         public string GetInfoLink()

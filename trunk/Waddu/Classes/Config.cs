@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Waddu.Types;
 using System.Collections.Generic;
+using Waddu.BusinessObjects;
 
 namespace Waddu.Classes
 {
@@ -111,6 +112,20 @@ namespace Waddu.Classes
             get { return _addonSites; }
             set { _addonSites = value; }
         }
+
+        private List<string> _ignoredAddons = new List<string>();
+        public List<string> IgnoredAddons
+        {
+            get { return _ignoredAddons; }
+            set { _ignoredAddons = value; }
+        }
+
+        private Dictionary<string, AddonSiteId> _preferredMappings = new Dictionary<string, AddonSiteId>();
+        public Dictionary<string, AddonSiteId> PreferredMappings
+        {
+            get { return _preferredMappings; }
+            set { _preferredMappings = value; }
+        }
         #endregion
 
         // Constructor
@@ -202,6 +217,21 @@ namespace Waddu.Classes
             Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowinterface);
             Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowspecial);
             Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowui);
+            // Get Ignored Addons
+            if (GetSetting("IgnoredAddons", out value))
+            {
+                string[] addonList = value.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                _ignoredAddons.AddRange(addonList);
+            }
+            // Get Preferred Mappings
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            if (GetSettingDict("PreferredMappings", dict))
+            {
+                foreach (KeyValuePair<string, string> kvp in dict)
+                {
+                    _preferredMappings.Add(kvp.Key, (AddonSiteId)Enum.Parse(typeof(AddonSiteId), kvp.Value));
+                }
+            }
         }
 
         private bool GetSetting(string settingName, out string value)
@@ -216,12 +246,32 @@ namespace Waddu.Classes
             return false;
         }
 
+        private bool GetSettingDict(string settingName, Dictionary<string, string> dict)
+        {
+            XmlElement settingElement = _xmlDoc.DocumentElement.SelectSingleNode(string.Format(@"settings/setting[@name=""{0}""]", settingName)) as XmlElement;
+            if (settingElement != null)
+            {
+                foreach (XmlNode child in settingElement.ChildNodes)
+                {
+                    string key = child.Attributes["key"].Value;
+                    string value = child.Attributes["value"].Value;
+                    dict.Add(key, value);
+                }
+                return true;
+            }
+            return false;
+        }
+
         public void SaveSettings()
         {
+            // Update Version
+            _xmlDoc.DocumentElement.Attributes["Version"].Value = this.GetType().Assembly.GetName().Version.ToString();
+
+            // Save Settings
             SaveSetting("WowFolderPath", WowFolderPath);
-            SaveSetting("DeleteBeforeUpdate", DeleteBeforeUpdate);
-            SaveSetting("MoveToTrash", MoveToTrash);
-            SaveSetting("NumberOfThreads", NumberOfThreads);
+            SaveSetting("DeleteBeforeUpdate", DeleteBeforeUpdate.ToString());
+            SaveSetting("MoveToTrash", MoveToTrash.ToString());
+            SaveSetting("NumberOfThreads", NumberOfThreads.ToString());
             SaveSetting("CurseLogin", CurseLogin);
             if (SavePassword)
             {
@@ -231,16 +281,72 @@ namespace Waddu.Classes
             {
                 SaveSetting("CursePassword", "");
             }
-            SaveSetting("SavePassword", SavePassword);
+            SaveSetting("SavePassword", SavePassword.ToString());
             SaveSetting("MappingFile", MappingFile);
-            SaveSetting("LogLevel", LogLevel);
-            SaveSetting("PreferNoLib", PreferNoLib);
+            SaveSetting("LogLevel", LogLevel.ToString());
+            SaveSetting("PreferNoLib", PreferNoLib.ToString());
             SaveSetting("PathTo7z", PathTo7z);
             SaveSetting("AddonSites", Helpers.Join<AddonSiteId>("|", AddonSites));
+            SaveSetting("IgnoredAddons", Helpers.Join<string>("|", IgnoredAddons));
+            SaveSettingDict("PreferredMappings", PreferredMappings);
             _xmlDoc.Save(_configFilePath);
         }
 
-        private void SaveSetting(string settingName, object value)
+        private XmlElement CreateSetting(string settingName)
+        {
+            XmlElement settingElement = _xmlDoc.CreateElement("setting");
+            // Name Attribute
+            XmlAttribute nameAttribute = _xmlDoc.CreateAttribute("name");
+            nameAttribute.Value = settingName;
+            settingElement.Attributes.Append(nameAttribute);
+            return settingElement;
+        }
+
+        private XmlElement CreateSetting(string settingName, string value)
+        {
+            XmlElement settingElement = CreateSetting(settingName);
+            // Value Element
+            XmlElement valueElement = _xmlDoc.CreateElement("value");
+            valueElement.InnerText = value;
+            settingElement.AppendChild(valueElement);
+            return settingElement;
+        }
+
+        private void SaveSettingDict<TKey, TValue>(string settingName, IDictionary<TKey, TValue> dict)
+        {
+            XmlElement settingListElement = FindElement(_xmlDoc.DocumentElement, "settings", true);
+            // Setting Element
+            XmlElement settingElement = settingListElement.SelectSingleNode(string.Format(@"setting[@name=""{0}""]", settingName)) as XmlElement;
+            if (settingElement == null)
+            {
+                // Create Setting
+                settingElement = CreateSetting(settingName);
+                // Append Setting to SettingList
+                settingListElement.AppendChild(settingElement);
+            }
+            else
+            {
+                // Update only
+                while (settingElement.ChildNodes.Count > 0)
+                {
+                    settingElement.RemoveChild(settingElement.ChildNodes[0]);
+                }
+            }
+
+            foreach (KeyValuePair<TKey, TValue> kvp in dict)
+            {
+                XmlElement entryElement = _xmlDoc.CreateElement("entry");
+                XmlAttribute keyAttribute = _xmlDoc.CreateAttribute("key");
+                keyAttribute.Value = kvp.Key.ToString();
+                entryElement.Attributes.Append(keyAttribute);
+                XmlAttribute valueAttribute = _xmlDoc.CreateAttribute("value");
+                valueAttribute.Value = kvp.Value.ToString();
+                entryElement.Attributes.Append(valueAttribute);
+                settingElement.AppendChild(entryElement);
+            }
+        }
+
+        private void SaveSetting(string settingName, string value)
         {
             XmlElement settingListElement = FindElement(_xmlDoc.DocumentElement, "settings", true);
 
@@ -248,22 +354,14 @@ namespace Waddu.Classes
             XmlElement settingElement = settingListElement.SelectSingleNode(string.Format(@"setting[@name=""{0}""]", settingName)) as XmlElement;
             if (settingElement == null)
             {
-                settingElement = _xmlDoc.CreateElement("setting");
-                // Name Attribute
-                XmlAttribute nameAttribute = _xmlDoc.CreateAttribute("name");
-                nameAttribute.Value = settingName;
-                settingElement.Attributes.Append(nameAttribute);
-
-                // Value Element
-                XmlElement valueElement = _xmlDoc.CreateElement("value");
-                valueElement.InnerText = value.ToString();
-                settingElement.AppendChild(valueElement);
-
+                // Create Setting
+                settingElement = CreateSetting(settingName, value);
                 // Append Setting to SettingList
                 settingListElement.AppendChild(settingElement);
             }
             else
             {
+                // Update only
                 settingElement.ChildNodes[0].InnerText = value.ToString();
             }
         }
@@ -280,5 +378,45 @@ namespace Waddu.Classes
             }
             return subElement;
         }
+
+        #region Public Helpers
+        public bool IsIgnored(Addon addon)
+        {
+            return _ignoredAddons.Contains(addon.Name);
+        }
+        public bool AddIgnored(Addon addon)
+        {
+            if (IsIgnored(addon))
+            {
+                return false;
+            }
+            _ignoredAddons.Add(addon.Name);
+            return true;
+        }
+        public bool RemoveIgnored(Addon addon)
+        {
+            if (IsIgnored(addon))
+            {
+                _ignoredAddons.Remove(addon.Name);
+                return true;
+            }
+            return false;
+        }
+
+        public void SetPreferredMapping(Mapping mapping)
+        {
+            Helpers.AddOrUpdate<string, AddonSiteId>(_preferredMappings, mapping.Addon.Name, mapping.AddonSiteId);
+        }
+        public bool GetPreferredMapping(Addon addon, out AddonSiteId preferredAddonSite)
+        {
+            if (_preferredMappings.ContainsKey(addon.Name))
+            {
+                preferredAddonSite = _preferredMappings[addon.Name];
+                return true;
+            }
+            preferredAddonSite = AddonSiteId.curse;
+            return false;
+        }
+        #endregion
     }
 }
