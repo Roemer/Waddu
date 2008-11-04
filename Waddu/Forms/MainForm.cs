@@ -17,6 +17,7 @@ namespace Waddu.Forms
         {
             InitializeComponent();
 
+            // Set the Version
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
@@ -316,7 +317,7 @@ namespace Waddu.Forms
             string unkAddons = string.Empty;
             foreach (Addon addon in AddonList.Instance.Addons)
             {
-                if (addon.Mappings.Count == 0)
+                if (addon.Mappings.Count == 0 && !addon.IsSubAddon)
                 {
                     unkAddons += "- " + addon.Name + Environment.NewLine;
                 }
