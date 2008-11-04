@@ -1,8 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Waddu.AddonSites;
-using Waddu.Classes;
 using Waddu.Types;
-using System;
 
 namespace Waddu.BusinessObjects
 {
@@ -14,6 +13,13 @@ namespace Waddu.BusinessObjects
         {
             get { return _addon; }
             set { _addon = value; }
+        }
+
+        private Package _package;
+        public Package Package
+        {
+            get { return _package; }
+            set { _package = value; }
         }
 
         private string _addonTag;
@@ -46,8 +52,11 @@ namespace Waddu.BusinessObjects
         #endregion
 
         #region Constructors
-        public Mapping()
+        public Mapping(string addonTag, AddonSiteId addonSiteId)
         {
+            _addonTag = addonTag;
+            _addonSiteId = addonSiteId;
+
             _remoteVersion = string.Empty;
             _lastUpdated = DateTime.MinValue;
         }

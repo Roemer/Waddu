@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using Waddu.AddonSites;
 using Waddu.BusinessObjects;
 using Waddu.Classes;
 using Waddu.Types;
-using System.Diagnostics;
 
 namespace Waddu.Forms
 {
@@ -117,23 +116,20 @@ namespace Waddu.Forms
                     continue;
                 }
 
-                // Filter out by name
+                // Filter out by Name
                 if (!addon.Name.ToUpper().Contains(txtAddonFilter.Text.ToUpper()))
+                {
+                    continue;
+                }
+
+                // Filter out Sub Addons
+                if (!tsmiFilterSubAddons.Checked && addon.IsSubAddon)
                 {
                     continue;
                 }
 
                 // Add the Addon
                 dispList.Add(addon);
-
-                // Add Sub Addons if wanted
-                if (tsmiFilterSubAddons.Checked)
-                {
-                    foreach (Addon subAddon in addon.SubAddons)
-                    {
-                        dispList.Add(subAddon);
-                    }
-                }
             }
             dgvAddons.DataSource = dispList;
         }
@@ -212,7 +208,10 @@ namespace Waddu.Forms
             BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
             foreach (Addon addon in addonList)
             {
-                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
+                if (!Config.Instance.IsIgnored(addon))
+                {
+                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
+                }
             }
         }
 
@@ -365,13 +364,6 @@ namespace Waddu.Forms
                             e.CellStyle.ForeColor = Color.Gray;
                             e.CellStyle.BackColor = Color.LightGray;
                         }
-                        if (addon.Mappings.Count > 1)
-                        {
-                            if (e.ColumnIndex == dgvColAddonPreferredMapping.Index)
-                            {
-                                e.CellStyle.BackColor = Color.LightCoral;
-                            }
-                        }
                     }
                 }
             }
@@ -386,6 +378,11 @@ namespace Waddu.Forms
                 {
                     Addon addon = e.Row.DataBoundItem as Addon;
 
+                    lbSuperAddons.Items.Clear();
+                    foreach (Addon superAddon in addon.SuperAddons)
+                    {
+                        lbSuperAddons.Items.Add(superAddon.Name);
+                    }
                     lbSubAddons.Items.Clear();
                     foreach (Addon subAddon in addon.SubAddons)
                     {
@@ -546,5 +543,13 @@ namespace Waddu.Forms
             Process.Start(map.GetDownloadLink());
         }
         #endregion
+
+        private void tsmiAdmin_Click(object sender, EventArgs e)
+        {
+            using (AdminForm dlg = new AdminForm())
+            {
+                dlg.ShowDialog();
+            }
+        }
     }
 }

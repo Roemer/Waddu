@@ -80,6 +80,7 @@
     <Compile Include="BusinessObjects\Addon.cs" />
     <Compile Include="BusinessObjects\AddonList.cs" />
     <Compile Include="BusinessObjects\Mapping.cs" />
+    <Compile Include="BusinessObjects\Package.cs" />
     <Compile Include="Classes\ArchiveHelper.cs" />
     <Compile Include="Classes\BlockingQueue.cs" />
     <Compile Include="Classes\Config.cs" />
@@ -102,6 +103,12 @@
     <Compile Include="Controls\SplitContainerEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ArchiveContentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +130,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ArchiveContentForm.resx">
       <DependentUpon>ArchiveContentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +175,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Types\AddonSiteId.cs" />
+    <Compile Include="Types\AddonType.cs" />
     <Compile Include="Types\DeleteType.cs" />
     <Compile Include="Types\FolderBrowseType.cs" />
     <Compile Include="Types\GameType.cs" />

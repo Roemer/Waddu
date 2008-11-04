@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.IO;
 using Waddu.Classes;
 using Waddu.Classes.Win32;
@@ -23,12 +21,32 @@ namespace Waddu.BusinessObjects
             get { return GetLocalVersion(); }
         }
 
-        private bool _isSubAddon = false;
-        [Browsable(false)]
+        private AddonType _addonType;
+        public bool IsMain
+        {
+            get { return (_addonType & AddonType.Main) == AddonType.Main; }
+            set
+            {
+                if (value) { _addonType |= AddonType.Main; }
+                else { _addonType &= ~AddonType.Main; }
+            }
+        }
         public bool IsSubAddon
         {
-            get { return _isSubAddon; }
-            set { _isSubAddon = value; }
+            get { return (_addonType & AddonType.Sub) == AddonType.Sub; }
+            set {
+                if (value) { _addonType |= AddonType.Sub; }
+                else { _addonType &= ~AddonType.Sub; }
+            }
+        }
+        public bool IsDepreciated
+        {
+            get { return (_addonType & AddonType.Depreciated) == AddonType.Depreciated; }
+            set
+            {
+                if (value) { _addonType |= AddonType.Depreciated; }
+                else { _addonType &= ~AddonType.Depreciated; }
+            }
         }
 
         [Browsable(false)]
@@ -64,11 +82,25 @@ namespace Waddu.BusinessObjects
             set { _subAddonList = value; }
         }
 
+        private BindingList<Addon> _superAddonList;
+        public BindingList<Addon> SuperAddons
+        {
+            get { return _superAddonList; }
+            set { _superAddonList = value; }
+        }
+
         private BindingList<Mapping> _mappingList;
         public BindingList<Mapping> Mappings
         {
             get { return _mappingList; }
             set { _mappingList = value; }
+        }
+
+        private BindingList<Package> _packageList;
+        public BindingList<Package> Packages
+        {
+            get { return _packageList; }
+            set { _packageList = value; }
         }
         #endregion
 
@@ -76,9 +108,12 @@ namespace Waddu.BusinessObjects
         private Addon()
         {
             _subAddonList = new BindingList<Addon>();
+            _superAddonList = new BindingList<Addon>();
             _mappingList = new BindingList<Mapping>();
+            _packageList = new BindingList<Package>();
 
             _mappingList.ListChanged += new ListChangedEventHandler(_mappingList_ListChanged);
+            _subAddonList.ListChanged += new ListChangedEventHandler(_subAddonList_ListChanged);
         }
 
         public Addon(string name)
@@ -90,11 +125,21 @@ namespace Waddu.BusinessObjects
         #endregion
 
         #region Functions
+        private void _subAddonList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                Addon newSubAddon = _subAddonList[e.NewIndex];
+                newSubAddon.SuperAddons.Add(this);
+            }
+        }
+
         private void _mappingList_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
                 Mapping newMapping = _mappingList[e.NewIndex];
+                newMapping.Addon = this;
 
                 if (_preferredMapping == null)
                 {
