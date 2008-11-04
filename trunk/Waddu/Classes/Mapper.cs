@@ -644,7 +644,7 @@ namespace Waddu.Classes
             GetAddon("FuBar_LastPlayedFu").Mappings.Add(new Mapping("lastplayedfu", AddonSiteId.curseforge));
             GetAddon("FuBar_LocationFu").Mappings.Add(new Mapping("fubar_locationfu", AddonSiteId.curse));
             GetAddon("FuBar_LocationFu").Mappings.Add(new Mapping("fubar_locationfu", AddonSiteId.wowace));
-            GetAddon("Fubar_MacroFu").Mappings.Add(new Mapping("5039", AddonSiteId.wowinterface));
+            GetAddon("FuBar_MacroFu").Mappings.Add(new Mapping("5039", AddonSiteId.wowinterface));
             GetAddon("FuBar_MailExpiryFu").Mappings.Add(new Mapping("mailexpiryfu", AddonSiteId.curse));
             GetAddon("FuBar_MailExpiryFu").Mappings.Add(new Mapping("mailexpiryfu", AddonSiteId.curseforge));
             GetAddon("FuBar_MicroMenuFu").Mappings.Add(new Mapping("fubar_micromenufu", AddonSiteId.curse));
@@ -1195,21 +1195,6 @@ namespace Waddu.Classes
             GetAddon("ZOMGBuffs").Mappings.Add(new Mapping("zomgbuffs", AddonSiteId.curse));
             GetAddon("ZOMGBuffs").Mappings.Add(new Mapping("zomgbuffs", AddonSiteId.wowace));
 
-            GetAddon("Broker_Location").Mappings.Add(new Mapping("broker_location", AddonSiteId.curse));
-            GetAddon("Broker_Location").Mappings.Add(new Mapping("broker_location", AddonSiteId.curseforge));
-            GetAddon("SexyMap").Mappings.Add(new Mapping("sexymap", AddonSiteId.wowace));
-            GetAddon("SexyMap").Mappings.Add(new Mapping("sexymap", AddonSiteId.curse));
-            GetAddon("texbrowser").Mappings.Add(new Mapping("texbrowser", AddonSiteId.wowace));
-            GetAddon("texbrowser").Mappings.Add(new Mapping("texbrowser", AddonSiteId.curse));
-            GetAddon("Examiner").Mappings.Add(new Mapping("7377", AddonSiteId.wowinterface));
-            GetAddon("LightHeaded").Mappings.Add(new Mapping("7017", AddonSiteId.wowinterface));
-            GetAddon("LightHeaded").SubAddons.Add(GetAddon("LightHeaded_Data_A"));
-            GetAddon("LightHeaded").SubAddons.Add(GetAddon("LightHeaded_Data_B"));
-            GetAddon("LightHeaded").SubAddons.Add(GetAddon("LightHeaded_Data_C"));
-            GetAddon("LightHeaded").SubAddons.Add(GetAddon("LightHeaded_Data_D"));
-            GetAddon("LightHeaded").SubAddons.Add(GetAddon("LightHeaded_Data_E"));
-
-
             #region Auctioneer
             // AuctioneerSuite
             GetPackage("AuctioneerSuite").Mappings.Add(new Mapping("5.1.3715|24.10.2008|http://auctioneeraddon.com/dl/#release|http://mirror.auctioneeraddon.com/dl/Packages3/AuctioneerSuite-5.1.3715.zip", AddonSiteId.direct));
@@ -1260,6 +1245,54 @@ namespace Waddu.Classes
             GetAddon("BtmScan").SubAddons.Add(GetAddon("EnhTooltip"));
             GetAddon("BtmScan").SubAddons.Add(GetAddon("Stubby"));
             #endregion
+
+            GetAddon("AltClickToAddItem").Mappings.Add(new Mapping("alt-click-to-add-item", AddonSiteId.wowace));
+            GetAddon("AltClickToAddItem").Mappings.Add(new Mapping("alt-click-to-add-item", AddonSiteId.curse));
+            GetAddon("BaudAuction").Mappings.Add(new Mapping("baud-auction", AddonSiteId.curseforge));
+            GetAddon("BaudAuction").Mappings.Add(new Mapping("baud-auction", AddonSiteId.curse));
+            GetAddon("Cartographer_QuestInfo").Mappings.Add(new Mapping("cartographer_quest-info", AddonSiteId.curse));
+            GetAddon("Framerate_Adjuster").Mappings.Add(new Mapping("framerate-adjuster", AddonSiteId.curse));
+            GetAddon("InventoryOnPar").Mappings.Add(new Mapping("inventory-on-par", AddonSiteId.curse));
+            GetAddon("InventoryOnPar").SubAddons.Add(GetAddon("TitanInventoryOnPar"));
+            GetAddon("Lootcounter").Mappings.Add(new Mapping("7811", AddonSiteId.wowinterface));
+            GetAddon("Lootvalue").Mappings.Add(new Mapping("7198", AddonSiteId.wowinterface));
+            GetAddon("MageAnnounce").Mappings.Add(new Mapping("mage-announce", AddonSiteId.curse));
+            GetAddon("MageFever").Mappings.Add(new Mapping("mfever", AddonSiteId.curse));
+            GetAddon("MarkBar").Mappings.Add(new Mapping("mark-bar", AddonSiteId.curse));
+            GetAddon("MetaMap").Mappings.Add(new Mapping("meta-map", AddonSiteId.curse));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapBKP"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapCVT"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapHLP"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapTRK"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapBLT"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapEXP"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapNBK"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapWKB"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapQST"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapBWP"));
+            GetAddon("MetaMap").SubAddons.Add(GetAddon("MetaMapFWM"));
+            GetAddon("MobInfo2").Mappings.Add(new Mapping("mob-info-2-includes-mob-health", AddonSiteId.curse));
+            GetAddon("Valuation").Mappings.Add(new Mapping("7493", AddonSiteId.wowinterface));
+            GetAddon("VisualHeal").Mappings.Add(new Mapping("visualheal", AddonSiteId.curse));
+            GetAddon("FuBar_LootTypeFu").Mappings.Add(new Mapping("fu-bar_loot-type-fu", AddonSiteId.curse));
+            GetAddon("MrPlow").Mappings.Add(new Mapping("3383", AddonSiteId.wowui));
+            GetAddon("NeonChat").Mappings.Add(new Mapping("7838", AddonSiteId.wowinterface));
+            GetAddon("PallyPower").Mappings.Add(new Mapping("pally-power", AddonSiteId.curse));
+            GetAddon("StatStain").Mappings.Add(new Mapping("stat-stain", AddonSiteId.curse));
+            GetAddon("ABInform").Mappings.Add(new Mapping("abinform", AddonSiteId.curse));
+            GetAddon("AFKFix").Mappings.Add(new Mapping("afk-fix", AddonSiteId.curse));
+            GetAddon("afktimer").Mappings.Add(new Mapping("afk-timer", AddonSiteId.curse));
+            GetAddon("AlarBGHelper").Mappings.Add(new Mapping("alar-bghelper", AddonSiteId.curse));
+            GetAddon("AlwaysLFG").Mappings.Add(new Mapping("always-lfg", AddonSiteId.curse));
+            GetAddon("AMP").Mappings.Add(new Mapping("answering-machine-plus", AddonSiteId.curse));
+            GetAddon("AMP").SubAddons.Add(GetAddon("AMPFu"));
+            GetAddon("AMP").SubAddons.Add(GetAddon("AMPTitan"));
+            GetAddon("AnkhCooldownTimer").Mappings.Add(new Mapping("6330", AddonSiteId.wowinterface));
+            GetAddon("AtlasQuest").Mappings.Add(new Mapping("atlas-quest-fan-update", AddonSiteId.curse));
+            GetAddon("Auctionator").Mappings.Add(new Mapping("auctionator", AddonSiteId.curse));
+            GetAddon("Auditor2").Mappings.Add(new Mapping("auditor-fu", AddonSiteId.curse));
+            GetAddon("Auditor2").SubAddons.Add(GetAddon("FuBar_AuditorFu"));
+            GetAddon("AVbars2").Mappings.Add(new Mapping("avbars2", AddonSiteId.curse));
 
             // Depreciated
             //AddDepreciated("Vendor", "AuctionMaster");
@@ -1335,18 +1368,6 @@ namespace Waddu.Classes
             //LibTooltip-1.0
             //LibTourist-3.0
 
-            //- ABInform
-            //- AFKFix
-            //- afktimer
-            //- AlarBGHelper
-            //- AlwaysLFG
-            //- AMP
-            //- AMPFu
-            //- AnkhCooldownTimer
-            //- AtlasQuest
-            //- Auctionator
-            //- Auditor2
-            //- AVbars2
             //- AzCastBar
             //- AzCastBarOptions
             //- BGAlerts
@@ -1436,26 +1457,7 @@ namespace Waddu.Classes
             //- HandyNotes_Vendors
             //- Informant
             //- InnerFireWatcher
-            //- InventoryOnPar
             //- KillingBlow
-            //- Lootcounter
-            //- Lootvalue
-            //- MageAnnounce
-            //- MageFever
-            //- MarkBar
-            //- MetaMap
-            //- MetaMapBKP
-            //- MetaMapBLT
-            //- MetaMapBWP
-            //- MetaMapCVT
-            //- MetaMapEXP
-            //- MetaMapFWM
-            //- MetaMapHLP
-            //- MetaMapNBK
-            //- MetaMapQST
-            //- MetaMapTRK
-            //- MetaMapWKB
-            //- MobInfo2
             //- myFriends
             //- Nauticus
             //- Perl_ArcaneBar
@@ -1482,26 +1484,14 @@ namespace Waddu.Classes
             //- TargetRange
             //- TradeJunkie
             //- UnitPrice
-            //- Valuation
-            //- VisualHeal
             //- WarsongFlags
             //- WatchTower
-
-            //- AltClickToAddItem
-            //- BaudAuction
-            //- Cartographer_QuestInfo
             //- File13
-            //- Framerate_Adjuster
             //- FriendColor
-            //- FuBar_LootTypeFu
-            //- MrPlow
             //- myError
             //- Nameplates
-            //- NeonChat
             //- Nier
-            //- PallyPower
             //- RaidIconFix
-            //- StatStain
         }
     }
 }

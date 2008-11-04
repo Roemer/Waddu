@@ -63,6 +63,7 @@
             this.txtUnknownAddons.Location = new System.Drawing.Point(12, 12);
             this.txtUnknownAddons.Multiline = true;
             this.txtUnknownAddons.Name = "txtUnknownAddons";
+            this.txtUnknownAddons.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtUnknownAddons.Size = new System.Drawing.Size(408, 310);
             this.txtUnknownAddons.TabIndex = 2;
             // 
