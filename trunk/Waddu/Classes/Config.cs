@@ -156,52 +156,52 @@ namespace Waddu.Classes
         private void LoadSettings()
         {
             string value;
-            if (GetSetting("WowFolderPath", out value))
+            if (GetSettingValue("WowFolderPath", out value))
             {
                 WowFolderPath = value;
             }
-            if (GetSetting("DeleteBeforeUpdate", out value))
+            if (GetSettingValue("DeleteBeforeUpdate", out value))
             {
                 DeleteBeforeUpdate = Convert.ToBoolean(value);
             }
-            if (GetSetting("MoveToTrash", out value))
+            if (GetSettingValue("MoveToTrash", out value))
             {
                 MoveToTrash = Convert.ToBoolean(value);
             }
-            if (GetSetting("NumberOfThreads", out value))
+            if (GetSettingValue("NumberOfThreads", out value))
             {
                 NumberOfThreads = Convert.ToInt32(value);
             }
-            if (GetSetting("CurseLogin", out value))
+            if (GetSettingValue("CurseLogin", out value))
             {
                 CurseLogin = value;
             }
-            if (GetSetting("CursePassword", out value))
+            if (GetSettingValue("CursePassword", out value))
             {
                 CursePassword = value;
             }
-            if (GetSetting("SavePassword", out value))
+            if (GetSettingValue("SavePassword", out value))
             {
                 SavePassword = Convert.ToBoolean(value);
             }
-            if (GetSetting("MappingFile", out value))
+            if (GetSettingValue("MappingFile", out value))
             {
                 MappingFile = value;
             }
-            if (GetSetting("LogLevel", out value))
+            if (GetSettingValue("LogLevel", out value))
             {
                 LogLevel = (LogType)Enum.Parse(typeof(LogType), value);
             }
-            if (GetSetting("PreferNoLib", out value))
+            if (GetSettingValue("PreferNoLib", out value))
             {
                 PreferNoLib = Convert.ToBoolean(value);
             }
-            if (GetSetting("PathTo7z", out value))
+            if (GetSettingValue("PathTo7z", out value))
             {
                 PathTo7z = value;
             }
             // Get Addon Sites
-            if (GetSetting("AddonSites", out value))
+            if (GetSettingValue("AddonSites", out value))
             {
                 string[] addonSiteList = value.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string addonSite in addonSiteList)
@@ -218,7 +218,7 @@ namespace Waddu.Classes
             Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowspecial);
             Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowui);
             // Get Ignored Addons
-            if (GetSetting("IgnoredAddons", out value))
+            if (GetSettingValue("IgnoredAddons", out value))
             {
                 string[] addonList = value.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                 _ignoredAddons.AddRange(addonList);
@@ -234,9 +234,15 @@ namespace Waddu.Classes
             }
         }
 
-        private bool GetSetting(string settingName, out string value)
+        private XmlElement GetSettingElement(string settingName)
         {
             XmlElement settingElement = _xmlDoc.DocumentElement.SelectSingleNode(string.Format(@"settings/setting[@name=""{0}""]", settingName)) as XmlElement;
+            return settingElement;
+        }
+
+        private bool GetSettingValue(string settingName, out string value)
+        {
+            XmlElement settingElement = GetSettingElement(settingName);
             if (settingElement != null)
             {
                 value = settingElement.ChildNodes[0].InnerText;
@@ -248,7 +254,8 @@ namespace Waddu.Classes
 
         private bool GetSettingDict(string settingName, Dictionary<string, string> dict)
         {
-            XmlElement settingElement = _xmlDoc.DocumentElement.SelectSingleNode(string.Format(@"settings/setting[@name=""{0}""]", settingName)) as XmlElement;
+            XmlElement settingElement = GetSettingElement(settingName);
+            dict = new Dictionary<string, string>();
             if (settingElement != null)
             {
                 foreach (XmlNode child in settingElement.ChildNodes)

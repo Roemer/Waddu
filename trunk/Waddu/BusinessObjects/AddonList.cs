@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
-using Waddu.Types;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using Waddu.Classes;
+using Waddu.Types;
 
 namespace Waddu.BusinessObjects
 {
@@ -65,42 +65,68 @@ namespace Waddu.BusinessObjects
                     // Loop thru all Addons
                     foreach (XmlNode addonNode in gameNode.ChildNodes)
                     {
-                        // Create Addon
-                        string addonName = addonNode.Attributes["Name"].Value;
-                        Addon addon = new Addon(addonName);
-                        // Remove the Addon from the Local Addons List
-                        localAddons.Remove(addon);
-
-                        // Loop thru the Mappings
-                        XmlNode mappingListElement = addonNode.SelectSingleNode("Mappings");
-                        if (mappingListElement != null)
+                        // Addon
+                        if (addonNode.Name == "Addon")
                         {
-                            foreach (XmlNode mappingElement in mappingListElement.ChildNodes)
+                            // Get the Addon Name
+                            string addonName = addonNode.Attributes["Name"].Value;
+                            // Search the List if there is already an Addon with this Name
+                            Addon addon = addonList.Find(delegate(Addon ad) { return ad.Name.Equals(addonName); });
+                            // If not, create it
+                            if (addon == null)
                             {
-                                Mapping mapping = new Mapping();
-                                mapping.Addon = addon;
-                                mapping.AddonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
-                                mapping.AddonTag = mappingElement.Attributes["Tag"].Value;
-                                addon.Mappings.Add(mapping);
+                                addon = new Addon(addonName);
                             }
-                        }
+                            // Remove the Addon from the Local Addons List
+                            localAddons.Remove(addon);
 
-                        // Loop thru the SubAddons
-                        XmlNode subAddonListElement = addonNode.SelectSingleNode("SubAddons");
-                        if (subAddonListElement != null)
+                            // Set the Addon as Main
+                            addon.IsMain = true;
+
+                            // Loop thru the Mappings
+                            XmlNode mappingListElement = addonNode.SelectSingleNode("Mappings");
+                            if (mappingListElement != null)
+                            {
+                                foreach (XmlNode mappingElement in mappingListElement.ChildNodes)
+                                {
+                                    string tag = mappingElement.Attributes["Tag"].Value;
+                                    AddonSiteId addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
+                                    Mapping mapping = new Mapping(tag, addonSiteId);
+                                    mapping.Addon = addon;
+                                    addon.Mappings.Add(mapping);
+                                }
+                            }
+
+                            // Loop thru the SubAddons
+                            XmlNode subAddonListElement = addonNode.SelectSingleNode("SubAddons");
+                            if (subAddonListElement != null)
+                            {
+                                foreach (XmlNode subAddonElement in subAddonListElement.ChildNodes)
+                                {
+                                    string subAddonName = subAddonElement.Attributes["Name"].Value;
+                                    Addon subAddon = addonList.Find(delegate(Addon ad) { return ad.Name.Equals(subAddonName); });
+                                    if (subAddon == null)
+                                    {
+                                        subAddon = new Addon(subAddonName);
+                                    }
+                                    subAddon.IsSubAddon = true;
+                                    addon.SubAddons.Add(subAddon);
+                                    // Remove the SubAddon from the Local Addons List
+                                    localAddons.Remove(subAddon);
+
+                                    // Add the SubAddon to the List
+                                    Helpers.AddIfNeeded<Addon>(addonList, subAddon);
+                                }
+                            }
+
+                            // Add the Addon to the List
+                            Helpers.AddIfNeeded<Addon>(addonList, addon);
+                        }
+                        // Package
+                        else if (addonNode.Name == "Package")
                         {
-                            foreach (XmlNode subAddonElement in subAddonListElement.ChildNodes)
-                            {
-                                Addon subAddon = new Addon(subAddonElement.Attributes["Name"].Value);
-                                subAddon.IsSubAddon = true;
-                                addon.SubAddons.Add(subAddon);
-                                // Remove the SubAddon from the Local Addons List
-                                localAddons.Remove(subAddon);
-                            }
+                            // TODO: Handle Packages
                         }
-
-                        // Add the Addon to the List
-                        addonList.Add(addon);
                     }
                 }
             }
