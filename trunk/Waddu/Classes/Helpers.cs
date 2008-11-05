@@ -110,15 +110,32 @@ namespace Waddu.Classes
             return lineList;
         }
 
-        public static string DownloadFile(string remoteFilename)
+        public static string DownloadFileToTemp(string remoteFilename)
         {
-            return DownloadFile(remoteFilename, null);
+            return DownloadFileToTemp(remoteFilename, null);
         }
-        public static string DownloadFile(string remoteFilename, IDownloadProgress progress)
+        public static string DownloadFileToTemp(string remoteFilename, IDownloadProgress progress)
         {
+            string localFilePath = Path.GetTempFileName();
+            if (DownloadFile(remoteFilename, localFilePath, progress))
+            {
+                return localFilePath;
+            }
+            return string.Empty;
+        }
+        public static bool DownloadFile(string remoteFilename, string localFilePath)
+        {
+            return DownloadFile(remoteFilename, localFilePath, null);
+        }
+        public static bool DownloadFile(string remoteFilename, string localFilePath, IDownloadProgress progress)
+        {
+            if (progress != null)
+            {
+                progress.DownloadStatusChanged(-1, -1);
+            }
+
             int bytesProcessed = 0;
             string fileName = remoteFilename.Substring(remoteFilename.LastIndexOf("/") + 1);
-            string localFilePath = string.Empty;
 
             // Assign values to these objects here so that they can
             // be referenced in the finally block
@@ -138,6 +155,10 @@ namespace Waddu.Classes
                     // WebResponse object
                     response = request.GetResponse();
                     long length = response.ContentLength;
+                    if (progress != null)
+                    {
+                        progress.DownloadStatusChanged(-1, length);
+                    }
                     if (response != null)
                     {
                         // Once the WebResponse object has been retrieved,
@@ -145,7 +166,6 @@ namespace Waddu.Classes
                         remoteStream = response.GetResponseStream();
 
                         // Create the local File
-                        localFilePath = Path.GetTempFileName();
                         localStream = File.Create(localFilePath);
 
                         // Allocate a 1k buffer
@@ -167,21 +187,16 @@ namespace Waddu.Classes
 
                             if (progress != null)
                             {
-                                progress.StatusText = string.Format("{0} of {1}", FormatBytes(bytesProcessed), FormatBytes(length));
+                                progress.DownloadStatusChanged(bytesProcessed, length);
                             }
                         } while (bytesRead > 0);
-
-                        if (progress != null)
-                        {
-                            progress.StatusText = string.Empty;
-                        }
                     }
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                return string.Empty;
+                return false;
             }
             finally
             {
@@ -191,9 +206,14 @@ namespace Waddu.Classes
                 if (response != null) response.Close();
                 if (remoteStream != null) remoteStream.Close();
                 if (localStream != null) localStream.Close();
+
+                if (progress != null)
+                {
+                    progress.DownloadStatusChanged(-1, -1);
+                }
             }
 
-            return localFilePath;
+            return true;
         }
 
         public static string FormatBytes(long bytes)

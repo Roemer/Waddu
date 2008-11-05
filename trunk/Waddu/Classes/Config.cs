@@ -224,8 +224,8 @@ namespace Waddu.Classes
                 _ignoredAddons.AddRange(addonList);
             }
             // Get Preferred Mappings
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            if (GetSettingDict("PreferredMappings", dict))
+            Dictionary<string, string> dict;
+            if (GetSettingDict("PreferredMappings", out dict))
             {
                 foreach (KeyValuePair<string, string> kvp in dict)
                 {
@@ -252,7 +252,7 @@ namespace Waddu.Classes
             return false;
         }
 
-        private bool GetSettingDict(string settingName, Dictionary<string, string> dict)
+        private bool GetSettingDict(string settingName, out Dictionary<string, string> dict)
         {
             XmlElement settingElement = GetSettingElement(settingName);
             dict = new Dictionary<string, string>();

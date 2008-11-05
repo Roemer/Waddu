@@ -29,7 +29,7 @@ namespace Waddu.Forms
             Mapping map = new Mapping(tag, siteId);
             map.Addon = new Addon("tag");
             string downLink = site.GetDownloadLink(map);
-            string archiveFilePath = Helpers.DownloadFile(downLink);
+            string archiveFilePath = Helpers.DownloadFileToTemp(downLink);
             List<string> cont = ArchiveHelper.GetArchiveContent(archiveFilePath);
             List<string> folderList = new List<string>();
             foreach (string s in cont)

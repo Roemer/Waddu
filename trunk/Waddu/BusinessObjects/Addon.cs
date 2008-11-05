@@ -60,6 +60,27 @@ namespace Waddu.BusinessObjects
             }
         }
 
+        [Browsable(false)]
+        public bool IsIgnored
+        {
+            get
+            {
+                return Config.Instance.IsIgnored(this);
+            }
+            set
+            {
+                if (value == true)
+                {
+                    Config.Instance.AddIgnored(this);
+                }
+                else
+                {
+                    Config.Instance.RemoveIgnored(this);
+                }
+                Config.Instance.SaveSettings();
+            }
+        }
+
         private bool _isUnhandled = false;
         [Browsable(false)]
         public bool IsUnhandled
@@ -154,8 +175,8 @@ namespace Waddu.BusinessObjects
                         if (newMapping.AddonSiteId == preferred)
                         {
                             _preferredMapping = newMapping;
-                            return;
                         }
+                        return;
                     }
 
                     // Assign by Priority
