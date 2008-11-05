@@ -566,7 +566,7 @@
             this.gbSuperAddons.Size = new System.Drawing.Size(151, 131);
             this.gbSuperAddons.TabIndex = 11;
             this.gbSuperAddons.TabStop = false;
-            this.gbSuperAddons.Text = "SuperAddons";
+            this.gbSuperAddons.Text = "Part of";
             // 
             // lbSuperAddons
             // 
@@ -587,7 +587,7 @@
             this.gbSubAddons.Size = new System.Drawing.Size(151, 131);
             this.gbSubAddons.TabIndex = 7;
             this.gbSubAddons.TabStop = false;
-            this.gbSubAddons.Text = "SubAddons";
+            this.gbSubAddons.Text = "Contains";
             // 
             // lbSubAddons
             // 

@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Waddu.Classes;
+using Waddu.Forms;
 using Waddu.Types;
 
 namespace Waddu.BusinessObjects
@@ -45,10 +46,23 @@ namespace Waddu.BusinessObjects
             }
 
             // Load XML File
+            string localXml = Path.Combine(Application.StartupPath, "mappings.xml");
+            if (Config.Instance.MappingFile.ToLower().StartsWith("http"))
+            {
+                using (MappingDownloadForm dlg = new MappingDownloadForm(Config.Instance.MappingFile, localXml))
+                {
+                    dlg.ShowDialog();
+                }
+            }
+            else
+            {
+                localXml = Config.Instance.MappingFile;
+            }
+
             XmlDocument doc = new XmlDocument();
             try
             {
-                doc.Load(Config.Instance.MappingFile);
+                doc.Load(localXml);
             }
             catch (Exception ex)
             {

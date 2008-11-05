@@ -27,7 +27,7 @@ namespace Waddu.Classes
         private string _infoText;
         public string InfoText
         {
-            get { return _infoText + (StatusText == string.Empty ? "" : string.Format(" ({0})", StatusText)); }
+            get { return _infoText + (_statusText == string.Empty ? "" : string.Format(" ({0})", _statusText)); }
             set { _infoText = value; NotifyPropertyChanged("InfoText"); }
         }
 
@@ -98,7 +98,7 @@ namespace Waddu.Classes
                         Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, wi.Addon.Name);
                         continue;
                     }
-                    string archiveFilePath = Helpers.DownloadFile(downloadUrl, workerThread);
+                    string archiveFilePath = Helpers.DownloadFileToTemp(downloadUrl, workerThread);
                     if (archiveFilePath == string.Empty)
                     {
                         Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, wi.Addon.Name);
@@ -166,22 +166,16 @@ namespace Waddu.Classes
         #endregion
 
         #region IDownloadProgress Members
-
         private string _statusText = string.Empty;
-        [Browsable(false)]
-        public string StatusText
+        public void DownloadStatusChanged(long currentBytes, long totalBytes)
         {
-            get
+            _statusText = string.Empty;
+            if (currentBytes >= 0 && totalBytes >= 0)
             {
-                return _statusText;
+                _statusText = string.Format("{0} of {1}", Helpers.FormatBytes(currentBytes), Helpers.FormatBytes(totalBytes));
             }
-            set
-            {
-                _statusText = value;
-                NotifyPropertyChanged("InfoText");
-            }
+            NotifyPropertyChanged("InfoText");
         }
-
         #endregion
     }
 }

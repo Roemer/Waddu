@@ -21,7 +21,7 @@ namespace Waddu.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
@@ -209,7 +209,7 @@ namespace Waddu.Forms
             BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
             foreach (Addon addon in addonList)
             {
-                if (!Config.Instance.IsIgnored(addon))
+                if (!addon.IsIgnored)
                 {
                     ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
                 }
@@ -350,6 +350,10 @@ namespace Waddu.Forms
                     {
                         e.CellStyle.ForeColor = Color.LightGray;
                     }
+                    else if (addon.IsIgnored)
+                    {
+                        e.CellStyle.BackColor = Color.Yellow;
+                    }
                     else if (!addon.IsInstalled)
                     {
                         e.CellStyle.BackColor = Color.LightGray;
@@ -411,7 +415,7 @@ namespace Waddu.Forms
                     Addon addon = dgv.CurrentRow.DataBoundItem as Addon;
 
                     // Handle Ignore
-                    if (Config.Instance.IsIgnored(addon))
+                    if (addon.IsIgnored)
                     {
                         tsmiAddonUnignore.Tag = addon;
                         tsmiAddonUnignore.Visible = true;
@@ -465,16 +469,14 @@ namespace Waddu.Forms
         {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             Addon addon = tsmi.Tag as Addon;
-            Config.Instance.AddIgnored(addon);
-            Config.Instance.SaveSettings();
+            addon.IsIgnored = true;
         }
 
         private void tsmiAddonUnignore_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             Addon addon = tsmi.Tag as Addon;
-            Config.Instance.RemoveIgnored(addon);
-            Config.Instance.SaveSettings();
+            addon.IsIgnored = false;
         }
         #endregion
 
