@@ -1,5 +1,12 @@
 ﻿Version History:
 
+05.11.2008 - 0.5.0.0 (Alpha 5)
+- Created Admin Form for fast Mapping Creation
+- Ignoring Addons (and saving between Sessions)
+- Save Preferred (Best) Mappings between Sessions
+- Fixed Archive Content Showing Bug
+- Added Loader for the Mappings File
+
 01.11.2008 - 0.4.0.0 (Alpha 4)
 - Use 7Zip for Extracting and check for wrong Packages (like xchar)
 - Implement Site Priorities
@@ -29,16 +36,14 @@
 05.10.2008 - Begin of Development
 
 Task List:
-- Add Loader for the Mappings File
+- Implement Packages
 - Add Changelog Viewing
 - Version Check (instead of update all)
 - Cleanup Saved Variables (with Backup)
-- Ignoring Addons
 - Proxy Support
 - Store Window and Column Sizes
 - Add Local Version if missing (own File / TOC)
 - Add Mappings
-- Create Editor for Mappings
 
 Bugs:
 - Catch protected (unreadable) Folders when deleting / extracting

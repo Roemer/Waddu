@@ -205,7 +205,7 @@ namespace Waddu.BusinessObjects
             }
 
             // Check for SubAddon
-            if (IsSubAddon)
+            if (IsSubAddon && !IsMain)
             {
                 return "SubAddon";
             }

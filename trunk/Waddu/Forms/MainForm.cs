@@ -21,7 +21,7 @@ namespace Waddu.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
@@ -124,7 +124,7 @@ namespace Waddu.Forms
                 }
 
                 // Filter out Sub Addons
-                if (!tsmiFilterSubAddons.Checked && addon.IsSubAddon)
+                if (!tsmiFilterSubAddons.Checked && addon.IsSubAddon && !addon.IsMain)
                 {
                     continue;
                 }
@@ -346,7 +346,7 @@ namespace Waddu.Forms
                 Addon addon = dgv.Rows[e.RowIndex].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    if (addon.IsSubAddon)
+                    if (addon.IsSubAddon && !addon.IsMain)
                     {
                         e.CellStyle.ForeColor = Color.LightGray;
                     }
