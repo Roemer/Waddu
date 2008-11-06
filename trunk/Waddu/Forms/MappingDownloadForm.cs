@@ -7,15 +7,13 @@ namespace Waddu.Forms
 {
     public partial class MappingDownloadForm : Form, IDownloadProgress
     {
-        private string _remotePath;
         private string _localPath;
 
         delegate bool StartDownloadDelegate(MappingDownloadForm form);
-        public MappingDownloadForm(string remotePath, string localPath)
+        public MappingDownloadForm(string localPath)
         {
             InitializeComponent();
 
-            _remotePath = remotePath;
             _localPath = localPath;
 
             Thread t = new Thread(new ParameterizedThreadStart(ThreadProc));
@@ -24,8 +22,17 @@ namespace Waddu.Forms
 
         protected static void ThreadProc(object param)
         {
+            string[] remotePaths = new string[] {
+                "http://waddu.flauschig.ch/mapping/waddu_mappings.xml",
+                "http://www.red-demon.com/waddu/mapping/waddu_mappings.xml"
+            };
             MappingDownloadForm form = param as MappingDownloadForm;
-            Helpers.DownloadFile(form._remotePath, form._localPath, form);
+            bool success = false;
+            foreach (string path in remotePaths)
+            {
+                success = WebHelper.DownloadFile(path, form._localPath, form);
+                if (success) { break; }
+            }
             form.CloseForm();
         }
 

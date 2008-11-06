@@ -23,7 +23,7 @@ namespace Waddu.AddonSites
             bool versionFound = false;
             bool dateFound = false;
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
-            List<string> infoPage = Helpers.GetHtml(url);
+            List<string> infoPage = WebHelper.GetHtml(url);
 
             for (int i = 0; i < infoPage.Count; i++)
             {

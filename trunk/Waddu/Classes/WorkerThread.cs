@@ -51,10 +51,15 @@ namespace Waddu.Classes
             {
                 workerThread.InfoText = "";
                 workerThread.ThreadStatus = ThreadStatus.Idle;
-                WorkItem wi = ThreadManager.Instance.GetWork();
+                WorkItemBase wi = ThreadManager.Instance.GetWork();
                 workerThread.ThreadStatus = ThreadStatus.Processing;
 
-                if (wi.WorkItemType == WorkItemType.Cancel)
+                if (wi.WorkItemType == WorkItemType.WadduVersionCheck)
+                {
+                    // Version Check for Waddu
+                    WadduVersionCheck(workerThread);
+                }
+                else if (wi.WorkItemType == WorkItemType.Cancel)
                 {
                     // Exit Thread
                     workerThread.ThreadStatus = ThreadStatus.Stopping;
@@ -63,17 +68,23 @@ namespace Waddu.Classes
                 }
                 else if (wi.WorkItemType == WorkItemType.VersionCheck)
                 {
+                    Addon addon = ((WorkItemAddon)wi).Addon;
+                    Mapping mapping = ((WorkItemAddon)wi).Mapping;
+
                     // Get Remote Version
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for {1}", workerThread.ThreadID, wi.Addon.Name);
-                    if (wi.Mapping != null)
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for {1}", workerThread.ThreadID, addon.Name);
+
+                    if (mapping != null)
                     {
-                        workerThread.InfoText = string.Format("Get Version for \"{0}\" from {1}", wi.Addon.Name, wi.Mapping.AddonSiteId);
-                        wi.Mapping.CheckRemote();
+                        // Only one Mapping
+                        workerThread.InfoText = string.Format("Get Version for \"{0}\" from {1}", addon.Name, mapping.AddonSiteId);
+                        mapping.CheckRemote();
                     }
                     else
                     {
-                        workerThread.InfoText = string.Format("Get Versions for \"{0}\"", wi.Addon.Name);
-                        foreach (Mapping map in wi.Addon.Mappings)
+                        // All (or no) Mappings
+                        workerThread.InfoText = string.Format("Get Versions for \"{0}\"", addon.Name);
+                        foreach (Mapping map in addon.Mappings)
                         {
                             map.CheckRemote();
                         }
@@ -82,32 +93,35 @@ namespace Waddu.Classes
                 // Update Addon
                 else if (wi.WorkItemType == WorkItemType.Update)
                 {
-                    if (wi.Addon.Mappings.Count <= 0)
+                    Addon addon = ((WorkItemAddon)wi).Addon;
+                    Mapping mapping = ((WorkItemAddon)wi).Mapping;
+
+                    if (addon.Mappings.Count <= 0)
                     {
                         // Addon has no Mappings, skip
-                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping", workerThread.ThreadID, wi.Addon.Name);
+                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping", workerThread.ThreadID, addon.Name);
                         continue;
                     }
 
                     // Define the Mapping to use
-                    Mapping mapping = wi.Mapping;
                     if (mapping == null)
                     {
-                        mapping = wi.Addon.PreferredMapping;
+                        // If no specific Mapping given, use Preferred Mapping
+                        mapping = addon.PreferredMapping;
                     }
                     // Download
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, wi.Addon.Name, mapping.AddonSiteId);
-                    workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, wi.Addon.Name);
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, addon.Name, mapping.AddonSiteId);
+                    workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, addon.Name);
                     string downloadUrl = mapping.GetDownloadLink();
                     if (downloadUrl == string.Empty)
                     {
-                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, wi.Addon.Name);
+                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, addon.Name);
                         continue;
                     }
-                    string archiveFilePath = Helpers.DownloadFileToTemp(downloadUrl, workerThread);
+                    string archiveFilePath = WebHelper.DownloadFileToTemp(downloadUrl, workerThread);
                     if (archiveFilePath == string.Empty)
                     {
-                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, wi.Addon.Name);
+                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, addon.Name);
                         continue;
                     }
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, archiveFilePath);
@@ -116,7 +130,7 @@ namespace Waddu.Classes
                     if (ArchiveHelper.Exists7z())
                     {
                         // Simple Check if the Archive looks right
-                        if (!ArchiveHelper.CheckIntegrity(archiveFilePath, wi.Addon.Name))
+                        if (!ArchiveHelper.CheckIntegrity(archiveFilePath, addon.Name))
                         {
                             // If now, warn us
                             using (ArchiveContentForm f = new ArchiveContentForm(archiveFilePath))
@@ -133,16 +147,16 @@ namespace Waddu.Classes
                     // Delete Old
                     if (Config.Instance.DeleteBeforeUpdate)
                     {
-                        if (wi.Addon.IsInstalled)
+                        if (addon.IsInstalled)
                         {
                             DeleteType delType;
-                            foreach (Addon subAddon in wi.Addon.SubAddons)
+                            foreach (Addon subAddon in addon.SubAddons)
                             {
                                 delType = subAddon.Delete();
                                 Logger.Instance.AddLog(LogType.Information, "Thread #{0}: SubAddon {1} {2}", workerThread.ThreadID, subAddon.Name, delType.ToString());
                             }
-                            delType = wi.Addon.Delete();
-                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadID, wi.Addon.Name, delType.ToString());
+                            delType = addon.Delete();
+                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadID, addon.Name, delType.ToString());
                         }
                     }
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Expanding to {1}", workerThread.ThreadID, Addon.GetFolderPath());
@@ -158,6 +172,39 @@ namespace Waddu.Classes
             }
             workerThread.ThreadStatus = ThreadStatus.Stopped;
             Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Stopped", workerThread.ThreadID);
+        }
+
+        private static void WadduVersionCheck(WorkerThread workerThread)
+        {
+            string[] remotePaths = new string[] {
+                "http://waddu.flauschig.ch/download/latest.txt",
+                "http://www.red-demon.com/waddu/download/latest.txt"
+            };
+
+            workerThread.InfoText = "Version Check for Waddu";
+            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for Waddu", workerThread.ThreadID);
+            bool success = false;
+            string version = string.Empty;
+            foreach (string path in remotePaths)
+            {
+                success = WebHelper.GetString(path, out version);
+                if (success) { break; }
+            }
+            if (success)
+            {
+                if (version == workerThread.GetType().Assembly.GetName().Version.ToString())
+                {
+                    MessageBox.Show("You have the newest Version");
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("There is an Update available for Version {0}", version));
+                }
+            }
+            else
+            {
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Could not check the Version", workerThread.ThreadID);
+            }
         }
 
         #region INotifyPropertyChanged Members

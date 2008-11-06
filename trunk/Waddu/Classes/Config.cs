@@ -78,7 +78,14 @@ namespace Waddu.Classes
             set { _savePassword = value; }
         }
 
-        private string _mappingFile = "http://www.flauschig.ch/transfer/waddu_mappings.xml";
+        private bool _useCustomMapping = false;
+        public bool UseCustomMapping
+        {
+            get { return _useCustomMapping; }
+            set { _useCustomMapping = value; }
+        }
+
+        private string _mappingFile = @".\mappings.xml";
         public string MappingFile
         {
             get { return _mappingFile; }
@@ -97,6 +104,13 @@ namespace Waddu.Classes
         {
             get { return _preferNoLib; }
             set { _preferNoLib = value; }
+        }
+
+        private bool _useOlderNoLib = false;
+        public bool UseOlderNoLib
+        {
+            get { return _useOlderNoLib; }
+            set { _useOlderNoLib = value; }
         }
 
         private string _pathTo7z = @"C:\Program Files\7-Zip";
@@ -184,6 +198,10 @@ namespace Waddu.Classes
             {
                 SavePassword = Convert.ToBoolean(value);
             }
+            if (GetSettingValue("UseCustomMapping", out value))
+            {
+                UseCustomMapping = Convert.ToBoolean(value);
+            }
             if (GetSettingValue("MappingFile", out value))
             {
                 MappingFile = value;
@@ -195,6 +213,10 @@ namespace Waddu.Classes
             if (GetSettingValue("PreferNoLib", out value))
             {
                 PreferNoLib = Convert.ToBoolean(value);
+            }
+            if (GetSettingValue("UseOlderNoLib", out value))
+            {
+                UseOlderNoLib = Convert.ToBoolean(value);
             }
             if (GetSettingValue("PathTo7z", out value))
             {
@@ -289,9 +311,11 @@ namespace Waddu.Classes
                 SaveSetting("CursePassword", "");
             }
             SaveSetting("SavePassword", SavePassword.ToString());
+            SaveSetting("UseCustomMapping", UseCustomMapping.ToString());
             SaveSetting("MappingFile", MappingFile);
             SaveSetting("LogLevel", LogLevel.ToString());
             SaveSetting("PreferNoLib", PreferNoLib.ToString());
+            SaveSetting("UseOlderNoLib", UseOlderNoLib.ToString());
             SaveSetting("PathTo7z", PathTo7z);
             SaveSetting("AddonSites", Helpers.Join<AddonSiteId>("|", AddonSites));
             SaveSetting("IgnoredAddons", Helpers.Join<string>("|", IgnoredAddons));
@@ -387,24 +411,24 @@ namespace Waddu.Classes
         }
 
         #region Public Helpers
-        public bool IsIgnored(Addon addon)
+        public bool IsIgnored(string addonName)
         {
-            return _ignoredAddons.Contains(addon.Name);
+            return _ignoredAddons.Contains(addonName);
         }
-        public bool AddIgnored(Addon addon)
+        public bool AddIgnored(string addonName)
         {
-            if (IsIgnored(addon))
+            if (IsIgnored(addonName))
             {
                 return false;
             }
-            _ignoredAddons.Add(addon.Name);
+            _ignoredAddons.Add(addonName);
             return true;
         }
-        public bool RemoveIgnored(Addon addon)
+        public bool RemoveIgnored(string addonName)
         {
-            if (IsIgnored(addon))
+            if (IsIgnored(addonName))
             {
-                _ignoredAddons.Remove(addon.Name);
+                _ignoredAddons.Remove(addonName);
                 return true;
             }
             return false;
@@ -412,7 +436,11 @@ namespace Waddu.Classes
 
         public void SetPreferredMapping(Mapping mapping)
         {
-            Helpers.AddOrUpdate<string, AddonSiteId>(_preferredMappings, mapping.Addon.Name, mapping.AddonSiteId);
+            SetPreferredMapping(mapping.Addon.Name, mapping.AddonSiteId);
+        }
+        public void SetPreferredMapping(string addonName, AddonSiteId addonSiteId)
+        {
+            Helpers.AddOrUpdate<string, AddonSiteId>(_preferredMappings, addonName, addonSiteId);
         }
         public bool GetPreferredMapping(Addon addon, out AddonSiteId preferredAddonSite)
         {

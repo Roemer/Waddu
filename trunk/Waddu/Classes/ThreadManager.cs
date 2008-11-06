@@ -26,7 +26,7 @@ namespace Waddu.Classes
             get { return _workerThreadList; }
         }
 
-        private BlockingQueue<WorkItem> _workQueue;
+        private BlockingQueue<WorkItemBase> _workQueue;
 
         public static void Initialize()
         {
@@ -43,18 +43,18 @@ namespace Waddu.Classes
         private ThreadManager()
         {
             // Initialize Work Queue
-            _workQueue = new BlockingQueue<WorkItem>();
+            _workQueue = new BlockingQueue<WorkItemBase>();
 
             // Initialize Worker Threads
             _workerThreadList = new BindingList<WorkerThread>();
         }
 
-        public void AddWork(WorkItem workItem)
+        public void AddWork(WorkItemBase workItem)
         {
             _workQueue.Enqueue(workItem);
         }
 
-        public WorkItem GetWork()
+        public WorkItemBase GetWork()
         {
             return _workQueue.Dequeue();
         }
@@ -67,7 +67,7 @@ namespace Waddu.Classes
                 // Tell the Thread to Stop
                 thread.Stop();
                 // Add Fake Work
-                _workQueue.Enqueue(new WorkItem(WorkItemType.Cancel));
+                _workQueue.Enqueue(new WorkItemEmpty(WorkItemType.Cancel));
             }
         }
     }
