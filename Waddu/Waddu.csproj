@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1EA32F6B-B84F-4472-B945-AD9723728FE2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -81,7 +81,10 @@
     <Compile Include="BusinessObjects\AddonList.cs" />
     <Compile Include="BusinessObjects\Mapping.cs" />
     <Compile Include="BusinessObjects\Package.cs" />
+    <Compile Include="BusinessObjects\SiteAddon.cs" />
     <Compile Include="Classes\ArchiveHelper.cs" />
+    <Compile Include="Classes\WebHelper.cs" />
+    <Compile Include="Classes\WorkItemBase.cs" />
     <Compile Include="Classes\BlockingQueue.cs" />
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\CookieManager.cs" />
@@ -96,7 +99,8 @@
     <Compile Include="Classes\Win32\Types\SHFileOperationType.cs" />
     <Compile Include="Classes\Win32\Types\SHFILEOPSTRUCT.cs" />
     <Compile Include="Classes\WorkerThread.cs" />
-    <Compile Include="Classes\WorkItem.cs" />
+    <Compile Include="Classes\WorkItemAddon.cs" />
+    <Compile Include="Classes\WorkItemEmpty.cs" />
     <Compile Include="Controls\SeparatorControl.cs">
       <SubType>Component</SubType>
     </Compile>

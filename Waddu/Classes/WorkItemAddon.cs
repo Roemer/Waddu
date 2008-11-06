@@ -4,14 +4,8 @@ using Waddu.Types;
 
 namespace Waddu.Classes
 {
-    public class WorkItem
+    public class WorkItemAddon : WorkItemBase
     {
-        private WorkItemType _workItemType;
-        public WorkItemType WorkItemType
-        {
-            get { return _workItemType; }
-        }
-
         private Addon _addon = null;
         public Addon Addon
         {
@@ -25,20 +19,21 @@ namespace Waddu.Classes
             set { _mapping = value; }
         }
 
-        public WorkItem(WorkItemType workItemType)
+        public WorkItemAddon(WorkItemType workItemType)
+            : base(workItemType)
         {
             if (workItemType != WorkItemType.Cancel)
             {
                 throw new Exception("WorkItem needs an Addon");
             }
         }
-        public WorkItem(WorkItemType workItemType, Addon addon)
+        public WorkItemAddon(WorkItemType workItemType, Addon addon)
+            : base(workItemType)
         {
-            _workItemType = workItemType;
             _addon = addon;
 
         }
-        public WorkItem(WorkItemType workItemType, Addon addon, Mapping mapping)
+        public WorkItemAddon(WorkItemType workItemType, Addon addon, Mapping mapping)
             : this(workItemType, addon)
         {
             _mapping = mapping;

@@ -74,7 +74,7 @@ namespace Waddu.AddonSites
                 return infoUrl;
             }
 
-            List<string> infoPage = Helpers.GetHtml(infoUrl);
+            List<string> infoPage = WebHelper.GetHtml(infoUrl);
             for (int i = 0; i < infoPage.Count; i++)
             {
                 string line = infoPage[i];
@@ -118,7 +118,7 @@ namespace Waddu.AddonSites
             }
 
             string infoUrl = "http://www.ctmod.net/downloads/";
-            List<string> infoPage = Helpers.GetHtml(infoUrl);
+            List<string> infoPage = WebHelper.GetHtml(infoUrl);
             for (int i = 0; i < infoPage.Count; i++)
             {
                 string line = infoPage[i];
@@ -176,7 +176,7 @@ namespace Waddu.AddonSites
                 }
                 if (type == Type.Date)
                 {
-                    List<string> infoPage = Helpers.GetHtml("http://www.xchar.de/index.php?content=downloads&tab=faces_manual");
+                    List<string> infoPage = WebHelper.GetHtml("http://www.xchar.de/index.php?content=downloads&tab=faces_manual");
                     for (int i = 0; i < infoPage.Count; i++)
                     {
                         string line = infoPage[i];
@@ -204,7 +204,7 @@ namespace Waddu.AddonSites
                 return DateTime.MinValue;
             }
 
-            List<string> infoPage = Helpers.GetHtml("http://www.mobmap.de/addon.php");
+            List<string> infoPage = WebHelper.GetHtml("http://www.mobmap.de/addon.php");
             for (int i = 0; i < infoPage.Count; i++)
             {
                 string line = infoPage[i];

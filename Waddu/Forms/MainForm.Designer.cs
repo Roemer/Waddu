@@ -59,6 +59,7 @@
             this.tsmiMappingSetAsPreferred = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelpCheckForUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerEx2 = new Waddu.Controls.SplitContainerEx();
             this.splitContainerEx1 = new Waddu.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
@@ -103,6 +104,7 @@
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -207,7 +209,9 @@
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCollectUnknownAddons});
+            this.tsmiCollectUnknownAddons,
+            this.tsmiHelpCheckForUpdate,
+            this.tsmiHelpAbout});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
             this.tsmiHelp.Text = "&Help";
@@ -346,6 +350,13 @@
             this.tsmiMappingDownload.Size = new System.Drawing.Size(155, 22);
             this.tsmiMappingDownload.Text = "Download";
             this.tsmiMappingDownload.Click += new System.EventHandler(this.tsmiMappingDownload_Click);
+            // 
+            // tsmiHelpCheckForUpdate
+            // 
+            this.tsmiHelpCheckForUpdate.Name = "tsmiHelpCheckForUpdate";
+            this.tsmiHelpCheckForUpdate.Size = new System.Drawing.Size(208, 22);
+            this.tsmiHelpCheckForUpdate.Text = "&Check for Update";
+            this.tsmiHelpCheckForUpdate.Click += new System.EventHandler(this.tsmiHelpCheckForUpdate_Click);
             // 
             // splitContainerEx2
             // 
@@ -861,6 +872,13 @@
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
+            // tsmiHelpAbout
+            // 
+            this.tsmiHelpAbout.Name = "tsmiHelpAbout";
+            this.tsmiHelpAbout.Size = new System.Drawing.Size(208, 22);
+            this.tsmiHelpAbout.Text = "&About";
+            this.tsmiHelpAbout.Click += new System.EventHandler(this.tsmiHelpAbout_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -982,6 +1000,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gbSuperAddons;
         private System.Windows.Forms.ListBox lbSuperAddons;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelpCheckForUpdate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelpAbout;
 
     }
 }

@@ -65,17 +65,17 @@ namespace Waddu.BusinessObjects
         {
             get
             {
-                return Config.Instance.IsIgnored(this);
+                return Config.Instance.IsIgnored(this.Name);
             }
             set
             {
                 if (value == true)
                 {
-                    Config.Instance.AddIgnored(this);
+                    Config.Instance.AddIgnored(this.Name);
                 }
                 else
                 {
-                    Config.Instance.RemoveIgnored(this);
+                    Config.Instance.RemoveIgnored(this.Name);
                 }
                 Config.Instance.SaveSettings();
             }
@@ -155,6 +155,7 @@ namespace Waddu.BusinessObjects
             }
         }
 
+        // Assign a new Preferred Mapping
         private void _mappingList_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
@@ -168,6 +169,16 @@ namespace Waddu.BusinessObjects
                 }
                 else
                 {
+                    // Assign by NoLib Setting
+                    if (Config.Instance.PreferNoLib)
+                    {
+                        if (newMapping.AddonSiteId == AddonSiteId.wowace || newMapping.AddonSiteId == AddonSiteId.curseforge)
+                        {
+                            _preferredMapping = newMapping;
+                            return;
+                        }
+                    }
+
                     // Assign by Preferred
                     AddonSiteId preferred;
                     if (Config.Instance.GetPreferredMapping(this, out preferred))

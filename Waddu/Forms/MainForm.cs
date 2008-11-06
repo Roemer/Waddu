@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using Waddu.BusinessObjects;
 using Waddu.Classes;
 using Waddu.Types;
+using System.Net;
 
 namespace Waddu.Forms
 {
@@ -67,12 +68,24 @@ namespace Waddu.Forms
             // Associate DataSources
             dgvThreadActivity.DataSource = ThreadManager.Instance.WorkerThreadList;
 
+            // Fire OnLoaded after everything is Done
+            Application.Idle += new EventHandler(OnLoaded);
+        }
+
+        // This gets fired after the Form is shown
+        private void OnLoaded(object sender, EventArgs args)
+        {
+            // Remove the OnLoaded Event
+            Application.Idle -= new EventHandler(OnLoaded);
+
+            // Check for a WoW Folder
             if (!Directory.Exists(Config.Instance.WowFolderPath))
             {
                 Config.Instance.WowFolderPath = GetWoWFolder();
                 Config.Instance.SaveSettings();
             }
 
+            // Check for 7z
             if (!ArchiveHelper.Exists7z())
             {
                 MessageBox.Show(@"Please install and check the Path for the Files ""7z.exe and ""7zFM.exe"" in the Settings", "7-Zip not found");
@@ -162,7 +175,11 @@ namespace Waddu.Forms
         {
             using (SettingsForm dlg = new SettingsForm())
             {
-                dlg.ShowDialog();
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    AddonList.Instance = null;
+                    LoadLocalAddons();
+                }
             }
         }
 
@@ -173,7 +190,7 @@ namespace Waddu.Forms
                 Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.VersionCheck, addon));
                 }
             }
         }
@@ -185,7 +202,7 @@ namespace Waddu.Forms
                 Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.Update, addon));
                 }
             }
         }
@@ -200,7 +217,10 @@ namespace Waddu.Forms
             BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
             foreach (Addon addon in addonList)
             {
-                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, addon));
+                if (!addon.IsIgnored)
+                {
+                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.VersionCheck, addon));
+                }
             }
         }
 
@@ -211,7 +231,7 @@ namespace Waddu.Forms
             {
                 if (!addon.IsIgnored)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.Update, addon));
                 }
             }
         }
@@ -312,6 +332,7 @@ namespace Waddu.Forms
         #endregion
 
         #region Help
+        // Collects all Unknown Addons
         private void tsmiCollectUnknownAddons_Click(object sender, EventArgs e)
         {
             string unkAddons = string.Empty;
@@ -334,6 +355,19 @@ namespace Waddu.Forms
             {
                 MessageBox.Show("You have no unknown Addons!");
             }
+        }
+
+        // Checks for a newer Version
+        private void tsmiHelpCheckForUpdate_Click(object sender, EventArgs e)
+        {
+            ThreadManager.Instance.AddWork(new WorkItemEmpty(WorkItemType.WadduVersionCheck));
+        }
+
+        // Show About Screen
+        private void tsmiHelpAbout_Click(object sender, EventArgs e)
+        {
+            // TODO: About Screen
+            MessageBox.Show("ToDo");
         }
         #endregion
 
@@ -506,7 +540,7 @@ namespace Waddu.Forms
             if (dgvMappings.SelectedRows.Count > 0)
             {
                 Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
-                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.VersionCheck, map.Addon, map));
+                ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.VersionCheck, map.Addon, map));
             }
         }
 
@@ -518,7 +552,7 @@ namespace Waddu.Forms
             if (dgvMappings.SelectedRows.Count > 0)
             {
                 Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
-                ThreadManager.Instance.AddWork(new WorkItem(WorkItemType.Update, map.Addon, map));
+                ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.Update, map.Addon, map));
             }
         }
 

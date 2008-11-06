@@ -26,7 +26,7 @@ namespace Waddu.AddonSites
             bool dateFound = false;
 
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
-            List<string> infoPage = Helpers.GetHtml(url);
+            List<string> infoPage = WebHelper.GetHtml(url);
 
             for (int i = 0; i < infoPage.Count; i++)
             {
@@ -106,7 +106,7 @@ namespace Waddu.AddonSites
             string fileUrl = _fileLinkCache[mapping.AddonTag];
 
             string downloadUrl = string.Empty;
-            List<string> filePage = Helpers.GetHtml(fileUrl);
+            List<string> filePage = WebHelper.GetHtml(fileUrl);
             for (int i = 0; i < filePage.Count; i++)
             {
                 string line = filePage[i];

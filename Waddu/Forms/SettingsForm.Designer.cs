@@ -52,11 +52,21 @@
             this.lbPriority = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnBrowseMapping = new System.Windows.Forms.Button();
+            this.chkUseCustomMapping = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chkUseOlderNoLib = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btnUnignore = new System.Windows.Forms.Button();
+            this.lvIgnored = new System.Windows.Forms.ListView();
+            this.chIgnoredName = new System.Windows.Forms.ColumnHeader();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.btnRemovePreferred = new System.Windows.Forms.Button();
+            this.lvPreferred = new System.Windows.Forms.ListView();
+            this.chPreferredName = new System.Windows.Forms.ColumnHeader();
+            this.chPreferredMapping = new System.Windows.Forms.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -64,12 +74,15 @@
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(283, 240);
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Location = new System.Drawing.Point(301, 239);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -81,7 +94,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(364, 240);
+            this.btnCancel.Location = new System.Drawing.Point(382, 239);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -100,7 +113,7 @@
             // btnBrowseWoW
             // 
             this.btnBrowseWoW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseWoW.Location = new System.Drawing.Point(338, 6);
+            this.btnBrowseWoW.Location = new System.Drawing.Point(356, 6);
             this.btnBrowseWoW.Name = "btnBrowseWoW";
             this.btnBrowseWoW.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseWoW.TabIndex = 3;
@@ -114,7 +127,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWoWPath.Location = new System.Drawing.Point(80, 8);
             this.txtWoWPath.Name = "txtWoWPath";
-            this.txtWoWPath.Size = new System.Drawing.Size(252, 20);
+            this.txtWoWPath.Size = new System.Drawing.Size(270, 20);
             this.txtWoWPath.TabIndex = 4;
             // 
             // chkDelete
@@ -141,7 +154,7 @@
             // lblNumOfThreads
             // 
             this.lblNumOfThreads.AutoSize = true;
-            this.lblNumOfThreads.Location = new System.Drawing.Point(2, 93);
+            this.lblNumOfThreads.Location = new System.Drawing.Point(6, 114);
             this.lblNumOfThreads.Name = "lblNumOfThreads";
             this.lblNumOfThreads.Size = new System.Drawing.Size(68, 13);
             this.lblNumOfThreads.TabIndex = 7;
@@ -149,7 +162,7 @@
             // 
             // numThreads
             // 
-            this.numThreads.Location = new System.Drawing.Point(80, 90);
+            this.numThreads.Location = new System.Drawing.Point(80, 112);
             this.numThreads.Minimum = new decimal(new int[] {
             1,
             0,
@@ -228,7 +241,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 67);
+            this.label3.Location = new System.Drawing.Point(30, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 11;
@@ -238,9 +251,9 @@
             // 
             this.txtMappingFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMappingFile.Location = new System.Drawing.Point(80, 64);
+            this.txtMappingFile.Location = new System.Drawing.Point(103, 86);
             this.txtMappingFile.Name = "txtMappingFile";
-            this.txtMappingFile.Size = new System.Drawing.Size(252, 20);
+            this.txtMappingFile.Size = new System.Drawing.Size(247, 20);
             this.txtMappingFile.TabIndex = 12;
             // 
             // chkNoLib
@@ -252,6 +265,7 @@
             this.chkNoLib.TabIndex = 13;
             this.chkNoLib.Text = "Prefer NoLib";
             this.chkNoLib.UseVisualStyleBackColor = true;
+            this.chkNoLib.CheckedChanged += new System.EventHandler(this.chkNoLib_CheckedChanged);
             // 
             // label4
             // 
@@ -268,13 +282,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txt7zPath.Location = new System.Drawing.Point(80, 37);
             this.txt7zPath.Name = "txt7zPath";
-            this.txt7zPath.Size = new System.Drawing.Size(252, 20);
+            this.txt7zPath.Size = new System.Drawing.Size(270, 20);
             this.txt7zPath.TabIndex = 15;
             // 
             // btnBrowse7z
             // 
             this.btnBrowse7z.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse7z.Location = new System.Drawing.Point(338, 35);
+            this.btnBrowse7z.Location = new System.Drawing.Point(356, 35);
             this.btnBrowse7z.Name = "btnBrowse7z";
             this.btnBrowse7z.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse7z.TabIndex = 16;
@@ -307,12 +321,14 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(427, 222);
+            this.tabControl1.Size = new System.Drawing.Size(445, 221);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.btnBrowseMapping);
+            this.tabPage1.Controls.Add(this.chkUseCustomMapping);
             this.tabPage1.Controls.Add(this.txtWoWPath);
             this.tabPage1.Controls.Add(this.lblWoWPath);
             this.tabPage1.Controls.Add(this.label4);
@@ -326,14 +342,36 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(419, 196);
+            this.tabPage1.Size = new System.Drawing.Size(437, 195);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnBrowseMapping
+            // 
+            this.btnBrowseMapping.Location = new System.Drawing.Point(356, 84);
+            this.btnBrowseMapping.Name = "btnBrowseMapping";
+            this.btnBrowseMapping.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseMapping.TabIndex = 18;
+            this.btnBrowseMapping.Text = "Browse";
+            this.btnBrowseMapping.UseVisualStyleBackColor = true;
+            this.btnBrowseMapping.Click += new System.EventHandler(this.btnBrowseMapping_Click);
+            // 
+            // chkUseCustomMapping
+            // 
+            this.chkUseCustomMapping.AutoSize = true;
+            this.chkUseCustomMapping.Location = new System.Drawing.Point(9, 63);
+            this.chkUseCustomMapping.Name = "chkUseCustomMapping";
+            this.chkUseCustomMapping.Size = new System.Drawing.Size(127, 17);
+            this.chkUseCustomMapping.TabIndex = 17;
+            this.chkUseCustomMapping.Text = "Use Custom Mapping";
+            this.chkUseCustomMapping.UseVisualStyleBackColor = true;
+            this.chkUseCustomMapping.CheckedChanged += new System.EventHandler(this.chkUseCustomMapping_CheckedChanged);
+            // 
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.chkUseOlderNoLib);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.chkDelete);
             this.tabPage2.Controls.Add(this.chkMoveToTrash);
@@ -341,10 +379,20 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(419, 196);
+            this.tabPage2.Size = new System.Drawing.Size(437, 195);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Updating";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // chkUseOlderNoLib
+            // 
+            this.chkUseOlderNoLib.AutoSize = true;
+            this.chkUseOlderNoLib.Location = new System.Drawing.Point(148, 29);
+            this.chkUseOlderNoLib.Name = "chkUseOlderNoLib";
+            this.chkUseOlderNoLib.Size = new System.Drawing.Size(71, 17);
+            this.chkUseOlderNoLib.TabIndex = 20;
+            this.chkUseOlderNoLib.Text = "Use older";
+            this.chkUseOlderNoLib.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -363,30 +411,104 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(419, 196);
+            this.tabPage3.Size = new System.Drawing.Size(437, 195);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Network";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btnUnignore);
+            this.tabPage4.Controls.Add(this.lvIgnored);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(419, 196);
+            this.tabPage4.Size = new System.Drawing.Size(437, 195);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Ignored";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // btnUnignore
+            // 
+            this.btnUnignore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnignore.Location = new System.Drawing.Point(356, 6);
+            this.btnUnignore.Name = "btnUnignore";
+            this.btnUnignore.Size = new System.Drawing.Size(75, 23);
+            this.btnUnignore.TabIndex = 1;
+            this.btnUnignore.Text = "Unignore";
+            this.btnUnignore.UseVisualStyleBackColor = true;
+            this.btnUnignore.Click += new System.EventHandler(this.btnUnignore_Click);
+            // 
+            // lvIgnored
+            // 
+            this.lvIgnored.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvIgnored.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chIgnoredName});
+            this.lvIgnored.FullRowSelect = true;
+            this.lvIgnored.GridLines = true;
+            this.lvIgnored.Location = new System.Drawing.Point(6, 6);
+            this.lvIgnored.Name = "lvIgnored";
+            this.lvIgnored.Size = new System.Drawing.Size(344, 183);
+            this.lvIgnored.TabIndex = 0;
+            this.lvIgnored.UseCompatibleStateImageBehavior = false;
+            this.lvIgnored.View = System.Windows.Forms.View.Details;
+            // 
+            // chIgnoredName
+            // 
+            this.chIgnoredName.Text = "Name";
+            this.chIgnoredName.Width = 200;
+            // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.btnRemovePreferred);
+            this.tabPage5.Controls.Add(this.lvPreferred);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(419, 196);
+            this.tabPage5.Size = new System.Drawing.Size(437, 195);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Preferred";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // btnRemovePreferred
+            // 
+            this.btnRemovePreferred.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemovePreferred.Location = new System.Drawing.Point(356, 6);
+            this.btnRemovePreferred.Name = "btnRemovePreferred";
+            this.btnRemovePreferred.Size = new System.Drawing.Size(75, 23);
+            this.btnRemovePreferred.TabIndex = 1;
+            this.btnRemovePreferred.Text = "Remove";
+            this.btnRemovePreferred.UseVisualStyleBackColor = true;
+            this.btnRemovePreferred.Click += new System.EventHandler(this.btnRemovePreferred_Click);
+            // 
+            // lvPreferred
+            // 
+            this.lvPreferred.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvPreferred.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chPreferredName,
+            this.chPreferredMapping});
+            this.lvPreferred.FullRowSelect = true;
+            this.lvPreferred.GridLines = true;
+            this.lvPreferred.Location = new System.Drawing.Point(6, 6);
+            this.lvPreferred.Name = "lvPreferred";
+            this.lvPreferred.Size = new System.Drawing.Size(344, 183);
+            this.lvPreferred.TabIndex = 0;
+            this.lvPreferred.UseCompatibleStateImageBehavior = false;
+            this.lvPreferred.View = System.Windows.Forms.View.Details;
+            // 
+            // chPreferredName
+            // 
+            this.chPreferredName.Text = "Name";
+            this.chPreferredName.Width = 139;
+            // 
+            // chPreferredMapping
+            // 
+            this.chPreferredMapping.Text = "Mapping";
+            this.chPreferredMapping.Width = 127;
             // 
             // SettingsForm
             // 
@@ -394,7 +516,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(451, 275);
+            this.ClientSize = new System.Drawing.Size(469, 274);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -413,6 +535,8 @@
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -448,5 +572,15 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.CheckBox chkUseCustomMapping;
+        private System.Windows.Forms.Button btnBrowseMapping;
+        private System.Windows.Forms.ListView lvIgnored;
+        private System.Windows.Forms.Button btnUnignore;
+        private System.Windows.Forms.Button btnRemovePreferred;
+        private System.Windows.Forms.ListView lvPreferred;
+        private System.Windows.Forms.ColumnHeader chIgnoredName;
+        private System.Windows.Forms.ColumnHeader chPreferredName;
+        private System.Windows.Forms.ColumnHeader chPreferredMapping;
+        private System.Windows.Forms.CheckBox chkUseOlderNoLib;
     }
 }

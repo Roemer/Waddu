@@ -27,6 +27,36 @@ namespace Waddu.BusinessObjects
 
         public List<Addon> Addons;
 
+        private string GetNewestVersion()
+        {
+            string version;
+            bool success = WebHelper.GetString("http://waddu.flauschig.ch/mapping/latest.txt", out version);
+            if (!success)
+            {
+                success = WebHelper.GetString("http://www.red-demon.com/waddu/mapping/latest.txt", out version);
+            }
+            if (success)
+            {
+                return version;
+            }
+            return string.Empty;
+        }
+
+        private string GetLocalVersion(string xmlFile)
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.Load(xmlFile);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+
+            return doc.DocumentElement.Attributes["Version"].Value;
+        }
+
         // Private Constructor
         private AddonList()
         {
@@ -46,20 +76,35 @@ namespace Waddu.BusinessObjects
             }
 
             // Load XML File
-            string localXml = Path.Combine(Application.StartupPath, "mappings.xml");
-            if (Config.Instance.MappingFile.ToLower().StartsWith("http"))
+            string localXml = Config.Instance.MappingFile;
+            if (!Config.Instance.UseCustomMapping)
             {
-                using (MappingDownloadForm dlg = new MappingDownloadForm(Config.Instance.MappingFile, localXml))
+                // Use Default Mapping
+                localXml = Path.Combine(Application.StartupPath, "mappings.xml");
+                bool getNewest = true;
+                if (File.Exists(localXml))
                 {
-                    dlg.ShowDialog();
+                    string localVersion = GetLocalVersion(localXml);
+                    string newestVersion = GetNewestVersion();
+                    if (newestVersion != string.Empty && localVersion == newestVersion)
+                    {
+                        getNewest = false;
+                    }
                 }
-            }
-            else
-            {
-                localXml = Config.Instance.MappingFile;
+
+                // Download if needed
+                if (getNewest)
+                {
+                    Logger.Instance.AddLog(LogType.Debug, "Download new Mapping from");
+                    using (MappingDownloadForm dlg = new MappingDownloadForm(localXml))
+                    {
+                        dlg.ShowDialog();
+                    }
+                }
             }
 
             XmlDocument doc = new XmlDocument();
+            Logger.Instance.AddLog(LogType.Debug, "Load Mapping from {0}", localXml);
             try
             {
                 doc.Load(localXml);

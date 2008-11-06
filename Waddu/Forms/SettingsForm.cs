@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Waddu.Classes;
-using Waddu.Properties;
 using Waddu.Types;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace Waddu.Forms
 {
@@ -82,12 +82,23 @@ namespace Waddu.Forms
             txtCurseLogin.Text = Config.Instance.CurseLogin;
             txtCursePassword.Text = Config.Instance.CursePassword;
             chkSavePassword.Checked = Config.Instance.SavePassword;
+            chkUseCustomMapping.Checked = Config.Instance.UseCustomMapping;
             txtMappingFile.Text = Config.Instance.MappingFile;
             chkNoLib.Checked = Config.Instance.PreferNoLib;
+            chkUseOlderNoLib.Checked = Config.Instance.UseOlderNoLib;
             txt7zPath.Text = Config.Instance.PathTo7z;
             foreach (AddonSiteId addonSite in Config.Instance.AddonSites)
             {
                 lbPriority.Items.Add(addonSite);
+            }
+            foreach (string addonName in Config.Instance.IgnoredAddons)
+            {
+                lvIgnored.Items.Add(addonName);
+            }
+            foreach (KeyValuePair<string, AddonSiteId> kvp in Config.Instance.PreferredMappings)
+            {
+                ListViewItem i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
+                lvPreferred.Items.Add(i);
             }
         }
 
@@ -100,6 +111,26 @@ namespace Waddu.Forms
             else
             {
                 chkMoveToTrash.Enabled = false;
+            }
+
+            if (chkUseCustomMapping.Checked)
+            {
+                txtMappingFile.Enabled = true;
+                btnBrowseMapping.Enabled = true;
+            }
+            else
+            {
+                txtMappingFile.Enabled = false;
+                btnBrowseMapping.Enabled = false;
+            }
+
+            if (chkNoLib.Checked)
+            {
+                chkUseOlderNoLib.Enabled = true;
+            }
+            else
+            {
+                chkUseOlderNoLib.Enabled = false;
             }
         }
 
@@ -118,6 +149,37 @@ namespace Waddu.Forms
             txt7zPath.Text = Helpers.BrowseForFolder(txt7zPath.Text, FolderBrowseType.Enum.Folder7z);
         }
 
+        private void chkUseCustomMapping_CheckedChanged(object sender, EventArgs e)
+        {
+            SetChecks();
+        }
+
+        private void btnBrowseMapping_Click(object sender, EventArgs e)
+        {
+            txtMappingFile.Text = Helpers.BrowseForFile(txtMappingFile.Text);
+        }
+
+        private void btnUnignore_Click(object sender, EventArgs e)
+        {
+            if (lvIgnored.SelectedItems.Count > 0)
+            {
+                lvIgnored.Items.Remove(lvIgnored.SelectedItems[0]);
+            }
+        }
+
+        private void btnRemovePreferred_Click(object sender, EventArgs e)
+        {
+            if (lvPreferred.SelectedItems.Count > 0)
+            {
+                lvPreferred.Items.Remove(lvPreferred.SelectedItems[0]);
+            }
+        }
+
+        private void chkNoLib_CheckedChanged(object sender, EventArgs e)
+        {
+            SetChecks();
+        }
+
         private void btnOk_Click(object sender, EventArgs e)
         {
             Config.Instance.DeleteBeforeUpdate = chkDelete.Checked;
@@ -127,14 +189,37 @@ namespace Waddu.Forms
             Config.Instance.CurseLogin = txtCurseLogin.Text;
             Config.Instance.CursePassword = txtCursePassword.Text;
             Config.Instance.SavePassword = chkSavePassword.Checked;
+            Config.Instance.UseCustomMapping = chkUseCustomMapping.Checked;
             Config.Instance.MappingFile = txtMappingFile.Text;
             Config.Instance.PreferNoLib = chkNoLib.Checked;
+            Config.Instance.UseOlderNoLib = chkUseOlderNoLib.Checked;
             Config.Instance.PathTo7z = txt7zPath.Text;
 
             Config.Instance.AddonSites.Clear();
             foreach (AddonSiteId addonSite in lbPriority.Items)
             {
                 Config.Instance.AddonSites.Add(addonSite);
+            }
+
+            Config.Instance.IgnoredAddons.Clear();
+            foreach (ListViewItem item in lvIgnored.Items)
+            {
+                string addonName = item.Text;
+                Config.Instance.AddIgnored(addonName);
+            }
+
+            Config.Instance.PreferredMappings.Clear();
+            foreach (ListViewItem item in lvPreferred.Items)
+            {
+                string addonName = item.Text;
+                AddonSiteId addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), item.SubItems[1].Text);
+                Config.Instance.SetPreferredMapping(addonName, addonSiteId);
+            }
+
+            foreach (KeyValuePair<string, AddonSiteId> kvp in Config.Instance.PreferredMappings)
+            {
+                ListViewItem i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
+                lvPreferred.Items.Add(i);
             }
 
             Config.Instance.SaveSettings();
