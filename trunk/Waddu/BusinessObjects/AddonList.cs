@@ -57,6 +57,11 @@ namespace Waddu.BusinessObjects
             return doc.DocumentElement.Attributes["Version"].Value;
         }
 
+        public Addon GetAddon(string addonName)
+        {
+            return Addons.Find(delegate(Addon obj) { return (obj.Name.ToUpper().Equals(addonName.ToUpper())); });
+        }
+
         // Private Constructor
         private AddonList()
         {

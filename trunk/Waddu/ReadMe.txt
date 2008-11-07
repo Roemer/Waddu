@@ -1,6 +1,7 @@
 ﻿Version History:
 
-xx-11.2008 - 0.6.0.0 (Alpha 6)
+07-11.2008 - 0.6.0.0 (Alpha 6)
+New: Check Content before Deleting
 New: Version Checking for Waddu and Mapping File
 New: Implement Ignored/Preferred Mappings in Settings
 New: Option to always prefer an older NoLib Version before a newer one with Libs

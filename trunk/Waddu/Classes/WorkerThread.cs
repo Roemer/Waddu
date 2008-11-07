@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Waddu.BusinessObjects;
 using Waddu.Forms;
 using Waddu.Types;
+using System.Collections.Generic;
 
 namespace Waddu.Classes
 {
@@ -126,9 +127,14 @@ namespace Waddu.Classes
                     }
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, archiveFilePath);
 
+                    bool has7z = ArchiveHelper.Exists7z();
+                    List<string> archiveFolderList = new List<string>();
                     // Check if 7z Exists
-                    if (ArchiveHelper.Exists7z())
+                    if (has7z)
                     {
+                        // Get the Folder List (for Deletion)
+                        archiveFolderList = ArchiveHelper.GetRootFolders(archiveFilePath);
+
                         // Simple Check if the Archive looks right
                         if (!ArchiveHelper.CheckIntegrity(archiveFilePath, addon.Name))
                         {
@@ -149,14 +155,45 @@ namespace Waddu.Classes
                     {
                         if (addon.IsInstalled)
                         {
-                            DeleteType delType;
-                            foreach (Addon subAddon in addon.SubAddons)
+                            if (!has7z)
                             {
-                                delType = subAddon.Delete();
-                                Logger.Instance.AddLog(LogType.Information, "Thread #{0}: SubAddon {1} {2}", workerThread.ThreadID, subAddon.Name, delType.ToString());
+                                MessageBox.Show("Please install 7z to get sure that the right Folders get Deleted");
+                                // Straight-Forward Delete
+                                DeleteType delType;
+                                foreach (Addon subAddon in addon.SubAddons)
+                                {
+                                    delType = subAddon.Delete();
+                                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: SubAddon {1} {2}", workerThread.ThreadID, subAddon.Name, delType.ToString());
+                                }
+                                delType = addon.Delete();
+                                Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadID, addon.Name, delType.ToString());
                             }
-                            delType = addon.Delete();
-                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadID, addon.Name, delType.ToString());
+                            else
+                            {
+                                // Delete by Archive Content
+                                DeleteType delType;
+                                List<string> deletedList = new List<string>();
+                                foreach (string archiveFolder in archiveFolderList)
+                                {
+                                    delType = Addon.DeleteByName(archiveFolder);
+                                    if (delType == DeleteType.Deleted || delType == DeleteType.MovedToTrash)
+                                    {
+                                        deletedList.Add(archiveFolder);
+                                    }
+                                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Folder {1} {2}", workerThread.ThreadID, archiveFolder, delType.ToString());
+                                }
+                                foreach (Addon subAddon in addon.SubAddons)
+                                {
+                                    if (!deletedList.Contains(subAddon.Name))
+                                    {
+                                        Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: SubAddon {1} was not in Archive", workerThread.ThreadID, subAddon.Name);
+                                    }
+                                }
+                                if (!deletedList.Contains(addon.Name))
+                                {
+                                    Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} was not in Archive", workerThread.ThreadID, addon.Name);
+                                }
+                            }
                         }
                     }
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Expanding to {1}", workerThread.ThreadID, Addon.GetFolderPath());

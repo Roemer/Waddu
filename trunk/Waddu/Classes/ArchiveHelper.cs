@@ -52,11 +52,11 @@ namespace Waddu.Classes
 
         public static bool CheckIntegrity(string archiveFile, string addonName)
         {
-            List<string> contentList = GetArchiveContent(archiveFile);
             bool baseFound = false;
-            foreach (string content in contentList)
+            List<string> folderList = GetRootFolders(archiveFile);
+            foreach (string folder in folderList)
             {
-                if (content.ToUpper().StartsWith(addonName.ToUpper() + "\\"))
+                if (folder.ToUpper() == addonName.ToUpper())
                 {
                     baseFound = true;
                     break;
@@ -73,6 +73,23 @@ namespace Waddu.Classes
             ProcessObj.StartInfo.FileName = appPath;
             ProcessObj.StartInfo.Arguments = cmdArgs;
             ProcessObj.Start();
+        }
+
+        public static List<string> GetRootFolders(string archiveFile)
+        {
+            List<string> contentList = GetArchiveContent(archiveFile);
+            List<string> folderList = new List<string>();
+            foreach (string content in contentList)
+            {
+                int folderEndIndex = content.IndexOf(@"\");
+                if (folderEndIndex > 0)
+                {
+                    string folderName = content.Substring(0, folderEndIndex);
+                    Helpers.AddIfNeeded<string>(folderList, folderName);
+                }
+            }
+            folderList.Sort();
+            return folderList;
         }
 
         public static List<string> GetArchiveContent(string archiveFile)

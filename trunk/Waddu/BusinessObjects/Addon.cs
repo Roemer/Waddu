@@ -273,7 +273,11 @@ namespace Waddu.BusinessObjects
         /// </summary>
         public DeleteType Delete()
         {
-            string addonPath = Path.Combine(Addon.GetFolderPath(), Name);
+            return DeleteByName(Name);
+        }
+        public static DeleteType DeleteByName(string addonName)
+        {
+            string addonPath = Path.Combine(Addon.GetFolderPath(), addonName);
             if (!Directory.Exists(addonPath))
             {
                 return DeleteType.Inexistent;
