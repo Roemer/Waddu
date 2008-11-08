@@ -152,7 +152,7 @@ namespace Waddu.AddonSites
             }
             if (type == Type.Version)
             {
-                return "Unknown";
+                return "?";
             }
 
             // Main Addon
@@ -205,27 +205,23 @@ namespace Waddu.AddonSites
             }
 
             List<string> infoPage = WebHelper.GetHtml("http://www.mobmap.de/addon.php");
-            for (int i = 0; i < infoPage.Count; i++)
+            if (type == Type.Download)
+            {    
+                string regex1 = @".*<td>- <a href=""(.*)""><font size=""3"" face=""Verdana, Arial, Helvetica, sans-serif""><u>Download with the newest German database</u></font></a></td>";
+                string regex2 = @"<p><font face=""Verdana, Arial, Helvetica, sans-serif"">If that is not the case, please click  <a href=""(.*)""><font size=""3"">here</font></a> to start the download manually!</font></p>";
+                
+                Match m = WebHelper.GetMatch(infoPage, regex1);
+                string downUrl = "http://www.mobmap.de/" + m.Groups[1].Captures[0].Value;
+                List<string> downPage = WebHelper.GetHtml(downUrl);
+                m = WebHelper.GetMatch(downPage, regex2);
+                return m.Groups[1].Captures[0].Value;
+            }
+            else if (type == Type.Version)
             {
-                string line = infoPage[i];
-
-                if (type == Type.Download)
+                Match m = WebHelper.GetMatch(infoPage, @"<p><font face=""Verdana, Arial, Helvetica, sans-serif"">newest version : (.*)</font></p>");
+                if (m != null)
                 {
-                    //<td>- <a href="dodownload.php?dl=files/MobMap212.german.zip"><font size="3" face="Verdana, Arial, Helvetica, sans-serif"><u>Download mit aktueller deutscher Datenbank</u></font></a></td>
-                    if (line.Contains("Download with the newest German database"))
-                    {
-                        int start = line.IndexOf("href=\"") + 6;
-                        int end = line.IndexOf("\"", start);
-                        return "http://www.mobmap.de" + line.Substring(start, (end - start));
-                    }
-                }
-                if (type == Type.Version)
-                {
-                    Match m = Regex.Match(line, @"<p><font face=""Verdana, Arial, Helvetica, sans-serif"">newest version : (.*)</font></p>");
-                    if (m.Success)
-                    {
-                        return m.Groups[1].Captures[0].Value;
-                    }
+                    return m.Groups[1].Captures[0].Value;
                 }
             }
             return new object();

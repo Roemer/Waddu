@@ -14,14 +14,14 @@ namespace Waddu.AddonSites
         private string _versionPattern = @"<a href=""(.*.aspx)"">(.*)</a>";
         private string _updatedPattern = @"<td><script>document.write\(Curse.Utils.getDateSince\((.*)000\)\);</script>(.*)</td>";
         private string _downloadPattern = @"<a class=""button button-pop"" href=""(.*)""><span>Manual Install</span></a>";
-        private Dictionary<string, string> _versionCache = new Dictionary<string, string>();
-        private Dictionary<string, DateTime> _dateCache = new Dictionary<string, DateTime>();
-        private Dictionary<string, string> _fileLinkCache = new Dictionary<string, string>();
+        private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
 
         #region AddonSiteBase Overrides
 
         private void ParseInfoSite(Mapping mapping)
         {
+            SiteAddon addon = new SiteAddon();
+
             bool versionFound = false;
             bool dateFound = false;
 
@@ -43,9 +43,9 @@ namespace Waddu.AddonSites
                         if (m.Success)
                         {
                             string version = m.Groups[2].Captures[0].Value;
-                            Helpers.AddOrUpdate<string, string>(_versionCache, mapping.AddonTag, version);
+                            addon.VersionString = version;
                             string file = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
-                            Helpers.AddOrUpdate<string, string>(_fileLinkCache, mapping.AddonTag, file);
+                            addon.FileUrl = file;
                             versionFound = true;
                         }
                     }
@@ -59,37 +59,31 @@ namespace Waddu.AddonSites
                     {
                         string date = m.Groups[1].Captures[0].Value;
                         DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(date));
-                        Helpers.AddOrUpdate<string, DateTime>(_dateCache, mapping.AddonTag, dt);
+                        addon.VersionDate = dt;
                         dateFound = true;
                     }
                 }
             }
+
+            Helpers.AddOrUpdate<string, SiteAddon>(_addonCache, mapping.AddonTag, addon);
         }
 
         public override string GetVersion(Mapping mapping)
         {
-            if (!_versionCache.ContainsKey(mapping.AddonTag))
+            if (!_addonCache.ContainsKey(mapping.AddonTag))
             {
                 ParseInfoSite(mapping);
             }
-            if (_versionCache.ContainsKey(mapping.AddonTag))
-            {
-                return _versionCache[mapping.AddonTag];
-            }
-            return string.Empty;
+            return _addonCache[mapping.AddonTag].VersionString;
         }
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_dateCache.ContainsKey(mapping.AddonTag))
+            if (!_addonCache.ContainsKey(mapping.AddonTag))
             {
                 ParseInfoSite(mapping);
             }
-            if (_dateCache.ContainsKey(mapping.AddonTag))
-            {
-                return _dateCache[mapping.AddonTag];
-            }
-            return DateTime.MinValue;
+            return _addonCache[mapping.AddonTag].VersionDate;
         }
 
         public override string GetInfoLink(Mapping mapping)
@@ -99,11 +93,11 @@ namespace Waddu.AddonSites
 
         public override string GetDownloadLink(Mapping mapping)
         {
-            if (!_fileLinkCache.ContainsKey(mapping.AddonTag))
+            if (!_addonCache.ContainsKey(mapping.AddonTag))
             {
                 ParseInfoSite(mapping);
             }
-            string fileUrl = _fileLinkCache[mapping.AddonTag];
+            string fileUrl = _addonCache[mapping.AddonTag].FileUrl;
 
             string downloadUrl = string.Empty;
             List<string> filePage = WebHelper.GetHtml(fileUrl);

@@ -235,7 +235,8 @@ namespace Waddu.Classes
                 }
                 else
                 {
-                    MessageBox.Show(string.Format("There is an Update available for Version {0}", version));
+                    UpdateAvailableForm form = new UpdateAvailableForm(version);
+                    form.ShowDialog();
                 }
             }
             else

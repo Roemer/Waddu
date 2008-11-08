@@ -120,7 +120,7 @@ namespace Waddu.AddonSites
             SiteAddon noLibAddon = _noLibCache[mapping.AddonTag];
 
             // Lib Addons or no NoLib Addon Found
-            if (!Config.Instance.PreferNoLib || noLibAddon.VersionString == string.Empty)
+            if (!Config.Instance.PreferNoLib || !noLibAddon.IsValid)
             {
                 return addon;
             }

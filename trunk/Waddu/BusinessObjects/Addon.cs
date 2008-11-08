@@ -265,7 +265,7 @@ namespace Waddu.BusinessObjects
             }
 
             // Unknown
-            return "Unknown";
+            return "?";
         }
 
         /// <summary>

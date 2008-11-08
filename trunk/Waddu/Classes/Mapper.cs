@@ -262,6 +262,7 @@ namespace Waddu.Classes
             GetAddon("adolf").Mappings.Add(new Mapping("adolf", AddonSiteId.wowace));
             GetAddon("ADS").Mappings.Add(new Mapping("ads", AddonSiteId.wowace));
             GetAddon("AdvancedTradeSkillWindow").Mappings.Add(new Mapping("5812", AddonSiteId.wowinterface));
+            GetAddon("AECB").Mappings.Add(new Mapping("6616", AddonSiteId.wowinterface));
             GetAddon("AEmotes_DrWho").Mappings.Add(new Mapping("aemotes_dr-who", AddonSiteId.curse));
             GetAddon("AEmotes_DrWho").Mappings.Add(new Mapping("aemotes_dr-who", AddonSiteId.wowace));
             GetAddon("AEmotes_FullMetalJ").Mappings.Add(new Mapping("aemotes_full-metal-j", AddonSiteId.curse));
@@ -371,6 +372,7 @@ namespace Waddu.Classes
             GetAddon("ASSBlock").Mappings.Add(new Mapping("assblock", AddonSiteId.wowace));
             GetAddon("Assessment").Mappings.Add(new Mapping("assessment", AddonSiteId.curse));
             GetAddon("Assessment").Mappings.Add(new Mapping("assessment", AddonSiteId.wowace));
+            GetAddon("ASSFilter").Mappings.Add(new Mapping("assfilter", AddonSiteId.curse));
             GetAddon("AssignAssist").Mappings.Add(new Mapping("assign-assist", AddonSiteId.curse));
             GetAddon("AssignAssist").Mappings.Add(new Mapping("assign-assist", AddonSiteId.wowace));
             GetAddon("ASSinTrade").Mappings.Add(new Mapping("assin-trade", AddonSiteId.curse));
@@ -910,7 +912,6 @@ namespace Waddu.Classes
             GetAddon("CandyBar").Mappings.Add(new Mapping("candybar", AddonSiteId.curse));
             GetAddon("CandyBar").Mappings.Add(new Mapping("candybar", AddonSiteId.wowace));
             GetAddon("Capping").Mappings.Add(new Mapping("11177", AddonSiteId.wowinterface));
-            GetAddon("Capping").Mappings.Add(new Mapping("capping", AddonSiteId.wowace));
             GetAddon("Capsule").Mappings.Add(new Mapping("capsule", AddonSiteId.curse));
             GetAddon("Capsule").Mappings.Add(new Mapping("capsule", AddonSiteId.wowace));
             GetAddon("Carbonite").Mappings.Add(new Mapping("carbonite-quest", AddonSiteId.curse));

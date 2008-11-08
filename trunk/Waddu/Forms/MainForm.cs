@@ -366,8 +366,9 @@ namespace Waddu.Forms
         // Show About Screen
         private void tsmiHelpAbout_Click(object sender, EventArgs e)
         {
-            // TODO: About Screen
-            MessageBox.Show("ToDo");
+            AboutForm form = new AboutForm();
+            Helpers.CenterFormTo(form, this);
+            form.Show(this);
         }
         #endregion
 

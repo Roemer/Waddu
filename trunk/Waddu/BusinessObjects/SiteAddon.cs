@@ -25,6 +25,14 @@ namespace Waddu.BusinessObjects
             set { _fileUrl = value; }
         }
 
+        public bool IsValid
+        {
+            get
+            {
+                return _versionString.Length > 0;
+            }
+        }
+
         public SiteAddon()
         {
         }
