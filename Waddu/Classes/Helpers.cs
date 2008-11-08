@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Waddu.Types;
+using System.Drawing;
 
 namespace Waddu.Classes
 {
@@ -129,5 +130,21 @@ namespace Waddu.Classes
             // Bytes
             return string.Format("{0} B", bytes);
         }
+
+        public static void CenterFormTo(Form form, Form containerForm)
+        {
+            Point point = new Point(); Size formSize = form.Size;
+            Rectangle workingArea = Screen.GetWorkingArea(containerForm);
+            Rectangle rect = containerForm.Bounds;
+            point.X = ((rect.Left + rect.Right) - formSize.Width) / 2;
+            if (point.X < workingArea.X) point.X = workingArea.X;
+            else if ((point.X + formSize.Width) > (workingArea.X + workingArea.Width))
+                point.X = (workingArea.X + workingArea.Width) - formSize.Width;
+            point.Y = ((rect.Top + rect.Bottom) - formSize.Height) / 2;
+            if (point.Y < workingArea.Y) point.Y = workingArea.Y;
+            else if ((point.Y + formSize.Height) > (workingArea.Y + workingArea.Height))
+                point.Y = (workingArea.Y + workingArea.Height) - formSize.Height;
+            form.Location = point;
+        } 
     }
 }

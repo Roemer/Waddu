@@ -14,13 +14,14 @@ namespace Waddu.AddonSites
         private string _versionPattern = @"<td class=""alt2""><div class=""smallfont"">(.*)</div></td>";
         private string _datePrePattern = @"<td class=""alt1""><div class=""infoboxfont1"">Date:</div></td>";
         private string _datePattern = @"<td class=""alt1""><div class=""smallfont"">([^ ]*).*</div></td>";
-        private Dictionary<string, string> _versionCache = new Dictionary<string, string>();
-        private Dictionary<string, DateTime> _dateCache = new Dictionary<string, DateTime>();
+        private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
 
         #region AddonSiteBase Overrides
 
         private void ParseInfoSite(Mapping mapping)
         {
+            SiteAddon addon = new SiteAddon();
+
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             bool versionFound = false;
             bool dateFound = false;
@@ -40,7 +41,7 @@ namespace Waddu.AddonSites
                         if (m.Success)
                         {
                             string version = m.Groups[1].Captures[0].Value;
-                            Helpers.AddOrUpdate<string, string>(_versionCache, mapping.AddonTag, version);
+                            addon.VersionString = version;
                             versionFound = true;
                         }
                     }
@@ -58,30 +59,32 @@ namespace Waddu.AddonSites
                             string dateStr = m.Groups[1].Captures[0].Value;
                             string[] dateList = dateStr.Split('-');
                             DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
-                            Helpers.AddOrUpdate<string, DateTime>(_dateCache, mapping.AddonTag, dt);
+                            addon.VersionDate = dt;
                             dateFound = true;
                         }
                     }
                 }
             }
+
+            Helpers.AddOrUpdate<string, SiteAddon>(_addonCache, mapping.AddonTag, addon);
         }
 
         public override string GetVersion(Mapping mapping)
         {
-            if (!_versionCache.ContainsKey(mapping.AddonTag))
+            if (!_addonCache.ContainsKey(mapping.AddonTag))
             {
                 ParseInfoSite(mapping);
             }
-            return _versionCache[mapping.AddonTag];
+            return _addonCache[mapping.AddonTag].VersionString;
         }
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_dateCache.ContainsKey(mapping.AddonTag))
+            if (!_addonCache.ContainsKey(mapping.AddonTag))
             {
                 ParseInfoSite(mapping);
             }
-            return _dateCache[mapping.AddonTag];
+            return _addonCache[mapping.AddonTag].VersionDate;
         }
 
         public override string GetInfoLink(Mapping mapping)

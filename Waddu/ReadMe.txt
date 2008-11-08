@@ -1,6 +1,9 @@
 ﻿Version History:
 
-07-11.2008 - 0.6.0.0 (Alpha 6)
+08.11.2008 - 0.6.1.0 (Alpha 6 Bugfix)
+
+
+07.11.2008 - 0.6.0.0 (Alpha 6)
 New: Check Content before Deleting
 New: Version Checking for Waddu and Mapping File
 New: Implement Ignored/Preferred Mappings in Settings

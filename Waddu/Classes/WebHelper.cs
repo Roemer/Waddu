@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using Waddu.Types;
+using System.Text.RegularExpressions;
 
 namespace Waddu.Classes
 {
@@ -22,6 +23,33 @@ namespace Waddu.Classes
             {
                 return false;
             }
+        }
+
+        public static Match GetMatch(List<string> pageLines, string regex)
+        {
+            for (int i = 0; i < pageLines.Count; i++)
+            {
+                string line = pageLines[i];
+                Match m = Regex.Match(line, regex);
+                if (m.Success)
+                {
+                    return m;
+                }
+            }
+            return null;
+        }
+
+        public static string GetContainingLine(List<string> pageLines, string stringToContain)
+        {
+            for (int i = 0; i < pageLines.Count; i++)
+            {
+                string line = pageLines[i];
+                if (line.ToUpper().Contains(stringToContain.ToUpper()))
+                {
+                    return line;
+                }
+            }
+            return string.Empty;
         }
 
         public static List<string> GetHtml(string url)
