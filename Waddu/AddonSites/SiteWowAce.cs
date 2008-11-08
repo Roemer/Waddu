@@ -132,17 +132,17 @@ namespace Waddu.AddonSites
                 }
                 else
                 {
-                    string version2 = noLibAddon.VersionString.Replace("-nolib", "");
-                    string version1 = addon.VersionString.Substring(0, version2.Length);
-                    // Versions are the same
-                    if (version1 == version2)
+                    string versionNoLib = noLibAddon.VersionString.Replace("-nolib", "");
+                    if (addon.VersionString.Length >= versionNoLib.Length)
                     {
-                        return noLibAddon;
+                        string versionWithLib = addon.VersionString.Substring(0, versionNoLib.Length);
+                        // Versions are the same
+                        if (versionWithLib == versionNoLib)
+                        {
+                            return noLibAddon;
+                        }
                     }
-                    else
-                    {
-                        return addon;
-                    }
+                    return addon;
                 }
             }
         }

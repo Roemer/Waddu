@@ -14,15 +14,19 @@ namespace Waddu.Forms
 {
     public partial class MainForm : Form
     {
+        public static MainForm Instance = null;
+
         public MainForm()
         {
+            Instance = this;
+
             InitializeComponent();
 
             // Set the Version
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)

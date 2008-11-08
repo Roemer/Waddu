@@ -74,7 +74,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MappingDownloadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MappingDownloadForm";
+            this.Text = "Mapping Download";
             this.ResumeLayout(false);
             this.PerformLayout();
 

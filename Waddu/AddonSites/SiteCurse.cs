@@ -43,6 +43,11 @@ namespace Waddu.AddonSites
                         if (m.Success)
                         {
                             string version = m.Groups[2].Captures[0].Value;
+                            // Remove "AddonName-" if existent
+                            if (version.StartsWith(mapping.Addon.Name))
+                            {
+                                version = version.Substring(mapping.Addon.Name.Length + 1);
+                            }
                             addon.VersionString = version;
                             string file = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
                             addon.FileUrl = file;
