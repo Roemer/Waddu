@@ -106,7 +106,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UpdateAvailableForm";
-            this.Text = "UpdateAvailableForm";
+            this.Text = "Update Available";
             this.ResumeLayout(false);
             this.PerformLayout();
 

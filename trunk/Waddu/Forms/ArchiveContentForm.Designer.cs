@@ -134,7 +134,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Name = "ArchiveContentForm";
-            this.Text = "ArchiveContentForm";
+            this.Text = "Archive Content";
             this.splitContainerEx1.Panel1.ResumeLayout(false);
             this.splitContainerEx1.Panel2.ResumeLayout(false);
             this.splitContainerEx1.Panel2.PerformLayout();

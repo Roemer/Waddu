@@ -149,17 +149,16 @@ namespace Waddu.Classes
                         byte[] buffer = new byte[1024];
                         int bytesRead;
 
-                        // Simple do/while loop to read from stream until
-                        // no bytes are returned
+                        // Simple do/while Loop to read from Stream until no Bytes are returned
                         do
                         {
-                            // Read data (up to 1k) from the stream
+                            // Read Data (up to 1k) from the Stream
                             bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
 
-                            // Write the data to the local file
+                            // Write the Data to the local File
                             localStream.Write(buffer, 0, bytesRead);
 
-                            // Increment total bytes processed
+                            // Increment total Bytes processed
                             bytesProcessed += bytesRead;
 
                             if (progress != null)

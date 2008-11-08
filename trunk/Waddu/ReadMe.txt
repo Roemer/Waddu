@@ -1,7 +1,17 @@
 ﻿Version History:
 
-08.11.2008 - 0.6.1.0 (Alpha 6 Bugfix)
+08.11.2008 - 0.6.3.0 (Alpha 6 Bugfix 3)
+New: Error Dialog Form
 
+08.11.2008 - 0.6.2.0 (Alpha 6 Bugfix 2)
+Chg: Made Dialogs Modal to Main Form
+Bug: NoLib Version Crash
+
+08.11.2008 - 0.6.1.0 (Alpha 6 Bugfix)
+Chg: Better About Box
+Chg: Better Update Available Form (for Waddu Updates)
+Bug: Crash on Curse, WoWInterface, WoWUI Page if something went wrong
+Bug: MobMap Download (German only)
 
 07.11.2008 - 0.6.0.0 (Alpha 6)
 New: Check Content before Deleting

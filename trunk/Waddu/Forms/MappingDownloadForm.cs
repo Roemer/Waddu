@@ -16,6 +16,14 @@ namespace Waddu.Forms
 
             _localPath = localPath;
 
+            Application.Idle += new EventHandler(OnLoaded);
+        }
+
+        private void OnLoaded(object sender, EventArgs args)
+        {
+            // Remove the OnLoaded Event
+            Application.Idle -= new EventHandler(OnLoaded);
+
             Thread t = new Thread(new ParameterizedThreadStart(ThreadProc));
             t.Start(this);
         }
