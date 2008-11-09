@@ -52,7 +52,7 @@ namespace Waddu.AddonSites
                     if (m.Success)
                     {
                         string dateStr = m.Groups[1].Captures[0].Value;
-                        string[] dateList = dateStr.Split('/');
+                        string[] dateList = dateStr.Split(new char[] { '/' });
                         DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[1]), Convert.ToInt32(dateList[0]));
                         addon.VersionDate = dt;
                         dateFound = true;

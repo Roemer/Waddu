@@ -17,6 +17,20 @@ namespace Waddu.AddonSites
         #endregion
 
         #region Helper Functions
+        public static string FormatVersion(Mapping mapping, string versionString)
+        {
+            string retString = versionString;
+            if (mapping.AddonSiteId == AddonSiteId.wowace || mapping.AddonSiteId == AddonSiteId.curseforge || mapping.AddonSiteId == AddonSiteId.curse)
+            {
+                // Remove "AddonName-" if existent
+                if (retString.StartsWith(mapping.Addon.Name + "-"))
+                {
+                    retString = retString.Substring(mapping.Addon.Name.Length + 1);
+                }
+            }
+            return retString;
+        }
+
         public static AddonSiteBase GetSite(int addonSiteId)
         {
             return GetSite((AddonSiteId)addonSiteId);

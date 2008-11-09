@@ -62,6 +62,9 @@ namespace Waddu.Forms
             dgvColMappingVersion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvColMappingLastUpdated.DataPropertyName = "LastUpdated";
 
+            // Initialize Relation Display
+            lvRelations.Layout += new LayoutEventHandler(lvRelations_Layout);
+
             // Initialize Logger
             SetLogLevel(Config.Instance.LogLevel);
             Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
@@ -74,6 +77,12 @@ namespace Waddu.Forms
 
             // Fire OnLoaded after everything is Done
             Application.Idle += new EventHandler(OnLoaded);
+        }
+
+        private void lvRelations_Layout(object sender, LayoutEventArgs e)
+        {
+            ListView lv = sender as ListView;
+            lv.Columns[0].Width = lv.ClientSize.Width - 5;
         }
 
         // This gets fired after the Form is shown
@@ -111,7 +120,7 @@ namespace Waddu.Forms
 
         private void LoadLocalAddons()
         {
-            BindingList<Addon> dispList = new BindingList<Addon>(); 
+            BindingList<Addon> dispList = new BindingList<Addon>();
             foreach (Addon addon in AddonList.Instance.Addons)
             {
                 // Filter out Blizzard Addons
@@ -422,17 +431,29 @@ namespace Waddu.Forms
                 {
                     Addon addon = e.Row.DataBoundItem as Addon;
 
-                    lbSuperAddons.Items.Clear();
-                    foreach (Addon superAddon in addon.SuperAddons)
+                    lvRelations.BeginUpdate();
+                    lvRelations.Columns[0].Width = -2;
+                    lvRelations.Items.Clear();
+                    // Dependencies
+                    foreach (string dep in TocHelper.GetDependencies(addon))
                     {
-                        lbSuperAddons.Items.Add(superAddon.Name);
+                        ListViewItem i = new ListViewItem(dep, lvRelations.Groups[0]);
+                        lvRelations.Items.Add(i);
                     }
-                    lbSubAddons.Items.Clear();
+                    // SubAddons
                     foreach (Addon subAddon in addon.SubAddons)
                     {
-                        lbSubAddons.Items.Add(subAddon.Name);
+                        ListViewItem i = new ListViewItem(subAddon.Name, lvRelations.Groups[1]);
+                        lvRelations.Items.Add(i);
                     }
-
+                    // SuperAddons
+                    foreach (Addon superAddon in addon.SuperAddons)
+                    {
+                        ListViewItem i = new ListViewItem(superAddon.Name, lvRelations.Groups[2]);
+                        lvRelations.Items.Add(i);
+                    }
+                    lvRelations.EndUpdate();
+                    // Other Info
                     txtName.Text = addon.Name;
                     txtLocalVersion.Text = addon.LocalVersion;
                     dgvMappings.DataSource = addon.Mappings;

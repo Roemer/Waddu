@@ -1,5 +1,9 @@
 ﻿Version History:
 
+xx.11.2008 - 0.7.0.0 (Alpha 7)
+New: Dependencies
+Bug: Fixed Splitting
+
 08.11.2008 - 0.6.3.0 (Alpha 6 Bugfix 3)
 New: Error Dialog Form
 
@@ -59,16 +63,15 @@ New: Download from most Sites Work
 
 Task List:
 - Zip Mapping File
+- Add Changelog Viewing
+- Local Change Date
 - Option to ignore Alpha/Beta Releases
 - Implement Packages
-- Add Changelog Viewing
 - Version Check (instead of update all)
 - Cleanup Saved Variables (with Backup)
 - Proxy Support
 - Store Window and Column Sizes
 - Add Local Version if missing (own File / TOC)
-- Add Mappings
 
 Bugs:
 - Catch protected (unreadable) Folders when deleting / extracting
-- Fix Crash for Bad Mapping / Site unavailable

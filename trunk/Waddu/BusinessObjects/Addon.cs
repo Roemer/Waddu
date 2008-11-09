@@ -243,15 +243,10 @@ namespace Waddu.BusinessObjects
             }
 
             // Try by .toc File
-            foreach (string file in Directory.GetFiles(addonFolderPath, "*.toc"))
+            string version;
+            if (TocHelper.GetVersion(this, out version))
             {
-                foreach (string line in File.ReadAllLines(file))
-                {
-                    if (line.Contains("## Version:"))
-                    {
-                        return line.Substring(11).Trim() + " (TOC)";
-                    }
-                }
+                return version;
             }
 
             // Special
