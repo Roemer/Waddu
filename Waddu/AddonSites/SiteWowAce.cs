@@ -42,11 +42,7 @@ namespace Waddu.AddonSites
                     if (m.Success)
                     {
                         string versionString = m.Groups[2].Captures[0].Value;
-                        // Remove "AddonName-" if existent
-                        if (versionString.StartsWith(mapping.Addon.Name))
-                        {
-                            versionString = versionString.Substring(mapping.Addon.Name.Length + 1);
-                        }
+                        versionString = FormatVersion(mapping, versionString);
                         string fileUrl = m.Groups[1].Captures[0].Value;
                         addon.VersionString = versionString;
                         addon.FileUrl = string.Format(_fileUrl, fileUrl);
@@ -60,15 +56,11 @@ namespace Waddu.AddonSites
                     if (m.Success)
                     {
                         string versionString = m.Groups[2].Captures[0].Value;
-                        // Remove <AddonName-> if existent
                         if (!versionString.ToLower().Contains("nolib"))
                         {
                             continue;
                         }
-                        if (versionString.StartsWith(mapping.Addon.Name))
-                        {
-                            versionString = versionString.Substring(mapping.Addon.Name.Length + 1);
-                        }
+                        versionString = FormatVersion(mapping, versionString);
                         string fileUrl = m.Groups[1].Captures[0].Value;
                         noLib.VersionString = versionString;
                         noLib.FileUrl = string.Format(_fileUrl, fileUrl);
@@ -83,7 +75,7 @@ namespace Waddu.AddonSites
                     if (m.Success)
                     {
                         string dateStr = m.Groups[1].Captures[0].Value;
-                        string[] dateList = dateStr.Split('/');
+                        string[] dateList = dateStr.Split(new char[] { '/' });
                         DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
                         addon.VersionDate = dt;
                         dateFound = true;
@@ -96,7 +88,7 @@ namespace Waddu.AddonSites
                     if (m.Success)
                     {
                         string dateStr = m.Groups[1].Captures[0].Value;
-                        string[] dateList = dateStr.Split('/');
+                        string[] dateList = dateStr.Split(new char[] { '/' });
                         DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
                         noLib.VersionDate = dt;
                         nolibDateFound = true;

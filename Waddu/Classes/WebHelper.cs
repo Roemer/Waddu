@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Waddu.Types;
-using System.Text.RegularExpressions;
 
 namespace Waddu.Classes
 {

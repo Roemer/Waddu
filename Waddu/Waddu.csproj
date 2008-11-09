@@ -83,6 +83,7 @@
     <Compile Include="BusinessObjects\Package.cs" />
     <Compile Include="BusinessObjects\SiteAddon.cs" />
     <Compile Include="Classes\ArchiveHelper.cs" />
+    <Compile Include="Classes\TocHelper.cs" />
     <Compile Include="Classes\WebHelper.cs" />
     <Compile Include="Classes\WorkItemBase.cs" />
     <Compile Include="Classes\BlockingQueue.cs" />
@@ -101,6 +102,9 @@
     <Compile Include="Classes\WorkerThread.cs" />
     <Compile Include="Classes\WorkItemAddon.cs" />
     <Compile Include="Classes\WorkItemEmpty.cs" />
+    <Compile Include="Controls\ListViewAutoSize.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\SeparatorControl.cs">
       <SubType>Component</SubType>
     </Compile>
