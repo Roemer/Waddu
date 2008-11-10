@@ -19,14 +19,6 @@ namespace Waddu.Classes
             set { _mapping = value; }
         }
 
-        public WorkItemAddon(WorkItemType workItemType)
-            : base(workItemType)
-        {
-            if (workItemType != WorkItemType.Cancel)
-            {
-                throw new Exception("WorkItem needs an Addon");
-            }
-        }
         public WorkItemAddon(WorkItemType workItemType, Addon addon)
             : base(workItemType)
         {

@@ -8,5 +8,6 @@ namespace Waddu.Types
         VersionCheck,
         Update,
         WadduVersionCheck,
+        ChangeLog,
     }
 }

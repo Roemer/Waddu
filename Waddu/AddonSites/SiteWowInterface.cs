@@ -87,6 +87,11 @@ namespace Waddu.AddonSites
             return _addonCache[mapping.AddonTag].VersionDate;
         }
 
+        public override string GetChangeLog(Mapping mapping)
+        {
+            return string.Empty;
+        }
+
         public override string GetInfoLink(Mapping mapping)
         {
             return _infoUrl.Replace("{tag}", mapping.AddonTag);

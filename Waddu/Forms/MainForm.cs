@@ -559,6 +559,18 @@ namespace Waddu.Forms
         }
 
         /// <summary>
+        /// Shows the Change Log for a Specific Mapping
+        /// </summary>
+        private void tsmiMappingChangeLog_Click(object sender, EventArgs e)
+        {
+            if (dgvMappings.SelectedRows.Count > 0)
+            {
+                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                ThreadManager.Instance.AddWork(new WorkItemMapping(WorkItemType.ChangeLog, map));
+            }
+        }
+
+        /// <summary>
         /// Adds an Version Request for a specific Mapping to the WorkQueue
         /// </summary>
         private void tsmiMappingCheckVersion_Click(object sender, EventArgs e)
@@ -607,6 +619,7 @@ namespace Waddu.Forms
         }
         #endregion
 
+        #region Admin
         private void tsmiAdmin_Click(object sender, EventArgs e)
         {
             using (AdminForm dlg = new AdminForm())
@@ -614,5 +627,6 @@ namespace Waddu.Forms
                 dlg.ShowDialog();
             }
         }
+        #endregion
     }
 }

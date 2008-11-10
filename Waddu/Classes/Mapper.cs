@@ -282,6 +282,7 @@ namespace Waddu.Classes
             GetAddon("Afflicted2").Mappings.Add(new Mapping("8063", AddonSiteId.wowinterface));
             GetAddon("AFKFix").Mappings.Add(new Mapping("afk-fix", AddonSiteId.curse));
             GetAddon("afktimer").Mappings.Add(new Mapping("afk-timer", AddonSiteId.curse));
+            GetAddon("Afterlife").Mappings.Add(new Mapping("9092", AddonSiteId.wowinterface));
             GetAddon("AFX").Mappings.Add(new Mapping("afx", AddonSiteId.curse));
             GetAddon("AFX").Mappings.Add(new Mapping("afx", AddonSiteId.wowace));
             GetAddon("ag_UnitFrames").Mappings.Add(new Mapping("ag_unitframes", AddonSiteId.curse));
@@ -313,6 +314,13 @@ namespace Waddu.Classes
             GetAddon("Aloft").Mappings.Add(new Mapping("aloft", AddonSiteId.wowace));
             GetAddon("AloftPresets").Mappings.Add(new Mapping("aloft-presets", AddonSiteId.curse));
             GetAddon("AloftPresets").Mappings.Add(new Mapping("aloft-presets", AddonSiteId.wowace));
+            GetAddon("AlphaMap").Mappings.Add(new Mapping("4411", AddonSiteId.wowinterface));
+            GetAddon("AlphaMap").Mappings.Add(new Mapping("alpha-map-fans-update", AddonSiteId.curse));
+            GetAddon("AlphaMap").SubAddons.Add(GetAddon("AlphaMap_Battlegrounds"));
+            GetAddon("AlphaMap").SubAddons.Add(GetAddon("AlphaMap_Exteriors"));
+            GetAddon("AlphaMap").SubAddons.Add(GetAddon("AlphaMap_Instances"));
+            GetAddon("AlphaMap").SubAddons.Add(GetAddon("AlphaMap_WorldBosses"));
+            GetAddon("AlphaMap").SubAddons.Add(GetAddon("AlphaQuestHelper"));
             GetAddon("AltClickToAddItem").Mappings.Add(new Mapping("alt-click-to-add-item", AddonSiteId.curse));
             GetAddon("AltClickToAddItem").Mappings.Add(new Mapping("alt-click-to-add-item", AddonSiteId.wowace));
             GetAddon("Altoholic").Mappings.Add(new Mapping("8533", AddonSiteId.wowinterface));
@@ -354,6 +362,7 @@ namespace Waddu.Classes
             GetAddon("AoFDKP").Mappings.Add(new Mapping("ao-fdkp", AddonSiteId.wowace));
             GetAddon("Aperture").Mappings.Add(new Mapping("aperture", AddonSiteId.curse));
             GetAddon("Aperture").Mappings.Add(new Mapping("aperture", AddonSiteId.wowace));
+            GetAddon("Ara_Broker_Guild_Friends").Mappings.Add(new Mapping("11205", AddonSiteId.wowinterface));
             GetAddon("ArcHUD2").Mappings.Add(new Mapping("arc-hud2", AddonSiteId.curse));
             GetAddon("ArcHUD2").Mappings.Add(new Mapping("arc-hud2", AddonSiteId.wowace));
             GetAddon("ArenaHistorian").Mappings.Add(new Mapping("8224", AddonSiteId.wowinterface));
@@ -399,6 +408,7 @@ namespace Waddu.Classes
             GetAddon("AtlasLoot").SubAddons.Add(GetAddon("AtlasLoot_WrathoftheLichKing"));
             GetAddon("AtlasLoot").SubAddons.Add(GetAddon("AtlasLootFu"));
             GetAddon("AtlasQuest").Mappings.Add(new Mapping("atlas-quest-fan-update", AddonSiteId.curse));
+            GetAddon("AtlasQuest").Mappings.Add(new Mapping("atlas-quest-fan-update", AddonSiteId.curseforge));
             GetAddon("Attrition").Mappings.Add(new Mapping("10598", AddonSiteId.wowinterface));
             GetAddon("Auction-1.0").Mappings.Add(new Mapping("auction-1-0", AddonSiteId.curse));
             GetAddon("Auction-1.0").Mappings.Add(new Mapping("auction-1-0", AddonSiteId.wowace));
@@ -409,6 +419,7 @@ namespace Waddu.Classes
             GetAddon("AuctionProfit").Mappings.Add(new Mapping("auction-profit", AddonSiteId.wowace));
             GetAddon("AuctionSort").Mappings.Add(new Mapping("auction-sort", AddonSiteId.curse));
             GetAddon("AuctionSort").Mappings.Add(new Mapping("auction-sort", AddonSiteId.wowace));
+            GetAddon("AudioAlert").Mappings.Add(new Mapping("11271", AddonSiteId.wowinterface));
             GetAddon("Auditor2").Mappings.Add(new Mapping("auditor-fu", AddonSiteId.curse));
             GetAddon("Auditor2").SubAddons.Add(GetAddon("FuBar_AuditorFu"));
             GetAddon("aUF_Banzai").Mappings.Add(new Mapping("a-uf_banzai", AddonSiteId.curse));
@@ -448,6 +459,7 @@ namespace Waddu.Classes
             GetAddon("autoInvite").Mappings.Add(new Mapping("auto-invite", AddonSiteId.wowace));
             GetAddon("autoLFG").Mappings.Add(new Mapping("auto-lfg", AddonSiteId.curse));
             GetAddon("autoLFG").Mappings.Add(new Mapping("auto-lfg", AddonSiteId.wowace));
+            GetAddon("AutoLootToggle").Mappings.Add(new Mapping("11486", AddonSiteId.wowinterface));
             GetAddon("AutomaticLFG").Mappings.Add(new Mapping("automatic-lfg", AddonSiteId.curse));
             GetAddon("AutomaticLFG").Mappings.Add(new Mapping("automatic-lfg", AddonSiteId.wowace));
             GetAddon("Automaton").Mappings.Add(new Mapping("automaton", AddonSiteId.curse));
@@ -458,6 +470,7 @@ namespace Waddu.Classes
             GetAddon("autoqueue").Mappings.Add(new Mapping("autoqueue", AddonSiteId.wowace));
             GetAddon("AutoRes").Mappings.Add(new Mapping("auto-res", AddonSiteId.curse));
             GetAddon("AutoRes").Mappings.Add(new Mapping("auto-res", AddonSiteId.wowace));
+            GetAddon("AutoScreenshot").Mappings.Add(new Mapping("10801", AddonSiteId.wowinterface));
             GetAddon("AutoTurnin").Mappings.Add(new Mapping("auto-turnin", AddonSiteId.curse));
             GetAddon("AutoTurnin").Mappings.Add(new Mapping("auto-turnin", AddonSiteId.wowace));
             GetAddon("AVbars2").Mappings.Add(new Mapping("avbars2", AddonSiteId.curse));
@@ -522,7 +535,9 @@ namespace Waddu.Classes
             GetAddon("Baggins").Mappings.Add(new Mapping("baggins", AddonSiteId.wowace));
             GetAddon("BagGnome").Mappings.Add(new Mapping("bag-gnome", AddonSiteId.curse));
             GetAddon("BagGnome").Mappings.Add(new Mapping("bag-gnome", AddonSiteId.wowace));
+            GetAddon("Bagnon").Mappings.Add(new Mapping("4459", AddonSiteId.wowinterface));
             GetAddon("Bagnon").Mappings.Add(new Mapping("bagnon", AddonSiteId.curse));
+            GetAddon("Bagnon").Mappings.Add(new Mapping("bagnon", AddonSiteId.curseforge));
             GetAddon("Bagnon").SubAddons.Add(GetAddon("Bagnon_Forever"));
             GetAddon("Bagnon").SubAddons.Add(GetAddon("Bagnon_Options"));
             GetAddon("Bagnon").SubAddons.Add(GetAddon("Bagnon_Tooltips"));
@@ -585,6 +600,7 @@ namespace Waddu.Classes
             GetAddon("BasicMinimap").Mappings.Add(new Mapping("basic-minimap", AddonSiteId.wowace));
             GetAddon("BaudAuction").Mappings.Add(new Mapping("baud-auction", AddonSiteId.curse));
             GetAddon("BaudAuction").Mappings.Add(new Mapping("baud-auction", AddonSiteId.curseforge));
+            GetAddon("BaudMount").Mappings.Add(new Mapping("baud-mount", AddonSiteId.curseforge));
             GetAddon("Bedazzler").Mappings.Add(new Mapping("bedazzler", AddonSiteId.curse));
             GetAddon("Bedazzler").Mappings.Add(new Mapping("bedazzler", AddonSiteId.wowace));
             GetAddon("Bejeweled").Mappings.Add(new Mapping("1.03|24.10.2008|http://www7.popcap.com/promos/wow/|http://images.popcap.com/www/promos/wow/Bejeweled_v1_03.zip", AddonSiteId.direct));
@@ -601,8 +617,10 @@ namespace Waddu.Classes
             GetAddon("BetterFriends").Mappings.Add(new Mapping("better-friends", AddonSiteId.wowace));
             GetAddon("BetterInbox").Mappings.Add(new Mapping("better-inbox", AddonSiteId.curse));
             GetAddon("BetterInbox").Mappings.Add(new Mapping("better-inbox", AddonSiteId.wowace));
+            GetAddon("BetterKeyBinding").Mappings.Add(new Mapping("bkb", AddonSiteId.curseforge));
             GetAddon("BetterQuest").Mappings.Add(new Mapping("better-quest", AddonSiteId.curse));
             GetAddon("BetterQuest").Mappings.Add(new Mapping("better-quest", AddonSiteId.wowace));
+            GetAddon("BGDefender").Mappings.Add(new Mapping("bg-defender", AddonSiteId.curse));
             GetAddon("BGJoinTime").Mappings.Add(new Mapping("bgjoin-time", AddonSiteId.curse));
             GetAddon("BGSoundAlerts").Mappings.Add(new Mapping("1837", AddonSiteId.wowui));
             GetAddon("BGSoundAlerts").Mappings.Add(new Mapping("bgsound-alerts", AddonSiteId.curse));
@@ -706,6 +724,7 @@ namespace Waddu.Classes
             GetAddon("Bits").Mappings.Add(new Mapping("bits", AddonSiteId.wowace));
             GetAddon("BlessingBar").Mappings.Add(new Mapping("blessing-bar", AddonSiteId.curse));
             GetAddon("BlessingBar").Mappings.Add(new Mapping("blessing-bar", AddonSiteId.wowace));
+            GetAddon("BlinkRogueHelper").Mappings.Add(new Mapping("blinks-rogue-helper-continued", AddonSiteId.curse));
             GetAddon("Blizz_ButtonFacade").Mappings.Add(new Mapping("blizz_button-facade", AddonSiteId.curse));
             GetAddon("Blizz_ButtonFacade").Mappings.Add(new Mapping("blizz_button-facade", AddonSiteId.wowace));
             GetAddon("Blizz_QuickHealth").Mappings.Add(new Mapping("blizz_quick-health", AddonSiteId.curse));
@@ -745,12 +764,14 @@ namespace Waddu.Classes
             GetAddon("Bongos").SubAddons.Add(GetAddon("Bongos_XP"));
             GetAddon("Bongos3_ButtonFacade").Mappings.Add(new Mapping("bongos3_button-facade", AddonSiteId.curse));
             GetAddon("Bongos3_ButtonFacade").Mappings.Add(new Mapping("bongos3_button-facade", AddonSiteId.wowace));
+            GetAddon("Bookworm").Mappings.Add(new Mapping("4088", AddonSiteId.wowinterface));
             GetAddon("BossTactics").Mappings.Add(new Mapping("boss-tactics", AddonSiteId.curse));
             GetAddon("BossTactics").Mappings.Add(new Mapping("boss-tactics", AddonSiteId.wowace));
             GetAddon("BossTalk").Mappings.Add(new Mapping("wowace-boss-talk", AddonSiteId.curse));
             GetAddon("BossTalk").Mappings.Add(new Mapping("wowace-boss-talk", AddonSiteId.wowace));
             GetAddon("BossWhisperer").Mappings.Add(new Mapping("boss-whisperer", AddonSiteId.curse));
             GetAddon("BossWhisperer").Mappings.Add(new Mapping("boss-whisperer", AddonSiteId.wowace));
+            GetAddon("Broker_AntiSocial").Mappings.Add(new Mapping("11370", AddonSiteId.wowinterface));
             GetAddon("Broker_AutoLoot").Mappings.Add(new Mapping("broker_autoloot", AddonSiteId.curse));
             GetAddon("Broker_AutoLoot").Mappings.Add(new Mapping("broker_autoloot", AddonSiteId.wowace));
             GetAddon("Broker_Bags").Mappings.Add(new Mapping("broker_bags", AddonSiteId.curse));
@@ -765,6 +786,7 @@ namespace Waddu.Classes
             GetAddon("Broker_Currency").Mappings.Add(new Mapping("broker-currency", AddonSiteId.wowace));
             GetAddon("Broker_Durability").Mappings.Add(new Mapping("broker_durability", AddonSiteId.curse));
             GetAddon("Broker_Durability").Mappings.Add(new Mapping("broker_durability", AddonSiteId.wowace));
+            GetAddon("Broker_Factions").Mappings.Add(new Mapping("11020", AddonSiteId.wowinterface));
             GetAddon("Broker_Group").Mappings.Add(new Mapping("10702", AddonSiteId.wowinterface));
             GetAddon("Broker_HitCrit").Mappings.Add(new Mapping("broker-hitcrit", AddonSiteId.curse));
             GetAddon("Broker_HitCrit").Mappings.Add(new Mapping("broker-hitcrit", AddonSiteId.wowace));
@@ -779,6 +801,7 @@ namespace Waddu.Classes
             GetAddon("Broker_Professions").Mappings.Add(new Mapping("broker_professions", AddonSiteId.wowace));
             GetAddon("Broker_PvP").Mappings.Add(new Mapping("broker_pv-p", AddonSiteId.curse));
             GetAddon("Broker_PvP").Mappings.Add(new Mapping("broker_pv-p", AddonSiteId.wowace));
+            GetAddon("Broker_RaidSave").Mappings.Add(new Mapping("11237", AddonSiteId.wowinterface));
             GetAddon("Broker_Recount").Mappings.Add(new Mapping("broker_recount", AddonSiteId.curse));
             GetAddon("Broker_Recount").Mappings.Add(new Mapping("broker_recount", AddonSiteId.wowace));
             GetAddon("Broker_Regen").Mappings.Add(new Mapping("broker-regen", AddonSiteId.curse));
@@ -793,6 +816,7 @@ namespace Waddu.Classes
             GetAddon("Broker_TradeCooldowns").Mappings.Add(new Mapping("broker-tradecooldowns", AddonSiteId.wowace));
             GetAddon("Broker_Wraps").Mappings.Add(new Mapping("broker_wraps", AddonSiteId.curse));
             GetAddon("Broker_Wraps").Mappings.Add(new Mapping("broker_wraps", AddonSiteId.wowace));
+            GetAddon("Broker_XPRate").Mappings.Add(new Mapping("10999", AddonSiteId.wowinterface));
             GetAddon("Broker2FuBar").Mappings.Add(new Mapping("broker2fubar", AddonSiteId.curse));
             GetAddon("Broker2FuBar").Mappings.Add(new Mapping("broker2fubar", AddonSiteId.wowace));
             GetAddon("bt_bcout").Mappings.Add(new Mapping("bt_bcout", AddonSiteId.wowace));
@@ -834,7 +858,6 @@ namespace Waddu.Classes
             GetAddon("Buffet").Mappings.Add(new Mapping("8370", AddonSiteId.wowinterface));
             GetAddon("Buffet").Mappings.Add(new Mapping("buffet", AddonSiteId.curse));
             GetAddon("Buffet").Mappings.Add(new Mapping("buffet", AddonSiteId.wowace));
-            GetAddon("buffet").Mappings.Add(new Mapping("buffet", AddonSiteId.wowace));
             GetAddon("BuffProtectorGnome").Mappings.Add(new Mapping("buff-protector-gnome", AddonSiteId.curse));
             GetAddon("BuffProtectorGnome").Mappings.Add(new Mapping("buff-protector-gnome", AddonSiteId.wowace));
             GetAddon("BugSack").Mappings.Add(new Mapping("5995", AddonSiteId.wowinterface));
@@ -889,6 +912,7 @@ namespace Waddu.Classes
             GetAddon("ButtonFacade_LiteStep").Mappings.Add(new Mapping("buttonfacade_litestep", AddonSiteId.wowace));
             GetAddon("ButtonFacade_Onyx").Mappings.Add(new Mapping("buttonfacade_onyx", AddonSiteId.curse));
             GetAddon("ButtonFacade_Onyx").Mappings.Add(new Mapping("buttonfacade_onyx", AddonSiteId.wowace));
+            GetAddon("ButtonFacade_Rothar").Mappings.Add(new Mapping("8917", AddonSiteId.wowinterface));
             GetAddon("ButtonFacade_Serenity").Mappings.Add(new Mapping("buttonfacade_serenity", AddonSiteId.curse));
             GetAddon("ButtonFacade_Serenity").Mappings.Add(new Mapping("buttonfacade_serenity", AddonSiteId.wowace));
             GetAddon("ButtonFacade_simpleSquare").Mappings.Add(new Mapping("button-facade_simple-square", AddonSiteId.curse));
@@ -904,6 +928,8 @@ namespace Waddu.Classes
             GetAddon("BuyCrap").Mappings.Add(new Mapping("buy-crap", AddonSiteId.wowace));
             GetAddon("BuyDropper").Mappings.Add(new Mapping("5280", AddonSiteId.wowinterface));
             GetAddon("BuyDropper").Mappings.Add(new Mapping("buy-dropper", AddonSiteId.curse));
+            GetAddon("BuyEmAll").Mappings.Add(new Mapping("5217", AddonSiteId.wowinterface));
+            GetAddon("BuyEmAll").Mappings.Add(new Mapping("buy-em-all", AddonSiteId.curseforge));
             GetAddon("caesar").Mappings.Add(new Mapping("caesar", AddonSiteId.wowace));
             GetAddon("CallbackHandler-1.0").Mappings.Add(new Mapping("callbackhandler", AddonSiteId.curse));
             GetAddon("CallbackHandler-1.0").Mappings.Add(new Mapping("callbackhandler", AddonSiteId.wowace));
@@ -917,6 +943,7 @@ namespace Waddu.Classes
             GetAddon("Capsule").Mappings.Add(new Mapping("capsule", AddonSiteId.curse));
             GetAddon("Capsule").Mappings.Add(new Mapping("capsule", AddonSiteId.wowace));
             GetAddon("Carbonite").Mappings.Add(new Mapping("carbonite-quest", AddonSiteId.curse));
+            GetAddon("cargExplorer").Mappings.Add(new Mapping("9079", AddonSiteId.wowinterface));
             GetAddon("cargoHonor").Mappings.Add(new Mapping("10482", AddonSiteId.wowinterface));
             GetAddon("Cartographer_Cleanup").Mappings.Add(new Mapping("cartographer_cleanup", AddonSiteId.curse));
             GetAddon("Cartographer_Cleanup").Mappings.Add(new Mapping("cartographer_cleanup", AddonSiteId.wowace));
@@ -981,6 +1008,9 @@ namespace Waddu.Classes
             GetAddon("Casualty").Mappings.Add(new Mapping("casualty", AddonSiteId.wowace));
             GetAddon("CatPoints").Mappings.Add(new Mapping("cat-points", AddonSiteId.curse));
             GetAddon("CatPoints").Mappings.Add(new Mapping("cat-points", AddonSiteId.wowace));
+            GetAddon("cAutoConfirm").Mappings.Add(new Mapping("11404", AddonSiteId.wowinterface));
+            GetAddon("cAutoConfirm").Mappings.Add(new Mapping("cacl", AddonSiteId.curse));
+            GetAddon("cAutoConfirm").Mappings.Add(new Mapping("cacl", AddonSiteId.curseforge));
             GetAddon("CBRipoff").Mappings.Add(new Mapping("cbripoff", AddonSiteId.curse));
             GetAddon("CBRipoff").Mappings.Add(new Mapping("cbripoff", AddonSiteId.wowace));
             GetAddon("CCBreaker").Mappings.Add(new Mapping("ccbreaker", AddonSiteId.curse));
@@ -1018,6 +1048,7 @@ namespace Waddu.Classes
             GetAddon("ChatCopy").Mappings.Add(new Mapping("chat-copy-fanupdate", AddonSiteId.curse));
             GetAddon("ChatHighlighter").Mappings.Add(new Mapping("chat-highlighter", AddonSiteId.curse));
             GetAddon("ChatHighlighter").Mappings.Add(new Mapping("chat-highlighter", AddonSiteId.wowace));
+            GetAddon("ChatIcons").Mappings.Add(new Mapping("8287", AddonSiteId.wowinterface));
             GetAddon("ChatSounds").Mappings.Add(new Mapping("chat-sounds", AddonSiteId.curse));
             GetAddon("ChatSounds").Mappings.Add(new Mapping("chat-sounds", AddonSiteId.wowace));
             GetAddon("ChatStamp").Mappings.Add(new Mapping("chat-stamp", AddonSiteId.curse));
@@ -1127,6 +1158,9 @@ namespace Waddu.Classes
             GetAddon("Conditioner").Mappings.Add(new Mapping("conditioner", AddonSiteId.curse));
             GetAddon("Conditioner").Mappings.Add(new Mapping("conditioner", AddonSiteId.wowace));
             GetAddon("Consensus").Mappings.Add(new Mapping("consensus", AddonSiteId.wowace));
+            GetAddon("Contemplate").Mappings.Add(new Mapping("6959", AddonSiteId.wowinterface));
+            GetAddon("Contemplate").Mappings.Add(new Mapping("contemplate", AddonSiteId.curse));
+            GetAddon("Contemplate").Mappings.Add(new Mapping("contemplate", AddonSiteId.curseforge));
             GetAddon("ControlFreak").Mappings.Add(new Mapping("controlfreak", AddonSiteId.curse));
             GetAddon("ControlFreak").Mappings.Add(new Mapping("controlfreak", AddonSiteId.wowace));
             GetAddon("coolDown").Mappings.Add(new Mapping("cool-down", AddonSiteId.curse));
@@ -1265,6 +1299,7 @@ namespace Waddu.Classes
             GetAddon("DarkCandy").Mappings.Add(new Mapping("dark-candy", AddonSiteId.wowace));
             GetAddon("Darkness").Mappings.Add(new Mapping("darkness", AddonSiteId.curse));
             GetAddon("Darkness").Mappings.Add(new Mapping("darkness", AddonSiteId.wowace));
+            GetAddon("DayTrader").Mappings.Add(new Mapping("10427", AddonSiteId.wowinterface));
             GetAddon("DBM_API").Mappings.Add(new Mapping("8814", AddonSiteId.wowinterface));
             GetAddon("DBM_API").Mappings.Add(new Mapping("deadly-boss-mods", AddonSiteId.curse));
             GetAddon("DBM_API").SubAddons.Add(GetAddon("DBM_Battlegrounds"));
@@ -1415,6 +1450,9 @@ namespace Waddu.Classes
             GetAddon("DrDamage").Mappings.Add(new Mapping("dr-damage", AddonSiteId.wowace));
             GetAddon("DreamChat").Mappings.Add(new Mapping("dream-chat", AddonSiteId.curse));
             GetAddon("DreamChat").Mappings.Add(new Mapping("dream-chat", AddonSiteId.wowace));
+            GetAddon("Dresser").Mappings.Add(new Mapping("9381", AddonSiteId.wowinterface));
+            GetAddon("Dresser").Mappings.Add(new Mapping("dresser", AddonSiteId.curse));
+            GetAddon("Dresser").Mappings.Add(new Mapping("dresser", AddonSiteId.curseforge));
             GetAddon("DRTracker").Mappings.Add(new Mapping("8901", AddonSiteId.wowinterface));
             GetAddon("DrugTest").Mappings.Add(new Mapping("drug-test", AddonSiteId.curse));
             GetAddon("DrugTest").Mappings.Add(new Mapping("drug-test", AddonSiteId.wowace));
@@ -1424,6 +1462,7 @@ namespace Waddu.Classes
             GetAddon("DruidBar").SubAddons.Add(GetAddon("DruidBarMenu"));
             GetAddon("DruidBar").SubAddons.Add(GetAddon("DruidBarMessages"));
             GetAddon("DruidBar").SubAddons.Add(GetAddon("DruidBarShifting"));
+            GetAddon("DruidStats").Mappings.Add(new Mapping("druid-stats-i", AddonSiteId.curseforge));
             GetAddon("DrumCoord").Mappings.Add(new Mapping("drum-coord", AddonSiteId.curse));
             GetAddon("DrumCoord").Mappings.Add(new Mapping("drum-coord", AddonSiteId.wowace));
             GetAddon("DrumLogic").Mappings.Add(new Mapping("drum-logic", AddonSiteId.curse));
@@ -1439,6 +1478,7 @@ namespace Waddu.Classes
             GetAddon("DynamicPerformance").Mappings.Add(new Mapping("dynamic-performance", AddonSiteId.curse));
             GetAddon("DynRepBar").Mappings.Add(new Mapping("dyn-rep-bar", AddonSiteId.curse));
             GetAddon("DynRepBar").Mappings.Add(new Mapping("dyn-rep-bar", AddonSiteId.wowace));
+            GetAddon("EasyDaily").Mappings.Add(new Mapping("10097", AddonSiteId.wowinterface));
             GetAddon("EasyDKP").Mappings.Add(new Mapping("easydkp", AddonSiteId.wowace));
             GetAddon("EasyDKP").SubAddons.Add(GetAddon("FuBar_EasyDKPFu"));
             GetAddon("EasyDKP").SubAddons.Add(GetAddon("TitanEasyDKP"));
@@ -1469,6 +1509,8 @@ namespace Waddu.Classes
             GetAddon("ElkBuffBars").Mappings.Add(new Mapping("10446", AddonSiteId.wowinterface));
             GetAddon("ElkBuffBars").Mappings.Add(new Mapping("elkbuffbars", AddonSiteId.curse));
             GetAddon("ElkBuffBars").Mappings.Add(new Mapping("elkbuffbars", AddonSiteId.wowace));
+            GetAddon("Ellipsis").Mappings.Add(new Mapping("10749", AddonSiteId.wowinterface));
+            GetAddon("Ellipsis").SubAddons.Add(GetAddon("Ellipsis_Options"));
             GetAddon("Embiggen").Mappings.Add(new Mapping("embiggen", AddonSiteId.curse));
             GetAddon("Embiggen").Mappings.Add(new Mapping("embiggen", AddonSiteId.wowace));
             GetAddon("EnchantBot").Mappings.Add(new Mapping("enchant-bot", AddonSiteId.curse));
@@ -1484,6 +1526,7 @@ namespace Waddu.Classes
             GetAddon("Enchantrix").SubAddons.Add(GetAddon("Enchantrix-Barker"));
             GetAddon("Enchantrix").SubAddons.Add(GetAddon("EnhTooltip"));
             GetAddon("Enchantrix").SubAddons.Add(GetAddon("Stubby"));
+            GetAddon("Encyclopedia").Mappings.Add(new Mapping("11158", AddonSiteId.wowinterface));
             GetAddon("Endeavours_BossStatus").Mappings.Add(new Mapping("endeavours_boss-status", AddonSiteId.curse));
             GetAddon("Endeavours_BossStatus").Mappings.Add(new Mapping("endeavours_boss-status", AddonSiteId.wowace));
             GetAddon("Endeavours_BuffMod").Mappings.Add(new Mapping("endeavours_buff-mod", AddonSiteId.curse));
@@ -1546,12 +1589,17 @@ namespace Waddu.Classes
             GetAddon("Examiner").Mappings.Add(new Mapping("examiner", AddonSiteId.curse));
             GetAddon("Excavator").Mappings.Add(new Mapping("excavator", AddonSiteId.curse));
             GetAddon("Excavator").Mappings.Add(new Mapping("excavator", AddonSiteId.wowace));
+            GetAddon("ExcessBaggage_FoodAndDrink").Mappings.Add(new Mapping("9295", AddonSiteId.wowinterface));
+            GetAddon("ExcessBaggage").Mappings.Add(new Mapping("9293", AddonSiteId.wowinterface));
+            GetAddon("ExcessBaggage").SubAddons.Add(GetAddon("ExcessBaggage_Options"));
             GetAddon("Exile-BidMe").Mappings.Add(new Mapping("exile-bid-me", AddonSiteId.curse));
             GetAddon("Exile-BidMe").Mappings.Add(new Mapping("exile-bid-me", AddonSiteId.wowace));
             GetAddon("expeller").Mappings.Add(new Mapping("expeller", AddonSiteId.curse));
             GetAddon("expeller").Mappings.Add(new Mapping("expeller", AddonSiteId.wowace));
             GetAddon("Expiration").Mappings.Add(new Mapping("expiration", AddonSiteId.curse));
             GetAddon("Expiration").Mappings.Add(new Mapping("expiration", AddonSiteId.wowace));
+            GetAddon("ExplorerCoords").Mappings.Add(new Mapping("explorercoords", AddonSiteId.curse));
+            GetAddon("ExplorerCoords").Mappings.Add(new Mapping("explorercoords", AddonSiteId.curseforge));
             GetAddon("Expo").Mappings.Add(new Mapping("expo", AddonSiteId.curse));
             GetAddon("Expo").Mappings.Add(new Mapping("expo", AddonSiteId.wowace));
             GetAddon("ExpressMail").Mappings.Add(new Mapping("6439", AddonSiteId.wowinterface));
@@ -1562,7 +1610,11 @@ namespace Waddu.Classes
             GetAddon("FacadeBuffs").Mappings.Add(new Mapping("facade-buffs", AddonSiteId.curse));
             GetAddon("FacadeBuffs").Mappings.Add(new Mapping("facade-buffs", AddonSiteId.wowace));
             GetAddon("Factionizer").Mappings.Add(new Mapping("factionizer", AddonSiteId.curse));
+            GetAddon("Fall-O-Meter").Mappings.Add(new Mapping("9954", AddonSiteId.wowinterface));
             GetAddon("Fane").Mappings.Add(new Mapping("7984", AddonSiteId.wowinterface));
+            GetAddon("FastQuest_Classic").Mappings.Add(new Mapping("9264", AddonSiteId.wowinterface));
+            GetAddon("FastQuest_Classic").Mappings.Add(new Mapping("fast-quest-classic", AddonSiteId.curse));
+            GetAddon("FastQuest_Classic").Mappings.Add(new Mapping("fast-quest-classic", AddonSiteId.curseforge));
             GetAddon("FB_InfoBar").Mappings.Add(new Mapping("fishing-buddy-bar-support", AddonSiteId.curse));
             GetAddon("FB_InfoBar").SubAddons.Add(GetAddon("FB_Titan"));
             GetAddon("FB_InfoBar").SubAddons.Add(GetAddon("FuBar_FishingBuddyFu"));
@@ -1644,8 +1696,15 @@ namespace Waddu.Classes
             GetAddon("Flippy").Mappings.Add(new Mapping("flippy", AddonSiteId.curse));
             GetAddon("Flippy").Mappings.Add(new Mapping("flippy", AddonSiteId.wowace));
             GetAddon("FloatingFrames").Mappings.Add(new Mapping("fframes", AddonSiteId.curse));
+            GetAddon("FluidFrames").Mappings.Add(new Mapping("7080", AddonSiteId.wowinterface));
+            GetAddon("FluidFrames").Mappings.Add(new Mapping("fluid-frames", AddonSiteId.curse));
+            GetAddon("FluidFrames").Mappings.Add(new Mapping("fluid-frames", AddonSiteId.curseforge));
+            GetAddon("FluidFrames").SubAddons.Add(GetAddon("Portfolio"));
             GetAddon("fmBuffCheck").Mappings.Add(new Mapping("fm-buff-check", AddonSiteId.curse));
             GetAddon("fmBuffCheck").Mappings.Add(new Mapping("fm-buff-check", AddonSiteId.wowace));
+            GetAddon("Focuser").Mappings.Add(new Mapping("10178", AddonSiteId.wowinterface));
+            GetAddon("Focuser").Mappings.Add(new Mapping("focuser", AddonSiteId.curse));
+            GetAddon("Focuser").Mappings.Add(new Mapping("focuser", AddonSiteId.curseforge));
             GetAddon("FocusFrame").Mappings.Add(new Mapping("focus-frame", AddonSiteId.curse));
             GetAddon("FocusInterruptSounds").Mappings.Add(new Mapping("focus-interrupt-sounds", AddonSiteId.curse));
             GetAddon("FocusInterruptSounds").Mappings.Add(new Mapping("focus-interrupt-sounds", AddonSiteId.wowace));
@@ -2109,6 +2168,8 @@ namespace Waddu.Classes
             GetAddon("GetInLine").Mappings.Add(new Mapping("get-in-line", AddonSiteId.wowace));
             GetAddon("GetOffGetGoing").Mappings.Add(new Mapping("wowace-get-off-get-going", AddonSiteId.curse));
             GetAddon("GetOffGetGoing").Mappings.Add(new Mapping("wowace-get-off-get-going", AddonSiteId.wowace));
+            GetAddon("GettingThingsHealed").Mappings.Add(new Mapping("10457", AddonSiteId.wowinterface));
+            GetAddon("GettingThingsHealedPresetsBTMH").Mappings.Add(new Mapping("11165", AddonSiteId.wowinterface));
             GetAddon("GFW_AdSpace").Mappings.Add(new Mapping("4075", AddonSiteId.wowinterface));
             GetAddon("GFW_FactionFriend").Mappings.Add(new Mapping("6402", AddonSiteId.wowinterface));
             GetAddon("GFW_FeedOMatic").Mappings.Add(new Mapping("4160", AddonSiteId.wowinterface));
@@ -2154,6 +2215,9 @@ namespace Waddu.Classes
             GetAddon("GonffBar").Mappings.Add(new Mapping("gonff-bar", AddonSiteId.wowace));
             GetAddon("GoodTarget").Mappings.Add(new Mapping("good-target", AddonSiteId.curse));
             GetAddon("GoodTarget").Mappings.Add(new Mapping("good-target", AddonSiteId.wowace));
+            GetAddon("Gossipmonger").Mappings.Add(new Mapping("9049", AddonSiteId.wowinterface));
+            GetAddon("Gossipmonger").Mappings.Add(new Mapping("gossipmonger", AddonSiteId.curse));
+            GetAddon("Gossipmonger").Mappings.Add(new Mapping("gossipmonger", AddonSiteId.curseforge));
             GetAddon("GotWood").Mappings.Add(new Mapping("got-wood", AddonSiteId.curse));
             GetAddon("GotWood").Mappings.Add(new Mapping("got-wood", AddonSiteId.wowace));
             GetAddon("GPriceEach").Mappings.Add(new Mapping("gprice-each", AddonSiteId.curse));
@@ -2168,6 +2232,7 @@ namespace Waddu.Classes
             GetAddon("Gratz").Mappings.Add(new Mapping("gratz", AddonSiteId.wowace));
             GetAddon("GravBlox").Mappings.Add(new Mapping("grav-blox", AddonSiteId.curse));
             GetAddon("GravBlox").Mappings.Add(new Mapping("grav-blox", AddonSiteId.wowace));
+            GetAddon("GreedBeacon").Mappings.Add(new Mapping("8839", AddonSiteId.wowinterface));
             GetAddon("Grid_QuickHealth").Mappings.Add(new Mapping("grid_quick-health", AddonSiteId.curse));
             GetAddon("Grid_QuickHealth").Mappings.Add(new Mapping("grid_quick-health", AddonSiteId.wowace));
             GetAddon("Grid").Mappings.Add(new Mapping("grid", AddonSiteId.curse));
@@ -2187,6 +2252,8 @@ namespace Waddu.Classes
             GetAddon("GridDynamicLayout").Mappings.Add(new Mapping("grid-dynamic-layout", AddonSiteId.wowace));
             GetAddon("GridDynamicZoneSwitch").Mappings.Add(new Mapping("grid-dynamic-zone-switch", AddonSiteId.curse));
             GetAddon("GridDynamicZoneSwitch").Mappings.Add(new Mapping("grid-dynamic-zone-switch", AddonSiteId.wowace));
+            GetAddon("GridIndicatorCornerIcons").Mappings.Add(new Mapping("grid-indicator-corner-icons", AddonSiteId.curse));
+            GetAddon("GridIndicatorCornerIcons").Mappings.Add(new Mapping("grid-indicator-corner-icons", AddonSiteId.wowace));
             GetAddon("GridIndicatorCornerPlus").Mappings.Add(new Mapping("grid-indicator-corner-plus", AddonSiteId.curse));
             GetAddon("GridIndicatorCornerPlus").Mappings.Add(new Mapping("grid-indicator-corner-plus", AddonSiteId.wowace));
             GetAddon("GridIndicatorCornerText").Mappings.Add(new Mapping("grid-indicator-corner-text", AddonSiteId.curse));
@@ -2209,6 +2276,7 @@ namespace Waddu.Classes
             GetAddon("GridStatusAFK").Mappings.Add(new Mapping("grid-status-afk", AddonSiteId.wowace));
             GetAddon("GridStatusCombatLogDmg").Mappings.Add(new Mapping("grid-status-combat-log-dmg", AddonSiteId.curse));
             GetAddon("GridStatusCombatLogDmg").Mappings.Add(new Mapping("grid-status-combat-log-dmg", AddonSiteId.wowace));
+            GetAddon("GridStatusCombatLogHealing").Mappings.Add(new Mapping("10102", AddonSiteId.wowinterface));
             GetAddon("GridStatusControlPipes").Mappings.Add(new Mapping("grid-status-control-pipes", AddonSiteId.curse));
             GetAddon("GridStatusControlPipes").Mappings.Add(new Mapping("grid-status-control-pipes", AddonSiteId.wowace));
             GetAddon("GridStatusGrace").Mappings.Add(new Mapping("gridstatusgrace", AddonSiteId.curse));
@@ -2267,6 +2335,8 @@ namespace Waddu.Classes
             GetAddon("GuildEventLogExporter").Mappings.Add(new Mapping("guild-event-log-exporter", AddonSiteId.wowace));
             GetAddon("GuildFilter").Mappings.Add(new Mapping("guild-filter", AddonSiteId.curse));
             GetAddon("GuildFilter").Mappings.Add(new Mapping("guild-filter", AddonSiteId.wowace));
+            GetAddon("GuildGreet").Mappings.Add(new Mapping("guild-greet-extended", AddonSiteId.curse));
+            GetAddon("GuildGreet").Mappings.Add(new Mapping("guild-greet-extended", AddonSiteId.curseforge));
             GetAddon("GuildMail").Mappings.Add(new Mapping("guild-mail", AddonSiteId.curse));
             GetAddon("GuildMail").Mappings.Add(new Mapping("guild-mail", AddonSiteId.wowace));
             GetAddon("GuildManagementTools").Mappings.Add(new Mapping("nobility-console", AddonSiteId.wowace));
@@ -2304,6 +2374,9 @@ namespace Waddu.Classes
             GetAddon("HealComm-2.0").Mappings.Add(new Mapping("healcomm-2-0", AddonSiteId.wowace));
             GetAddon("HealGraph").Mappings.Add(new Mapping("heal-graph", AddonSiteId.curse));
             GetAddon("HealGraph").Mappings.Add(new Mapping("heal-graph", AddonSiteId.wowace));
+            GetAddon("HealIncTimer").Mappings.Add(new Mapping("8709", AddonSiteId.wowinterface));
+            GetAddon("HealIncTimer").Mappings.Add(new Mapping("heal-inc-timer", AddonSiteId.curse));
+            GetAddon("HealIncTimer").Mappings.Add(new Mapping("heal-inc-timer", AddonSiteId.curseforge));
             GetAddon("HealOrganizer").Mappings.Add(new Mapping("heal-organizer", AddonSiteId.curse));
             GetAddon("HealOrganizer").Mappings.Add(new Mapping("heal-organizer", AddonSiteId.wowace));
             GetAddon("HealPoints").Mappings.Add(new Mapping("heal-points", AddonSiteId.curse));
@@ -2335,6 +2408,7 @@ namespace Waddu.Classes
             GetAddon("HotCandy").Mappings.Add(new Mapping("hotcandy", AddonSiteId.wowace));
             GetAddon("Hourglass").Mappings.Add(new Mapping("hourglass", AddonSiteId.curse));
             GetAddon("Hourglass").Mappings.Add(new Mapping("hourglass", AddonSiteId.wowace));
+            GetAddon("Huggie").Mappings.Add(new Mapping("10533", AddonSiteId.wowinterface));
             GetAddon("HunterAEP").Mappings.Add(new Mapping("hunter-aep", AddonSiteId.curse));
             GetAddon("HunterAEP").Mappings.Add(new Mapping("hunter-aep", AddonSiteId.wowace));
             GetAddon("HuntersMark").Mappings.Add(new Mapping("wowace-hunters-mark", AddonSiteId.curse));
@@ -2451,10 +2525,14 @@ namespace Waddu.Classes
             GetAddon("Jude").Mappings.Add(new Mapping("jude", AddonSiteId.wowace));
             GetAddon("JumpCounter").Mappings.Add(new Mapping("jump-counter", AddonSiteId.curse));
             GetAddon("JumpCounter").Mappings.Add(new Mapping("jump-counter", AddonSiteId.wowace));
+            GetAddon("Junkie").Mappings.Add(new Mapping("10607", AddonSiteId.wowinterface));
             GetAddon("Junkie").Mappings.Add(new Mapping("junkie", AddonSiteId.curse));
             GetAddon("Junkie").Mappings.Add(new Mapping("junkie", AddonSiteId.curseforge));
             GetAddon("JustDrum").Mappings.Add(new Mapping("just-drum", AddonSiteId.curse));
             GetAddon("JustDrum").Mappings.Add(new Mapping("just-drum", AddonSiteId.wowace));
+            GetAddon("KarniCrap").Mappings.Add(new Mapping("9441", AddonSiteId.wowinterface));
+            GetAddon("KarniCrap").Mappings.Add(new Mapping("karnicrap", AddonSiteId.curse));
+            GetAddon("KarniCrap").Mappings.Add(new Mapping("karnicrap", AddonSiteId.curseforge));
             GetAddon("KBTracker").Mappings.Add(new Mapping("kbtracker", AddonSiteId.curse));
             GetAddon("KC_Items").Mappings.Add(new Mapping("kc_items", AddonSiteId.curse));
             GetAddon("KC_Items").Mappings.Add(new Mapping("kc_items", AddonSiteId.wowace));
@@ -2492,6 +2570,8 @@ namespace Waddu.Classes
             GetAddon("Klappa").Mappings.Add(new Mapping("klappa", AddonSiteId.wowace));
             GetAddon("Knowledge-1.0").Mappings.Add(new Mapping("knowledge-1-0", AddonSiteId.curse));
             GetAddon("Knowledge-1.0").Mappings.Add(new Mapping("knowledge-1-0", AddonSiteId.wowace));
+            GetAddon("Kong").Mappings.Add(new Mapping("kong", AddonSiteId.curse));
+            GetAddon("Kong").Mappings.Add(new Mapping("kong", AddonSiteId.curseforge));
             GetAddon("KTMCPUManager").Mappings.Add(new Mapping("ktmcpumanager", AddonSiteId.curse));
             GetAddon("KTMCPUManager").Mappings.Add(new Mapping("ktmcpumanager", AddonSiteId.wowace));
             GetAddon("Kyubi").Mappings.Add(new Mapping("kyubi", AddonSiteId.curse));
@@ -2506,6 +2586,7 @@ namespace Waddu.Classes
             GetAddon("LD50_ap").Mappings.Add(new Mapping("ld50_ap", AddonSiteId.wowace));
             GetAddon("LD50_armor").Mappings.Add(new Mapping("ld50_armor", AddonSiteId.curse));
             GetAddon("LD50_armor").Mappings.Add(new Mapping("ld50_armor", AddonSiteId.wowace));
+            GetAddon("leafZone").Mappings.Add(new Mapping("11599", AddonSiteId.wowinterface));
             GetAddon("LearningAid").Mappings.Add(new Mapping("learningaid", AddonSiteId.curse));
             GetAddon("LearningAid").Mappings.Add(new Mapping("learningaid", AddonSiteId.curseforge));
             GetAddon("lern2count").Mappings.Add(new Mapping("lern2count", AddonSiteId.curse));
@@ -2721,6 +2802,10 @@ namespace Waddu.Classes
             GetAddon("LootDB").Mappings.Add(new Mapping("loot-db", AddonSiteId.curse));
             GetAddon("LootDB").Mappings.Add(new Mapping("loot-db", AddonSiteId.wowace));
             GetAddon("Looter").Mappings.Add(new Mapping("9284", AddonSiteId.wowinterface));
+            GetAddon("LootHog").Mappings.Add(new Mapping("loot-hog-codeus", AddonSiteId.curse));
+            GetAddon("LootHog").Mappings.Add(new Mapping("loot-hog-codeus", AddonSiteId.curseforge));
+            GetAddon("LootInfoSpam").Mappings.Add(new Mapping("lootspam", AddonSiteId.curse));
+            GetAddon("LootInfoSpam").Mappings.Add(new Mapping("lootspam", AddonSiteId.curseforge));
             GetAddon("LootLink").Mappings.Add(new Mapping("10149", AddonSiteId.wowinterface));
             GetAddon("LootSink").Mappings.Add(new Mapping("loot-sink", AddonSiteId.curse));
             GetAddon("LootSink").Mappings.Add(new Mapping("loot-sink", AddonSiteId.wowace));
@@ -2747,6 +2832,8 @@ namespace Waddu.Classes
             GetAddon("Lute").Mappings.Add(new Mapping("lute", AddonSiteId.wowace));
             GetAddon("LZProfiler").Mappings.Add(new Mapping("lzprofiler", AddonSiteId.curse));
             GetAddon("LZProfiler").Mappings.Add(new Mapping("lzprofiler", AddonSiteId.wowace));
+            GetAddon("M1Peng").Mappings.Add(new Mapping("m1peng", AddonSiteId.curse));
+            GetAddon("M1Peng").Mappings.Add(new Mapping("m1peng", AddonSiteId.curseforge));
             GetAddon("Macaroon").Mappings.Add(new Mapping("10636", AddonSiteId.wowinterface));
             GetAddon("Macaroon").SubAddons.Add(GetAddon("MacaroonProfiles"));
             GetAddon("MacaroonXtras").Mappings.Add(new Mapping("10933", AddonSiteId.wowinterface));
@@ -2758,6 +2845,7 @@ namespace Waddu.Classes
             GetAddon("MAcon").Mappings.Add(new Mapping("macon", AddonSiteId.wowace));
             GetAddon("MacroBank").Mappings.Add(new Mapping("macro-bank", AddonSiteId.curse));
             GetAddon("MacroBank").Mappings.Add(new Mapping("macro-bank", AddonSiteId.wowace));
+            GetAddon("MacroSequence").Mappings.Add(new Mapping("7911", AddonSiteId.wowinterface));
             GetAddon("magealert").Mappings.Add(new Mapping("magealert", AddonSiteId.curse));
             GetAddon("magealert").Mappings.Add(new Mapping("magealert", AddonSiteId.wowace));
             GetAddon("MageAnnounce").Mappings.Add(new Mapping("mage-announce", AddonSiteId.curse));
@@ -2799,6 +2887,14 @@ namespace Waddu.Classes
             GetAddon("Manufac").Mappings.Add(new Mapping("manufac", AddonSiteId.wowace));
             GetAddon("ManufacSnoop").Mappings.Add(new Mapping("manufac-snoop", AddonSiteId.curse));
             GetAddon("ManufacSnoop").Mappings.Add(new Mapping("manufac-snoop", AddonSiteId.wowace));
+            GetAddon("MapNotes").Mappings.Add(new Mapping("5537", AddonSiteId.wowinterface));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesBrowser"));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesForAtlas"));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesIconLib_Fancy"));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesIconLib_Legacy"));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesIconLib_Neptunia"));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesIconLib_Numbers"));
+            GetAddon("MapNotes").SubAddons.Add(GetAddon("MapNotesIconLib"));
             GetAddon("Mapster").Mappings.Add(new Mapping("mapster", AddonSiteId.curse));
             GetAddon("Mapster").Mappings.Add(new Mapping("mapster", AddonSiteId.wowace));
             GetAddon("MarkBar").Mappings.Add(new Mapping("mark-bar", AddonSiteId.curse));
@@ -2958,12 +3054,16 @@ namespace Waddu.Classes
             GetAddon("MouseLook").Mappings.Add(new Mapping("mouse-look", AddonSiteId.curse));
             GetAddon("MouseLook").Mappings.Add(new Mapping("mouse-look", AddonSiteId.wowace));
             GetAddon("MoveAnything").Mappings.Add(new Mapping("11208", AddonSiteId.wowinterface));
+            GetAddon("MozzFullWorldMap").Mappings.Add(new Mapping("5004", AddonSiteId.wowinterface));
+            GetAddon("MozzFullWorldMap").Mappings.Add(new Mapping("mozz-full-world-map-fans-update", AddonSiteId.curse));
+            GetAddon("MozzFullWorldMap").Mappings.Add(new Mapping("mozz-full-world-map-fans-update", AddonSiteId.curseforge));
             GetAddon("MrHat").Mappings.Add(new Mapping("mrhat", AddonSiteId.curse));
             GetAddon("MrHat").Mappings.Add(new Mapping("mrhat", AddonSiteId.wowace));
             GetAddon("MrPlow").Mappings.Add(new Mapping("3383", AddonSiteId.wowui));
             GetAddon("MrPlow").Mappings.Add(new Mapping("mr-plow", AddonSiteId.curse));
             GetAddon("MrPlow").Mappings.Add(new Mapping("mr-plow", AddonSiteId.wowace));
             GetAddon("MTLove").Mappings.Add(new Mapping("7024", AddonSiteId.wowinterface));
+            GetAddon("Multishot").Mappings.Add(new Mapping("9590", AddonSiteId.wowinterface));
             GetAddon("MultiTips").Mappings.Add(new Mapping("multi-tips", AddonSiteId.curse));
             GetAddon("MultiTips").Mappings.Add(new Mapping("multi-tips", AddonSiteId.wowace));
             GetAddon("myAddOns").Mappings.Add(new Mapping("my-add-ons", AddonSiteId.curse));
@@ -2978,6 +3078,7 @@ namespace Waddu.Classes
             GetAddon("Nameplates").Mappings.Add(new Mapping("6852", AddonSiteId.wowinterface));
             GetAddon("NameTagToggle").Mappings.Add(new Mapping("name-tag-toggle", AddonSiteId.curse));
             GetAddon("NameTagToggle").Mappings.Add(new Mapping("name-tag-toggle", AddonSiteId.wowace));
+            GetAddon("nanoPar").Mappings.Add(new Mapping("10958", AddonSiteId.wowinterface));
             GetAddon("nanoplayed").Mappings.Add(new Mapping("nanoplayed", AddonSiteId.curse));
             GetAddon("nanoplayed").Mappings.Add(new Mapping("nanoplayed", AddonSiteId.wowace));
             GetAddon("nanoTalk").Mappings.Add(new Mapping("nanotalk", AddonSiteId.curse));
@@ -3002,6 +3103,7 @@ namespace Waddu.Classes
             GetAddon("NextStep").Mappings.Add(new Mapping("next-step", AddonSiteId.wowace));
             GetAddon("Niagara").Mappings.Add(new Mapping("niagara", AddonSiteId.curse));
             GetAddon("Niagara").Mappings.Add(new Mapping("niagara", AddonSiteId.wowace));
+            GetAddon("NiceDamage").Mappings.Add(new Mapping("9732", AddonSiteId.wowinterface));
             GetAddon("NielasAran").Mappings.Add(new Mapping("nielas-aran", AddonSiteId.curse));
             GetAddon("NielasAran").Mappings.Add(new Mapping("nielas-aran", AddonSiteId.wowace));
             GetAddon("Nier").Mappings.Add(new Mapping("10378", AddonSiteId.wowinterface));
@@ -3033,6 +3135,7 @@ namespace Waddu.Classes
             GetAddon("Nudge").Mappings.Add(new Mapping("nudge", AddonSiteId.curse));
             GetAddon("Nudge").Mappings.Add(new Mapping("nudge", AddonSiteId.wowace));
             GetAddon("NugEnergy").Mappings.Add(new Mapping("9099", AddonSiteId.wowinterface));
+            GetAddon("NugMiniPet").Mappings.Add(new Mapping("11133", AddonSiteId.wowinterface));
             GetAddon("Numen").Mappings.Add(new Mapping("numen", AddonSiteId.curse));
             GetAddon("Numen").Mappings.Add(new Mapping("numen", AddonSiteId.wowace));
             GetAddon("Nurfed_AutoBarHook").Mappings.Add(new Mapping("nurfed_auto-bar-hook", AddonSiteId.curse));
@@ -3068,6 +3171,8 @@ namespace Waddu.Classes
             GetAddon("OneBank").Mappings.Add(new Mapping("one-bank", AddonSiteId.wowace));
             GetAddon("OneClickBuyOut").Mappings.Add(new Mapping("ocbo", AddonSiteId.curse));
             GetAddon("OneClickBuyOut").Mappings.Add(new Mapping("ocbo", AddonSiteId.curseforge));
+            GetAddon("OneCompanion").Mappings.Add(new Mapping("10746", AddonSiteId.wowinterface));
+            GetAddon("OneCompanion").Mappings.Add(new Mapping("onecompanion", AddonSiteId.curseforge));
             GetAddon("OneHitWonder").Mappings.Add(new Mapping("one-hit-wonder", AddonSiteId.curse));
             GetAddon("OneHitWonder").Mappings.Add(new Mapping("one-hit-wonder", AddonSiteId.wowace));
             GetAddon("OneRing").Mappings.Add(new Mapping("one-ring", AddonSiteId.curse));
@@ -3166,6 +3271,9 @@ namespace Waddu.Classes
             GetAddon("Pendulum").Mappings.Add(new Mapping("pendulum", AddonSiteId.wowace));
             GetAddon("Percent").Mappings.Add(new Mapping("percent", AddonSiteId.curse));
             GetAddon("Percent").Mappings.Add(new Mapping("percent", AddonSiteId.wowace));
+            GetAddon("PerfectRaid_IncHeal").Mappings.Add(new Mapping("8324", AddonSiteId.wowinterface));
+            GetAddon("PerfectRaid_QuickHealth").Mappings.Add(new Mapping("9866", AddonSiteId.wowinterface));
+            GetAddon("PerfectRaid").Mappings.Add(new Mapping("4673", AddonSiteId.wowinterface));
             GetAddon("PerfectTargets").Mappings.Add(new Mapping("perfect-targets", AddonSiteId.curse));
             GetAddon("PerfectTargets").Mappings.Add(new Mapping("perfect-targets", AddonSiteId.wowace));
             GetAddon("PersonalRating").Mappings.Add(new Mapping("7834", AddonSiteId.wowinterface));
@@ -3233,6 +3341,12 @@ namespace Waddu.Classes
             GetAddon("PlayerMenu").Mappings.Add(new Mapping("player-menu", AddonSiteId.wowace));
             GetAddon("PlayerNotes").Mappings.Add(new Mapping("player-notes", AddonSiteId.curse));
             GetAddon("PlayerNotes").Mappings.Add(new Mapping("player-notes", AddonSiteId.wowace));
+            GetAddon("pMap").Mappings.Add(new Mapping("8385", AddonSiteId.wowinterface));
+            GetAddon("pMinimap").Mappings.Add(new Mapping("8389", AddonSiteId.wowinterface));
+            GetAddon("pMinimap").SubAddons.Add(GetAddon("pMinimap_Clock"));
+            GetAddon("pMinimap").SubAddons.Add(GetAddon("pMinimap_Config"));
+            GetAddon("pMinimap").SubAddons.Add(GetAddon("pMinimap_Coords"));
+            GetAddon("pMinimap").SubAddons.Add(GetAddon("pMinimap_Durability"));
             GetAddon("pMutilate").Mappings.Add(new Mapping("p-mutilate", AddonSiteId.curse));
             GetAddon("pMutilate").Mappings.Add(new Mapping("p-mutilate", AddonSiteId.wowace));
             GetAddon("PoisonMenu").Mappings.Add(new Mapping("poison-menu", AddonSiteId.curse));
@@ -3246,6 +3360,9 @@ namespace Waddu.Classes
             GetAddon("Postal").Mappings.Add(new Mapping("postal", AddonSiteId.wowace));
             GetAddon("Postman").Mappings.Add(new Mapping("postman", AddonSiteId.curse));
             GetAddon("Postman").Mappings.Add(new Mapping("postman", AddonSiteId.wowace));
+            GetAddon("PowerAuras").Mappings.Add(new Mapping("8579", AddonSiteId.wowinterface));
+            GetAddon("PowerAuras").Mappings.Add(new Mapping("powerauras-classic", AddonSiteId.curse));
+            GetAddon("PowerAuras").Mappings.Add(new Mapping("powerauras-classic", AddonSiteId.curseforge));
             GetAddon("powerbar").Mappings.Add(new Mapping("powerbar", AddonSiteId.curse));
             GetAddon("powerbar").Mappings.Add(new Mapping("powerbar", AddonSiteId.wowace));
             GetAddon("PowerDisplay").Mappings.Add(new Mapping("power-display", AddonSiteId.curse));
@@ -3291,6 +3408,8 @@ namespace Waddu.Classes
             GetAddon("ProximityLib").Mappings.Add(new Mapping("proximitylib", AddonSiteId.wowace));
             GetAddon("Proximo").Mappings.Add(new Mapping("proximo", AddonSiteId.curse));
             GetAddon("Proximo").Mappings.Add(new Mapping("proximo", AddonSiteId.wowace));
+            GetAddon("pStats").Mappings.Add(new Mapping("8381", AddonSiteId.wowinterface));
+            GetAddon("pStats").SubAddons.Add(GetAddon("pStats_Config"));
             GetAddon("PT3Bar_ButtonFacade").Mappings.Add(new Mapping("pt3bar_button-facade", AddonSiteId.curse));
             GetAddon("PT3Bar_ButtonFacade").Mappings.Add(new Mapping("pt3bar_button-facade", AddonSiteId.wowace));
             GetAddon("PT3Bar").Mappings.Add(new Mapping("pt3bar", AddonSiteId.curse));
@@ -3327,6 +3446,7 @@ namespace Waddu.Classes
             GetAddon("QuestCollector").Mappings.Add(new Mapping("quest-collector", AddonSiteId.curse));
             GetAddon("QuestCollector").Mappings.Add(new Mapping("quest-collector", AddonSiteId.wowace));
             GetAddon("QuesterJester").Mappings.Add(new Mapping("11005", AddonSiteId.wowinterface));
+            GetAddon("QuestGlance").Mappings.Add(new Mapping("9514", AddonSiteId.wowinterface));
             GetAddon("QuestGuru").Mappings.Add(new Mapping("4855", AddonSiteId.wowui));
             GetAddon("QuestGuru").Mappings.Add(new Mapping("quest-guru", AddonSiteId.curse));
             GetAddon("QuestHelper").Mappings.Add(new Mapping("6271", AddonSiteId.wowui));
@@ -3335,6 +3455,9 @@ namespace Waddu.Classes
             GetAddon("QuestHelper").Mappings.Add(new Mapping("quest-helper", AddonSiteId.curseforge));
             GetAddon("QuestLongList").Mappings.Add(new Mapping("quest-long-list", AddonSiteId.curse));
             GetAddon("QuestLongList").Mappings.Add(new Mapping("quest-long-list", AddonSiteId.wowace));
+            GetAddon("QuestQuery").Mappings.Add(new Mapping("10791", AddonSiteId.wowinterface));
+            GetAddon("QuestQuery").Mappings.Add(new Mapping("questquery", AddonSiteId.curse));
+            GetAddon("QuestQuery").Mappings.Add(new Mapping("questquery", AddonSiteId.curseforge));
             GetAddon("Quests2Watch").Mappings.Add(new Mapping("9269", AddonSiteId.wowinterface));
             GetAddon("QuestTranslator2").Mappings.Add(new Mapping("quest-translator2", AddonSiteId.curse));
             GetAddon("QuestTranslator2").Mappings.Add(new Mapping("quest-translator2", AddonSiteId.wowace));
@@ -3430,6 +3553,11 @@ namespace Waddu.Classes
             GetAddon("RBM_ZulAman").Mappings.Add(new Mapping("rbm_zul-aman", AddonSiteId.wowace));
             GetAddon("RBM").Mappings.Add(new Mapping("rbm", AddonSiteId.curse));
             GetAddon("RBM").Mappings.Add(new Mapping("rbm", AddonSiteId.wowace));
+            GetAddon("RBM2").Mappings.Add(new Mapping("rbm2", AddonSiteId.curse));
+            GetAddon("RBM2").SubAddons.Add(GetAddon("RBM2_BigWigs"));
+            GetAddon("RBM2").SubAddons.Add(GetAddon("RBM2_Config"));
+            GetAddon("RBM2").SubAddons.Add(GetAddon("RBM2_CooldownWatch"));
+            GetAddon("RBM2").SubAddons.Add(GetAddon("RBM2_DeBuffWatch"));
             GetAddon("RC4Lib").Mappings.Add(new Mapping("rc4lib", AddonSiteId.curse));
             GetAddon("RC4Lib").Mappings.Add(new Mapping("rc4lib", AddonSiteId.wowace));
             GetAddon("ReadyCheckAnnouncer").Mappings.Add(new Mapping("ready-check-announcer", AddonSiteId.curse));
@@ -3612,6 +3740,7 @@ namespace Waddu.Classes
             GetAddon("SickOfClickingDailies").Mappings.Add(new Mapping("sick-of-clicking-dailies", AddonSiteId.wowace));
             GetAddon("SilverDragon").Mappings.Add(new Mapping("silver-dragon", AddonSiteId.curse));
             GetAddon("SilverDragon").Mappings.Add(new Mapping("silver-dragon", AddonSiteId.wowace));
+            GetAddon("SimpleAssist").Mappings.Add(new Mapping("7814", AddonSiteId.wowinterface));
             GetAddon("SimpleAuraFilter").Mappings.Add(new Mapping("simpleaurafilter", AddonSiteId.curse));
             GetAddon("SimpleAuraFilter").Mappings.Add(new Mapping("simpleaurafilter", AddonSiteId.wowace));
             GetAddon("SimpleBar").Mappings.Add(new Mapping("simple-bar", AddonSiteId.curse));
@@ -3629,6 +3758,7 @@ namespace Waddu.Classes
             GetAddon("simpleMinimap").Mappings.Add(new Mapping("simple-minimap", AddonSiteId.wowace));
             GetAddon("SimplePriceEach").Mappings.Add(new Mapping("simple-price-each", AddonSiteId.curse));
             GetAddon("SimplePriceEach").Mappings.Add(new Mapping("simple-price-each", AddonSiteId.wowace));
+            GetAddon("SimpleRaidTargetIcons").Mappings.Add(new Mapping("5353", AddonSiteId.wowinterface));
             GetAddon("SimpleRaidTargetIcons").Mappings.Add(new Mapping("simple-raid-target-icons", AddonSiteId.curse));
             GetAddon("SimpleSelfRebuff").Mappings.Add(new Mapping("simple-self-rebuff", AddonSiteId.curse));
             GetAddon("SimpleSelfRebuff").Mappings.Add(new Mapping("simple-self-rebuff", AddonSiteId.wowace));
@@ -3686,6 +3816,9 @@ namespace Waddu.Classes
             GetAddon("Socialist").Mappings.Add(new Mapping("socialist", AddonSiteId.curse));
             GetAddon("Socialist").Mappings.Add(new Mapping("socialist", AddonSiteId.wowace));
             GetAddon("SocketAssistant").Mappings.Add(new Mapping("9839", AddonSiteId.wowinterface));
+            GetAddon("SomeAssemblyRequired").Mappings.Add(new Mapping("4134", AddonSiteId.wowinterface));
+            GetAddon("SomeAssemblyRequired").Mappings.Add(new Mapping("some-assembly-required", AddonSiteId.curse));
+            GetAddon("SomeAssemblyRequired").Mappings.Add(new Mapping("some-assembly-required", AddonSiteId.curseforge));
             GetAddon("SpamMeNot").Mappings.Add(new Mapping("spam-me-not", AddonSiteId.curse));
             GetAddon("SpamSentry").Mappings.Add(new Mapping("5552", AddonSiteId.wowinterface));
             GetAddon("SpamSentry").SubAddons.Add(GetAddon("SpamSentry_Titan"));
@@ -3699,6 +3832,7 @@ namespace Waddu.Classes
             GetAddon("SpecialEventsEmbed").SubAddons.Add(GetAddon("SpecialEvents-Mail-2.0"));
             GetAddon("SpecialEventsEmbed").SubAddons.Add(GetAddon("SpecialEvents-Mount-2.0"));
             GetAddon("SpecialEventsEmbed").SubAddons.Add(GetAddon("SpecialEvents-Movement-2.0"));
+            GetAddon("SpellAlert").Mappings.Add(new Mapping("8469", AddonSiteId.wowinterface));
             GetAddon("SpellBinder").Mappings.Add(new Mapping("spell-binder", AddonSiteId.curse));
             GetAddon("SpellBinder").Mappings.Add(new Mapping("spell-binder", AddonSiteId.wowace));
             GetAddon("SpellEventsLib").Mappings.Add(new Mapping("spelleventslib", AddonSiteId.curse));
@@ -3916,6 +4050,7 @@ namespace Waddu.Classes
             GetAddon("Tipachu").Mappings.Add(new Mapping("8808", AddonSiteId.wowinterface));
             GetAddon("TipHookerLib").Mappings.Add(new Mapping("tiphookerlib", AddonSiteId.curse));
             GetAddon("TipHookerLib").Mappings.Add(new Mapping("tiphookerlib", AddonSiteId.wowace));
+            GetAddon("TipTac").Mappings.Add(new Mapping("7593", AddonSiteId.wowinterface));
             GetAddon("TipTac").Mappings.Add(new Mapping("tip-tac", AddonSiteId.curse));
             GetAddon("TipTac").Mappings.Add(new Mapping("tip-tac", AddonSiteId.curseforge));
             GetAddon("TipTac").SubAddons.Add(GetAddon("TipTacOptions"));
@@ -4058,6 +4193,8 @@ namespace Waddu.Classes
             GetAddon("VitalWatch").SubAddons.Add(GetAddon("VitalWatchOptions"));
             GetAddon("VitalWatchOptions").Mappings.Add(new Mapping("vital-watch-options", AddonSiteId.curse));
             GetAddon("VitalWatchOptions").Mappings.Add(new Mapping("vital-watch-options", AddonSiteId.wowace));
+            GetAddon("VolumeControl").Mappings.Add(new Mapping("11562", AddonSiteId.wowinterface));
+            GetAddon("VolumeControl").SubAddons.Add(GetAddon("VolumeControl_Config"));
             GetAddon("Vox").Mappings.Add(new Mapping("vox", AddonSiteId.curse));
             GetAddon("Vox").Mappings.Add(new Mapping("vox", AddonSiteId.wowace));
             GetAddon("Voyeur").Mappings.Add(new Mapping("voyeur", AddonSiteId.curse));
@@ -4191,8 +4328,17 @@ namespace Waddu.Classes
             GetAddon("zimCoords").Mappings.Add(new Mapping("zim-coords", AddonSiteId.wowace));
             GetAddon("zimGreed").Mappings.Add(new Mapping("zim-greed", AddonSiteId.curse));
             GetAddon("zimGreed").Mappings.Add(new Mapping("zim-greed", AddonSiteId.wowace));
+            GetAddon("ZMobDB").Mappings.Add(new Mapping("7029", AddonSiteId.wowinterface));
             GetAddon("ZOMGBuffs").Mappings.Add(new Mapping("zomgbuffs", AddonSiteId.curse));
+            GetAddon("ZOMGBuffs").Mappings.Add(new Mapping("zomgbuffs", AddonSiteId.curseforge));
             GetAddon("ZOMGBuffs").Mappings.Add(new Mapping("zomgbuffs", AddonSiteId.wowace));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_Blessings"));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_BlessingsManager"));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_BlessingsPP"));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_BuffTehRaid"));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_Log"));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_Portalz"));
+            GetAddon("ZOMGBuffs").SubAddons.Add(GetAddon("ZOMGBuffs_SelfBuffs"));
             GetAddon("ZooKeeper").Mappings.Add(new Mapping("zoo-keeper", AddonSiteId.curse));
             GetAddon("ZooKeeper").Mappings.Add(new Mapping("zoo-keeper", AddonSiteId.wowace));
             GetAddon("zzml").Mappings.Add(new Mapping("zzml", AddonSiteId.curse));
@@ -4214,6 +4360,7 @@ namespace Waddu.Classes
             GetPackage("Auctioneer Suite").Addons.Add(GetAddon("Informant"));
             GetPackage("Auctioneer Suite").Addons.Add(GetAddon("Stubby"));
             GetPackage("Auctioneer Suite").Mappings.Add(new Mapping("5.1.3715|24.10.2008|http://auctioneeraddon.com/dl/#release|http://mirror.auctioneeraddon.com/dl/Packages3/AuctioneerSuite-5.1.3715.zip", AddonSiteId.direct));
+            GetPackage("Auctioneer Suite").Mappings.Add(new Mapping("7879", AddonSiteId.wowinterface));
             GetPackage("Auctioneer").Addons.Add(GetAddon("!Swatter"));
             GetPackage("Auctioneer").Addons.Add(GetAddon("Auc-Advanced"));
             GetPackage("Auctioneer").Addons.Add(GetAddon("Auc-ScanData"));
@@ -4243,9 +4390,6 @@ namespace Waddu.Classes
             GetPackage("Perl Classic Unit Frames").Addons.Add(GetAddon("Perl_Target_Target"));
             GetPackage("Perl Classic Unit Frames").Addons.Add(GetAddon("Perl_Target"));
             GetPackage("Perl Classic Unit Frames").Mappings.Add(new Mapping("perl-classic-unit-frames", AddonSiteId.curse));
-            GetAddon("PerfectRaid").Mappings.Add(new Mapping("4673", AddonSiteId.wowinterface));
-            GetAddon("PerfectRaid_IncHeal").Mappings.Add(new Mapping("8324", AddonSiteId.wowinterface));
-            GetAddon("PerfectRaid_QuickHealth").Mappings.Add(new Mapping("9866", AddonSiteId.wowinterface));
 
             // Depreciated
             //AddDepreciated("Vendor", "AuctionMaster");

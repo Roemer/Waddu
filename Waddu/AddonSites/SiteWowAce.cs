@@ -30,7 +30,7 @@ namespace Waddu.AddonSites
             bool nolibVersionFound = false;
             bool nolibDateFound = false;
 
-            List<string> infoPage = WebHelper.GetHtml(url, AddonSiteId.wowace);
+            List<string> infoPage = WebHelper.GetHtml(url, mapping.AddonSiteId);
             for (int i = 0; i < infoPage.Count; i++)
             {
                 string line = infoPage[i];
@@ -149,6 +149,34 @@ namespace Waddu.AddonSites
             return GetSiteAddon(mapping).VersionDate;
         }
 
+        public override string GetChangeLog(Mapping mapping)
+        {
+            string fileUrl = GetSiteAddon(mapping).FileUrl;
+            List<string> filePage = WebHelper.GetHtml(fileUrl, mapping.AddonSiteId);
+            string changeLog = string.Empty;
+            bool changeLogAdd = false;
+            for (int i = 0; i < filePage.Count; i++)
+            {
+                string line = filePage[i];
+                if (line.Contains(@"<dt>Change Log</dt>"))
+                {
+                    changeLogAdd = true;
+                    i += 6;
+                    continue;
+                }
+                if (line.Contains(@"</div>") && changeLogAdd)
+                {
+                    break;
+                }
+                if (changeLogAdd)
+                {
+                    changeLog += line;
+                }
+            }
+
+            return changeLog;
+        }
+
         public override string GetInfoLink(Mapping mapping)
         {
             return _infoUrl.Replace("{tag}", mapping.AddonTag);
@@ -159,7 +187,7 @@ namespace Waddu.AddonSites
             string fileUrl = GetSiteAddon(mapping).FileUrl;
 
             string downloadUrl = string.Empty;
-            List<string> filePage = WebHelper.GetHtml(fileUrl, AddonSiteId.wowace);
+            List<string> filePage = WebHelper.GetHtml(fileUrl, mapping.AddonSiteId);
             for (int i = 0; i < filePage.Count; i++)
             {
                 string line = filePage[i];

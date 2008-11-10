@@ -16,6 +16,11 @@ namespace Waddu.AddonSites
             return DateTime.Now;
         }
 
+        public override string GetChangeLog(Mapping mapping)
+        {
+            return string.Empty;
+        }
+
         public override string GetInfoLink(Mapping mapping)
         {
             return "http://www.worldofwarcraft.com";

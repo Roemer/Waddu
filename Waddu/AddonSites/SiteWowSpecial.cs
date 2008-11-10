@@ -53,6 +53,11 @@ namespace Waddu.AddonSites
             return (DateTime)CallHandler(mapping, Type.Date);
         }
 
+        public override string GetChangeLog(Mapping mapping)
+        {
+            return string.Empty;
+        }
+
         public override string GetInfoLink(Mapping mapping)
         {
             return (string)CallHandler(mapping, Type.Info);

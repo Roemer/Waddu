@@ -1,12 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Waddu.BusinessObjects;
 using Waddu.Forms;
 using Waddu.Types;
-using System.Collections.Generic;
-using System;
 
 namespace Waddu.Classes
 {
@@ -69,6 +69,23 @@ namespace Waddu.Classes
                         workerThread.ThreadStatus = ThreadStatus.Stopping;
                         Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Stopping", workerThread.ThreadID);
                         break;
+                    }
+                    else if (wi.WorkItemType == WorkItemType.ChangeLog)
+                    {
+                        // Change Log
+                        Mapping mapping = ((WorkItemMapping)wi).Mapping;
+
+                        Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Change Log for {1} from {2}", workerThread.ThreadID, mapping.Addon.Name, mapping.AddonSiteId);
+                        workerThread.InfoText = string.Format("Change Log for {0} from {1}", mapping.Addon.Name, mapping.AddonSiteId);
+
+                        string changeLog = mapping.GetChangeLog();
+                        MainForm.Instance.Invoke((MethodInvoker)delegate()
+                        {
+                            using (ChangeLogForm dlg = new ChangeLogForm(changeLog))
+                            {
+                                dlg.ShowDialog();
+                            }
+                        });
                     }
                     else if (wi.WorkItemType == WorkItemType.VersionCheck)
                     {

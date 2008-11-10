@@ -21,6 +21,11 @@ namespace Waddu.AddonSites
             return dt;
         }
 
+        public override string GetChangeLog(Mapping mapping)
+        {
+            return string.Empty;
+        }
+
         public override string GetInfoLink(Mapping mapping)
         {
             string[] strList = mapping.AddonTag.Split(new char[] { '|' });
