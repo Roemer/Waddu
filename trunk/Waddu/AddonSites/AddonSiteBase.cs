@@ -11,6 +11,8 @@ namespace Waddu.AddonSites
 
         public abstract DateTime GetLastUpdated(Mapping mapping);
 
+        public abstract string GetChangeLog(Mapping mapping);
+
         public abstract string GetInfoLink(Mapping mapping);
 
         public abstract string GetDownloadLink(Mapping mapping);

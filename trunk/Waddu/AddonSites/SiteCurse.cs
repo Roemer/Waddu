@@ -87,6 +87,43 @@ namespace Waddu.AddonSites
             return _addonCache[mapping.AddonTag].VersionDate;
         }
 
+        public override string GetChangeLog(Mapping mapping)
+        {
+            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            {
+                ParseInfoSite(mapping);
+            }
+            string fileUrl = _addonCache[mapping.AddonTag].FileUrl;
+            List<string> filePage = WebHelper.GetHtml(fileUrl);
+            string changeLog = string.Empty;
+            bool changeLogAdd = false;
+            for (int i = 0; i < filePage.Count; i++)
+            {
+                string line = filePage[i];
+                if (line.Contains(@"<div id=""tab_changes"" class=""body"" style=""display:none"">"))
+                {
+                    changeLogAdd = true;
+                    i += 2;
+                    continue;
+                }
+                if (line.Contains(@"<li class=""title"">ChangeLog</li>")){
+                    changeLogAdd = true;
+                    i += 3;
+                    continue;
+                }
+                if (line.Contains(@"</div>") && changeLogAdd)
+                {
+                    break;
+                }
+                if (changeLogAdd)
+                {
+                    changeLog += line;
+                }
+            }
+
+            return changeLog;
+        }
+
         public override string GetInfoLink(Mapping mapping)
         {
             return _infoUrl.Replace("{tag}", mapping.AddonTag);

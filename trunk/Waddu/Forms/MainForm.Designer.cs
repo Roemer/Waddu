@@ -106,6 +106,7 @@
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMappingChangeLog = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -321,13 +322,14 @@
             // ctxMapping
             // 
             this.ctxMapping.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMappingChangeLog,
             this.tsmiMappingCheckVersion,
             this.tsmiMappingUpdate,
             this.tsmiMappingSetAsPreferred,
             this.tsmiMappingInfo,
             this.tsmiMappingDownload});
             this.ctxMapping.Name = "ctxMapping";
-            this.ctxMapping.Size = new System.Drawing.Size(156, 114);
+            this.ctxMapping.Size = new System.Drawing.Size(156, 158);
             // 
             // tsmiMappingCheckVersion
             // 
@@ -861,6 +863,13 @@
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
+            // tsmiMappingChangeLog
+            // 
+            this.tsmiMappingChangeLog.Name = "tsmiMappingChangeLog";
+            this.tsmiMappingChangeLog.Size = new System.Drawing.Size(155, 22);
+            this.tsmiMappingChangeLog.Text = "&Change Log";
+            this.tsmiMappingChangeLog.Click += new System.EventHandler(this.tsmiMappingChangeLog_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -980,6 +989,7 @@
         private System.Windows.Forms.GroupBox gbRelations;
         private System.Windows.Forms.ListView lvRelations;
         private System.Windows.Forms.ColumnHeader chRelationsName;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMappingChangeLog;
 
     }
 }

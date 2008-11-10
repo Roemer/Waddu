@@ -77,6 +77,12 @@ namespace Waddu.BusinessObjects
             Addon.PreferredMapping = Addon.PreferredMapping;
         }
 
+        public string GetChangeLog()
+        {
+            AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
+            return site.GetChangeLog(this);
+        }
+
         public string GetInfoLink()
         {
             AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
