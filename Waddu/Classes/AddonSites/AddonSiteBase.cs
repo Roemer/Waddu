@@ -2,7 +2,7 @@
 using Waddu.BusinessObjects;
 using Waddu.Types;
 
-namespace Waddu.AddonSites
+namespace Waddu.Classes.AddonSites
 {
     public abstract class AddonSiteBase
     {

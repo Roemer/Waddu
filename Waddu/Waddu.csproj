@@ -68,24 +68,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddonSites\AddonSiteBase.cs" />
-    <Compile Include="AddonSites\SiteBlizzard.cs" />
-    <Compile Include="AddonSites\SiteCurse.cs" />
-    <Compile Include="AddonSites\SiteCurseForge.cs" />
-    <Compile Include="AddonSites\SiteDirect.cs" />
-    <Compile Include="AddonSites\SiteWowAce.cs" />
-    <Compile Include="AddonSites\SiteWowInterface.cs" />
-    <Compile Include="AddonSites\SiteWowSpecial.cs" />
-    <Compile Include="AddonSites\SiteWowUi.cs" />
     <Compile Include="BusinessObjects\Addon.cs" />
     <Compile Include="BusinessObjects\AddonList.cs" />
     <Compile Include="BusinessObjects\Mapping.cs" />
     <Compile Include="BusinessObjects\Package.cs" />
     <Compile Include="BusinessObjects\SiteAddon.cs" />
+    <Compile Include="Classes\AddonSites\AddonSiteBase.cs" />
+    <Compile Include="Classes\AddonSites\SiteBlizzard.cs" />
+    <Compile Include="Classes\AddonSites\SiteCurse.cs" />
+    <Compile Include="Classes\AddonSites\SiteCurseForge.cs" />
+    <Compile Include="Classes\AddonSites\SiteDirect.cs" />
+    <Compile Include="Classes\AddonSites\SiteWowAce.cs" />
+    <Compile Include="Classes\AddonSites\SiteWowInterface.cs" />
+    <Compile Include="Classes\AddonSites\SiteWowSpecial.cs" />
+    <Compile Include="Classes\AddonSites\SiteWowUi.cs" />
     <Compile Include="Classes\ArchiveHelper.cs" />
     <Compile Include="Classes\TocHelper.cs" />
     <Compile Include="Classes\WebHelper.cs" />
-    <Compile Include="Classes\WorkItemBase.cs" />
     <Compile Include="Classes\BlockingQueue.cs" />
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\CookieManager.cs" />
@@ -100,9 +99,12 @@
     <Compile Include="Classes\Win32\Types\SHFileOperationType.cs" />
     <Compile Include="Classes\Win32\Types\SHFILEOPSTRUCT.cs" />
     <Compile Include="Classes\WorkerThread.cs" />
-    <Compile Include="Classes\WorkItemAddon.cs" />
-    <Compile Include="Classes\WorkItemEmpty.cs" />
-    <Compile Include="Classes\WorkItemMapping.cs" />
+    <Compile Include="Classes\WorkItems\WorkItemAddonChangeLog.cs" />
+    <Compile Include="Classes\WorkItems\WorkItemAddonUpdate.cs" />
+    <Compile Include="Classes\WorkItems\WorkItemAddonVersionCheck.cs" />
+    <Compile Include="Classes\WorkItems\WorkItemAppVersionCheck.cs" />
+    <Compile Include="Classes\WorkItems\WorkItemBase.cs" />
+    <Compile Include="Classes\WorkItems\WorkItemCancel.cs" />
     <Compile Include="Controls\SeparatorControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -235,7 +237,6 @@
     <Compile Include="Types\GameType.cs" />
     <Compile Include="Types\LogType.cs" />
     <Compile Include="Types\ThreadStatus.cs" />
-    <Compile Include="Types\WorkItemType.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -266,6 +267,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\Helpers\" />
+    <Folder Include="Classes\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

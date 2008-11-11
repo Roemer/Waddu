@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Waddu.Properties;
+using Waddu.Classes.WorkItems;
 using Waddu.Types;
 
 namespace Waddu.Classes
@@ -67,7 +67,7 @@ namespace Waddu.Classes
                 // Tell the Thread to Stop
                 thread.Stop();
                 // Add Fake Work
-                _workQueue.Enqueue(new WorkItemEmpty(WorkItemType.Cancel));
+                _workQueue.Enqueue(new WorkItemCancel());
             }
         }
     }
