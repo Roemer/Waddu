@@ -7,8 +7,8 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using Waddu.BusinessObjects;
 using Waddu.Classes;
+using Waddu.Classes.WorkItems;
 using Waddu.Types;
-using System.Net;
 
 namespace Waddu.Forms
 {
@@ -203,7 +203,7 @@ namespace Waddu.Forms
                 Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.VersionCheck, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(addon));
                 }
             }
         }
@@ -215,7 +215,7 @@ namespace Waddu.Forms
                 Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
                 if (addon != null)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.Update, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(addon));
                 }
             }
         }
@@ -232,7 +232,7 @@ namespace Waddu.Forms
             {
                 if (!addon.IsIgnored)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.VersionCheck, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(addon));
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace Waddu.Forms
             {
                 if (!addon.IsIgnored)
                 {
-                    ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.Update, addon));
+                    ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(addon));
                 }
             }
         }
@@ -373,7 +373,7 @@ namespace Waddu.Forms
         // Checks for a newer Version
         private void tsmiHelpCheckForUpdate_Click(object sender, EventArgs e)
         {
-            ThreadManager.Instance.AddWork(new WorkItemEmpty(WorkItemType.WadduVersionCheck));
+            ThreadManager.Instance.AddWork(new WorkItemAppVersionCheck());
         }
 
         // Show About Screen
@@ -566,7 +566,7 @@ namespace Waddu.Forms
             if (dgvMappings.SelectedRows.Count > 0)
             {
                 Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
-                ThreadManager.Instance.AddWork(new WorkItemMapping(WorkItemType.ChangeLog, map));
+                ThreadManager.Instance.AddWork(new WorkItemAddonChangeLog(map));
             }
         }
 
@@ -578,7 +578,7 @@ namespace Waddu.Forms
             if (dgvMappings.SelectedRows.Count > 0)
             {
                 Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
-                ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.VersionCheck, map.Addon, map));
+                ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(map));
             }
         }
 
@@ -590,7 +590,7 @@ namespace Waddu.Forms
             if (dgvMappings.SelectedRows.Count > 0)
             {
                 Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
-                ThreadManager.Instance.AddWork(new WorkItemAddon(WorkItemType.Update, map.Addon, map));
+                ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(map));
             }
         }
 

@@ -5,15 +5,16 @@ using Waddu.BusinessObjects;
 using Waddu.Classes;
 using Waddu.Types;
 
-namespace Waddu.AddonSites
+namespace Waddu.Classes.AddonSites
 {
-    public class SiteWowAce : AddonSiteBase
+    public class SiteCurseForge : AddonSiteBase
     {
-        private string _infoUrl = "http://www.wowace.com/projects/{tag}/files/";
-        private string _fileUrl = "http://www.wowace.com{0}";
+        private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
+        private string _fileUrl = "http://wow.curseforge.com{0}";
         private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
         private string _datePattern = @"<span class=""date"" title="".*"">(.*)</span>";
-        private string _downloadPattern = @"<a href=""(.*)""><span>Download</span></a>";
+        private string _downloadPrePattern = @"<th>Filename:</th>";
+        private string _downloadPattern = @"<td><a href=""(.*)"">.*</a></td>";
         private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
         private Dictionary<string, SiteAddon> _noLibCache = new Dictionary<string, SiteAddon>();
 
@@ -161,7 +162,7 @@ namespace Waddu.AddonSites
                 if (line.Contains(@"<dt>Change Log</dt>"))
                 {
                     changeLogAdd = true;
-                    i += 6;
+                    i += 4;
                     continue;
                 }
                 if (line.Contains(@"</div>") && changeLogAdd)
@@ -191,11 +192,16 @@ namespace Waddu.AddonSites
             for (int i = 0; i < filePage.Count; i++)
             {
                 string line = filePage[i];
-                Match m = Regex.Match(line, _downloadPattern);
+                Match m = Regex.Match(line, _downloadPrePattern);
                 if (m.Success)
                 {
-                    downloadUrl = m.Groups[1].Captures[0].Value;
-                    break;
+                    string realLine = filePage[i + 1];
+                    m = Regex.Match(realLine, _downloadPattern);
+                    if (m.Success)
+                    {
+                        downloadUrl = m.Groups[1].Captures[0].Value;
+                        break;
+                    }
                 }
             }
             return downloadUrl;

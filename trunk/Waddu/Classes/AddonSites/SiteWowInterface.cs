@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Waddu.BusinessObjects;
 using Waddu.Classes;
 
-namespace Waddu.AddonSites
+namespace Waddu.Classes.AddonSites
 {
     public class SiteWowInterface : AddonSiteBase
     {

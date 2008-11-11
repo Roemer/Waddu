@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using Waddu.AddonSites;
+using Waddu.Classes.AddonSites;
 using Waddu.BusinessObjects;
 using Waddu.Types;
 using Waddu.Classes;

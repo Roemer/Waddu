@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Waddu.AddonSites;
+using Waddu.Classes.AddonSites;
 using Waddu.Types;
 
 namespace Waddu.BusinessObjects

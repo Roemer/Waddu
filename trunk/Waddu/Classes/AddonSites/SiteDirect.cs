@@ -1,7 +1,7 @@
 ﻿using System;
 using Waddu.BusinessObjects;
 
-namespace Waddu.AddonSites
+namespace Waddu.Classes.AddonSites
 {
     public class SiteDirect : AddonSiteBase
     {
