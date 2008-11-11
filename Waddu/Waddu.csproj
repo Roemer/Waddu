@@ -83,12 +83,12 @@
     <Compile Include="Classes\AddonSites\SiteWowSpecial.cs" />
     <Compile Include="Classes\AddonSites\SiteWowUi.cs" />
     <Compile Include="Classes\ArchiveHelper.cs" />
+    <Compile Include="Classes\Interfaces\IDownloadProgress.cs" />
     <Compile Include="Classes\TocHelper.cs" />
     <Compile Include="Classes\WebHelper.cs" />
     <Compile Include="Classes\BlockingQueue.cs" />
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\CookieManager.cs" />
-    <Compile Include="Classes\IDownloadProgress.cs" />
     <Compile Include="Classes\LogEntry.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\ThreadManager.cs" />
@@ -267,10 +267,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\Helpers\" />
-    <Folder Include="Classes\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
