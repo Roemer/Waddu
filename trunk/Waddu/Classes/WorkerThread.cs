@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
+using Waddu.Classes.Interfaces;
 using Waddu.Classes.WorkItems;
 using Waddu.Forms;
 using Waddu.Types;

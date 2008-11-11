@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 using Waddu.Classes;
+using Waddu.Classes.Interfaces;
 
 namespace Waddu.Forms
 {

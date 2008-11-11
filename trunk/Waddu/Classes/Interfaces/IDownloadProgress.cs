@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Waddu.Classes
+namespace Waddu.Classes.Interfaces
 {
     public interface IDownloadProgress
     {
