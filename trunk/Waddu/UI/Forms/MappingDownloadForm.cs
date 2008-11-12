@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using Waddu.Classes;
-using Waddu.Classes.Interfaces;
+using Waddu.Core;
+using Waddu.Interfaces;
 
-namespace Waddu.Forms
+namespace Waddu.UI.Forms
 {
     public partial class MappingDownloadForm : Form, IDownloadProgress
     {

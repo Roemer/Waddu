@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using Waddu.Classes;
-using Waddu.Classes.Win32;
 using Waddu.Types;
+using Waddu.Win32;
 
-namespace Waddu.BusinessObjects
+namespace Waddu.Core.BusinessObjects
 {
     public class Addon : INotifyPropertyChanged
     {
@@ -34,7 +33,8 @@ namespace Waddu.BusinessObjects
         public bool IsSubAddon
         {
             get { return (_addonType & AddonType.Sub) == AddonType.Sub; }
-            set {
+            set
+            {
                 if (value) { _addonType |= AddonType.Sub; }
                 else { _addonType &= ~AddonType.Sub; }
             }

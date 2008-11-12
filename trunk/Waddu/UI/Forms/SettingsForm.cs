@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Waddu.Classes;
+using Waddu.Core;
 using Waddu.Types;
-using System.Collections.Generic;
 
-namespace Waddu.Forms
+namespace Waddu.UI.Forms
 {
     public partial class SettingsForm : Form
     {

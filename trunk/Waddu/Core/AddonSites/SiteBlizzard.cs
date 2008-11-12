@@ -1,7 +1,7 @@
 ﻿using System;
-using Waddu.BusinessObjects;
+using Waddu.Core.BusinessObjects;
 
-namespace Waddu.Classes.AddonSites
+namespace Waddu.Core.AddonSites
 {
     public class SiteBlizzard : AddonSiteBase
     {

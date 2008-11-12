@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using Waddu.Classes.AddonSites;
-using Waddu.BusinessObjects;
+using System.Windows.Forms;
+using Waddu.Core;
+using Waddu.Core.AddonSites;
+using Waddu.Core.BusinessObjects;
 using Waddu.Types;
-using Waddu.Classes;
 
-namespace Waddu.Forms
+namespace Waddu.UI.Forms
 {
     public partial class AdminForm : Form
     {

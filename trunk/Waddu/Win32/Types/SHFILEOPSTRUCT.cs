@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Waddu.Classes.Win32.Types
+namespace Waddu.Win32.Types
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 1)]
     public class SHFILEOPSTRUCT

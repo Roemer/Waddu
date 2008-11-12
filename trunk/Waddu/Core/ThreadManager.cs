@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using Waddu.Classes.WorkItems;
+using Waddu.Core.WorkItems;
 using Waddu.Types;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class ThreadManager
     {

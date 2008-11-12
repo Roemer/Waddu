@@ -1,7 +1,7 @@
-﻿using Waddu.BusinessObjects;
+﻿using Waddu.Core.BusinessObjects;
 using Waddu.Types;
 
-namespace Waddu.Classes.WorkItems
+namespace Waddu.Core.WorkItems
 {
     public class WorkItemAddonVersionCheck : WorkItemBase
     {

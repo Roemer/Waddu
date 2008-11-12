@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Waddu.BusinessObjects;
+using Waddu.Core.BusinessObjects;
 using Waddu.Types;
-using System;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class Mapper
     {

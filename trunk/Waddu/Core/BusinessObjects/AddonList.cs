@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Waddu.Classes;
-using Waddu.Forms;
 using Waddu.Types;
+using Waddu.UI.Forms;
 
-namespace Waddu.BusinessObjects
+namespace Waddu.Core.BusinessObjects
 {
     public class AddonList
     {

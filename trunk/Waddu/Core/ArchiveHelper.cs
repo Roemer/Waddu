@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Zip;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class ArchiveHelper
     {

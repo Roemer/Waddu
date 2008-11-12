@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
-using Waddu.Classes.Interfaces;
-using Waddu.Classes.WorkItems;
-using Waddu.Forms;
+using Waddu.Core.WorkItems;
+using Waddu.Interfaces;
 using Waddu.Types;
+using Waddu.UI.Forms;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class WorkerThread : INotifyPropertyChanged, IDownloadProgress
     {

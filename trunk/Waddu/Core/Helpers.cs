@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Waddu.Types;
-using System.Drawing;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class Helpers
     {

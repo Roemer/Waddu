@@ -4,10 +4,10 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Waddu.Classes.Interfaces;
+using Waddu.Interfaces;
 using Waddu.Types;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public abstract class WebHelper
     {

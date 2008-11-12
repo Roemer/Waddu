@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class BlockingQueue<T> : IDisposable
     {

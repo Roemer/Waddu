@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Waddu.BusinessObjects
+namespace Waddu.Core.BusinessObjects
 {
     public class SiteAddon
     {

@@ -1,4 +1,4 @@
-﻿namespace Waddu.Forms
+﻿namespace Waddu.UI.Forms
 {
     partial class MainForm
     {
@@ -64,8 +64,8 @@
             this.tsmiMappingSetAsPreferred = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingDownload = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainerEx2 = new Waddu.Controls.SplitContainerEx();
-            this.splitContainerEx1 = new Waddu.Controls.SplitContainerEx();
+            this.splitContainerEx2 = new Waddu.UI.Controls.SplitContainerEx();
+            this.splitContainerEx1 = new Waddu.UI.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
             this.dgvAddons = new System.Windows.Forms.DataGridView();
             this.dgvColAddonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +91,7 @@
             this.dgvColMappingLastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.splitContainerEx3 = new Waddu.Controls.SplitContainerEx();
+            this.splitContainerEx3 = new Waddu.UI.Controls.SplitContainerEx();
             this.dgvThreadActivity = new System.Windows.Forms.DataGridView();
             this.dgvColThreadID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvColThreadState = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -369,12 +369,12 @@
             // splitContainerEx2
             // 
             this.splitContainerEx2.AlternativeCollapseDefault = false;
-            this.splitContainerEx2.AlternativeCollapsePanel = Waddu.Controls.SplitContainerEx.Panels.Panel2;
-            this.splitContainerEx2.BottomRightLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
-            this.splitContainerEx2.CenterLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx2.AlternativeCollapsePanel = Waddu.UI.Controls.SplitContainerEx.Panels.Panel2;
+            this.splitContainerEx2.BottomRightLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx2.CenterLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             this.splitContainerEx2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerEx2.DragLineOffset = 0;
-            this.splitContainerEx2.DragLines = Waddu.Controls.SplitContainerEx.LineMode.Normal;
+            this.splitContainerEx2.DragLines = Waddu.UI.Controls.SplitContainerEx.LineMode.Normal;
             this.splitContainerEx2.DragLineWidth = 40;
             this.splitContainerEx2.Location = new System.Drawing.Point(0, 24);
             this.splitContainerEx2.Name = "splitContainerEx2";
@@ -393,17 +393,17 @@
             this.splitContainerEx2.SplitterDistance = 350;
             this.splitContainerEx2.SplitterWidth = 20;
             this.splitContainerEx2.TabIndex = 13;
-            this.splitContainerEx2.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx2.TopLeftLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             // 
             // splitContainerEx1
             // 
             this.splitContainerEx1.AlternativeCollapseDefault = false;
-            this.splitContainerEx1.AlternativeCollapsePanel = Waddu.Controls.SplitContainerEx.Panels.Panel2;
-            this.splitContainerEx1.BottomRightLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
-            this.splitContainerEx1.CenterLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx1.AlternativeCollapsePanel = Waddu.UI.Controls.SplitContainerEx.Panels.Panel2;
+            this.splitContainerEx1.BottomRightLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx1.CenterLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             this.splitContainerEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerEx1.DragLineOffset = 0;
-            this.splitContainerEx1.DragLines = Waddu.Controls.SplitContainerEx.LineMode.Normal;
+            this.splitContainerEx1.DragLines = Waddu.UI.Controls.SplitContainerEx.LineMode.Normal;
             this.splitContainerEx1.DragLineWidth = 40;
             this.splitContainerEx1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerEx1.Name = "splitContainerEx1";
@@ -421,7 +421,7 @@
             this.splitContainerEx1.SplitterDistance = 461;
             this.splitContainerEx1.SplitterWidth = 20;
             this.splitContainerEx1.TabIndex = 0;
-            this.splitContainerEx1.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx1.TopLeftLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             // 
             // gbAddons
             // 
@@ -688,12 +688,12 @@
             // splitContainerEx3
             // 
             this.splitContainerEx3.AlternativeCollapseDefault = false;
-            this.splitContainerEx3.AlternativeCollapsePanel = Waddu.Controls.SplitContainerEx.Panels.Panel2;
-            this.splitContainerEx3.BottomRightLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
-            this.splitContainerEx3.CenterLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx3.AlternativeCollapsePanel = Waddu.UI.Controls.SplitContainerEx.Panels.Panel2;
+            this.splitContainerEx3.BottomRightLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx3.CenterLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             this.splitContainerEx3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerEx3.DragLineOffset = 0;
-            this.splitContainerEx3.DragLines = Waddu.Controls.SplitContainerEx.LineMode.Normal;
+            this.splitContainerEx3.DragLines = Waddu.UI.Controls.SplitContainerEx.LineMode.Normal;
             this.splitContainerEx3.DragLineWidth = 40;
             this.splitContainerEx3.Location = new System.Drawing.Point(0, 0);
             this.splitContainerEx3.Name = "splitContainerEx3";
@@ -712,7 +712,7 @@
             this.splitContainerEx3.SplitterDistance = 461;
             this.splitContainerEx3.SplitterWidth = 20;
             this.splitContainerEx3.TabIndex = 0;
-            this.splitContainerEx3.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx3.TopLeftLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             // 
             // dgvThreadActivity
             // 
@@ -946,9 +946,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiFilterBlizzard;
         private System.Windows.Forms.GroupBox gbAddons;
         private System.Windows.Forms.GroupBox gbAddonDetails;
-        private Waddu.Controls.SplitContainerEx splitContainerEx2;
-        private Waddu.Controls.SplitContainerEx splitContainerEx1;
-        private Waddu.Controls.SplitContainerEx splitContainerEx3;
+        private Waddu.UI.Controls.SplitContainerEx splitContainerEx2;
+        private Waddu.UI.Controls.SplitContainerEx splitContainerEx1;
+        private Waddu.UI.Controls.SplitContainerEx splitContainerEx3;
         private System.Windows.Forms.ToolStrip tsLog;
         private System.Windows.Forms.ToolStripDropDownButton tsddLogLevel;
         private System.Windows.Forms.ToolStripMenuItem tsmiLogDebug;

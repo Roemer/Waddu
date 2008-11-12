@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Waddu.BusinessObjects
+namespace Waddu.Core.BusinessObjects
 {
     public class Package
     {

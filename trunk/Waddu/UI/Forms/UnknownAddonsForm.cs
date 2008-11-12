@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Waddu.Forms
+namespace Waddu.UI.Forms
 {
     public partial class UnknownAddonsForm : Form
     {

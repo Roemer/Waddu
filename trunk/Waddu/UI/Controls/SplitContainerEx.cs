@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Waddu.Controls
+namespace Waddu.UI.Controls
 {
     /// <summary>
     /// An extended Split Container with nicer Graphics

@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using Waddu.Core.BusinessObjects;
 using Waddu.Types;
-using System.Collections.Generic;
-using Waddu.BusinessObjects;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class Config
     {

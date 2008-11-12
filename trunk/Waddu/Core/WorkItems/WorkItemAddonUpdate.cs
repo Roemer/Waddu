@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using Waddu.BusinessObjects;
-using Waddu.Forms;
+using Waddu.Core.BusinessObjects;
 using Waddu.Types;
+using Waddu.UI.Forms;
 
-namespace Waddu.Classes.WorkItems
+namespace Waddu.Core.WorkItems
 {
     public class WorkItemAddonUpdate : WorkItemBase
     {
