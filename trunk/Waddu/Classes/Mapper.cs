@@ -4394,8 +4394,35 @@ namespace Waddu.Classes
             // Depreciated
             //AddDepreciated("Vendor", "AuctionMaster");
             //AddDepreciated("Afflicted", "Afflicted2");
+            //AddDepreciated("CT_RaidTracker", ""); 
 
             // TODO: Mappings
+            //- Auc-Db
+            //- CallToArms_FanUpdate *wowinterface -
+            //- Cellular
+            //- DerAssistHelper
+            //- Dominos_Bufftimes
+            //- GrindStatus
+            //- Lifebloomer
+            //- Livestock
+            //- Luggage
+            //- pError
+            //- RABuffs
+            //- ShieldsUp
+            //http://www.wowinterface.com/downloads/info8865-BangAntiSpam.html
+            //http://www.wowinterface.com/downloads/info5800-rpgo-CharacterProfiler.html
+            //http://wow.curse.com/downloads/wow-addons/details/guild-event-manager.aspx
+            //http://wow.curse.com/downloads/wow-addons/details/vendor.aspx
+            //http://www.wowinterface.com/downloads/info11520-zBrokerClock.html
+            //http://www.wowinterface.com/downloads/info11473-zBrokerDurability.html
+            //http://www.wowinterface.com/downloads/info11524-zBrokerPerformance.html
+            //- Broker_Portals
+            //- FireExit
+            //- gdFont
+            //- Instant_Health
+            //- Opticon
+            //- SkillsTip
+            //- TheTravellersReference 
             //Fubar_ProfessionsBookFu
             //LannySimpleMicroMenuFu
             //Minimalist_ButtonFrame
