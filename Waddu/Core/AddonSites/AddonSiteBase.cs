@@ -1,8 +1,8 @@
 ﻿using System;
-using Waddu.BusinessObjects;
+using Waddu.Core.BusinessObjects;
 using Waddu.Types;
 
-namespace Waddu.Classes.AddonSites
+namespace Waddu.Core.AddonSites
 {
     public abstract class AddonSiteBase
     {

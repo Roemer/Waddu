@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Waddu.BusinessObjects;
-using Waddu.Classes;
+using Waddu.Core.BusinessObjects;
 
-namespace Waddu.Classes.AddonSites
+namespace Waddu.Core.AddonSites
 {
     public class SiteCurse : AddonSiteBase
     {
@@ -106,7 +105,8 @@ namespace Waddu.Classes.AddonSites
                     i += 2;
                     continue;
                 }
-                if (line.Contains(@"<li class=""title"">ChangeLog</li>")){
+                if (line.Contains(@"<li class=""title"">ChangeLog</li>"))
+                {
                     changeLogAdd = true;
                     i += 3;
                     continue;

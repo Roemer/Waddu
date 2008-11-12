@@ -1,4 +1,4 @@
-﻿namespace Waddu.Forms
+﻿namespace Waddu.UI.Forms
 {
     partial class SettingsForm
     {

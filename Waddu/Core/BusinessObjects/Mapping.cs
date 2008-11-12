@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using Waddu.Classes.AddonSites;
+using Waddu.Core.AddonSites;
 using Waddu.Types;
 
-namespace Waddu.BusinessObjects
+namespace Waddu.Core.BusinessObjects
 {
     public class Mapping : INotifyPropertyChanged
     {
@@ -60,7 +60,7 @@ namespace Waddu.BusinessObjects
             _remoteVersion = string.Empty;
             _lastUpdated = DateTime.MinValue;
         }
-        
+
         #endregion
 
         #region Functions
@@ -101,7 +101,7 @@ namespace Waddu.BusinessObjects
             {
 
             }
-            return string.Format("{0} - {1} ({2})", 
+            return string.Format("{0} - {1} ({2})",
                 RemoteVersion == string.Empty ? "?" : RemoteVersion,
                 LastUpdated == DateTime.MinValue ? "?" : LastUpdated.ToShortDateString(),
                 AddonSiteId

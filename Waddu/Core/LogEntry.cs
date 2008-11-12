@@ -1,7 +1,7 @@
 ﻿using System;
 using Waddu.Types;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class LogEntry
     {

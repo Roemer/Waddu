@@ -5,12 +5,12 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using Waddu.BusinessObjects;
-using Waddu.Classes;
-using Waddu.Classes.WorkItems;
+using Waddu.Core;
+using Waddu.Core.BusinessObjects;
 using Waddu.Types;
+using Waddu.Core.WorkItems;
 
-namespace Waddu.Forms
+namespace Waddu.UI.Forms
 {
     public partial class MainForm : Form
     {

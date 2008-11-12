@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Waddu.Classes;
+using Waddu.Core;
 
-namespace Waddu.Forms
+namespace Waddu.UI.Forms
 {
     public partial class ArchiveContentForm : Form
     {

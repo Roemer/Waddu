@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class UnixTimeStamp
     {

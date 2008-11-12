@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Waddu.Forms;
+using Waddu.UI.Forms;
 
 namespace Waddu
 {

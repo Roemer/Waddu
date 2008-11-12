@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using Waddu.Types;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public class CookieManager
     {

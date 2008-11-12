@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using Waddu.Types;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public delegate void LogEntryEventHandler(LogEntry entry);
     public class Logger

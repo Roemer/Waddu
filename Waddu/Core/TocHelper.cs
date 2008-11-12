@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Waddu.BusinessObjects;
+using Waddu.Core.BusinessObjects;
 
-namespace Waddu.Classes
+namespace Waddu.Core
 {
     public abstract class TocHelper
     {

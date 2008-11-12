@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Waddu.Classes.Win32.Types;
+using Waddu.Win32.Types;
 
-namespace Waddu.Classes.Win32
+namespace Waddu.Win32
 {
     public class NativeMethods
     {

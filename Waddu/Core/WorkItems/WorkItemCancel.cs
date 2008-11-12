@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Waddu.Classes.WorkItems
+namespace Waddu.Core.WorkItems
 {
     public class WorkItemCancel : WorkItemBase
     {

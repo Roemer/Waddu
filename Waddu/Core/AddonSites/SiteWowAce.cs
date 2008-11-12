@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Waddu.BusinessObjects;
-using Waddu.Classes;
-using Waddu.Types;
+using Waddu.Core.BusinessObjects;
 
-namespace Waddu.Classes.AddonSites
+namespace Waddu.Core.AddonSites
 {
     public class SiteWowAce : AddonSiteBase
     {

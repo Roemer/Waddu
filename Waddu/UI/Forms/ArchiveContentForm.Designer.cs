@@ -1,4 +1,4 @@
-﻿namespace Waddu.Forms
+﻿namespace Waddu.UI.Forms
 {
     partial class ArchiveContentForm
     {
@@ -33,7 +33,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.tvContent = new System.Windows.Forms.TreeView();
-            this.splitContainerEx1 = new Waddu.Controls.SplitContainerEx();
+            this.splitContainerEx1 = new Waddu.UI.Controls.SplitContainerEx();
             this.splitContainerEx1.Panel1.SuspendLayout();
             this.splitContainerEx1.Panel2.SuspendLayout();
             this.splitContainerEx1.SuspendLayout();
@@ -95,14 +95,14 @@
             // splitContainerEx1
             // 
             this.splitContainerEx1.AlternativeCollapseDefault = false;
-            this.splitContainerEx1.AlternativeCollapsePanel = Waddu.Controls.SplitContainerEx.Panels.Panel2;
+            this.splitContainerEx1.AlternativeCollapsePanel = Waddu.UI.Controls.SplitContainerEx.Panels.Panel2;
             this.splitContainerEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainerEx1.BottomRightLine = Waddu.Controls.SplitContainerEx.LineMode.Normal;
-            this.splitContainerEx1.CenterLine = Waddu.Controls.SplitContainerEx.LineMode.Hidden;
+            this.splitContainerEx1.BottomRightLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Normal;
+            this.splitContainerEx1.CenterLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Hidden;
             this.splitContainerEx1.DragLineOffset = 0;
-            this.splitContainerEx1.DragLines = Waddu.Controls.SplitContainerEx.LineMode.Normal;
+            this.splitContainerEx1.DragLines = Waddu.UI.Controls.SplitContainerEx.LineMode.Normal;
             this.splitContainerEx1.DragLineWidth = 40;
             this.splitContainerEx1.Location = new System.Drawing.Point(12, 12);
             this.splitContainerEx1.Name = "splitContainerEx1";
@@ -120,7 +120,7 @@
             this.splitContainerEx1.SplitterDistance = 334;
             this.splitContainerEx1.SplitterWidth = 20;
             this.splitContainerEx1.TabIndex = 5;
-            this.splitContainerEx1.TopLeftLine = Waddu.Controls.SplitContainerEx.LineMode.Normal;
+            this.splitContainerEx1.TopLeftLine = Waddu.UI.Controls.SplitContainerEx.LineMode.Normal;
             // 
             // ArchiveContentForm
             // 
@@ -150,6 +150,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.TreeView tvContent;
-        private Waddu.Controls.SplitContainerEx splitContainerEx1;
+        private Waddu.UI.Controls.SplitContainerEx splitContainerEx1;
     }
 }

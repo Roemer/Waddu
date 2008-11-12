@@ -68,146 +68,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessObjects\Addon.cs" />
-    <Compile Include="BusinessObjects\AddonList.cs" />
-    <Compile Include="BusinessObjects\Mapping.cs" />
-    <Compile Include="BusinessObjects\Package.cs" />
-    <Compile Include="BusinessObjects\SiteAddon.cs" />
-    <Compile Include="Classes\AddonSites\AddonSiteBase.cs" />
-    <Compile Include="Classes\AddonSites\SiteBlizzard.cs" />
-    <Compile Include="Classes\AddonSites\SiteCurse.cs" />
-    <Compile Include="Classes\AddonSites\SiteCurseForge.cs" />
-    <Compile Include="Classes\AddonSites\SiteDirect.cs" />
-    <Compile Include="Classes\AddonSites\SiteWowAce.cs" />
-    <Compile Include="Classes\AddonSites\SiteWowInterface.cs" />
-    <Compile Include="Classes\AddonSites\SiteWowSpecial.cs" />
-    <Compile Include="Classes\AddonSites\SiteWowUi.cs" />
-    <Compile Include="Classes\ArchiveHelper.cs" />
-    <Compile Include="Classes\Interfaces\IDownloadProgress.cs" />
-    <Compile Include="Classes\TocHelper.cs" />
-    <Compile Include="Classes\WebHelper.cs" />
-    <Compile Include="Classes\BlockingQueue.cs" />
-    <Compile Include="Classes\Config.cs" />
-    <Compile Include="Classes\CookieManager.cs" />
-    <Compile Include="Classes\LogEntry.cs" />
-    <Compile Include="Classes\Logger.cs" />
-    <Compile Include="Classes\ThreadManager.cs" />
-    <Compile Include="Classes\Helpers.cs" />
-    <Compile Include="Classes\UnixTimeStamp.cs" />
-    <Compile Include="Classes\Win32\NativeMethods.cs" />
-    <Compile Include="Classes\Win32\Types\ShFileOperationFlags.cs" />
-    <Compile Include="Classes\Win32\Types\SHFileOperationType.cs" />
-    <Compile Include="Classes\Win32\Types\SHFILEOPSTRUCT.cs" />
-    <Compile Include="Classes\WorkerThread.cs" />
-    <Compile Include="Classes\WorkItems\WorkItemAddonChangeLog.cs" />
-    <Compile Include="Classes\WorkItems\WorkItemAddonUpdate.cs" />
-    <Compile Include="Classes\WorkItems\WorkItemAddonVersionCheck.cs" />
-    <Compile Include="Classes\WorkItems\WorkItemAppVersionCheck.cs" />
-    <Compile Include="Classes\WorkItems\WorkItemBase.cs" />
-    <Compile Include="Classes\WorkItems\WorkItemCancel.cs" />
-    <Compile Include="Controls\SeparatorControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\SplitContainerEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\AboutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AboutForm.Designer.cs">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AdminForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ArchiveContentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ArchiveContentForm.Designer.cs">
-      <DependentUpon>ArchiveContentForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ChangeLogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ChangeLogForm.Designer.cs">
-      <DependentUpon>ChangeLogForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ErrorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ErrorForm.Designer.cs">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Mapper.cs" />
-    <Compile Include="Forms\MappingDownloadForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MappingDownloadForm.Designer.cs">
-      <DependentUpon>MappingDownloadForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UnknownAddonsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UnknownAddonsForm.Designer.cs">
-      <DependentUpon>UnknownAddonsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UpdateAvailableForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UpdateAvailableForm.Designer.cs">
-      <DependentUpon>UpdateAvailableForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Core\AddonSites\AddonSiteBase.cs" />
+    <Compile Include="Core\AddonSites\SiteBlizzard.cs" />
+    <Compile Include="Core\AddonSites\SiteCurse.cs" />
+    <Compile Include="Core\AddonSites\SiteCurseForge.cs" />
+    <Compile Include="Core\AddonSites\SiteDirect.cs" />
+    <Compile Include="Core\AddonSites\SiteWowAce.cs" />
+    <Compile Include="Core\AddonSites\SiteWowInterface.cs" />
+    <Compile Include="Core\AddonSites\SiteWowSpecial.cs" />
+    <Compile Include="Core\AddonSites\SiteWowUi.cs" />
+    <Compile Include="Core\ArchiveHelper.cs" />
+    <Compile Include="Core\BlockingQueue.cs" />
+    <Compile Include="Core\BusinessObjects\Addon.cs" />
+    <Compile Include="Core\BusinessObjects\AddonList.cs" />
+    <Compile Include="Core\BusinessObjects\Mapping.cs" />
+    <Compile Include="Core\BusinessObjects\Package.cs" />
+    <Compile Include="Core\BusinessObjects\SiteAddon.cs" />
+    <Compile Include="Core\Config.cs" />
+    <Compile Include="Core\CookieManager.cs" />
+    <Compile Include="Core\Helpers.cs" />
+    <Compile Include="Core\LogEntry.cs" />
+    <Compile Include="Core\Logger.cs" />
+    <Compile Include="Core\Mapper.cs" />
+    <Compile Include="Core\ThreadManager.cs" />
+    <Compile Include="Core\TocHelper.cs" />
+    <Compile Include="Core\UnixTimeStamp.cs" />
+    <Compile Include="Core\WebHelper.cs" />
+    <Compile Include="Core\WorkerThread.cs" />
+    <Compile Include="Core\WorkItems\WorkItemAddonChangeLog.cs" />
+    <Compile Include="Core\WorkItems\WorkItemAddonUpdate.cs" />
+    <Compile Include="Core\WorkItems\WorkItemAddonVersionCheck.cs" />
+    <Compile Include="Core\WorkItems\WorkItemAppVersionCheck.cs" />
+    <Compile Include="Core\WorkItems\WorkItemBase.cs" />
+    <Compile Include="Core\WorkItems\WorkItemCancel.cs" />
+    <Compile Include="Interfaces\IDownloadProgress.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AboutForm.resx">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminForm.resx">
-      <DependentUpon>AdminForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ArchiveContentForm.resx">
-      <DependentUpon>ArchiveContentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ChangeLogForm.resx">
-      <DependentUpon>ChangeLogForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ErrorForm.resx">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MappingDownloadForm.resx">
-      <DependentUpon>MappingDownloadForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UnknownAddonsForm.resx">
-      <DependentUpon>UnknownAddonsForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UpdateAvailableForm.resx">
-      <DependentUpon>UpdateAvailableForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SettingsForm.resx">
+    <EmbeddedResource Include="UI\Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ArchiveContentForm.resx">
+      <DependentUpon>ArchiveContentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ChangeLogForm.resx">
+      <DependentUpon>ChangeLogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\MappingDownloadForm.resx">
+      <DependentUpon>MappingDownloadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UnknownAddonsForm.resx">
+      <DependentUpon>UnknownAddonsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UpdateAvailableForm.resx">
+      <DependentUpon>UpdateAvailableForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -219,12 +149,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Forms\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -237,6 +161,76 @@
     <Compile Include="Types\GameType.cs" />
     <Compile Include="Types\LogType.cs" />
     <Compile Include="Types\ThreadStatus.cs" />
+    <Compile Include="UI\Controls\SeparatorControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SplitContainerEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\ArchiveContentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ArchiveContentForm.Designer.cs">
+      <DependentUpon>ArchiveContentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\ChangeLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ChangeLogForm.Designer.cs">
+      <DependentUpon>ChangeLogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MappingDownloadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MappingDownloadForm.Designer.cs">
+      <DependentUpon>MappingDownloadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UnknownAddonsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UnknownAddonsForm.Designer.cs">
+      <DependentUpon>UnknownAddonsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UpdateAvailableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UpdateAvailableForm.Designer.cs">
+      <DependentUpon>UpdateAvailableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win32\NativeMethods.cs" />
+    <Compile Include="Win32\Types\ShFileOperationFlags.cs" />
+    <Compile Include="Win32\Types\SHFileOperationType.cs" />
+    <Compile Include="Win32\Types\SHFILEOPSTRUCT.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -267,10 +261,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Tools\" />
-    <Folder Include="UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
