@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using Waddu.Types;
 using Waddu.Win32;
@@ -18,6 +19,14 @@ namespace Waddu.Core.BusinessObjects
         public string LocalVersion
         {
             get { return GetLocalVersion(); }
+        }
+
+        public DateTime LastUpdated
+        {
+            get
+            {
+                return UpdateStatusList.Get(Name);
+            }
         }
 
         private AddonType _addonType;
