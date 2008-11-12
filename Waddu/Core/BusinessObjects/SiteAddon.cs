@@ -25,6 +25,8 @@ namespace Waddu.Core.BusinessObjects
             set { _fileUrl = value; }
         }
 
+        private DateTime _lastCheckingTime;
+
         public bool IsValid
         {
             get

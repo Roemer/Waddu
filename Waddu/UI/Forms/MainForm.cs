@@ -36,6 +36,7 @@ namespace Waddu.UI.Forms
             // Setup Addon Display
             dgvAddons.AutoGenerateColumns = false;
             dgvColAddonName.DataPropertyName = "Name";
+            dgvColAddonLastUpdated.DataPropertyName = "LastUpdated";
             dgvColAddonLocalVersion.DataPropertyName = "LocalVersion";
             dgvColAddonPreferredMapping.DataPropertyName = "PreferredMapping";
             dgvColAddonPreferredMapping.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -71,6 +72,9 @@ namespace Waddu.UI.Forms
 
             // Initialize the Thread Manager
             ThreadManager.Initialize();
+
+            // Init Local Status List
+            UpdateStatusList.Load();
 
             // Associate DataSources
             dgvThreadActivity.DataSource = ThreadManager.Instance.WorkerThreadList;

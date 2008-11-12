@@ -140,6 +140,10 @@ namespace Waddu.Core.WorkItems
             // Expand
             ArchiveHelper.Expand(archiveFilePath, Addon.GetFolderPath());
 
+            // Set the Updated Date
+            UpdateStatusList.Set(addon.Name, mapping.RemoteVersion);
+            UpdateStatusList.Save();
+
             // Delete Temp File
             Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Deleting {1}", workerThread.ThreadID, archiveFilePath);
             File.Delete(archiveFilePath);

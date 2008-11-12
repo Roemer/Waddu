@@ -175,7 +175,6 @@ namespace Waddu.Core
 
             xmlDoc = new XmlDocument();
             xmlDoc.Load(_xmlFile);
-
             xmlDoc.Save(_xmlFile);
         }
 
