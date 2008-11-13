@@ -16,7 +16,7 @@ namespace Waddu.Core.AddonSites
 
         private void ParseInfoSite(Mapping mapping)
         {
-            SiteAddon addon = new SiteAddon();
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
 
             bool versionFound = false;
             bool dateFound = false;
