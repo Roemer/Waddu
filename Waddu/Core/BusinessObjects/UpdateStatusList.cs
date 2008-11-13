@@ -18,24 +18,33 @@ namespace Waddu.Core.BusinessObjects
 
         private static List<UpdateStatusObject> _addonNameList = new List<UpdateStatusObject>();
 
+        private static string GetFilePath()
+        {
+            return Path.Combine(Application.StartupPath, "UpdateStatus.xml");
+        }
+
         public static void Load()
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(Path.Combine(Application.StartupPath, "UpdateStatus.xml"));
-            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+            string filePath = GetFilePath();
+            if (File.Exists(filePath))
             {
-                UpdateStatusObject obj = new UpdateStatusObject();
-                obj.Name = node.Name;
-                obj.Version = node.Attributes["Version"].Value;
-                Match m = Regex.Match(node.Attributes["Date"].Value, @"(.*)\.(.*)\.(.*) (.*):(.*):(.*)");
-                int year = Convert.ToInt32(m.Groups[1].Captures[0].Value);
-                int month = Convert.ToInt32(m.Groups[2].Captures[0].Value);
-                int day = Convert.ToInt32(m.Groups[3].Captures[0].Value);
-                int hour = Convert.ToInt32(m.Groups[4].Captures[0].Value);
-                int min = Convert.ToInt32(m.Groups[5].Captures[0].Value);
-                int sec = Convert.ToInt32(m.Groups[6].Captures[0].Value);
-                obj.Date = new DateTime(year, month, day, hour, min, sec);
-                _addonNameList.Add(obj);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filePath);
+                foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+                {
+                    UpdateStatusObject obj = new UpdateStatusObject();
+                    obj.Name = node.Attributes["Name"].Value;
+                    obj.Version = node.Attributes["Version"].Value;
+                    Match m = Regex.Match(node.Attributes["Date"].Value, @"(.*)\.(.*)\.(.*) (.*):(.*):(.*)");
+                    int year = Convert.ToInt32(m.Groups[1].Captures[0].Value);
+                    int month = Convert.ToInt32(m.Groups[2].Captures[0].Value);
+                    int day = Convert.ToInt32(m.Groups[3].Captures[0].Value);
+                    int hour = Convert.ToInt32(m.Groups[4].Captures[0].Value);
+                    int min = Convert.ToInt32(m.Groups[5].Captures[0].Value);
+                    int sec = Convert.ToInt32(m.Groups[6].Captures[0].Value);
+                    obj.Date = new DateTime(year, month, day, hour, min, sec);
+                    _addonNameList.Add(obj);
+                }
             }
         }
 
@@ -64,19 +73,23 @@ namespace Waddu.Core.BusinessObjects
 
         public static void Save()
         {
-            string xmlFile = Path.Combine(Application.StartupPath, "UpdateStatus.xml");
+            string xmlFile = GetFilePath();
             if (File.Exists(xmlFile))
             {
                 File.Delete(xmlFile);
             }
 
             XmlTextWriter w = new XmlTextWriter(xmlFile, null);
+            w.Formatting = Formatting.Indented;
             w.WriteStartDocument();
             w.WriteStartElement("WadduUpdateStatus");
 
             foreach (UpdateStatusObject obj in _addonNameList)
             {
-                w.WriteStartElement(obj.Name);
+                w.WriteStartElement("Addon");
+                w.WriteStartAttribute("Name");
+                w.WriteString(obj.Name);
+                w.WriteEndAttribute();
                 w.WriteStartAttribute("Date");
                 w.WriteString(obj.Date.ToString("yyyy.MM.dd HH:mm:ss"));
                 w.WriteEndAttribute();
@@ -89,11 +102,6 @@ namespace Waddu.Core.BusinessObjects
             w.WriteEndElement();
             w.WriteEndDocument();
             w.Close();
-
-            // Open and Save again (pretty Formatting)
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(xmlFile);
-            xmlDoc.Save(xmlFile);
         }
     }
 }

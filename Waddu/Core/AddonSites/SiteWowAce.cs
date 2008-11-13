@@ -12,15 +12,15 @@ namespace Waddu.Core.AddonSites
         private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
         private string _datePattern = @"<span class=""date"" title="".*"">(.*)</span>";
         private string _downloadPattern = @"<a href=""(.*)""><span>Download</span></a>";
-        private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
-        private Dictionary<string, SiteAddon> _noLibCache = new Dictionary<string, SiteAddon>();
-
-        #region AddonSiteBase Overrides
+        private SiteAddonCache _addonCache = new SiteAddonCache();
+        private SiteAddonCache _noLibCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
         {
-            SiteAddon addon = new SiteAddon();
-            SiteAddon noLib = new SiteAddon();
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            addon.Clear();
+            SiteAddon noLibAddon = _noLibCache.Get(mapping.AddonTag);
+            noLibAddon.Clear();
 
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             bool versionFound = false;
@@ -60,8 +60,8 @@ namespace Waddu.Core.AddonSites
                         }
                         versionString = FormatVersion(mapping, versionString);
                         string fileUrl = m.Groups[1].Captures[0].Value;
-                        noLib.VersionString = versionString;
-                        noLib.FileUrl = string.Format(_fileUrl, fileUrl);
+                        noLibAddon.VersionString = versionString;
+                        noLibAddon.FileUrl = string.Format(_fileUrl, fileUrl);
                         nolibVersionFound = true;
                     }
                 }
@@ -88,28 +88,24 @@ namespace Waddu.Core.AddonSites
                         string dateStr = m.Groups[1].Captures[0].Value;
                         string[] dateList = dateStr.Split(new char[] { '/' });
                         DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
-                        noLib.VersionDate = dt;
+                        noLibAddon.VersionDate = dt;
                         nolibDateFound = true;
                     }
                 }
             }
-
-            // Add the Addons to the Cache
-            Helpers.AddOrUpdate<string, SiteAddon>(_addonCache, mapping.AddonTag, addon);
-            Helpers.AddOrUpdate<string, SiteAddon>(_noLibCache, mapping.AddonTag, noLib);
         }
 
         private SiteAddon GetSiteAddon(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            SiteAddon noLibAddon = _noLibCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            SiteAddon addon = _addonCache[mapping.AddonTag];
-            SiteAddon noLibAddon = _noLibCache[mapping.AddonTag];
 
             // Lib Addons or no NoLib Addon Found
-            if (!Config.Instance.PreferNoLib || !noLibAddon.IsValid)
+            if (!Config.Instance.PreferNoLib || !noLibAddon.IsCollected)
             {
                 return addon;
             }
@@ -137,6 +133,7 @@ namespace Waddu.Core.AddonSites
             }
         }
 
+        #region AddonSiteBase Overrides
         public override string GetVersion(Mapping mapping)
         {
             return GetSiteAddon(mapping).VersionString;
@@ -198,7 +195,6 @@ namespace Waddu.Core.AddonSites
             }
             return downloadUrl;
         }
-
         #endregion
     }
 }
