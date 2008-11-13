@@ -13,13 +13,12 @@ namespace Waddu.Core.AddonSites
         private string _versionPattern = @"<td class=""alt2""><div class=""smallfont"">(.*)</div></td>";
         private string _datePrePattern = @"<td class=""alt1""><div class=""infoboxfont1"">Date:</div></td>";
         private string _datePattern = @"<td class=""alt1""><div class=""smallfont"">([^ ]*).*</div></td>";
-        private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
-
-        #region AddonSiteBase Overrides
+        private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
         {
             SiteAddon addon = new SiteAddon();
+            addon.Clear();
 
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             bool versionFound = false;
@@ -64,26 +63,27 @@ namespace Waddu.Core.AddonSites
                     }
                 }
             }
-
-            Helpers.AddOrUpdate<string, SiteAddon>(_addonCache, mapping.AddonTag, addon);
         }
 
+        #region AddonSiteBase Overrides
         public override string GetVersion(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            return _addonCache[mapping.AddonTag].VersionString;
+            return addon.VersionString;
         }
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            return _addonCache[mapping.AddonTag].VersionDate;
+            return addon.VersionDate;
         }
 
         public override string GetChangeLog(Mapping mapping)
@@ -100,7 +100,6 @@ namespace Waddu.Core.AddonSites
         {
             return _downUrl.Replace("{tag}", mapping.AddonTag);
         }
-
         #endregion
     }
 }

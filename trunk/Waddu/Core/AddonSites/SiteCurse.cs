@@ -13,13 +13,12 @@ namespace Waddu.Core.AddonSites
         private string _versionPattern = @"<a href=""(.*.aspx)"">(.*)</a>";
         private string _updatedPattern = @"<td><script>document.write\(Curse.Utils.getDateSince\((.*)000\)\);</script>(.*)</td>";
         private string _downloadPattern = @"<a class=""button button-pop"" href=""(.*)""><span>Manual Install</span></a>";
-        private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
-
-        #region AddonSiteBase Overrides
+        private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
         {
-            SiteAddon addon = new SiteAddon();
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            addon.Clear();
 
             bool versionFound = false;
             bool dateFound = false;
@@ -64,35 +63,38 @@ namespace Waddu.Core.AddonSites
                     }
                 }
             }
-
-            Helpers.AddOrUpdate<string, SiteAddon>(_addonCache, mapping.AddonTag, addon);
         }
 
+        #region AddonSiteBase Overrides
         public override string GetVersion(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            return _addonCache[mapping.AddonTag].VersionString;
+            return addon.VersionString;
         }
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            return _addonCache[mapping.AddonTag].VersionDate;
+            return addon.VersionDate;
         }
 
         public override string GetChangeLog(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            string fileUrl = _addonCache[mapping.AddonTag].FileUrl;
+
+            string fileUrl = addon.FileUrl;
             List<string> filePage = WebHelper.GetHtml(fileUrl);
             string changeLog = string.Empty;
             bool changeLogAdd = false;
@@ -131,11 +133,12 @@ namespace Waddu.Core.AddonSites
 
         public override string GetDownloadLink(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            string fileUrl = _addonCache[mapping.AddonTag].FileUrl;
+            string fileUrl = addon.FileUrl;
 
             string downloadUrl = string.Empty;
             List<string> filePage = WebHelper.GetHtml(fileUrl);
@@ -152,7 +155,6 @@ namespace Waddu.Core.AddonSites
             }
             return downloadUrl;
         }
-
         #endregion
     }
 }

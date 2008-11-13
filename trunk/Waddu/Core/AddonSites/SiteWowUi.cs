@@ -12,9 +12,7 @@ namespace Waddu.Core.AddonSites
         private string _versionPrePattern = @"<title>";
         private string _versionPattern = @"(.*?) - .*";
         private string _datePattern = @".*<br />Updated <b>(.*?)</b>.*";
-        private Dictionary<string, SiteAddon> _addonCache = new Dictionary<string, SiteAddon>();
-
-        #region AddonSiteBase Overrides
+        private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
         {
@@ -58,26 +56,27 @@ namespace Waddu.Core.AddonSites
                     }
                 }
             }
-
-            Helpers.AddOrUpdate<string, SiteAddon>(_addonCache, mapping.AddonTag, addon);
         }
 
+        #region AddonSiteBase Overrides
         public override string GetVersion(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            return _addonCache[mapping.AddonTag].VersionString;
+            return addon.VersionString;
         }
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            if (!_addonCache.ContainsKey(mapping.AddonTag))
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            return _addonCache[mapping.AddonTag].VersionDate;
+            return addon.VersionDate;
         }
 
         public override string GetChangeLog(Mapping mapping)
@@ -94,7 +93,6 @@ namespace Waddu.Core.AddonSites
         {
             return _downUrl.Replace("{tag}", mapping.AddonTag);
         }
-
         #endregion
     }
 }
