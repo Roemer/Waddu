@@ -17,7 +17,7 @@ namespace Waddu.Core.AddonSites
 
         private void ParseInfoSite(Mapping mapping)
         {
-            SiteAddon addon = new SiteAddon();
+            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
 
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
