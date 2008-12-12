@@ -10,7 +10,7 @@ namespace Waddu.Core.AddonSites
         private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
         private string _fileUrl = "http://wow.curseforge.com{0}";
         private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
-        private string _datePattern = @"<span class=""date"" title="".*"">(.*)</span>";
+        private string _datePattern = @"<span class=""date"" title="".*"" epoch=""(.*)"">.*</span>";
         private string _downloadPrePattern = @"<th>Filename:</th>";
         private string _downloadPattern = @"<td><a href=""(.*)"">.*</a></td>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
@@ -74,8 +74,7 @@ namespace Waddu.Core.AddonSites
                     if (m.Success)
                     {
                         string dateStr = m.Groups[1].Captures[0].Value;
-                        string[] dateList = dateStr.Split(new char[] { '/' });
-                        DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
+                        DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateStr));
                         addon.VersionDate = dt;
                         dateFound = true;
                     }
@@ -87,8 +86,7 @@ namespace Waddu.Core.AddonSites
                     if (m.Success)
                     {
                         string dateStr = m.Groups[1].Captures[0].Value;
-                        string[] dateList = dateStr.Split(new char[] { '/' });
-                        DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
+                        DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateStr));
                         noLibAddon.VersionDate = dt;
                         nolibDateFound = true;
                     }

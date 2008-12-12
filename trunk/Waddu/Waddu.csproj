@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1EA32F6B-B84F-4472-B945-AD9723728FE2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -81,6 +81,7 @@
     <Compile Include="Core\BlockingQueue.cs" />
     <Compile Include="Core\BusinessObjects\Addon.cs" />
     <Compile Include="Core\BusinessObjects\AddonList.cs" />
+    <Compile Include="Core\BusinessObjects\AddonUpdateStats.cs" />
     <Compile Include="Core\BusinessObjects\Mapping.cs" />
     <Compile Include="Core\BusinessObjects\Package.cs" />
     <Compile Include="Core\BusinessObjects\SiteAddon.cs" />
