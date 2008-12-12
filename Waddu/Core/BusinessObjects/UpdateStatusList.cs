@@ -9,14 +9,7 @@ namespace Waddu.Core.BusinessObjects
 {
     public class UpdateStatusList
     {
-        private class UpdateStatusObject
-        {
-            public string Name;
-            public string Version;
-            public DateTime Date;
-        }
-
-        private static List<UpdateStatusObject> _addonNameList = new List<UpdateStatusObject>();
+        private static List<AddonUpdateStats> _addonNameList = new List<AddonUpdateStats>();
 
         private static string GetFilePath()
         {
@@ -32,7 +25,7 @@ namespace Waddu.Core.BusinessObjects
                 doc.Load(filePath);
                 foreach (XmlNode node in doc.DocumentElement.ChildNodes)
                 {
-                    UpdateStatusObject obj = new UpdateStatusObject();
+                    AddonUpdateStats obj = new AddonUpdateStats();
                     obj.Name = node.Attributes["Name"].Value;
                     obj.Version = node.Attributes["Version"].Value;
                     Match m = Regex.Match(node.Attributes["Date"].Value, @"(.*)\.(.*)\.(.*) (.*):(.*):(.*)");
@@ -42,33 +35,33 @@ namespace Waddu.Core.BusinessObjects
                     int hour = Convert.ToInt32(m.Groups[4].Captures[0].Value);
                     int min = Convert.ToInt32(m.Groups[5].Captures[0].Value);
                     int sec = Convert.ToInt32(m.Groups[6].Captures[0].Value);
-                    obj.Date = new DateTime(year, month, day, hour, min, sec);
+                    obj.LastUpdated = new DateTime(year, month, day, hour, min, sec);
                     _addonNameList.Add(obj);
                 }
             }
         }
 
-        public static DateTime Get(string addonName)
+        public static AddonUpdateStats Get(string addonName)
         {
-            UpdateStatusObject statusObj = _addonNameList.Find(delegate(UpdateStatusObject obj) { return (obj.Name.ToUpper().Equals(addonName.ToUpper())); });
+            AddonUpdateStats statusObj = _addonNameList.Find(delegate(AddonUpdateStats obj) { return (obj.Name.ToUpper().Equals(addonName.ToUpper())); });
             if (statusObj != null)
             {
-                return statusObj.Date;
+                return statusObj;
             }
-            return DateTime.MinValue;
+            return null;
         }
 
         public static void Set(string addonName, string version)
         {
-            UpdateStatusObject statusObj = _addonNameList.Find(delegate(UpdateStatusObject obj) { return (obj.Name.ToUpper().Equals(addonName.ToUpper())); });
+            AddonUpdateStats statusObj = _addonNameList.Find(delegate(AddonUpdateStats obj) { return (obj.Name.ToUpper().Equals(addonName.ToUpper())); });
             if (statusObj == null)
             {
-                statusObj = new UpdateStatusObject();
+                statusObj = new AddonUpdateStats();
                 statusObj.Name = addonName;
                 _addonNameList.Add(statusObj);
             }
             statusObj.Version = version;
-            statusObj.Date = DateTime.Now;
+            statusObj.LastUpdated = DateTime.Now;
         }
 
         public static void Save()
@@ -84,14 +77,14 @@ namespace Waddu.Core.BusinessObjects
             w.WriteStartDocument();
             w.WriteStartElement("WadduUpdateStatus");
 
-            foreach (UpdateStatusObject obj in _addonNameList)
+            foreach (AddonUpdateStats obj in _addonNameList)
             {
                 w.WriteStartElement("Addon");
                 w.WriteStartAttribute("Name");
                 w.WriteString(obj.Name);
                 w.WriteEndAttribute();
                 w.WriteStartAttribute("Date");
-                w.WriteString(obj.Date.ToString("yyyy.MM.dd HH:mm:ss"));
+                w.WriteString(obj.LastUpdated.ToString("yyyy.MM.dd HH:mm:ss"));
                 w.WriteEndAttribute();
                 w.WriteStartAttribute("Version");
                 w.WriteString(obj.Version);

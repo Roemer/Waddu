@@ -53,6 +53,62 @@ namespace Waddu.Core.WorkItems
                     map.CheckRemote();
                 }
             }
+
+            // Check if the Addon needs updating and which Mapping is the Best
+            AddonUpdateStats stats = UpdateStatusList.Get(addon.Name);
+            foreach (Mapping addonMapping in addon.Mappings)
+            {
+                if (stats != null)
+                {
+                    if (stats.LastUpdated > addonMapping.LastUpdated)
+                    {
+                        // Skip if the Local Date is Bigger than the Remote Date
+                        continue;
+                    }
+                }
+
+                // If no Mapping defined yet, define it now
+                if (addon.PreferredMapping == null)
+                {
+                    addon.PreferredMapping = addonMapping;
+                    continue;
+                }
+
+                // Check if the Mapping has a newer Date
+                if (addonMapping.LastUpdated > addon.PreferredMapping.LastUpdated)
+                {
+                    addon.PreferredMapping = addonMapping;
+                    continue;
+                }
+
+                // TODO
+
+                // Assign by NoLib Setting
+                if (Config.Instance.PreferNoLib)
+                {
+                    if (addonMapping.AddonSiteId == AddonSiteId.wowace || addonMapping.AddonSiteId == AddonSiteId.curseforge)
+                    {
+                        addon.PreferredMapping = addonMapping;
+                    }
+                }
+
+                // Assign by Preferred
+                AddonSiteId preferred;
+                if (Config.Instance.GetPreferredMapping(addon, out preferred))
+                {
+                    if (addonMapping.AddonSiteId == preferred)
+                    {
+                        addon.PreferredMapping = addonMapping;
+                    }
+                }
+                // Assign by Priority
+                int indexOld = Config.Instance.AddonSites.IndexOf(addon.PreferredMapping.AddonSiteId);
+                int indexNew = Config.Instance.AddonSites.IndexOf(addonMapping.AddonSiteId);
+                if (indexNew >= 0 && indexNew < indexOld)
+                {
+                    addon.PreferredMapping = addonMapping;
+                }
+            }
         }
     }
 }

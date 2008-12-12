@@ -25,7 +25,12 @@ namespace Waddu.Core.BusinessObjects
         {
             get
             {
-                return UpdateStatusList.Get(Name);
+                AddonUpdateStats stats = UpdateStatusList.Get(Name);
+                if (stats != null)
+                {
+                    return UpdateStatusList.Get(Name).LastUpdated;
+                }
+                return DateTime.MinValue;
             }
         }
 
@@ -171,42 +176,6 @@ namespace Waddu.Core.BusinessObjects
             {
                 Mapping newMapping = _mappingList[e.NewIndex];
                 newMapping.Addon = this;
-
-                if (_preferredMapping == null)
-                {
-                    _preferredMapping = newMapping;
-                }
-                else
-                {
-                    // Assign by NoLib Setting
-                    if (Config.Instance.PreferNoLib)
-                    {
-                        if (newMapping.AddonSiteId == AddonSiteId.wowace || newMapping.AddonSiteId == AddonSiteId.curseforge)
-                        {
-                            _preferredMapping = newMapping;
-                            return;
-                        }
-                    }
-
-                    // Assign by Preferred
-                    AddonSiteId preferred;
-                    if (Config.Instance.GetPreferredMapping(this, out preferred))
-                    {
-                        if (newMapping.AddonSiteId == preferred)
-                        {
-                            _preferredMapping = newMapping;
-                        }
-                        return;
-                    }
-
-                    // Assign by Priority
-                    int indexOld = Config.Instance.AddonSites.IndexOf(_preferredMapping.AddonSiteId);
-                    int indexNew = Config.Instance.AddonSites.IndexOf(newMapping.AddonSiteId);
-                    if (indexNew >= 0 && indexNew < indexOld)
-                    {
-                        _preferredMapping = newMapping;
-                    }
-                }
             }
         }
 
