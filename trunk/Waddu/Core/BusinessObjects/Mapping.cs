@@ -97,10 +97,6 @@ namespace Waddu.Core.BusinessObjects
 
         public override string ToString()
         {
-            if (RemoteVersion == string.Empty)
-            {
-
-            }
             return string.Format("{0} - {1} ({2})",
                 RemoteVersion == string.Empty ? "?" : RemoteVersion,
                 LastUpdated == DateTime.MinValue ? "?" : LastUpdated.ToShortDateString(),

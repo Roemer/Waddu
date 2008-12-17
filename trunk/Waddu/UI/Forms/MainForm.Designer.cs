@@ -69,6 +69,10 @@
             this.splitContainerEx1 = new Waddu.UI.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
             this.dgvAddons = new System.Windows.Forms.DataGridView();
+            this.dgvColAddonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColAddonLastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColAddonLocalVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColAddonPreferredMapping = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsAddon = new System.Windows.Forms.ToolStrip();
             this.tsddFilter = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiFilterInstalled = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,10 +108,7 @@
             this.tsmiLogInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLogError = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvColAddonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvColAddonLastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvColAddonLocalVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvColAddonPreferredMapping = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tsmiAddonSetAsUpdated = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ctxAddon.SuspendLayout();
             this.ctxLog.SuspendLayout();
@@ -254,9 +255,10 @@
             this.tsmiAddonUpdate,
             this.tsmiAddonIgnore,
             this.tsmiAddonUnignore,
-            this.tsmiAddonMappings});
+            this.tsmiAddonMappings,
+            this.tsmiAddonSetAsUpdated});
             this.ctxAddon.Name = "ctxAddon";
-            this.ctxAddon.Size = new System.Drawing.Size(167, 114);
+            this.ctxAddon.Size = new System.Drawing.Size(167, 158);
             // 
             // tsmiAddonCheckForUpdate
             // 
@@ -466,6 +468,31 @@
             this.dgvAddons.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvAddons_MouseClick);
             this.dgvAddons.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAddons_CellPainting);
             this.dgvAddons.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvAddons_RowStateChanged);
+            // 
+            // dgvColAddonName
+            // 
+            this.dgvColAddonName.HeaderText = "Name";
+            this.dgvColAddonName.Name = "dgvColAddonName";
+            this.dgvColAddonName.ReadOnly = true;
+            // 
+            // dgvColAddonLastUpdated
+            // 
+            this.dgvColAddonLastUpdated.HeaderText = "Last Updated";
+            this.dgvColAddonLastUpdated.Name = "dgvColAddonLastUpdated";
+            this.dgvColAddonLastUpdated.ReadOnly = true;
+            // 
+            // dgvColAddonLocalVersion
+            // 
+            this.dgvColAddonLocalVersion.HeaderText = "Local Version";
+            this.dgvColAddonLocalVersion.Name = "dgvColAddonLocalVersion";
+            this.dgvColAddonLocalVersion.ReadOnly = true;
+            // 
+            // dgvColAddonPreferredMapping
+            // 
+            this.dgvColAddonPreferredMapping.HeaderText = "Preferred Mapping";
+            this.dgvColAddonPreferredMapping.Name = "dgvColAddonPreferredMapping";
+            this.dgvColAddonPreferredMapping.ReadOnly = true;
+            this.dgvColAddonPreferredMapping.Width = 120;
             // 
             // tsAddon
             // 
@@ -853,30 +880,12 @@
             this.tsmiLogError.Text = "Error";
             this.tsmiLogError.Click += new System.EventHandler(this.tsmiLogLevelItem_Click);
             // 
-            // dgvColAddonName
+            // tsmiAddonSetAsUpdated
             // 
-            this.dgvColAddonName.HeaderText = "Name";
-            this.dgvColAddonName.Name = "dgvColAddonName";
-            this.dgvColAddonName.ReadOnly = true;
-            // 
-            // dgvColAddonLastUpdated
-            // 
-            this.dgvColAddonLastUpdated.HeaderText = "Last Updated";
-            this.dgvColAddonLastUpdated.Name = "dgvColAddonLastUpdated";
-            this.dgvColAddonLastUpdated.ReadOnly = true;
-            // 
-            // dgvColAddonLocalVersion
-            // 
-            this.dgvColAddonLocalVersion.HeaderText = "Local Version";
-            this.dgvColAddonLocalVersion.Name = "dgvColAddonLocalVersion";
-            this.dgvColAddonLocalVersion.ReadOnly = true;
-            // 
-            // dgvColAddonPreferredMapping
-            // 
-            this.dgvColAddonPreferredMapping.HeaderText = "Preferred Mapping";
-            this.dgvColAddonPreferredMapping.Name = "dgvColAddonPreferredMapping";
-            this.dgvColAddonPreferredMapping.ReadOnly = true;
-            this.dgvColAddonPreferredMapping.Width = 120;
+            this.tsmiAddonSetAsUpdated.Name = "tsmiAddonSetAsUpdated";
+            this.tsmiAddonSetAsUpdated.Size = new System.Drawing.Size(166, 22);
+            this.tsmiAddonSetAsUpdated.Text = "&Set as Updated";
+            this.tsmiAddonSetAsUpdated.Click += new System.EventHandler(this.tsmiAddonSetAsUpdated_Click);
             // 
             // MainForm
             // 
@@ -999,6 +1008,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLastUpdated;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonPreferredMapping;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddonSetAsUpdated;
 
     }
 }

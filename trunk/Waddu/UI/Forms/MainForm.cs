@@ -200,30 +200,6 @@ namespace Waddu.UI.Forms
             }
         }
 
-        private void tsmiAddonCheckForUpdate_Click(object sender, EventArgs e)
-        {
-            if (dgvAddons.SelectedRows.Count > 0)
-            {
-                Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
-                if (addon != null)
-                {
-                    ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(addon));
-                }
-            }
-        }
-
-        private void tsmiAddonUpdate_Click(object sender, EventArgs e)
-        {
-            if (dgvAddons.SelectedRows.Count > 0)
-            {
-                Addon addon = dgvAddons.SelectedRows[0].DataBoundItem as Addon;
-                if (addon != null)
-                {
-                    ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(addon));
-                }
-            }
-        }
-
         private void tsmiReloadLocalAddons_Click(object sender, EventArgs e)
         {
             LoadLocalAddons();
@@ -478,6 +454,11 @@ namespace Waddu.UI.Forms
                     // Get the Addon
                     Addon addon = dgv.CurrentRow.DataBoundItem as Addon;
 
+                    // Assign the Addon
+                    tsmiAddonCheckForUpdate.Tag = addon;
+                    tsmiAddonUpdate.Tag = addon;
+                    tsmiAddonSetAsUpdated.Tag = addon;
+
                     // Handle Ignore
                     if (addon.IsIgnored)
                     {
@@ -517,6 +498,20 @@ namespace Waddu.UI.Forms
             }
         }
 
+        private void tsmiAddonCheckForUpdate_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            Addon addon = tsmi.Tag as Addon;
+            ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(addon));
+        }
+
+        private void tsmiAddonUpdate_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            Addon addon = tsmi.Tag as Addon;
+            ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(addon));
+        }
+
         /// <summary>
         /// Sets the selected Mapping as the Preferred Mapping for the Addon
         /// </summary>
@@ -541,6 +536,15 @@ namespace Waddu.UI.Forms
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             Addon addon = tsmi.Tag as Addon;
             addon.IsIgnored = false;
+        }
+
+        private void tsmiAddonSetAsUpdated_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            Addon addon = tsmi.Tag as Addon;
+            UpdateStatusList.Set(addon.Name, addon.LocalVersion);
+            UpdateStatusList.Save();
+            addon.LocalVersionUpdated();
         }
         #endregion
 
