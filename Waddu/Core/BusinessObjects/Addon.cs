@@ -179,6 +179,15 @@ namespace Waddu.Core.BusinessObjects
             }
         }
 
+        public void LocalVersionUpdated()
+        {
+            // Notify Properties Changed
+            NotifyPropertyChanged("LastUpdated");
+            NotifyPropertyChanged("LocalVersion");
+            // Delete the Preferred Mapping
+            this.PreferredMapping = null;
+        }
+
         /// <summary>
         /// Get the Local Version of an Addon
         /// </summary>

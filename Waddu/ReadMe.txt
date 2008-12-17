@@ -1,8 +1,20 @@
 ﻿Version History:
 
-xx.11.2008 - 0.7.0.0 (Alpha 7)
-New: Dependencies
-Bug: Fixed Splitting
+xx.xx.xxxx - 0.7.0.0 (Alpha 7)
+New: Packages
+
+17.12.2008 - 0.6.5.0 (Alpha 6 Bugfix 5)
+New: Option to set an Addon to updated (Right-Click on Addon)
+Chg: Refresh Addon Display when an Addon was updated
+Bug: Always use preferred Mapping if manually set (even after Restarting)
+Bug: Fixed Error when Addon doesn't have a preferred Mapping
+
+12.12.2008 - 0.6.4.0 (Alpha 6 Bugfix 4)
+New: Simple ChangeLog Viewer
+New: Local Last Updated
+New: Added Caching when Remote Checking an Addon
+Chg: Improved Dependencies
+Bug: Fixed String Splitting
 
 08.11.2008 - 0.6.3.0 (Alpha 6 Bugfix 3)
 New: Error Dialog Form

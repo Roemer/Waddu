@@ -49,6 +49,14 @@ namespace Waddu.Core.WorkItems
                 // If no specific Mapping given, use Preferred Mapping
                 mapping = addon.PreferredMapping;
             }
+
+            // If the Mapping still is undefined (like no Update Check was made)
+            if (mapping == null)
+            {
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping to Update", workerThread.ThreadID, addon.Name);
+                return;
+            }
+
             // Download
             Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, addon.Name, mapping.AddonSiteId);
             workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, addon.Name);
@@ -147,6 +155,9 @@ namespace Waddu.Core.WorkItems
             // Delete Temp File
             Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Deleting {1}", workerThread.ThreadID, archiveFilePath);
             File.Delete(archiveFilePath);
+
+            // Mark as just updated
+            addon.LocalVersionUpdated();
         }
     }
 }

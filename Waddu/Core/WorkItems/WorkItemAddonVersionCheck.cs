@@ -62,7 +62,7 @@ namespace Waddu.Core.WorkItems
                 {
                     if (stats.LastUpdated > addonMapping.LastUpdated)
                     {
-                        // Skip if the Local Date is Bigger than the Remote Date
+                        // Skip if the Local Date is bigger than the Remote Date
                         continue;
                     }
                 }
@@ -74,24 +74,6 @@ namespace Waddu.Core.WorkItems
                     continue;
                 }
 
-                // Check if the Mapping has a newer Date
-                if (addonMapping.LastUpdated > addon.PreferredMapping.LastUpdated)
-                {
-                    addon.PreferredMapping = addonMapping;
-                    continue;
-                }
-
-                // TODO
-
-                // Assign by NoLib Setting
-                if (Config.Instance.PreferNoLib)
-                {
-                    if (addonMapping.AddonSiteId == AddonSiteId.wowace || addonMapping.AddonSiteId == AddonSiteId.curseforge)
-                    {
-                        addon.PreferredMapping = addonMapping;
-                    }
-                }
-
                 // Assign by Preferred
                 AddonSiteId preferred;
                 if (Config.Instance.GetPreferredMapping(addon, out preferred))
@@ -100,13 +82,34 @@ namespace Waddu.Core.WorkItems
                     {
                         addon.PreferredMapping = addonMapping;
                     }
+                    // If a Preferred Mapping is set, skip all others
+                    continue;
                 }
+
+                // Assign by NoLib Setting
+                if (Config.Instance.PreferNoLib)
+                {
+                    if (addonMapping.AddonSiteId == AddonSiteId.wowace || addonMapping.AddonSiteId == AddonSiteId.curseforge)
+                    {
+                        addon.PreferredMapping = addonMapping;
+                        continue;
+                    }
+                }
+
+                // Check if the Mapping has a newer Date
+                if (addonMapping.LastUpdated > addon.PreferredMapping.LastUpdated)
+                {
+                    addon.PreferredMapping = addonMapping;
+                    continue;
+                }
+
                 // Assign by Priority
                 int indexOld = Config.Instance.AddonSites.IndexOf(addon.PreferredMapping.AddonSiteId);
                 int indexNew = Config.Instance.AddonSites.IndexOf(addonMapping.AddonSiteId);
                 if (indexNew >= 0 && indexNew < indexOld)
                 {
                     addon.PreferredMapping = addonMapping;
+                    continue;
                 }
             }
         }
