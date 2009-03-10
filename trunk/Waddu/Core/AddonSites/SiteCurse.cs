@@ -11,7 +11,7 @@ namespace Waddu.Core.AddonSites
         private string _downUrl = "http://wow.curse.com{0}";
         private string _versionPrePattern = @"<th>Current Version:</th>";
         private string _versionPattern = @"<a href=""(.*.aspx)"">(.*)</a>";
-        private string _updatedPattern = @"<td><script>document.write\(Curse.Utils.getDateSince\((.*)000\)\);</script>(.*)</td>";
+        private string _updatedPattern = @"<td><script>document.write\(Curse.Utils.getDateSince\((\d*)\d{3}\)\);</script>(.*)</td>";
         private string _downloadPattern = @"<a class=""button button-pop"" href=""(.*)""><span>Manual Install</span></a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
 

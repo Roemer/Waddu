@@ -10,7 +10,7 @@ namespace Waddu.Core.AddonSites
         private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
         private string _fileUrl = "http://wow.curseforge.com{0}";
         private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
-        private string _datePattern = @"<span class=""date"" title="".*"" epoch=""(.*)"">.*</span>";
+        private string _datePattern = @"<span class=""date"" title="".*"" data-epoch=""(.*)"">.*</span>";
         private string _downloadPrePattern = @"<th>Filename:</th>";
         private string _downloadPattern = @"<td><a href=""(.*)"">.*</a></td>";
         private SiteAddonCache _addonCache = new SiteAddonCache();

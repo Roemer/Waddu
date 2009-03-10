@@ -26,7 +26,7 @@ namespace Waddu.UI.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
