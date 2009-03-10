@@ -12,7 +12,7 @@ namespace Waddu.UI.Forms
             lblNewestVersion.Text = newestVersion;
 
             llInfoSite.Links[0].LinkData = "http://waddu.flauschig.ch";
-            llInfoSiteMirror.Links[0].LinkData = "http://www.red-demon.com/waddu";
+            llInfoSiteMirror.Links[0].LinkData = "http://code.google.com/p/waddu/downloads/list";
         }
 
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
