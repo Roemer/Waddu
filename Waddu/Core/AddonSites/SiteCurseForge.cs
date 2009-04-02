@@ -9,10 +9,10 @@ namespace Waddu.Core.AddonSites
     {
         private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
         private string _fileUrl = "http://wow.curseforge.com{0}";
-        private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
-        private string _datePattern = @"<span class=""date"" title="".*"" data-epoch=""(.*)"">.*</span>";
-        private string _downloadPrePattern = @"<th>Filename:</th>";
-        private string _downloadPattern = @"<td><a href=""(.*)"">.*</a></td>";
+        private string _versionPattern = "<td class=\"first\"><a href=\"(.*)\">(.*)</a></td>";
+        private string _datePattern = "<span class=\"date\" title=\".*\" data-epoch=\"(.*)\">.*</span>";
+        private string _downloadPrePattern = "<span>Actions:</span>";
+        private string _downloadPattern = "<a href=\"(.*)\">Download</a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
         private SiteAddonCache _noLibCache = new SiteAddonCache();
 
@@ -188,7 +188,7 @@ namespace Waddu.Core.AddonSites
                 Match m = Regex.Match(line, _downloadPrePattern);
                 if (m.Success)
                 {
-                    string realLine = filePage[i + 1];
+                    string realLine = filePage[i + 4];
                     m = Regex.Match(realLine, _downloadPattern);
                     if (m.Success)
                     {
