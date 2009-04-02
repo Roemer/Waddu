@@ -9,9 +9,9 @@ namespace Waddu.Core.AddonSites
     {
         private string _infoUrl = "http://www.wowace.com/projects/{tag}/files/";
         private string _fileUrl = "http://www.wowace.com{0}";
-        private string _versionPattern = @"<td class=""first""><a href=""(.*)"">(.*)</a></td>";
-        private string _datePattern = @"<span class=""date"" title="".*"" data-epoch=""(.*)"">.*</span>";
-        private string _downloadPattern = @"<a href=""(.*)""><span>Download</span></a>";
+        private string _versionPattern = "<td class=\"first\"><a href=\"(.*)\">(.*)</a></td>";
+        private string _datePattern = "<span class=\"date\" title=\".*\" data-epoch=\"(.*)\">.*</span>";
+        private string _downloadPattern = "<a href=\"(.*)\">Download</a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
         private SiteAddonCache _noLibCache = new SiteAddonCache();
 
@@ -154,7 +154,7 @@ namespace Waddu.Core.AddonSites
                 if (line.Contains(@"<dt>Change Log</dt>"))
                 {
                     changeLogAdd = true;
-                    i += 6;
+                    i += 4;
                     continue;
                 }
                 if (line.Contains(@"</div>") && changeLogAdd)
