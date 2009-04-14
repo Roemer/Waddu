@@ -15,14 +15,35 @@ namespace Waddu.Core.AddonSites
         private string _datePattern = @"<td class=""alt1""><div class=""smallfont"">([^ ]*).*</div></td>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
 
+        private string _xmlUrl = "http://www.wowinterface.com/patcher.php?id={tag}";
+        private string _xmlVersionPattern = @"<UIVersion>(.*)</UIVersion>";
+
         private void ParseInfoSite(Mapping mapping)
         {
             SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
 
-            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             bool versionFound = false;
+            string xmlurl = _xmlUrl.Replace("{tag}", mapping.AddonTag);
+            List<string> xmlPage = WebHelper.GetHtml(xmlurl);
+
+            for (int i = 0; i < xmlPage.Count; i++)
+            {
+                string line = xmlPage[i];
+                if (!versionFound)
+                {
+                    Match m = Regex.Match(line, _xmlVersionPattern);
+                    if (m.Success)
+                    {
+                        string version = m.Groups[1].Captures[0].Value;
+                        addon.VersionString = version;
+                        versionFound = true;
+                    }
+                }
+            }
+
             bool dateFound = false;
+            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             List<string> infoPage = WebHelper.GetHtml(url);
 
             for (int i = 0; i < infoPage.Count; i++)
