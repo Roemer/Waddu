@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Waddu.Core.BusinessObjects;
+using Waddu.Types;
+using Waddu.UI.Forms;
 
 namespace Waddu.Core.AddonSites
 {
@@ -192,11 +195,19 @@ namespace Waddu.Core.AddonSites
                     m = Regex.Match(realLine, _downloadPattern);
                     if (m.Success)
                     {
+                        // This is the URL with the Captcha
                         downloadUrl = m.Groups[1].Captures[0].Value;
                         break;
                     }
                 }
             }
+
+            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curseforge);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                downloadUrl = form.DownloadUrl;
+            }
+
             return downloadUrl;
         }
         #endregion

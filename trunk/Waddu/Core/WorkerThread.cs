@@ -36,6 +36,8 @@ namespace Waddu.Core
         {
             _thread = new Thread(new ParameterizedThreadStart(ThreadProc));
 
+            _thread.SetApartmentState(ApartmentState.STA);
+
             _thread.Start(this);
         }
 
