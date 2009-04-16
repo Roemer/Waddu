@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // webBrowser1
@@ -39,22 +40,31 @@
             this.webBrowser1.Location = new System.Drawing.Point(12, 12);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(60, 30);
+            this.webBrowser1.Size = new System.Drawing.Size(119, 26);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Location = new System.Drawing.Point(12, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 55);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "If you see this window for more than a minute, enlarge it and click the download " +
+                "Button.";
             // 
             // WebBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(108, 53);
+            this.ClientSize = new System.Drawing.Size(143, 114);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.webBrowser1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "WebBrowserForm";
-            this.ShowInTaskbar = false;
             this.Text = "WebBrowserForm";
             this.ResumeLayout(false);
 
@@ -63,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Label label1;
     }
 }

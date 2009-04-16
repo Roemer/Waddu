@@ -202,7 +202,7 @@ namespace Waddu.Core.AddonSites
                 }
             }
 
-            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curseforge);
+            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curseforge, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 downloadUrl = form.DownloadUrl;

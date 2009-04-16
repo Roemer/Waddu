@@ -144,7 +144,7 @@ namespace Waddu.Core.AddonSites
             string fileUrl = addon.FileUrl;
 
             string downloadUrl = string.Empty;
-            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curse);
+            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curse, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 downloadUrl = form.DownloadUrl;
