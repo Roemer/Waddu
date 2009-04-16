@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Waddu.Core.BusinessObjects;
+using Waddu.UI.Forms;
+using Waddu.Types;
+using System.Windows.Forms;
 
 namespace Waddu.Core.AddonSites
 {
@@ -141,18 +144,26 @@ namespace Waddu.Core.AddonSites
             string fileUrl = addon.FileUrl;
 
             string downloadUrl = string.Empty;
-            List<string> filePage = WebHelper.GetHtml(fileUrl);
-            for (int i = 0; i < filePage.Count; i++)
+            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curse);
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                string line = filePage[i];
-                Match m = Regex.Match(line, _downloadPattern);
-                if (m.Success)
-                {
-                    downloadUrl = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
-                    downloadUrl = downloadUrl.Replace("&amp;", "&");
-                    break;
-                }
+                downloadUrl = form.DownloadUrl;
             }
+
+            // Legacy
+            //List<string> filePage = WebHelper.GetHtml(fileUrl);
+            //for (int i = 0; i < filePage.Count; i++)
+            //{
+            //    string line = filePage[i];
+            //    Match m = Regex.Match(line, _downloadPattern);
+            //    if (m.Success)
+            //    {
+            //        downloadUrl = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
+            //        downloadUrl = downloadUrl.Replace("&amp;", "&");
+            //        break;
+            //    }
+            //}
+
             return downloadUrl;
         }
         #endregion

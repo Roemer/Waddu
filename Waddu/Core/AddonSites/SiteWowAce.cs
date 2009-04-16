@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Waddu.Core.BusinessObjects;
+using Waddu.Types;
+using Waddu.UI.Forms;
 
 namespace Waddu.Core.AddonSites
 {
@@ -191,6 +194,16 @@ namespace Waddu.Core.AddonSites
                     break;
                 }
             }
+
+            // This is the URL with the Captcha
+            downloadUrl = "http://www.wowace.com" + downloadUrl;
+
+            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.wowace);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                downloadUrl = form.DownloadUrl;
+            }
+
             return downloadUrl;
         }
         #endregion
