@@ -198,7 +198,7 @@ namespace Waddu.Core.AddonSites
             // This is the URL with the Captcha
             downloadUrl = "http://www.wowace.com" + downloadUrl;
 
-            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.wowace);
+            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.wowace, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 downloadUrl = form.DownloadUrl;

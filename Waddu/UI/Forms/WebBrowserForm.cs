@@ -20,12 +20,16 @@ namespace Waddu.UI.Forms
         public string DownloadUrl = string.Empty;
 
         private AddonSiteId _addonSiteId;
+        private string _addonName;
 
-        public WebBrowserForm(string url, AddonSiteId addonSiteId)
+        public WebBrowserForm(string url, AddonSiteId addonSiteId, string addonName)
         {
             InitializeComponent();
 
             _addonSiteId = addonSiteId;
+            _addonName = addonName;
+
+            Text = "DL: " + addonName;
 
             webBrowser1.Navigate(url);
         }
@@ -34,12 +38,6 @@ namespace Waddu.UI.Forms
         {
             if (e.Url.AbsoluteUri.Contains(".zip") || e.Url.AbsoluteUri.Contains(".rar") || e.Url.AbsoluteUri.Contains(".7z"))
             {
-                //Console.WriteLine("Download detected");
-                //WebClient wc = new WebClient();
-                //string filename = @"c:\test.zip";
-                //wc.DownloadFile(e.Url.AbsoluteUri, filename);
-                //Console.WriteLine("file downloaded");
-
                 DownloadUrl = e.Url.AbsoluteUri;
 
                 e.Cancel = true;
@@ -102,6 +100,11 @@ namespace Waddu.UI.Forms
                 y = 5;
             }
 
+            DoClick(x, y);
+        }
+
+        private void DoClick(int x, int y)
+        {
             // Emulate the Click
             IntPtr handle = webBrowser1.Handle;
             StringBuilder className = new StringBuilder(100);
@@ -116,7 +119,7 @@ namespace Waddu.UI.Forms
             }
             if (handle != IntPtr.Zero)
             {
-                IntPtr lParam = (IntPtr) ((y << 16) | x); // X and Y coordinates of the click
+                IntPtr lParam = (IntPtr)((y << 16) | x); // X and Y coordinates of the click
                 IntPtr wParam = IntPtr.Zero; // change this if you want to simulate Ctrl-Click and such
                 const uint downCode = 0x201; // these codes are for single left clicks
                 const uint upCode = 0x202;
