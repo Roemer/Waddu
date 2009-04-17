@@ -178,7 +178,7 @@ namespace Waddu.Core.AddonSites
             return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             string fileUrl = GetSiteAddon(mapping).FileUrl;
 
@@ -196,12 +196,16 @@ namespace Waddu.Core.AddonSites
             }
 
             // This is the URL with the Captcha
-            downloadUrl = "http://www.wowace.com" + downloadUrl;
+            // downloadUrl = "http://www.wowace.com" + downloadUrl;
 
             WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.wowace, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
-                downloadUrl = form.DownloadUrl;
+                downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;
+            }
+            else
+            {
+                downloadUrl = string.Empty;
             }
 
             return downloadUrl;

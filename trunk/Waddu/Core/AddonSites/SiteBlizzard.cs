@@ -26,7 +26,7 @@ namespace Waddu.Core.AddonSites
             return "http://www.worldofwarcraft.com";
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             return "http://www.worldofwarcraft.com";
         }

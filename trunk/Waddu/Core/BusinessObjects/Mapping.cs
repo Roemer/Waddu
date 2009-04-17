@@ -89,10 +89,10 @@ namespace Waddu.Core.BusinessObjects
             return site.GetInfoLink(this);
         }
 
-        public string GetDownloadLink()
+        public string GetFilePath()
         {
             AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
-            return site.GetDownloadLink(this);
+            return site.GetFilePath(this);
         }
 
         public override string ToString()

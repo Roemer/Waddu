@@ -89,7 +89,7 @@ namespace Waddu.Core.AddonSites
             return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             return _downUrl.Replace("{tag}", mapping.AddonTag);
         }

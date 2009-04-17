@@ -134,7 +134,7 @@ namespace Waddu.Core.AddonSites
             return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
@@ -147,22 +147,12 @@ namespace Waddu.Core.AddonSites
             WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curse, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
-                downloadUrl = form.DownloadUrl;
+                downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;
             }
-
-            // Legacy
-            //List<string> filePage = WebHelper.GetHtml(fileUrl);
-            //for (int i = 0; i < filePage.Count; i++)
-            //{
-            //    string line = filePage[i];
-            //    Match m = Regex.Match(line, _downloadPattern);
-            //    if (m.Success)
-            //    {
-            //        downloadUrl = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
-            //        downloadUrl = downloadUrl.Replace("&amp;", "&");
-            //        break;
-            //    }
-            //}
+            else
+            {
+                downloadUrl = string.Empty;
+            }
 
             return downloadUrl;
         }

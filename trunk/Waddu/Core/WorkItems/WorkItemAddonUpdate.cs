@@ -36,6 +36,8 @@ namespace Waddu.Core.WorkItems
             Addon addon = _addon;
             Mapping mapping = _mapping;
 
+            workerThread.InfoText = addon.Name;
+
             if (addon.Mappings.Count <= 0)
             {
                 // Addon has no Mappings, skip
@@ -57,22 +59,35 @@ namespace Waddu.Core.WorkItems
                 return;
             }
 
-            // Download
+            // Get the File Path / Url
             Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, addon.Name, mapping.AddonSiteId);
-            workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, addon.Name);
-            string downloadUrl = mapping.GetDownloadLink();
-            if (downloadUrl == string.Empty)
+            string fileUrl = mapping.GetFilePath();
+            if (fileUrl == string.Empty)
             {
-                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download Link for {1} incorrect", workerThread.ThreadID, addon.Name);
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: File for {1} incorrect", workerThread.ThreadID, addon.Name);
                 return;
             }
-            string archiveFilePath = WebHelper.DownloadFileToTemp(downloadUrl, workerThread);
-            if (archiveFilePath == string.Empty)
+
+            string archiveFilePath;
+            if (fileUrl.ToLower().StartsWith("http:"))
             {
-                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, addon.Name);
-                return;
+                // Download
+                workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, addon.Name);
+                archiveFilePath = WebHelper.DownloadFileToTemp(fileUrl, workerThread);
+
+                // Check if the Download was correct
+                if (archiveFilePath == string.Empty)
+                {
+                    Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, addon.Name);
+                    return;
+                }
+                Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, archiveFilePath);
             }
-            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, archiveFilePath);
+            else
+            {
+                // A File was selected
+                archiveFilePath = fileUrl;
+            }
 
             bool has7z = ArchiveHelper.Exists7z();
             List<string> archiveFolderList = new List<string>();

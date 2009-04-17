@@ -18,7 +18,7 @@ namespace Waddu.Core.AddonSites
 
         public abstract string GetInfoLink(Mapping mapping);
 
-        public abstract string GetDownloadLink(Mapping mapping);
+        public abstract string GetFilePath(Mapping mapping);
         #endregion
 
         #region Helper Functions
