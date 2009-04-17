@@ -62,7 +62,7 @@ namespace Waddu.Core.AddonSites
             return (string)CallHandler(mapping, Type.Info);
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             return (string)CallHandler(mapping, Type.Download);
         }

@@ -138,7 +138,7 @@ namespace Waddu.Core.AddonSites
             return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             // This is the Captcha URL
             //string captchaURL = _downUrl.Replace("{tag}", mapping.AddonTag);

@@ -179,7 +179,7 @@ namespace Waddu.Core.AddonSites
             return _infoUrl.Replace("{tag}", mapping.AddonTag);
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             string fileUrl = GetSiteAddon(mapping).FileUrl;
 
@@ -205,7 +205,11 @@ namespace Waddu.Core.AddonSites
             WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curseforge, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
-                downloadUrl = form.DownloadUrl;
+                downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;
+            }
+            else
+            {
+                downloadUrl = string.Empty;
             }
 
             return downloadUrl;

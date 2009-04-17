@@ -9,7 +9,7 @@ namespace Waddu.UI.Forms
     public partial class WebBrowserForm : Form
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
@@ -18,89 +18,40 @@ namespace Waddu.UI.Forms
         static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         public string DownloadUrl = string.Empty;
+        public bool UseFile = false;
+        public string FileUrl = string.Empty;
 
-        private AddonSiteId _addonSiteId;
-        private string _addonName;
+        private readonly AddonSiteId _addonSiteId;
 
         public WebBrowserForm(string url, AddonSiteId addonSiteId, string addonName)
         {
+            _addonSiteId = addonSiteId;
+
             InitializeComponent();
 
-            _addonSiteId = addonSiteId;
-            _addonName = addonName;
-
+            // Set the Title
             Text = "DL: " + addonName;
 
+            // Initialize Browser
+            btnBack.Enabled = false;
+            btnForward.Enabled = false;
+            webBrowser1.CanGoBackChanged += new EventHandler(webBrowser1_CanGoBackChanged);
+            webBrowser1.CanGoForwardChanged += new EventHandler(webBrowser1_CanGoForwardChanged);
+
+            // Navigate
             webBrowser1.Navigate(url);
         }
 
-        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        private void webBrowser1_CanGoBackChanged(object sender, EventArgs e)
         {
-            if (e.Url.AbsoluteUri.Contains(".zip") || e.Url.AbsoluteUri.Contains(".rar") || e.Url.AbsoluteUri.Contains(".7z"))
-            {
-                DownloadUrl = e.Url.AbsoluteUri;
-
-                e.Cancel = true;
-                DialogResult = DialogResult.OK;
-            }
+            WebBrowser browser = sender as WebBrowser;
+            btnBack.Enabled = browser.CanGoBack;
         }
 
-        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        private void webBrowser1_CanGoForwardChanged(object sender, EventArgs e)
         {
-            // Search the Element
-            //for (int i = 0; i < webBrowser1.Document.All.Count; i++)
-            //{
-            //    HtmlElement tempEl = webBrowser1.Document.All[i];
-            //    if (tempEl.InnerHtml != null && tempEl.InnerHtml.Contains(@"<param name=""movie"" value=""/Themes/Common/v6/flash/DownloadButton.swf"))
-            //    {
-            //        Console.WriteLine(i);
-            //    }
-
-            //    if (tempEl.InnerHtml != null && tempEl.InnerHtml.Contains("download.swf") && i > 100)
-            //    {
-            //        Console.WriteLine("Element {0}: {1}", i, tempEl.InnerHtml ?? "");
-            //    }
-            //}
-
-            // Scroll the Flash to the Screen
-            HtmlElement el2 = null;
-            if (_addonSiteId == AddonSiteId.wowace)
-            {
-                el2 = webBrowser1.Document.All[776];
-            }
-            else if (_addonSiteId == AddonSiteId.curse)
-            {
-                el2 = webBrowser1.Document.All[81];
-            }
-            else if (_addonSiteId == AddonSiteId.curseforge)
-            {
-                el2 = webBrowser1.Document.All[154];
-            }
-            if (el2 != null)
-            {
-                el2.ScrollIntoView(true);
-            }
-
-            // Set the Right Position
-            int x = 0;
-            int y = 0;
-            if (_addonSiteId == AddonSiteId.wowace)
-            {
-                x = 5;
-                y = 5;
-            }
-            else if (_addonSiteId == AddonSiteId.curse)
-            {
-                x = 5;
-                y = 5;
-            }
-            else if (_addonSiteId == AddonSiteId.curseforge)
-            {
-                x = 5;
-                y = 5;
-            }
-
-            DoClick(x, y);
+            WebBrowser browser = sender as WebBrowser;
+            btnForward.Enabled = browser.CanGoForward;
         }
 
         private void DoClick(int x, int y)
@@ -125,6 +76,133 @@ namespace Waddu.UI.Forms
                 const uint upCode = 0x202;
                 SendMessage(handle, downCode, wParam, lParam); // mousedown
                 SendMessage(handle, upCode, wParam, lParam); // mouseup
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            webBrowser1.GoBack();
+        }
+
+        private void btnForward_Click(object sender, EventArgs e)
+        {
+            webBrowser1.GoForward();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Refresh(WebBrowserRefreshOption.Completely);
+        }
+
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Navigate(txtUrl.Text);
+        }
+
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            WebBrowser browser = sender as WebBrowser;
+
+            if (e.Url.AbsoluteUri.Contains(".zip") || e.Url.AbsoluteUri.Contains(".rar") || e.Url.AbsoluteUri.Contains(".7z"))
+            {
+                DownloadUrl = e.Url.AbsoluteUri;
+
+                e.Cancel = true;
+                DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                txtUrl.Text = browser.Url.AbsoluteUri;
+            }
+        }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            Console.WriteLine("webBrowser1_Navigated");
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowser browser = sender as WebBrowser;
+
+            if (browser != null && browser.Document != null)
+            {
+                // Search the Element
+                int foundElement = -1;
+                for (int i = 0; i < browser.Document.All.Count; i++)
+                {
+                    HtmlElement tempEl = browser.Document.All[i];
+                    if (tempEl.InnerHtml != null)
+                    {
+                        // WoWAce / CurseForge
+                        //if (tempEl.InnerHtml.Contains("download.swf") && i > 100)
+                        //{
+                        //    string temp = string.Format("Element {0}: {1}", i, tempEl.InnerHtml);
+                        //}
+                        //// Curse
+                        //if (tempEl.InnerHtml.Contains("DownloadButton.swf"))
+                        //{
+                        //    string temp = string.Format("Element {0}: {1}", i, tempEl.InnerHtml);
+                        //}
+
+                        if (_addonSiteId == AddonSiteId.wowace && tempEl.InnerHtml.StartsWith("<EMBED class=download-button"))
+                        {
+                            foundElement = i;
+                            break;
+                        }
+                        else if (_addonSiteId == AddonSiteId.curseforge && tempEl.InnerHtml.StartsWith("<EMBED class=download-button"))
+                        {
+                            foundElement = i + 1;
+                            break;
+                        }
+                        else if (_addonSiteId == AddonSiteId.curse && tempEl.InnerHtml.StartsWith("\r\n<embed src=\"/Themes/Common/v6/flash/DownloadButton.swf"))
+                        {
+                            foundElement = i;
+                            break;
+                        }
+                    }
+                }
+
+                // Scroll the Flash to the Screen
+                if (foundElement >= 0)
+                {
+                    HtmlElement el2 = browser.Document.All[foundElement];
+                    if (el2 != null)
+                    {
+                        // Scroll the Element into the View
+                        el2.ScrollIntoView(true);
+
+                        // Set the Right Position
+                        int x = 5;
+                        int y = 5;
+
+                        // Perform the Click
+                        DoClick(x, y);
+                    }
+                }
+            }
+        }
+
+        private void webBrowser1_FileDownload(object sender, EventArgs e)
+        {
+            Console.WriteLine("webBrowser1_FileDownload");
+        }
+
+        private void webBrowser1_NewWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Console.WriteLine("webBrowser1_NewWindow");
+        }
+
+        private void llInfoText_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    UseFile = true;
+                    FileUrl = dlg.FileName;
+                    DialogResult = DialogResult.OK;
+                }
             }
         }
     }

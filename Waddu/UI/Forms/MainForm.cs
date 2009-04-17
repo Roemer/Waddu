@@ -624,7 +624,7 @@ namespace Waddu.UI.Forms
         private void tsmiMappingDownload_Click(object sender, EventArgs e)
         {
             Mapping map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
-            Process.Start(map.GetDownloadLink());
+            Process.Start(map.GetFilePath());
         }
         #endregion
 

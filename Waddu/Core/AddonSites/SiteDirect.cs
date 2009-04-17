@@ -32,7 +32,7 @@ namespace Waddu.Core.AddonSites
             return strList[2];
         }
 
-        public override string GetDownloadLink(Mapping mapping)
+        public override string GetFilePath(Mapping mapping)
         {
             string[] strList = mapping.AddonTag.Split(new char[] { '|' });
             return strList[3];

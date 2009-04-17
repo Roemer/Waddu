@@ -31,7 +31,7 @@ namespace Waddu.UI.Forms
                     AddonSiteBase site = AddonSiteBase.GetSite(siteId);
                     Mapping map = new Mapping(currTag, siteId);
                     map.Addon = new Addon("tag");
-                    string downLink = site.GetDownloadLink(map);
+                    string downLink = site.GetFilePath(map);
                     string archiveFilePath = WebHelper.DownloadFileToTemp(downLink);
                     List<string> cont = ArchiveHelper.GetArchiveContent(archiveFilePath);
                     List<string> folderList = new List<string>();
