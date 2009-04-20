@@ -4,13 +4,13 @@ TOC:
 <wiki:toc max_depth="4" />
 
 == Addon ==
-Folder Name of the WoW-Addon or of the Main-Addon if the WoW-Addon has [http://code.google.com/p/waddu/wiki/Glossar#SubAddon SubAddons]
+Folder Name of the WoW-Addon or of the Main-Addon if the WoW-Addon has [Glossar#SubAddon SubAddons]
 
 == Mapping ==
-Relation between an Addon and a Site
+Relation between an [Glossar#bAddon Addon] and a [Glossar#Site Site]
 
 == Site ==
-An Addon Updating Site (like curse, wowinterface)
+An WebSite which hosts WoW-Addons (like curse, wowinterface)
 
 == !SubAddon ==
-Folder Name of a related Addon
+A Folder which is related to another [Glossar#Addon Addon]
