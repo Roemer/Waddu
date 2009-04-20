@@ -4,9 +4,9 @@
 
 To automatically update all your Addons follow this easy Guide:
 
-- Start WADDU
-- Choose the Menu "Addons" and select "Check for Updates"
-- Wait until all Items are processed
-- Choose the Menu "Addons" and select "Update all Addons"
-- Wait until all Items are processed
-- Your Addons are now up to date
+  # Start WADDU
+  # Choose the Menu "Addons" and select "Check for Updates"
+  # Wait until all Items are processed
+  # Choose the Menu "Addons" and select "Update all Addons"
+  # Wait until all Items are processed
+  # Your Addons are now up to date
