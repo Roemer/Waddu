@@ -1,0 +1,79 @@
+#summary Description of the Elements of the User Interface of WADDU
+
+= The Interface of WADDU =
+
+=== Interface Elements ===
+
+WADDU basically contains five UI-Elements:
+
+  # Menu
+  # Addons
+  # Mappings (Addon Details)
+  # Threads
+  # Log
+
+Here's a picture of them:<br>
+http://waddu.flauschig.ch/images/waddu_interface.png
+
+=== The Menu ===
+
+Here's an overview of the Menues and a short description of what they do:<br>
+http://waddu.flauschig.ch/images/menue.png
+
+  * File
+    * Settings - Shows the Settings Dialog
+    * Exit - Exits WADDU
+
+  * Addons
+    * Reload Local Addons - Rescan your Addon Folder
+    * Check for Updates - Checks all your Addons for new Versions
+    * Update all Addons - Updates checked Addons with the newest Version
+
+  * Help
+    * Collect unknown Addons - Shows a Screen with Addons that WADDU doesn't know
+    * Check for Update - Checks if there is a newer Version of WADDU
+    * About - Shows some Info about WADDU
+
+=== The Addon Screen ===
+
+The Addon Screen has Filter possibilities on top. You can select which Addons should be displayed ("Installed", "Not Installed", "Sub Addon", "Blizzard") and a Text they contain (like "Broker" if you want only the broker Addons).
+
+The main part is the List with the Addons according to your Filter settings.<br>
+The Grid contains for Columns:
+  * Name - The Name (Folder Name) of the Addon
+  * Last Updated - The Time when you last updated this Addon
+  * Local Version - The Version you have installed
+  * Preferred Mapping - Which Mapping it will use to update the Addon
+
+You can also Right-Click any Addon from the List and get a Context-Menu:<br>
+http://waddu.flauschig.ch/images/ctx_addon.png
+
+  * Check for Update - Checks this Addon if it needs Updating
+  * Update - Update this Addon with the Preferred Mapping
+  * Ignore - WADDU will never touch this Addon (until un-ignored)
+  * Mappings - Manually select the Preferred Mapping
+  * Set as Updated - Set the Updated-Date of this Addon to "now"
+
+=== The Mappings Screen ===
+
+Here you see all known Mappings for the selected Addon, it's Relation to other Addons and it's known SubAddons.
+
+You can Right-Click any Mapping and get a Context-Menu:<br>
+http://waddu.flauschig.ch/images/ctx_mapping.png
+
+  * Change Log - Shows the ChangeLog of this Addon and Site (where possible)
+  * Check Version - Gets the actual Version for this Addon and Site
+  * Update - Updates the Addon from this Site (regardless if needed or not)
+  * Set as Preferred - Sets this Mapping as the Preferred for this Addon
+  * Info - Shows the Info-Page of this Addon and Site in your Browser
+  * Download - Downloads the actual File for this Addon and Site with your Browser
+
+=== The Thread Screen ===
+
+Here you see what the Threads are doing. You see if a thread is checking a Version of if it is downloading a File and how much it has already downloaded.
+
+=== The Log Screen ===
+
+Here you can see what WADDU is doing behind. You can select which Messages you want to see (select "Debug" for everything). You can also Right-Click it to clear it.
+<br><br>
+The entire Log is saved into the File "log.txt" at the same Location where "Waddu.exe" is.
