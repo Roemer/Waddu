@@ -7,7 +7,7 @@ TOC:
 Folder Name of the WoW-Addon or of the Main-Addon if the WoW-Addon has [Glossar#SubAddon SubAddons]
 
 == Mapping ==
-Relation between an [Glossar#bAddon Addon] and a [Glossar#Site Site]
+Relation between an [Glossar#Addon Addon] and a [Glossar#Site Site]
 
 == Site ==
 An WebSite which hosts WoW-Addons (like curse, wowinterface)
