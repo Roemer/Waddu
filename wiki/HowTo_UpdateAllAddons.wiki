@@ -1,6 +1,6 @@
-#summary How To: Update All your Addons
+#summary How To: Update all your Addons
 
-= How To: Update All your Addons =
+= How To: Update all your Addons =
 
 To automatically update all your Addons follow this easy Guide:
 
