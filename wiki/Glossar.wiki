@@ -1,0 +1,16 @@
+#summary Glossar
+
+Table of Contents:
+<wiki:toc max_depth="6" />
+
+==== Addon ====
+Folder Name of an Addon
+
+==== Mapping ====
+Relation between an Addon and a Site
+
+==== Site ====
+An Addon Updating Site (like curse, wowinterface)
+
+==== !SubAddon ====
+Folder Name of a related Addon
