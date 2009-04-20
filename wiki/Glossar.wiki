@@ -1,16 +1,16 @@
 #summary Glossar
 
-Table of Contents:
-<wiki:toc max_depth="6" />
+TOC:
+<wiki:toc max_depth="4" />
 
-==== Addon ====
-Folder Name of an Addon
+== Addon ==
+Folder Name of the WoW-Addon or of the Main-Addon if the WoW-Addon has [http://code.google.com/p/waddu/wiki/Glossar#SubAddon SubAddons]
 
-==== Mapping ====
+== Mapping ==
 Relation between an Addon and a Site
 
-==== Site ====
+== Site ==
 An Addon Updating Site (like curse, wowinterface)
 
-==== !SubAddon ====
+== !SubAddon ==
 Folder Name of a related Addon
