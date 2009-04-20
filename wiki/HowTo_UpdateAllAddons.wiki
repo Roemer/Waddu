@@ -9,4 +9,5 @@ To automatically update all your Addons follow this easy Guide:
   # Wait until all Items are processed
   # Choose the Menu "Addons" and select "Update all Addons"
   # Wait until all Items are processed
+    * During the Update Process, you may see a [http://waddu.flauschig.ch/images/browser.png small Window], that is for the new Curse-Website. It there tries to automatically find the Download. If this window stays open, you have to click the Download Link yourself inside that Window (you can enlarge it) or download the Addon-File yourself and select it from there.
   # Your Addons are now up to date
