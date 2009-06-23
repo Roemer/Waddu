@@ -84,6 +84,7 @@ Task List:
 - Proxy Support
 - Store Window and Column Sizes
 - Add Local Version if missing (own File / TOC)
+- Request gzipped HTML (content-Encoding)
 
 Bugs:
 - Catch protected (unreadable) Folders when deleting / extracting
