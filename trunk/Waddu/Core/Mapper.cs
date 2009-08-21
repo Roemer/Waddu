@@ -221,6 +221,7 @@ namespace Waddu.Core
             GetAddon("AbacusLib").Mappings.Add(new Mapping("abacuslib", AddonSiteId.wowace));
             GetAddon("Abakus").Mappings.Add(new Mapping("abakus", AddonSiteId.curse));
             GetAddon("Abakus").Mappings.Add(new Mapping("abakus", AddonSiteId.wowace));
+            GetAddon("ActionButtonColors").Mappings.Add(new Mapping("abc", AddonSiteId.curse));
             GetAddon("ABFu").Mappings.Add(new Mapping("abfu", AddonSiteId.curse));
             GetAddon("ABFu").Mappings.Add(new Mapping("abfu", AddonSiteId.wowace));
             GetAddon("ABInform").Mappings.Add(new Mapping("abinform", AddonSiteId.curse));
@@ -372,6 +373,7 @@ namespace Waddu.Core
             GetAddon("Aperture").Mappings.Add(new Mapping("aperture", AddonSiteId.curse));
             GetAddon("Aperture").Mappings.Add(new Mapping("aperture", AddonSiteId.wowace));
             GetAddon("Ara_Broker_Guild_Friends").Mappings.Add(new Mapping("11205", AddonSiteId.wowinterface));
+            GetAddon("Ara_Broker_Money").Mappings.Add(new Mapping("11907", AddonSiteId.wowinterface));
             GetAddon("ArcHUD2").Mappings.Add(new Mapping("arc-hud2", AddonSiteId.curse));
             GetAddon("ArcHUD2").Mappings.Add(new Mapping("arc-hud2", AddonSiteId.wowace));
             GetAddon("ArenaHistorian").Mappings.Add(new Mapping("8224", AddonSiteId.wowinterface));
@@ -764,6 +766,7 @@ namespace Waddu.Core
             GetAddon("Blizzard_CombatLog").Mappings.Add(new Mapping("Blizzard_CombatLog", AddonSiteId.blizzard));
             GetAddon("Blizzard_CombatText").Mappings.Add(new Mapping("Blizzard_CombatText", AddonSiteId.blizzard));
             GetAddon("Blizzard_CraftUI").Mappings.Add(new Mapping("Blizzard_CraftUI", AddonSiteId.blizzard));
+            GetAddon("Blizzard_DebugTools").Mappings.Add(new Mapping("Blizzard_DebugTools", AddonSiteId.blizzard));
             GetAddon("Blizzard_FeedbackUI").Mappings.Add(new Mapping("Blizzard_FeedbackUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_GlyphUI").Mappings.Add(new Mapping("Blizzard_GlyphUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_GMChatUI").Mappings.Add(new Mapping("Blizzard_GMChatUI", AddonSiteId.blizzard));
@@ -815,6 +818,8 @@ namespace Waddu.Core
             GetAddon("Broker_Currency").Mappings.Add(new Mapping("broker-currency", AddonSiteId.wowace));
             GetAddon("Broker_Durability").Mappings.Add(new Mapping("broker_durability", AddonSiteId.curse));
             GetAddon("Broker_Durability").Mappings.Add(new Mapping("broker_durability", AddonSiteId.wowace));
+            GetAddon("Broker_Equipment").Mappings.Add(new Mapping("broker_equipment", AddonSiteId.curse));
+            GetAddon("Broker_Equipment").Mappings.Add(new Mapping("broker_equipment", AddonSiteId.curseforge));
             GetAddon("Broker_Factions").Mappings.Add(new Mapping("11020", AddonSiteId.wowinterface));
             GetAddon("Broker_Group").Mappings.Add(new Mapping("10702", AddonSiteId.wowinterface));
             GetAddon("Broker_HitCrit").Mappings.Add(new Mapping("broker-hitcrit", AddonSiteId.curse));
@@ -848,6 +853,7 @@ namespace Waddu.Core
             GetAddon("Broker_Tracking").Mappings.Add(new Mapping("broker_tracking", AddonSiteId.wowace));
             GetAddon("Broker_TradeCooldowns").Mappings.Add(new Mapping("broker-tradecooldowns", AddonSiteId.curse));
             GetAddon("Broker_TradeCooldowns").Mappings.Add(new Mapping("broker-tradecooldowns", AddonSiteId.wowace));
+            GetAddon("Broker_uClock").Mappings.Add(new Mapping("12552", AddonSiteId.wowinterface));
             GetAddon("Broker_Wraps").Mappings.Add(new Mapping("broker_wraps", AddonSiteId.curse));
             GetAddon("Broker_Wraps").Mappings.Add(new Mapping("broker_wraps", AddonSiteId.wowace));
             GetAddon("Broker_XPRate").Mappings.Add(new Mapping("10999", AddonSiteId.wowinterface));
@@ -1103,6 +1109,9 @@ namespace Waddu.Core
             GetAddon("Chinchilla").Mappings.Add(new Mapping("chinchilla", AddonSiteId.wowace));
             GetAddon("Chinon").Mappings.Add(new Mapping("chinon", AddonSiteId.curse));
             GetAddon("Chinon").Mappings.Add(new Mapping("chinon", AddonSiteId.wowace));
+            GetAddon("ChocolateBar").Mappings.Add(new Mapping("chocolatebar", AddonSiteId.curse));
+            GetAddon("ChocolateBar").Mappings.Add(new Mapping("chocolatebar", AddonSiteId.wowace));
+            GetAddon("ChocolateBar").Mappings.Add(new Mapping("12326", AddonSiteId.wowinterface));
             GetAddon("cht").Mappings.Add(new Mapping("cht", AddonSiteId.curse));
             GetAddon("cht").Mappings.Add(new Mapping("cht", AddonSiteId.wowace));
             GetAddon("ClassButtons").Mappings.Add(new Mapping("class-buttons", AddonSiteId.curse));
@@ -3578,7 +3587,6 @@ namespace Waddu.Core
             GetAddon("QuestGlance").Mappings.Add(new Mapping("9514", AddonSiteId.wowinterface));
             GetAddon("QuestGuru").Mappings.Add(new Mapping("4855", AddonSiteId.wowui));
             GetAddon("QuestGuru").Mappings.Add(new Mapping("quest-guru", AddonSiteId.curse));
-            GetAddon("QuestHelper").Mappings.Add(new Mapping("6271", AddonSiteId.wowui));
             GetAddon("QuestHelper").Mappings.Add(new Mapping("9896", AddonSiteId.wowinterface));
             GetAddon("QuestHelper").Mappings.Add(new Mapping("quest-helper", AddonSiteId.curse));
             GetAddon("QuestHelper").Mappings.Add(new Mapping("quest-helper", AddonSiteId.curseforge));
