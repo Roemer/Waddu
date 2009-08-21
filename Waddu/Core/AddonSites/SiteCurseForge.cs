@@ -12,10 +12,9 @@ namespace Waddu.Core.AddonSites
     {
         private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
         private string _fileUrl = "http://wow.curseforge.com{0}";
-        private string _versionPattern = "<td class=\"first\"><a href=\"(.*)\">(.*)</a></td>";
-        private string _datePattern = "<span class=\"date\" title=\".*\" data-epoch=\"(.*)\">.*</span>";
-        private string _downloadPrePattern = "<span>Actions:</span>";
-        private string _downloadPattern = "<a href=\"(.*)\">Download</a>";
+        private string _versionPattern = "<td class=\"col-file\"><a href=\"(.*)\">(.*)</a></td>";
+        private string _datePattern = "<td class=\"col-date\"><span class=\"standard-date\" title=\".*\" data-epoch=\"(.*)\">.*</span></td>";
+        private string _downloadPattern = "<ul class=\"user-actions user-actions-by-header\"><li class=\"user-action user-action-download\"><span><a href=\"(.*)\">Download</a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
         private SiteAddonCache _noLibCache = new SiteAddonCache();
 
@@ -188,17 +187,12 @@ namespace Waddu.Core.AddonSites
             for (int i = 0; i < filePage.Count; i++)
             {
                 string line = filePage[i];
-                Match m = Regex.Match(line, _downloadPrePattern);
+                Match m = Regex.Match(line, _downloadPattern);
                 if (m.Success)
                 {
-                    string realLine = filePage[i + 4];
-                    m = Regex.Match(realLine, _downloadPattern);
-                    if (m.Success)
-                    {
-                        // This is the URL with the Captcha
-                        downloadUrl = m.Groups[1].Captures[0].Value;
-                        break;
-                    }
+                    // This is the URL with the Captcha
+                    downloadUrl = m.Groups[1].Captures[0].Value;
+                    break;
                 }
             }
 
