@@ -29,6 +29,8 @@ namespace Waddu.UI.Forms
 
             InitializeComponent();
 
+            ChangeUserAgent();
+
             // Set the Title
             Text = "DL: " + addonName;
 
@@ -37,6 +39,7 @@ namespace Waddu.UI.Forms
             btnForward.Enabled = false;
             webBrowser1.CanGoBackChanged += new EventHandler(webBrowser1_CanGoBackChanged);
             webBrowser1.CanGoForwardChanged += new EventHandler(webBrowser1_CanGoForwardChanged);
+            webBrowser1.ScriptErrorsSuppressed = true;
 
             // Navigate
             webBrowser1.Navigate(url);
@@ -145,12 +148,12 @@ namespace Waddu.UI.Forms
                         //    string temp = string.Format("Element {0}: {1}", i, tempEl.InnerHtml);
                         //}
 
-                        if (_addonSiteId == AddonSiteId.wowace && tempEl.InnerHtml.StartsWith("<EMBED class=download-button"))
+                        if (_addonSiteId == AddonSiteId.wowace && tempEl.InnerHtml.StartsWith("<LI class=\"user-action user-action-download\""))
                         {
                             foundElement = i;
                             break;
                         }
-                        else if (_addonSiteId == AddonSiteId.curseforge && tempEl.InnerHtml.StartsWith("<EMBED class=download-button"))
+                        else if (_addonSiteId == AddonSiteId.curseforge && tempEl.InnerHtml.StartsWith("<LI class=\"user-action user-action-download\""))
                         {
                             foundElement = i + 1;
                             break;
@@ -175,6 +178,13 @@ namespace Waddu.UI.Forms
                         // Set the Right Position
                         int x = 5;
                         int y = 5;
+
+                        // Fix Position
+                        if (_addonSiteId == AddonSiteId.wowace || _addonSiteId == AddonSiteId.curseforge)
+                        {
+                            x = 60;
+                            y = 30;
+                        }
 
                         // Perform the Click
                         DoClick(x, y);
@@ -205,5 +215,18 @@ namespace Waddu.UI.Forms
                 }
             }
         }
+
+        #region Override UserAgent
+        [DllImport("urlmon.dll", CharSet = CharSet.Ansi)]
+        private static extern int UrlMkSetSessionOption(int dwOption, string pBuffer, int dwBufferLength, int dwReserved);
+
+        const int URLMON_OPTION_USERAGENT = 0x10000001;
+
+        public void ChangeUserAgent()
+        {
+            string ua = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Creative AutoUpdate v1.40.01)";
+            UrlMkSetSessionOption(URLMON_OPTION_USERAGENT, ua, ua.Length, 0);
+        }
+        #endregion
     }
 }
