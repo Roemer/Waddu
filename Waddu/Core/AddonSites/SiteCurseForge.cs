@@ -154,10 +154,9 @@ namespace Waddu.Core.AddonSites
             for (int i = 0; i < filePage.Count; i++)
             {
                 string line = filePage[i];
-                if (line.Contains(@"<dt>Change Log</dt>"))
+                if (line.Contains(@"<h3>Change log</h3>"))
                 {
                     changeLogAdd = true;
-                    i += 4;
                     continue;
                 }
                 if (line.Contains(@"</div>") && changeLogAdd)
