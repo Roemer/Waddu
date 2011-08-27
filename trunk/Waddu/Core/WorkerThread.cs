@@ -34,11 +34,27 @@ namespace Waddu.Core
 
         public WorkerThread()
         {
+            Start();
+        }
+
+        private void Start()
+        {
             _thread = new Thread(new ParameterizedThreadStart(ThreadProc));
-
             _thread.SetApartmentState(ApartmentState.STA);
-
             _thread.Start(this);
+        }
+
+        public void Abort()
+        {
+            try
+            {
+                _thread.Abort();
+            }
+            catch
+            {
+                // Handle gracefully
+            }
+            Start();
         }
 
         public void Stop()

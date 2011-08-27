@@ -26,10 +26,7 @@ namespace Waddu.Core.WorkItems
             {
                 if (version == this.GetType().Assembly.GetName().Version.ToString())
                 {
-                    MainForm.Instance.Invoke((MethodInvoker)delegate()
-                    {
-                        MessageBox.Show("You have the newest Version");
-                    });
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: No Update for Waddu available: {1}", workerThread.ThreadID, version);
                 }
                 else
                 {

@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewGroup listViewGroup13 = new System.Windows.Forms.ListViewGroup("Dependencies", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup14 = new System.Windows.Forms.ListViewGroup("Contains", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup15 = new System.Windows.Forms.ListViewGroup("Part Of", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Dependencies", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Contains", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Part Of", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +45,6 @@
             this.tsmWadduAllAddons = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCollectUnknownAddons = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelpCheckForUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxAddon = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -66,6 +65,8 @@
             this.tsmiMappingSetAsPreferred = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMappingDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCheckAndUpdatdAddons = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainerEx2 = new Waddu.UI.Controls.SplitContainerEx();
             this.splitContainerEx1 = new Waddu.UI.Controls.SplitContainerEx();
             this.gbAddons = new System.Windows.Forms.GroupBox();
@@ -181,6 +182,8 @@
             // 
             this.tsmiAddons.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiReloadLocalAddons,
+            this.tsmiCheckAndUpdatdAddons,
+            this.toolStripMenuItem2,
             this.tsmiCheckForUpdates,
             this.tsmWadduAllAddons});
             this.tsmiAddons.Name = "tsmiAddons";
@@ -190,29 +193,28 @@
             // tsmiReloadLocalAddons
             // 
             this.tsmiReloadLocalAddons.Name = "tsmiReloadLocalAddons";
-            this.tsmiReloadLocalAddons.Size = new System.Drawing.Size(185, 22);
+            this.tsmiReloadLocalAddons.Size = new System.Drawing.Size(219, 22);
             this.tsmiReloadLocalAddons.Text = "&Reload Local Addons";
             this.tsmiReloadLocalAddons.Click += new System.EventHandler(this.tsmiReloadLocalAddons_Click);
             // 
             // tsmiCheckForUpdates
             // 
             this.tsmiCheckForUpdates.Name = "tsmiCheckForUpdates";
-            this.tsmiCheckForUpdates.Size = new System.Drawing.Size(185, 22);
-            this.tsmiCheckForUpdates.Text = "&Check for Updates";
+            this.tsmiCheckForUpdates.Size = new System.Drawing.Size(219, 22);
+            this.tsmiCheckForUpdates.Text = "Check for Updates";
             this.tsmiCheckForUpdates.Click += new System.EventHandler(this.tsmiCheckForUpdates_Click);
             // 
             // tsmWadduAllAddons
             // 
             this.tsmWadduAllAddons.Name = "tsmWadduAllAddons";
-            this.tsmWadduAllAddons.Size = new System.Drawing.Size(185, 22);
-            this.tsmWadduAllAddons.Text = "&Update all Addons";
+            this.tsmWadduAllAddons.Size = new System.Drawing.Size(219, 22);
+            this.tsmWadduAllAddons.Text = "&Update Addons";
             this.tsmWadduAllAddons.Click += new System.EventHandler(this.tsmiUpdateAllAddons_Click);
             // 
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCollectUnknownAddons,
-            this.tsmiHelpCheckForUpdate,
             this.tsmiHelpAbout});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
@@ -224,13 +226,6 @@
             this.tsmiCollectUnknownAddons.Size = new System.Drawing.Size(208, 22);
             this.tsmiCollectUnknownAddons.Text = "Collect unknown Addons";
             this.tsmiCollectUnknownAddons.Click += new System.EventHandler(this.tsmiCollectUnknownAddons_Click);
-            // 
-            // tsmiHelpCheckForUpdate
-            // 
-            this.tsmiHelpCheckForUpdate.Name = "tsmiHelpCheckForUpdate";
-            this.tsmiHelpCheckForUpdate.Size = new System.Drawing.Size(208, 22);
-            this.tsmiHelpCheckForUpdate.Text = "&Check for Update";
-            this.tsmiHelpCheckForUpdate.Click += new System.EventHandler(this.tsmiHelpCheckForUpdate_Click);
             // 
             // tsmiHelpAbout
             // 
@@ -382,6 +377,19 @@
             this.tsmiMappingDownload.Size = new System.Drawing.Size(155, 22);
             this.tsmiMappingDownload.Text = "Download";
             this.tsmiMappingDownload.Click += new System.EventHandler(this.tsmiMappingDownload_Click);
+            // 
+            // tsmiCheckAndUpdatdAddons
+            // 
+            this.tsmiCheckAndUpdatdAddons.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiCheckAndUpdatdAddons.Name = "tsmiCheckAndUpdatdAddons";
+            this.tsmiCheckAndUpdatdAddons.Size = new System.Drawing.Size(219, 22);
+            this.tsmiCheckAndUpdatdAddons.Text = "Check and Update Addons";
+            this.tsmiCheckAndUpdatdAddons.Click += new System.EventHandler(this.tsmiCheckAndUpdatdAddons_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(216, 6);
             // 
             // splitContainerEx2
             // 
@@ -602,16 +610,16 @@
             this.chRelationsName});
             this.lvRelations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRelations.FullRowSelect = true;
-            listViewGroup13.Header = "Dependencies";
-            listViewGroup13.Name = "lvgRelationDependencies";
-            listViewGroup14.Header = "Contains";
-            listViewGroup14.Name = "lvgRelationSubAddons";
-            listViewGroup15.Header = "Part Of";
-            listViewGroup15.Name = "lvgRelationSuperAddons";
+            listViewGroup7.Header = "Dependencies";
+            listViewGroup7.Name = "lvgRelationDependencies";
+            listViewGroup8.Header = "Contains";
+            listViewGroup8.Name = "lvgRelationSubAddons";
+            listViewGroup9.Header = "Part Of";
+            listViewGroup9.Name = "lvgRelationSuperAddons";
             this.lvRelations.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup13,
-            listViewGroup14,
-            listViewGroup15});
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9});
             this.lvRelations.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvRelations.Location = new System.Drawing.Point(3, 16);
             this.lvRelations.Name = "lvRelations";
@@ -757,6 +765,7 @@
             this.dgvThreadActivity.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvThreadActivity.Size = new System.Drawing.Size(461, 187);
             this.dgvThreadActivity.TabIndex = 0;
+            this.dgvThreadActivity.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvThreadActivity_MouseClick);
             // 
             // dgvColThreadID
             // 
@@ -998,7 +1007,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddonIgnore;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddonUnignore;
         private System.Windows.Forms.ToolStripMenuItem tsmiAdmin;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelpCheckForUpdate;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelpAbout;
         private System.Windows.Forms.GroupBox gbRelations;
         private System.Windows.Forms.ListView lvRelations;
@@ -1009,6 +1017,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonPreferredMapping;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddonSetAsUpdated;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCheckAndUpdatdAddons;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 
     }
 }
