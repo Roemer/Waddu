@@ -41,6 +41,13 @@ namespace Waddu.Core
 
         private static CookieContainer GetWowAceCookies(string loginName, string loginPassword)
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += delegate(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+                System.Security.Cryptography.X509Certificates.X509Chain chain,
+                System.Net.Security.SslPolicyErrors sslPolicyErrors)
+            {
+                return true; // Always accept 
+            };
+
             // Setup
             HttpWebRequest webRequest = null;
             StreamReader responseReader = null;
@@ -50,7 +57,7 @@ namespace Waddu.Core
             CookieContainer cookies = new CookieContainer();
 
             // Get Cookies from Base URL
-            string baseUrl = "http://www.wowace.com/home/login/?next=/";
+            string baseUrl = "https://www.wowace.com/home/login/";
             webRequest = WebRequest.Create(baseUrl) as HttpWebRequest;
             webRequest.CookieContainer = cookies;
             responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
@@ -58,25 +65,41 @@ namespace Waddu.Core
             responseReader.Close();
 
             // Build POST Data
-            string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
+            //string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
+            string postData = string.Format("login-next=%2F&form_type=login&login-username={0}&login-password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
 
             // Post to the Login Form
-            string loginUrl = "http://www.wowace.com/home/login/";
+            string loginUrl = "https://www.wowace.com/home/login/";
             webRequest = WebRequest.Create(loginUrl) as HttpWebRequest;
             webRequest.Method = "POST";
             webRequest.ContentType = "application/x-www-form-urlencoded";
             webRequest.CookieContainer = cookies;
-            // Write the Form Values into the Request Mssage
+            // Write the Form Values into the Request Message
             StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream());
             requestWriter.Write(postData);
             requestWriter.Close();
 
-            // Get the Response (and the Cookies) and forget Content
-            WebResponse resp = webRequest.GetResponse();
-            StreamReader respStream = new StreamReader(resp.GetResponseStream());
-            string respstr = respStream.ReadToEnd();
-            respStream.Close();
-            resp.Close();
+            try
+            {
+                // Get the Response (and the Cookies) and forget Content
+                WebResponse resp = webRequest.GetResponse();
+                StreamReader respStream = new StreamReader(resp.GetResponseStream());
+                string respstr = respStream.ReadToEnd();
+                respStream.Close();
+                resp.Close();
+            }
+            catch (WebException webex)
+            {
+                Console.WriteLine("Unable to perform command: " + webRequest);
+
+                String data = String.Empty;
+                if (webex.Response != null)
+                {
+                    StreamReader r = new StreamReader(webex.Response.GetResponseStream());
+                    data = r.ReadToEnd();
+                    r.Close();
+                }
+            }
 
             return cookies;
         }
@@ -92,7 +115,7 @@ namespace Waddu.Core
             CookieContainer cookies = new CookieContainer();
 
             // Get Cookies from Base URL
-            string baseUrl = "http://www.curseforge.com/home/login/?next=/";
+            string baseUrl = "https://www.curseforge.com/home/login/";
             webRequest = WebRequest.Create(baseUrl) as HttpWebRequest;
             webRequest.CookieContainer = cookies;
             responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
@@ -100,10 +123,11 @@ namespace Waddu.Core
             responseReader.Close();
 
             // Build POST Data
-            string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", loginName, loginPassword);
+            //string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", loginName, loginPassword);
+            string postData = string.Format("login-next=%2F&form_type=login&login-username={0}&login-password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
 
             // Post to the Login Form
-            string loginUrl = "http://www.curseforge.com/home/login/";
+            string loginUrl = "https://www.curseforge.com/home/login/";
             webRequest = WebRequest.Create(loginUrl) as HttpWebRequest;
             webRequest.Method = "POST";
             webRequest.ContentType = "application/x-www-form-urlencoded";
@@ -113,12 +137,27 @@ namespace Waddu.Core
             requestWriter.Write(postData);
             requestWriter.Close();
 
-            // Get the Response (and the Cookies) and forget Content
-            WebResponse resp = webRequest.GetResponse();
-            StreamReader respStream = new StreamReader(resp.GetResponseStream());
-            string respstr = respStream.ReadToEnd();
-            respStream.Close();
-            resp.Close();
+            try
+            {
+                // Get the Response (and the Cookies) and forget Content
+                WebResponse resp = webRequest.GetResponse();
+                StreamReader respStream = new StreamReader(resp.GetResponseStream());
+                string respstr = respStream.ReadToEnd();
+                respStream.Close();
+                resp.Close();
+            }
+            catch (WebException webex)
+            {
+                Console.WriteLine("Unable to perform command: " + webRequest);
+
+                String data = String.Empty;
+                if (webex.Response != null)
+                {
+                    StreamReader r = new StreamReader(webex.Response.GetResponseStream());
+                    data = r.ReadToEnd();
+                    r.Close();
+                }
+            }
 
             return cookies;
         }

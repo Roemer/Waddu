@@ -27,7 +27,7 @@ namespace Waddu.UI.Forms
             this.Text += " v." + this.GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
-            //Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
+            Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
         }
 
         protected override void OnLoad(EventArgs e)
@@ -111,6 +111,9 @@ namespace Waddu.UI.Forms
 
             // Load local Addons
             LoadLocalAddons();
+
+            // Checks for a newer Version of Waddu
+            ThreadManager.Instance.AddWork(new WorkItemAppVersionCheck());
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -230,9 +233,25 @@ namespace Waddu.UI.Forms
             }
         }
 
-        private void tsmiAbortThread_Click(object sender, EventArgs e)
+        private void tsmiCheckAndUpdatdAddons_Click(object sender, EventArgs e)
         {
-
+            BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
+            // Add Version Check
+            foreach (Addon addon in addonList)
+            {
+                if (!addon.IsIgnored)
+                {
+                    ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(addon));
+                }
+            }
+            // Add Update
+            foreach (Addon addon in addonList)
+            {
+                if (!addon.IsIgnored)
+                {
+                    ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(addon));
+                }
+            }
         }
 
         private void tsmiFilter_CheckedChanged(object sender, EventArgs e)
@@ -245,6 +264,37 @@ namespace Waddu.UI.Forms
         {
             LoadLocalAddons();
         }
+
+        #region Threads
+        private void dgvThreadActivity_MouseClick(object sender, MouseEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (e.Button == MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
+                if (h.RowIndex >= 0)
+                {
+                    // Select the Cell
+                    dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
+                    // Get the Addon
+                    WorkerThread thread = dgv.CurrentRow.DataBoundItem as WorkerThread;
+
+                    // Assign the Thread
+                    tsmiAbortThread.Tag = thread;
+
+                    // Show the Context Menu
+                    ctxThread.Show(dgv, e.Location);
+                }
+            }
+        }
+
+        private void tsmiAbortThread_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            WorkerThread thread = tsmi.Tag as WorkerThread;
+            thread.Abort();
+        }
+        #endregion
 
         #region Log
         private void SetLogLevel(LogType logLevel)
@@ -349,12 +399,6 @@ namespace Waddu.UI.Forms
             {
                 MessageBox.Show("You have no unknown Addons!");
             }
-        }
-
-        // Checks for a newer Version
-        private void tsmiHelpCheckForUpdate_Click(object sender, EventArgs e)
-        {
-            ThreadManager.Instance.AddWork(new WorkItemAppVersionCheck());
         }
 
         // Show About Screen

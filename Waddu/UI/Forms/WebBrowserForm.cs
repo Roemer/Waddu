@@ -40,6 +40,7 @@ namespace Waddu.UI.Forms
             webBrowser1.CanGoBackChanged += new EventHandler(webBrowser1_CanGoBackChanged);
             webBrowser1.CanGoForwardChanged += new EventHandler(webBrowser1_CanGoForwardChanged);
             webBrowser1.ScriptErrorsSuppressed = true;
+            webBrowser1.NewWindow += new System.ComponentModel.CancelEventHandler(webBrowser1_NewWindow);
 
             // Navigate
             webBrowser1.Navigate(url);
@@ -200,6 +201,8 @@ namespace Waddu.UI.Forms
 
         private void webBrowser1_NewWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // Possibility to block Popups?
+            //e.Cancel = true;
             Console.WriteLine("webBrowser1_NewWindow");
         }
 

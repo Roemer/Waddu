@@ -11,6 +11,8 @@ namespace Waddu.Core.BusinessObjects
     {
         private static List<AddonUpdateStats> _addonNameList = new List<AddonUpdateStats>();
 
+        private static object _lockObject = new object();
+
         private static string GetFilePath()
         {
             return Path.Combine(Application.StartupPath, "UpdateStatus.xml");
@@ -66,35 +68,39 @@ namespace Waddu.Core.BusinessObjects
 
         public static void Save()
         {
-            string xmlFile = GetFilePath();
-            if (File.Exists(xmlFile))
+            // Lock the File Access for Thread-Safety
+            lock (_lockObject)
             {
-                File.Delete(xmlFile);
-            }
+                string xmlFile = GetFilePath();
+                if (File.Exists(xmlFile))
+                {
+                    File.Delete(xmlFile);
+                }
 
-            XmlTextWriter w = new XmlTextWriter(xmlFile, null);
-            w.Formatting = Formatting.Indented;
-            w.WriteStartDocument();
-            w.WriteStartElement("WadduUpdateStatus");
+                XmlTextWriter w = new XmlTextWriter(xmlFile, null);
+                w.Formatting = Formatting.Indented;
+                w.WriteStartDocument();
+                w.WriteStartElement("WadduUpdateStatus");
 
-            foreach (AddonUpdateStats obj in _addonNameList)
-            {
-                w.WriteStartElement("Addon");
-                w.WriteStartAttribute("Name");
-                w.WriteString(obj.Name);
-                w.WriteEndAttribute();
-                w.WriteStartAttribute("Date");
-                w.WriteString(obj.LastUpdated.ToString("yyyy.MM.dd HH:mm:ss"));
-                w.WriteEndAttribute();
-                w.WriteStartAttribute("Version");
-                w.WriteString(obj.Version);
-                w.WriteEndAttribute();
+                foreach (AddonUpdateStats obj in _addonNameList)
+                {
+                    w.WriteStartElement("Addon");
+                    w.WriteStartAttribute("Name");
+                    w.WriteString(obj.Name);
+                    w.WriteEndAttribute();
+                    w.WriteStartAttribute("Date");
+                    w.WriteString(obj.LastUpdated.ToString("yyyy.MM.dd HH:mm:ss"));
+                    w.WriteEndAttribute();
+                    w.WriteStartAttribute("Version");
+                    w.WriteString(obj.Version);
+                    w.WriteEndAttribute();
+                    w.WriteEndElement();
+                }
+
                 w.WriteEndElement();
+                w.WriteEndDocument();
+                w.Close();
             }
-
-            w.WriteEndElement();
-            w.WriteEndDocument();
-            w.Close();
         }
     }
 }

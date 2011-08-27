@@ -11,8 +11,8 @@ namespace Waddu.Core.AddonSites
         private string _downUrl = "http://www.wowinterface.com/downloads/download{tag}";
         private string _versionPrePattern = @"<td class=""alt2""><div class=""infoboxfont1"">Version:</div></td>";
         private string _versionPattern = @"<td class=""alt2""><div class=""smallfont"">(.*)</div></td>";
-        private string _datePrePattern = @"<td class=""alt1""><div class=""infoboxfont1"">Date:</div></td>";
-        private string _datePattern = @"<td class=""alt1""><div class=""smallfont"">([^ ]*).*</div></td>";
+        private string _datePrePattern = @"";
+        private string _datePattern = @"<div id=""safe"">Updated: ([^ ]*).*</div>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private string _xmlUrl = "http://www.wowinterface.com/patcher.php?id={tag}";

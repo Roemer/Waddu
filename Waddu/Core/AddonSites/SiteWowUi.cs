@@ -7,8 +7,8 @@ namespace Waddu.Core.AddonSites
 {
     public class SiteWowUi : AddonSiteBase
     {
-        private string _infoUrl = "http://wowui.worldofwar.net/?p=mod&m={tag}";
-        private string _downUrl = "http://wowui.worldofwar.net/?p=download&m={tag}";
+        private string _infoUrl = "http://wowui.incgamers.com/?p=mod&m={tag}";
+        private string _downUrl = "http://wowui.incgamers.com/?p=download&m={tag}";
         private string _versionPrePattern = @"<title>";
         private string _versionPattern = @"(.*?) - .*";
         private string _datePattern = @".*<br />Updated <b>(.*?)</b>.*";
