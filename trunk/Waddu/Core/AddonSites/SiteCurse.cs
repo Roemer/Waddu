@@ -10,12 +10,10 @@ namespace Waddu.Core.AddonSites
 {
     public class SiteCurse : AddonSiteBase
     {
-        private string _infoUrl = "http://wow.curse.com/downloads/wow-addons/details/{tag}.aspx";
-        private string _downUrl = "http://wow.curse.com{0}";
-        private string _versionPrePattern = @"<th>Current Version:</th>";
-        private string _versionPattern = @"<a href=""(.*.aspx)"">(.*)</a>";
-        private string _updatedPattern = @"<td><script>document.write\(Curse.Utils.getDateSince\((\d*)\d{3}\)\);</script>(.*)</td>";
-        private string _downloadPattern = @"<a class=""button button-pop"" href=""(.*)""><span>Manual Install</span></a>";
+        private string _infoUrl = "http://www.curse.com/addons/wow/{tag}";
+        private string _downUrl = "http://www.curse.com/addons/wow/{tag}/download";
+        private string _versionPattern = @"<li class=""newest-file"">Newest File: (.*)</li>";
+        private string _updatedPattern = @"<li class=""updated"">Updated <abbr class=""standard-date"" title="".*"" data-epoch=""(\d*)"">.*</abbr>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
@@ -29,6 +27,8 @@ namespace Waddu.Core.AddonSites
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             List<string> infoPage = WebHelper.GetHtml(url);
 
+            addon.FileUrl = _downUrl.Replace("{tag}", mapping.AddonTag);
+
             for (int i = 0; i < infoPage.Count; i++)
             {
                 string line = infoPage[i];
@@ -36,20 +36,13 @@ namespace Waddu.Core.AddonSites
                 // Version Check / Download Url
                 if (!versionFound)
                 {
-                    Match m = Regex.Match(line, _versionPrePattern);
+                    Match m = Regex.Match(line, _versionPattern);
                     if (m.Success)
                     {
-                        string realLine = infoPage[i + 2];
-                        m = Regex.Match(realLine, _versionPattern);
-                        if (m.Success)
-                        {
-                            string version = m.Groups[2].Captures[0].Value;
-                            version = FormatVersion(mapping, version);
-                            addon.VersionString = version;
-                            string file = string.Format(_downUrl, m.Groups[1].Captures[0].Value);
-                            addon.FileUrl = file;
-                            versionFound = true;
-                        }
+                        string version = m.Groups[1].Captures[0].Value;
+                        version = FormatVersion(mapping, version);
+                        addon.VersionString = version;
+                        versionFound = true;
                     }
                 }
 
