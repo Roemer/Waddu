@@ -10,10 +10,10 @@ namespace Waddu.Core.AddonSites
 {
     public class SiteCurseForge : AddonSiteBase
     {
-        private string _infoUrl = "http://wow.curseforge.com/projects/{tag}/files/";
+        private string _infoUrl = "http://wow.curseforge.com/addons/{tag}/files/";
         private string _fileUrl = "http://wow.curseforge.com{0}";
         private string _versionPattern = "<td class=\"col-file\"><a href=\"(.*)\">(.*)</a></td>";
-        private string _datePattern = "<td class=\"col-date\"><span class=\"standard-date\" title=\".*\" data-epoch=\"(.*)\">.*</span></td>";
+        private string _datePattern = "<td class=\"col-date\"><span class=\"standard-date\" title=\".*\" data-epoch=\"(.*)\" data-shortdate=\".*\">.*</span></td>";
         private string _downloadPattern = "<ul class=\"user-actions user-actions-by-header\"><li class=\"user-action user-action-download\"><span><a href=\"(.*)\">Download</a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
         private SiteAddonCache _noLibCache = new SiteAddonCache();
