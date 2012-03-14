@@ -10,10 +10,10 @@ namespace Waddu.Core.AddonSites
 {
     public class SiteWowAce : AddonSiteBase
     {
-        private string _infoUrl = "http://www.wowace.com/projects/{tag}/files/";
+        private string _infoUrl = "http://www.wowace.com/addons/{tag}/files/";
         private string _fileUrl = "http://www.wowace.com{0}";
         private string _versionPattern = @"<td class=""col-file""><a href=""(.*)"">(.*)</a></td>";
-        private string _datePattern = @"<span class=""standard-date"" title="".*"" data-epoch=""(.*)"">.*</span>";
+        private string _datePattern = @"<span class=""standard-date"" title="".*"" data-epoch=""(.*)"" data-shortdate="".*"">.*</span>";
         private string _downloadPattern = "<a href=\"(.*)\">Download</a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
         private SiteAddonCache _noLibCache = new SiteAddonCache();

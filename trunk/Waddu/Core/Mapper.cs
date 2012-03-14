@@ -807,6 +807,7 @@ namespace Waddu.Core
             GetAddon("Blizzard_CraftUI").Mappings.Add(new Mapping("Blizzard_CraftUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_CUFProfiles").Mappings.Add(new Mapping("Blizzard_CUFProfiles", AddonSiteId.blizzard));
             GetAddon("Blizzard_DebugTools").Mappings.Add(new Mapping("Blizzard_DebugTools", AddonSiteId.blizzard));
+            GetAddon("Blizzard_EncounterJournal").Mappings.Add(new Mapping("Blizzard_EncounterJournal", AddonSiteId.blizzard));
             GetAddon("Blizzard_FeedbackUI").Mappings.Add(new Mapping("Blizzard_FeedbackUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_GlyphUI").Mappings.Add(new Mapping("Blizzard_GlyphUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_GMChatUI").Mappings.Add(new Mapping("Blizzard_GMChatUI", AddonSiteId.blizzard));
@@ -815,6 +816,7 @@ namespace Waddu.Core
             GetAddon("Blizzard_GuildControlUI").Mappings.Add(new Mapping("Blizzard_GuildControlUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_GuildUI").Mappings.Add(new Mapping("Blizzard_GuildUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_InspectUI").Mappings.Add(new Mapping("Blizzard_InspectUI", AddonSiteId.blizzard));
+            GetAddon("Blizzard_ItemAlterationUI").Mappings.Add(new Mapping("Blizzard_ItemAlterationUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_ItemSocketingUI").Mappings.Add(new Mapping("Blizzard_ItemSocketingUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_LookingForGuildUI").Mappings.Add(new Mapping("Blizzard_LookingForGuildUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_MacroUI").Mappings.Add(new Mapping("Blizzard_MacroUI", AddonSiteId.blizzard));
@@ -826,6 +828,7 @@ namespace Waddu.Core
             GetAddon("Blizzard_TokenUI").Mappings.Add(new Mapping("Blizzard_TokenUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_TradeSkillUI").Mappings.Add(new Mapping("Blizzard_TradeSkillUI", AddonSiteId.blizzard));
             GetAddon("Blizzard_TrainerUI").Mappings.Add(new Mapping("Blizzard_TrainerUI", AddonSiteId.blizzard));
+            GetAddon("Blizzard_VoidStorageUI").Mappings.Add(new Mapping("Blizzard_VoidStorageUI", AddonSiteId.blizzard));
             GetAddon("BloodyFont").Mappings.Add(new Mapping("bloody-font-2-0", AddonSiteId.curse));
             GetAddon("BloodyFont").Mappings.Add(new Mapping("bloody-font-2-0", AddonSiteId.curseforge));
             GetAddon("BombersBuddy").Mappings.Add(new Mapping("bombers-buddy", AddonSiteId.curse));
