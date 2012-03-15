@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using Waddu.Core;

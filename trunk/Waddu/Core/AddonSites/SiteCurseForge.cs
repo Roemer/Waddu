@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
 using Waddu.Types;
 using Waddu.UI.Forms;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
@@ -20,12 +22,35 @@ namespace Waddu.Core.AddonSites
 
         private void ParseInfoSite(Mapping mapping)
         {
+            // Clear the Caches
             SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
             SiteAddon noLibAddon = _noLibCache.Get(mapping.AddonTag);
             noLibAddon.Clear();
 
+            // Build the Url
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            // Get the Version and Link
+            // <a href="/addons/afflicted3/files/20-afflicted3-2-2-1/">Afflicted3 2.2.1</a>
+            HtmlNode fileNode = doc.DocumentNode.SelectSingleNode("//table[@class='listing']/tbody/tr/td[@class='col-file']");
+            string fUrl = fileNode.ChildNodes[0].Attributes["href"].Value;
+            string version = fileNode.ChildNodes[0].InnerText;
+
+            // Get the Date
+            //<td class="col-date"><span class="standard-date" title="Mar 15, 2012 at 00:16 UTC" data-epoch="1331770599" data-shortdate="true">Mar 15, 2012</span></td>
+            HtmlNode dateNode = doc.DocumentNode.SelectSingleNode("//table[@class='listing']/tbody/tr/td[@class='col-date']");
+            string dateValue = dateNode.ChildNodes[0].Attributes["data-epoch"].Value;
+            DateTime date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
+
+            //Config.Instance.PreferNoLib
+
+
             bool versionFound = false;
             bool dateFound = false;
             bool nolibVersionFound = false;
