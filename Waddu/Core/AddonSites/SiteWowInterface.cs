@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Globalization;
+using System.Xml;
+using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
@@ -9,10 +11,6 @@ namespace Waddu.Core.AddonSites
     {
         private string _infoUrl = "http://www.wowinterface.com/downloads/info{tag}.html";
         private string _downUrl = "http://www.wowinterface.com/downloads/download{tag}";
-        private string _versionPrePattern = @"<td class=""alt2""><div class=""infoboxfont1"">Version:</div></td>";
-        private string _versionPattern = @"<td class=""alt2""><div class=""smallfont"">(.*)</div></td>";
-        private string _datePrePattern = @"";
-        private string _datePattern = @"<div id=""safe"">Updated: ([^ ]*).*</div>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private string _xmlUrl = "http://www.wowinterface.com/patcher.php?id={tag}";
@@ -22,37 +20,15 @@ namespace Waddu.Core.AddonSites
 
         private void ParseXmlSite(Mapping mapping, SiteAddon addon)
         {
-            bool versionFound = false;
-            bool downloadFound = false;
+            // Build the Url
             string xmlurl = _xmlUrl.Replace("{tag}", mapping.AddonTag);
-            List<string> xmlPage = WebHelper.GetHtml(xmlurl);
-
-            for (int i = 0; i < xmlPage.Count; i++)
-            {
-                string line = xmlPage[i];
-                if (!versionFound)
-                {
-                    Match m = Regex.Match(line, _xmlVersionPattern);
-                    if (m.Success)
-                    {
-                        string version = m.Groups[1].Captures[0].Value;
-                        if (addon != null)
-                        {
-                            addon.VersionString = version;
-                        }
-                        versionFound = true;
-                    }
-                }
-                if (!downloadFound)
-                {
-                    Match m = Regex.Match(line, _xmlFilePattern);
-                    if (m.Success)
-                    {
-                        _xmlDownloadPath = m.Groups[1].Captures[0].Value;
-                        downloadFound = true;
-                    }
-                }
-            }
+            // Get the Html
+            string xml = string.Join("", WebHelper.GetHtml(xmlurl, mapping.AddonSiteId).ToArray());
+            // Get the Document
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+            addon.VersionString = doc.DocumentElement.SelectSingleNode("//UIVersion").InnerText;
+            _xmlDownloadPath = doc.DocumentElement.SelectSingleNode("//UIFileURL").InnerText;
         }
 
         private void ParseInfoSite(Mapping mapping)
@@ -60,51 +36,22 @@ namespace Waddu.Core.AddonSites
             SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
 
+            // Parse the XML
             ParseXmlSite(mapping, addon);
 
-            bool dateFound = false;
+            // Build the Url
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
-            List<string> infoPage = WebHelper.GetHtml(url);
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
 
-            for (int i = 0; i < infoPage.Count; i++)
-            {
-                string line = infoPage[i];
-
-                // Replaced by XML
-                //if (!versionFound)
-                //{
-                //    Match m = Regex.Match(line, _versionPrePattern);
-                //    if (m.Success)
-                //    {
-                //        string realLine = infoPage[i + 1];
-                //        m = Regex.Match(realLine, _versionPattern);
-                //        if (m.Success)
-                //        {
-                //            string version = m.Groups[1].Captures[0].Value;
-                //            addon.VersionString = version;
-                //            versionFound = true;
-                //        }
-                //    }
-                //}
-
-                if (!dateFound)
-                {
-                    Match m = Regex.Match(line, _datePrePattern);
-                    if (m.Success)
-                    {
-                        string realLine = infoPage[i + 1];
-                        m = Regex.Match(realLine, _datePattern);
-                        if (m.Success)
-                        {
-                            string dateStr = m.Groups[1].Captures[0].Value;
-                            string[] dateList = dateStr.Split(new char[] { '-' });
-                            DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
-                            addon.VersionDate = dt;
-                            dateFound = true;
-                        }
-                    }
-                }
-            }
+            HtmlNode dateNode = doc.DocumentNode.SelectSingleNode("//div[@id='safe']");
+            string dateString = dateNode.InnerText.Replace("Updated: ", string.Empty);
+            //DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
+            DateTime dt = DateTime.Parse(dateString, CultureInfo.CreateSpecificCulture("en-US"));
+            addon.VersionDate = dt;
         }
 
         #region AddonSiteBase Overrides
@@ -140,9 +87,6 @@ namespace Waddu.Core.AddonSites
 
         public override string GetFilePath(Mapping mapping)
         {
-            // This is the Captcha URL
-            //string captchaURL = _downUrl.Replace("{tag}", mapping.AddonTag);
-
             ParseXmlSite(mapping, null);
             return _xmlDownloadPath;
         }
