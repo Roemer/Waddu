@@ -155,6 +155,11 @@ namespace Waddu.Core.BusinessObjects
                                     string tag = mappingElement.Attributes["Tag"].Value;
                                     AddonSiteId addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
                                     Mapping mapping = new Mapping(tag, addonSiteId);
+                                    // Skip wowui Mappings since they seem to have shut down
+                                    if (mapping.AddonSiteId == AddonSiteId.wowui)
+                                    {
+                                        continue;
+                                    }
                                     mapping.Addon = addon;
                                     addon.Mappings.Add(mapping);
                                 }

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
 using Waddu.Types;
 using Waddu.UI.Forms;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
@@ -12,88 +12,70 @@ namespace Waddu.Core.AddonSites
     {
         private string _infoUrl = "http://www.wowace.com/addons/{tag}/files/";
         private string _fileUrl = "http://www.wowace.com{0}";
-        private string _versionPattern = @"<td class=""col-file""><a href=""(.*)"">(.*)</a></td>";
-        private string _datePattern = @"<span class=""standard-date"" title="".*"" data-epoch=""(.*)"" data-shortdate="".*"">.*</span>";
-        private string _downloadPattern = "<a href=\"(.*)\">Download</a>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
         private SiteAddonCache _noLibCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
         {
+            // Clear the Caches
             SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
             SiteAddon noLibAddon = _noLibCache.Get(mapping.AddonTag);
             noLibAddon.Clear();
 
+            // Build the Url
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
-            bool versionFound = false;
-            bool dateFound = false;
-            bool nolibVersionFound = false;
-            bool nolibDateFound = false;
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
 
-            List<string> infoPage = WebHelper.GetHtml(url, mapping.AddonSiteId);
-            for (int i = 0; i < infoPage.Count; i++)
+            // Get the Row Object
+            HtmlNodeCollection rowNodes = doc.DocumentNode.SelectNodes("//table[@class='listing']/tbody/tr");
+            // Use the first Row by default
+            HtmlNode fileRow = rowNodes[0];
+            HtmlNode noLibfileRow = null;
+            if (Config.Instance.PreferNoLib)
             {
-                string line = infoPage[i];
-
-                // Version Check
-                if (!versionFound)
+                // Search for a NoLib Version
+                for (int i = 1; i < rowNodes.Count; i++)
                 {
-                    Match m = Regex.Match(line, _versionPattern);
-                    if (m.Success)
+                    HtmlNode rowNode = rowNodes[i];
+                    // Check if the Filename Contains a nolib
+                    if (rowNode.SelectSingleNode("td[6]").InnerText.Contains("-nolib"))
                     {
-                        string versionString = m.Groups[2].Captures[0].Value;
-                        versionString = FormatVersion(mapping, versionString);
-                        string fileUrl = m.Groups[1].Captures[0].Value;
-                        addon.VersionString = versionString;
-                        addon.FileUrl = string.Format(_fileUrl, fileUrl);
-                        versionFound = true;
-                    }
-                }
-                // NoLib Check
-                else if (Config.Instance.PreferNoLib && !nolibVersionFound)
-                {
-                    Match m = Regex.Match(line, _versionPattern);
-                    if (m.Success)
-                    {
-                        string versionString = m.Groups[2].Captures[0].Value;
-                        if (!versionString.ToLower().Contains("nolib"))
-                        {
-                            continue;
-                        }
-                        versionString = FormatVersion(mapping, versionString);
-                        string fileUrl = m.Groups[1].Captures[0].Value;
-                        noLibAddon.VersionString = versionString;
-                        noLibAddon.FileUrl = string.Format(_fileUrl, fileUrl);
-                        nolibVersionFound = true;
-                    }
-                }
-
-                // Last Update Check
-                if (!dateFound)
-                {
-                    Match m = Regex.Match(line, _datePattern);
-                    if (m.Success)
-                    {
-                        string dateStr = m.Groups[1].Captures[0].Value;
-                        DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateStr));
-                        addon.VersionDate = dt;
-                        dateFound = true;
-                    }
-                }
-                // NoLib Check
-                else if (Config.Instance.PreferNoLib && !nolibDateFound)
-                {
-                    Match m = Regex.Match(line, _datePattern);
-                    if (m.Success)
-                    {
-                        string dateStr = m.Groups[1].Captures[0].Value;
-                        DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateStr));
-                        noLibAddon.VersionDate = dt;
-                        nolibDateFound = true;
+                        // It does, assign it
+                        noLibfileRow = rowNode;
+                        break;
                     }
                 }
             }
+
+            // Parse the Info for the Addon
+            ParseRowInfo(fileRow, addon);
+
+            if (Config.Instance.PreferNoLib && noLibfileRow != null)
+            {
+                // Parse the Info for the NoLib Addon
+                ParseRowInfo(noLibfileRow, noLibAddon);
+            }
+        }
+
+        private void ParseRowInfo(HtmlNode htmlRow, SiteAddon addon)
+        {
+            // Get the Version and Link
+            HtmlNode fileNode = htmlRow.SelectSingleNode("td[@class='col-file']/a");
+            string fileUrl = fileNode.Attributes["href"].Value;
+            string version = fileNode.InnerText;
+            // Get the Date
+            HtmlNode dateNode = htmlRow.SelectSingleNode("td[@class='col-date']/span");
+            string dateValue = dateNode.Attributes["data-epoch"].Value;
+            DateTime date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
+            // Assign the Values
+            addon.VersionString = version;
+            addon.FileUrl = string.Format(_fileUrl, fileUrl);
+            addon.VersionDate = date;
         }
 
         private SiteAddon GetSiteAddon(Mapping mapping)
@@ -148,27 +130,14 @@ namespace Waddu.Core.AddonSites
         public override string GetChangeLog(Mapping mapping)
         {
             string fileUrl = GetSiteAddon(mapping).FileUrl;
-            List<string> filePage = WebHelper.GetHtml(fileUrl, mapping.AddonSiteId);
-            string changeLog = string.Empty;
-            bool changeLogAdd = false;
-            for (int i = 0; i < filePage.Count; i++)
-            {
-                string line = filePage[i];
-                if (line.Contains(@"<h3>Change log</h3>"))
-                {
-                    changeLogAdd = true;
-                    continue;
-                }
-                if (line.Contains(@"</div>") && changeLogAdd)
-                {
-                    break;
-                }
-                if (changeLogAdd)
-                {
-                    changeLog += line;
-                }
-            }
 
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            string changeLog = doc.DocumentNode.SelectSingleNode("//div[@class='content-box-inner']").InnerHtml;
             return changeLog;
         }
 
@@ -180,22 +149,13 @@ namespace Waddu.Core.AddonSites
         public override string GetFilePath(Mapping mapping)
         {
             string fileUrl = GetSiteAddon(mapping).FileUrl;
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
 
-            string downloadUrl = string.Empty;
-            List<string> filePage = WebHelper.GetHtml(fileUrl, mapping.AddonSiteId);
-            for (int i = 0; i < filePage.Count; i++)
-            {
-                string line = filePage[i];
-                Match m = Regex.Match(line, _downloadPattern);
-                if (m.Success)
-                {
-                    downloadUrl = m.Groups[1].Captures[0].Value;
-                    break;
-                }
-            }
-
-            // This is the URL with the Captcha
-            // downloadUrl = "http://www.wowace.com" + downloadUrl;
+            string downloadUrl = doc.DocumentNode.SelectSingleNode("//li[@class='user-action user-action-download']/span/a").GetAttributeValue("href", string.Empty);
 
             WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.wowace, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)

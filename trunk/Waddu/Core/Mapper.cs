@@ -1428,7 +1428,9 @@ namespace Waddu.Core
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-BlackwingDescent"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-ChamberOfAspects"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-Coliseum"));
+            GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-DragonSoul"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-EyeOfEternity"));
+            GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-Firelands"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-GUI"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-Icecrown"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-Naxx"));
@@ -3889,6 +3891,9 @@ namespace Waddu.Core
             GetAddon("ReverseEngineering").Mappings.Add(new Mapping("reverse-engineering", AddonSiteId.wowace));
             GetAddon("RicoMiniMap").Mappings.Add(new Mapping("rico-mini-map", AddonSiteId.curse));
             GetAddon("RicoMiniMap").Mappings.Add(new Mapping("rico-mini-map", AddonSiteId.wowace));
+            GetAddon("RightClickSelfCast").Mappings.Add(new Mapping("rightclickselfcast", AddonSiteId.curse));
+            GetAddon("RightClickSelfCast").Mappings.Add(new Mapping("rightclickselfcast", AddonSiteId.curseforge));
+            GetAddon("RightClickSelfCast").Mappings.Add(new Mapping("15049", AddonSiteId.wowinterface));
             GetAddon("RightWing").Mappings.Add(new Mapping("right-wing", AddonSiteId.curse));
             GetAddon("RightWing").Mappings.Add(new Mapping("right-wing", AddonSiteId.wowace));
             GetAddon("RogueFocus").Mappings.Add(new Mapping("6060", AddonSiteId.wowui));
@@ -3965,7 +3970,6 @@ namespace Waddu.Core
             GetAddon("sct").Mappings.Add(new Mapping("3965", AddonSiteId.wowinterface));
             GetAddon("sct").Mappings.Add(new Mapping("scrolling-combat-text", AddonSiteId.curse));
             GetAddon("sct").Mappings.Add(new Mapping("scrolling-combat-text", AddonSiteId.wowace));
-            GetAddon("sct").Mappings.Add(new Mapping("sct", AddonSiteId.wowace));
             GetAddon("sct").SubAddons.Add(GetAddon("sct_options"));
             GetAddon("SCT_Cooldowns").Mappings.Add(new Mapping("sct_cooldowns", AddonSiteId.curse));
             GetAddon("SCT_Cooldowns").Mappings.Add(new Mapping("sct_cooldowns", AddonSiteId.wowace));

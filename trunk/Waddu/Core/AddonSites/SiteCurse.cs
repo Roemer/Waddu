@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Waddu.Core.BusinessObjects;
-using Waddu.UI.Forms;
-using Waddu.Types;
 using System.Windows.Forms;
+using HtmlAgilityPack;
+using Waddu.Core.BusinessObjects;
+using Waddu.Types;
+using Waddu.UI.Forms;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
@@ -12,8 +12,6 @@ namespace Waddu.Core.AddonSites
     {
         private string _infoUrl = "http://www.curse.com/addons/wow/{tag}";
         private string _downUrl = "http://www.curse.com/addons/wow/{tag}/download";
-        private string _versionPattern = @"<li class=""newest-file"">Newest File: (.*)</li>";
-        private string _updatedPattern = @"<li class=""updated"">Updated <abbr class=""standard-date"" title="".*"" data-epoch=""(\d*)"">.*</abbr>";
         private SiteAddonCache _addonCache = new SiteAddonCache();
 
         private void ParseInfoSite(Mapping mapping)
@@ -21,44 +19,30 @@ namespace Waddu.Core.AddonSites
             SiteAddon addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
 
-            bool versionFound = false;
-            bool dateFound = false;
-
+            // Build the Url
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
-            List<string> infoPage = WebHelper.GetHtml(url);
-
-            addon.FileUrl = _downUrl.Replace("{tag}", mapping.AddonTag);
-
-            for (int i = 0; i < infoPage.Count; i++)
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            if (string.IsNullOrEmpty(html))
             {
-                string line = infoPage[i];
-
-                // Version Check / Download Url
-                if (!versionFound)
-                {
-                    Match m = Regex.Match(line, _versionPattern);
-                    if (m.Success)
-                    {
-                        string version = m.Groups[1].Captures[0].Value;
-                        version = FormatVersion(mapping, version);
-                        addon.VersionString = version;
-                        versionFound = true;
-                    }
-                }
-
-                // Last Update Check
-                if (!dateFound)
-                {
-                    Match m = Regex.Match(line, _updatedPattern);
-                    if (m.Success)
-                    {
-                        string date = m.Groups[1].Captures[0].Value;
-                        DateTime dt = UnixTimeStamp.GetDateTime(Convert.ToDouble(date));
-                        addon.VersionDate = dt;
-                        dateFound = true;
-                    }
-                }
+                return;
             }
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            // Get the Version
+            HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//li[@class='newest-file']");
+            string version = versionNode.InnerText.Replace("Newest File: ", string.Empty);
+            // Get the Date
+            HtmlNode dateNode = doc.DocumentNode.SelectSingleNode("//li[@class='updated']/abbr");
+            string dateValue = dateNode.Attributes["data-epoch"].Value;
+            DateTime date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
+
+            // Assign the Values
+            addon.VersionString = version;
+            addon.FileUrl = _downUrl.Replace("{tag}", mapping.AddonTag);
+            addon.VersionDate = date;
         }
 
         #region AddonSiteBase Overrides
@@ -84,41 +68,15 @@ namespace Waddu.Core.AddonSites
 
         public override string GetChangeLog(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
-            if (addon.IsCollectRequired)
-            {
-                ParseInfoSite(mapping);
-            }
+            string fileUrl = _infoUrl.Replace("{tag}", mapping.AddonTag);
 
-            string fileUrl = addon.FileUrl;
-            List<string> filePage = WebHelper.GetHtml(fileUrl);
-            string changeLog = string.Empty;
-            bool changeLogAdd = false;
-            for (int i = 0; i < filePage.Count; i++)
-            {
-                string line = filePage[i];
-                if (line.Contains(@"<div id=""tab_changes"" class=""body"" style=""display:none"">"))
-                {
-                    changeLogAdd = true;
-                    i += 2;
-                    continue;
-                }
-                if (line.Contains(@"<li class=""title"">ChangeLog</li>"))
-                {
-                    changeLogAdd = true;
-                    i += 3;
-                    continue;
-                }
-                if (line.Contains(@"</div>") && changeLogAdd)
-                {
-                    break;
-                }
-                if (changeLogAdd)
-                {
-                    changeLog += line;
-                }
-            }
+            // Get the Html
+            string html = string.Join("", WebHelper.GetHtml(fileUrl).ToArray());
+            // Get the Document
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
 
+            string changeLog = doc.DocumentNode.SelectSingleNode("//div[@id='tab-changes']").InnerHtml;
             return changeLog;
         }
 
