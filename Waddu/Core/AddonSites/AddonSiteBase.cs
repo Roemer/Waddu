@@ -7,7 +7,7 @@ namespace Waddu.Core.AddonSites
 {
     public abstract class AddonSiteBase
     {
-        private static Dictionary<AddonSiteId, AddonSiteBase> _siteDict = new Dictionary<AddonSiteId, AddonSiteBase>();
+        private static readonly Dictionary<AddonSiteId, AddonSiteBase> SiteDict = new Dictionary<AddonSiteId, AddonSiteBase>();
 
         #region Overridable Functions
         public abstract string GetVersion(Mapping mapping);
@@ -24,7 +24,7 @@ namespace Waddu.Core.AddonSites
         #region Helper Functions
         public string FormatVersion(Mapping mapping, string versionString)
         {
-            string retString = versionString;
+            var retString = versionString;
             if (mapping.AddonSiteId == AddonSiteId.wowace || mapping.AddonSiteId == AddonSiteId.curseforge || mapping.AddonSiteId == AddonSiteId.curse)
             {
                 // Remove "AddonName-" if existent
@@ -45,12 +45,12 @@ namespace Waddu.Core.AddonSites
         {
             AddonSiteBase site = null;
             // Lock the Dictionary
-            lock (_siteDict)
+            lock (SiteDict)
             {
                 // Get the Site if it's already created
-                if (_siteDict.ContainsKey(addonSiteId))
+                if (SiteDict.ContainsKey(addonSiteId))
                 {
-                    site = _siteDict[addonSiteId];
+                    site = SiteDict[addonSiteId];
                 }
                 // If not, create it
                 if (site == null)
@@ -88,7 +88,7 @@ namespace Waddu.Core.AddonSites
                         site = new SiteDirect();
                     }
                     // Add the Site to the Dict
-                    _siteDict.Add(addonSiteId, site);
+                    SiteDict.Add(addonSiteId, site);
                 }
             }
             // Return the site
