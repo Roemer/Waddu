@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Waddu.Interfaces
 {
     public interface IDownloadProgress

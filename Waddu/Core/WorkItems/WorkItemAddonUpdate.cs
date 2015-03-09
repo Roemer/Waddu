@@ -9,8 +9,8 @@ namespace Waddu.Core.WorkItems
 {
     public class WorkItemAddonUpdate : WorkItemBase
     {
-        private Mapping _mapping;
-        private Addon _addon;
+        private readonly Mapping _mapping;
+        private readonly Addon _addon;
 
         private WorkItemAddonUpdate()
         {
@@ -33,15 +33,14 @@ namespace Waddu.Core.WorkItems
 
         public override void DoWork(WorkerThread workerThread)
         {
-            Addon addon = _addon;
-            Mapping mapping = _mapping;
+            workerThread.InfoText = _addon.Name;
 
-            workerThread.InfoText = addon.Name;
+            var mapping = _mapping;
 
-            if (addon.Mappings.Count <= 0)
+            if (_addon.Mappings.Count <= 0)
             {
                 // Addon has no Mappings, skip
-                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping", workerThread.ThreadID, addon.Name);
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping", workerThread.ThreadId, _addon.Name);
                 return;
             }
 
@@ -49,22 +48,22 @@ namespace Waddu.Core.WorkItems
             if (mapping == null)
             {
                 // If no specific Mapping given, use Preferred Mapping
-                mapping = addon.PreferredMapping;
+                mapping = _addon.PreferredMapping;
             }
 
             // If the Mapping still is undefined (like no Update Check was made)
             if (mapping == null)
             {
-                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping to Update", workerThread.ThreadID, addon.Name);
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} has no Mapping to Update", workerThread.ThreadId, _addon.Name);
                 return;
             }
 
             // Get the File Path / Url
-            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadID, addon.Name, mapping.AddonSiteId);
-            string fileUrl = mapping.GetFilePath();
+            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Updating {1} from {2}", workerThread.ThreadId, _addon.Name, mapping.AddonSiteId);
+            var fileUrl = mapping.GetFilePath();
             if (fileUrl == string.Empty)
             {
-                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: File for {1} incorrect", workerThread.ThreadID, addon.Name);
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: File for {1} incorrect", workerThread.ThreadId, _addon.Name);
                 return;
             }
 
@@ -72,16 +71,16 @@ namespace Waddu.Core.WorkItems
             if (fileUrl.ToLower().StartsWith("http:"))
             {
                 // Download
-                workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, addon.Name);
+                workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, _addon.Name);
                 archiveFilePath = WebHelper.DownloadFileToTemp(fileUrl, workerThread);
 
                 // Check if the Download was correct
                 if (archiveFilePath == string.Empty)
                 {
-                    Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadID, addon.Name);
+                    Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Download for {1} failed", workerThread.ThreadId, _addon.Name);
                     return;
                 }
-                Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadID, archiveFilePath);
+                Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Downloaded to {1}", workerThread.ThreadId, archiveFilePath);
             }
             else
             {
@@ -89,8 +88,8 @@ namespace Waddu.Core.WorkItems
                 archiveFilePath = fileUrl;
             }
 
-            bool has7z = ArchiveHelper.Exists7z();
-            List<string> archiveFolderList = new List<string>();
+            var has7z = ArchiveHelper.Exists7z();
+            var archiveFolderList = new List<string>();
             // Check if 7z Exists
             if (has7z)
             {
@@ -98,14 +97,14 @@ namespace Waddu.Core.WorkItems
                 archiveFolderList = ArchiveHelper.GetRootFolders(archiveFilePath);
 
                 // Simple Check if the Archive looks right
-                if (!ArchiveHelper.CheckIntegrity(archiveFilePath, addon.Name))
+                if (!ArchiveHelper.CheckIntegrity(archiveFilePath, _addon.Name))
                 {
                     // If now, warn us
-                    using (ArchiveContentForm f = new ArchiveContentForm(archiveFilePath))
+                    using (var f = new ArchiveContentForm(archiveFilePath))
                     {
                         if (f.ShowDialog() != DialogResult.OK)
                         {
-                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: cancelled by User Request", workerThread.ThreadID);
+                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: cancelled by User Request", workerThread.ThreadId);
                             return;
                         }
                     }
@@ -115,64 +114,63 @@ namespace Waddu.Core.WorkItems
             // Delete Old
             if (Config.Instance.DeleteBeforeUpdate)
             {
-                if (addon.IsInstalled)
+                if (_addon.IsInstalled)
                 {
                     if (!has7z)
                     {
                         MessageBox.Show("Please install 7z to get sure that the right Folders get Deleted");
                         // Straight-Forward Delete
                         DeleteType delType;
-                        foreach (Addon subAddon in addon.SubAddons)
+                        foreach (var subAddon in _addon.SubAddons)
                         {
                             delType = subAddon.Delete();
-                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: SubAddon {1} {2}", workerThread.ThreadID, subAddon.Name, delType.ToString());
+                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: SubAddon {1} {2}", workerThread.ThreadId, subAddon.Name, delType.ToString());
                         }
-                        delType = addon.Delete();
-                        Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadID, addon.Name, delType.ToString());
+                        delType = _addon.Delete();
+                        Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Addon {1} {2}", workerThread.ThreadId, _addon.Name, delType.ToString());
                     }
                     else
                     {
                         // Delete by Archive Content
-                        DeleteType delType;
-                        List<string> deletedList = new List<string>();
-                        foreach (string archiveFolder in archiveFolderList)
+                        var deletedList = new List<string>();
+                        foreach (var archiveFolder in archiveFolderList)
                         {
-                            delType = Addon.DeleteByName(archiveFolder);
+                            var delType = Addon.DeleteByName(archiveFolder);
                             if (delType == DeleteType.Deleted || delType == DeleteType.MovedToTrash)
                             {
                                 deletedList.Add(archiveFolder);
                             }
-                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Folder {1} {2}", workerThread.ThreadID, archiveFolder, delType.ToString());
+                            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Folder {1} {2}", workerThread.ThreadId, archiveFolder, delType.ToString());
                         }
-                        foreach (Addon subAddon in addon.SubAddons)
+                        foreach (var subAddon in _addon.SubAddons)
                         {
                             if (!deletedList.Contains(subAddon.Name))
                             {
-                                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: SubAddon {1} was not in Archive", workerThread.ThreadID, subAddon.Name);
+                                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: SubAddon {1} was not in Archive", workerThread.ThreadId, subAddon.Name);
                             }
                         }
-                        if (!deletedList.Contains(addon.Name))
+                        if (!deletedList.Contains(_addon.Name))
                         {
-                            Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} was not in Archive", workerThread.ThreadID, addon.Name);
+                            Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Addon {1} was not in Archive", workerThread.ThreadId, _addon.Name);
                         }
                     }
                 }
             }
-            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Expanding to {1}", workerThread.ThreadID, Addon.GetFolderPath());
+            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Expanding to {1}", workerThread.ThreadId, Addon.GetFolderPath());
 
             // Expand
             ArchiveHelper.Expand(archiveFilePath, Addon.GetFolderPath());
 
             // Set the Updated Date
-            UpdateStatusList.Set(addon.Name, mapping.RemoteVersion);
+            UpdateStatusList.Set(_addon.Name, mapping.RemoteVersion);
             UpdateStatusList.Save();
 
             // Delete Temp File
-            Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Deleting {1}", workerThread.ThreadID, archiveFilePath);
+            Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Deleting {1}", workerThread.ThreadId, archiveFilePath);
             File.Delete(archiveFilePath);
 
             // Mark as just updated
-            addon.LocalVersionUpdated();
+            _addon.LocalVersionUpdated();
         }
     }
 }

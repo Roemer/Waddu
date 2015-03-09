@@ -2,14 +2,12 @@
 
 namespace Waddu.Core
 {
-    public class UnixTimeStamp
+    public static class UnixTimeStamp
     {
-        private UnixTimeStamp() { }
-
         public static long GetUnixTimeStamp(DateTime dtToConvert)
         {
-            DateTime dtBase = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            TimeSpan span = dtToConvert.ToUniversalTime() - dtBase;
+            var dtBase = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            var span = dtToConvert.ToUniversalTime() - dtBase;
             return (long)span.TotalSeconds;
         }
 

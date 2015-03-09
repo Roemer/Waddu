@@ -16,7 +16,7 @@ namespace Waddu.Core
             returnValue = string.Empty;
             try
             {
-                WebClient cl = new WebClient();
+                var cl = new WebClient();
                 returnValue = cl.DownloadString(url);
                 return true;
             }
@@ -28,10 +28,10 @@ namespace Waddu.Core
 
         public static Match GetMatch(List<string> pageLines, string regex)
         {
-            for (int i = 0; i < pageLines.Count; i++)
+            for (var i = 0; i < pageLines.Count; i++)
             {
-                string line = pageLines[i];
-                Match m = Regex.Match(line, regex);
+                var line = pageLines[i];
+                var m = Regex.Match(line, regex);
                 if (m.Success)
                 {
                     return m;
@@ -42,9 +42,9 @@ namespace Waddu.Core
 
         public static string GetContainingLine(List<string> pageLines, string stringToContain)
         {
-            for (int i = 0; i < pageLines.Count; i++)
+            for (var i = 0; i < pageLines.Count; i++)
             {
-                string line = pageLines[i];
+                var line = pageLines[i];
                 if (line.ToUpper().Contains(stringToContain.ToUpper()))
                 {
                     return line;
@@ -63,16 +63,16 @@ namespace Waddu.Core
         }
         public static List<string> GetHtml(string url, CookieContainer cookies)
         {
-            List<string> lineList = new List<string>();
+            var lineList = new List<string>();
             try
             {
-                HttpWebRequest webRequest = WebRequest.Create(url) as HttpWebRequest;
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
                 if (cookies != null)
                 {
                     webRequest.CookieContainer = cookies;
                 }
-                WebResponse responseHtml = webRequest.GetResponse();
-                StreamReader reader = new StreamReader(responseHtml.GetResponseStream());
+                var responseHtml = webRequest.GetResponse();
+                var reader = new StreamReader(responseHtml.GetResponseStream());
 
                 string line = null;
                 while ((line = reader.ReadLine()) != null)
@@ -94,7 +94,7 @@ namespace Waddu.Core
         }
         public static string DownloadFileToTemp(string remoteFilename, IDownloadProgress progress)
         {
-            string localFilePath = Path.GetTempFileName();
+            var localFilePath = Path.GetTempFileName();
             if (DownloadFile(remoteFilename, localFilePath, progress))
             {
                 return localFilePath;
@@ -112,8 +112,8 @@ namespace Waddu.Core
                 progress.DownloadStatusChanged(-1, -1);
             }
 
-            int bytesProcessed = 0;
-            string fileName = remoteFilename.Substring(remoteFilename.LastIndexOf("/") + 1);
+            var bytesProcessed = 0;
+            var fileName = remoteFilename.Substring(remoteFilename.LastIndexOf("/") + 1);
 
             // Assign values to these objects here so that they can
             // be referenced in the finally block
@@ -126,13 +126,13 @@ namespace Waddu.Core
             try
             {
                 // Create a request for the specified remote file name
-                WebRequest request = WebRequest.Create(remoteFilename);
+                var request = WebRequest.Create(remoteFilename);
                 if (request != null)
                 {
                     // Send the request to the server and retrieve the
                     // WebResponse object
                     response = request.GetResponse();
-                    long length = response.ContentLength;
+                    var length = response.ContentLength;
                     if (progress != null)
                     {
                         progress.DownloadStatusChanged(-1, length);
@@ -147,7 +147,7 @@ namespace Waddu.Core
                         localStream = File.Create(localFilePath);
 
                         // Allocate a 1k buffer
-                        byte[] buffer = new byte[1024];
+                        var buffer = new byte[1024];
                         int bytesRead;
 
                         // Simple do/while Loop to read from Stream until no Bytes are returned

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Waddu.Core.WorkItems
 {
     public abstract class WorkItemBase

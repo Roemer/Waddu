@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using Waddu.Core.WorkItems;
@@ -9,27 +8,23 @@ using Waddu.UI.Forms;
 
 namespace Waddu.Core
 {
-    public class WorkerThread : INotifyPropertyChanged, IDownloadProgress
+    public class WorkerThread : ObservableObject, IDownloadProgress
     {
         private Thread _thread;
 
-        public int ThreadID
-        {
-            get { return _thread.ManagedThreadId; }
-        }
+        public int ThreadId { get { return _thread.ManagedThreadId; } }
 
-        private ThreadStatus _threadStatus;
         public ThreadStatus ThreadStatus
         {
-            get { return _threadStatus; }
-            set { _threadStatus = value; NotifyPropertyChanged("ThreadStatus"); }
+            get { return GetProperty<ThreadStatus>(); }
+            set { SetProperty(value); }
         }
 
         private string _infoText;
         public string InfoText
         {
-            get { return _infoText + (_statusText == string.Empty ? "" : string.Format(" ({0})", _statusText)); }
-            set { _infoText = value; NotifyPropertyChanged("InfoText"); }
+            get { return _infoText + (_statusText == String.Empty ? "" : String.Format(" ({0})", _statusText)); }
+            set { _infoText = value; OnPropertyChanged(() => InfoText); }
         }
 
         public WorkerThread()
@@ -39,7 +34,7 @@ namespace Waddu.Core
 
         private void Start()
         {
-            _thread = new Thread(new ParameterizedThreadStart(ThreadProc));
+            _thread = new Thread(ThreadProc);
             _thread.SetApartmentState(ApartmentState.STA);
             _thread.Start(this);
         }
@@ -64,13 +59,13 @@ namespace Waddu.Core
 
         protected static void ThreadProc(object param)
         {
-            WorkerThread workerThread = param as WorkerThread;
-            Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Starting", workerThread.ThreadID);
+            var workerThread = (WorkerThread)param;
+            Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Starting", workerThread.ThreadId);
             while (true)
             {
                 workerThread.InfoText = "";
                 workerThread.ThreadStatus = ThreadStatus.Idle;
-                WorkItemBase wi = ThreadManager.Instance.GetWork();
+                var wi = ThreadManager.Instance.GetWork();
                 workerThread.ThreadStatus = ThreadStatus.Processing;
 
                 try
@@ -79,42 +74,31 @@ namespace Waddu.Core
                     {
                         // Exit Thread
                         workerThread.ThreadStatus = ThreadStatus.Stopping;
-                        Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Stopping", workerThread.ThreadID);
+                        Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Stopping", workerThread.ThreadId);
                         break;
                     }
 
                     // Do the Work
                     wi.DoWork(workerThread);
 
-                    Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Finished", workerThread.ThreadID);
+                    Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Finished", workerThread.ThreadId);
                 }
                 catch (Exception ex)
                 {
-                    Logger.Instance.AddLog(LogType.Error, "Thread #{0}: Error {1}", workerThread.ThreadID, ex.Message);
-                    MainForm.Instance.Invoke((MethodInvoker)delegate()
+                    Logger.Instance.AddLog(LogType.Error, "Thread #{0}: Error {1}", workerThread.ThreadId, ex.Message);
+                    MainForm.Instance.Invoke((MethodInvoker)(() =>
                     {
-                        using (ErrorForm dlg = new ErrorForm(ex))
+                        using (var dlg = new ErrorForm(ex))
                         {
                             dlg.StartPosition = FormStartPosition.CenterParent;
                             dlg.ShowDialog();
                         }
-                    });
+                    }));
                 }
             }
             workerThread.ThreadStatus = ThreadStatus.Stopped;
-            Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Stopped", workerThread.ThreadID);
+            Logger.Instance.AddLog(LogType.Debug, "Thread #{0}: Stopped", workerThread.ThreadId);
         }
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-        #endregion
 
         #region IDownloadProgress Members
         private string _statusText = string.Empty;
@@ -125,7 +109,7 @@ namespace Waddu.Core
             {
                 _statusText = string.Format("{0} of {1}", Helpers.FormatBytes(currentBytes), Helpers.FormatBytes(totalBytes));
             }
-            NotifyPropertyChanged("InfoText");
+            OnPropertyChanged(() => InfoText);
         }
         #endregion
     }
