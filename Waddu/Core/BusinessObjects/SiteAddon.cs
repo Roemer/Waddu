@@ -47,14 +47,7 @@ namespace Waddu.Core.BusinessObjects
             }
         }
 
-        private bool _isCollected;
-        public bool IsCollected
-        {
-            get
-            {
-                return _isCollected;
-            }
-        }
+        public bool IsCollected { get; private set; }
 
         public SiteAddon()
         {
@@ -68,13 +61,13 @@ namespace Waddu.Core.BusinessObjects
             _fileUrl = string.Empty;
 
             _lastCheckingTime = DateTime.MinValue;
-            _isCollected = false;
+            IsCollected = false;
         }
 
         private void SetUpdated()
         {
             _lastCheckingTime = DateTime.Now;
-            _isCollected = true;
+            IsCollected = true;
         }
     }
 }

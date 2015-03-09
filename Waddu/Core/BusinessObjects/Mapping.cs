@@ -8,19 +8,8 @@ namespace Waddu.Core.BusinessObjects
     public class Mapping : INotifyPropertyChanged
     {
         #region Members
-        private Addon _addon;
-        public Addon Addon
-        {
-            get { return _addon; }
-            set { _addon = value; }
-        }
-
-        private Package _package;
-        public Package Package
-        {
-            get { return _package; }
-            set { _package = value; }
-        }
+        public Addon Addon { get; set; }
+        public Package Package { get; set; }
 
         private string _addonTag;
         public string AddonTag

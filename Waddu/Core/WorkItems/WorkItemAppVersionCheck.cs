@@ -8,7 +8,7 @@ namespace Waddu.Core.WorkItems
     {
         public override void DoWork(WorkerThread workerThread)
         {
-            string[] remotePaths = new string[] {
+            string[] remotePaths = {
                 "http://waddu.flauschig.ch/download/latest.txt",
                 "http://www.red-demon.com/waddu/download/latest.txt"
             };
@@ -17,14 +17,14 @@ namespace Waddu.Core.WorkItems
             Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for Waddu", workerThread.ThreadID);
             bool success = false;
             string version = string.Empty;
-            foreach (string path in remotePaths)
+            foreach (var path in remotePaths)
             {
                 success = WebHelper.GetString(path, out version);
                 if (success) { break; }
             }
             if (success)
             {
-                if (version == this.GetType().Assembly.GetName().Version.ToString())
+                if (version == GetType().Assembly.GetName().Version.ToString())
                 {
                     Logger.Instance.AddLog(LogType.Information, "Thread #{0}: No Update for Waddu available: {1}", workerThread.ThreadID, version);
                 }
