@@ -108,6 +108,7 @@
     <Compile Include="Core\LogEntry.cs" />
     <Compile Include="Core\Logger.cs" />
     <Compile Include="Core\Mapper.cs" />
+    <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\ThreadManager.cs" />
     <Compile Include="Core\TocHelper.cs" />
     <Compile Include="Core\UnixTimeStamp.cs" />

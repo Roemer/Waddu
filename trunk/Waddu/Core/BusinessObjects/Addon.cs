@@ -6,14 +6,11 @@ using Waddu.Win32;
 
 namespace Waddu.Core.BusinessObjects
 {
-    public class Addon : INotifyPropertyChanged
+    public class Addon : ObservableObject
     {
         #region Members
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-        }
+
+        public string Name { get; private set; }
 
         [DisplayName("Your Version")]
         public string LocalVersion
@@ -25,12 +22,8 @@ namespace Waddu.Core.BusinessObjects
         {
             get
             {
-                AddonUpdateStats stats = UpdateStatusList.Get(Name);
-                if (stats != null)
-                {
-                    return UpdateStatusList.Get(Name).LastUpdated;
-                }
-                return DateTime.MinValue;
+                var stats = UpdateStatusList.Get(Name);
+                return stats != null ? UpdateStatusList.Get(Name).LastUpdated : DateTime.MinValue;
             }
         }
 
@@ -68,7 +61,7 @@ namespace Waddu.Core.BusinessObjects
         {
             get
             {
-                string addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
+                var addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
                 addonFolderPath = Path.Combine(addonFolderPath, Name);
                 return Directory.Exists(addonFolderPath);
             }
@@ -79,83 +72,59 @@ namespace Waddu.Core.BusinessObjects
         {
             get
             {
-                return Config.Instance.IsIgnored(this.Name);
+                return Config.Instance.IsIgnored(Name);
             }
             set
             {
-                if (value == true)
+                if (value)
                 {
-                    Config.Instance.AddIgnored(this.Name);
+                    Config.Instance.AddIgnored(Name);
                 }
                 else
                 {
-                    Config.Instance.RemoveIgnored(this.Name);
+                    Config.Instance.RemoveIgnored(Name);
                 }
                 Config.Instance.SaveSettings();
             }
         }
 
-        private bool _isUnhandled = false;
         [Browsable(false)]
-        public bool IsUnhandled
-        {
-            get { return _isUnhandled; }
-            set { _isUnhandled = value; }
-        }
+        public bool IsUnhandled { get; set; }
 
-        private Mapping _preferredMapping = null;
         public Mapping PreferredMapping
         {
-            get { return _preferredMapping; }
-            set { _preferredMapping = value; NotifyPropertyChanged("PreferredMapping"); }
+            get { return GetProperty<Mapping>(); }
+            set { SetProperty(value); }
         }
 
-        private BindingList<Addon> _subAddonList;
-        public BindingList<Addon> SubAddons
-        {
-            get { return _subAddonList; }
-            set { _subAddonList = value; }
-        }
+        public BindingList<Addon> SubAddons { get; set; }
 
-        private BindingList<Addon> _superAddonList;
-        public BindingList<Addon> SuperAddons
-        {
-            get { return _superAddonList; }
-            set { _superAddonList = value; }
-        }
+        public BindingList<Addon> SuperAddons { get; set; }
 
-        private BindingList<Mapping> _mappingList;
-        public BindingList<Mapping> Mappings
-        {
-            get { return _mappingList; }
-            set { _mappingList = value; }
-        }
+        public BindingList<Mapping> Mappings { get; set; }
 
-        private BindingList<Package> _packageList;
-        public BindingList<Package> Packages
-        {
-            get { return _packageList; }
-            set { _packageList = value; }
-        }
+        public BindingList<Package> Packages { get; set; }
+
         #endregion
 
         #region Constructors
         private Addon()
         {
-            _subAddonList = new BindingList<Addon>();
-            _superAddonList = new BindingList<Addon>();
-            _mappingList = new BindingList<Mapping>();
-            _packageList = new BindingList<Package>();
+            IsUnhandled = false;
+            SubAddons = new BindingList<Addon>();
+            SuperAddons = new BindingList<Addon>();
+            Mappings = new BindingList<Mapping>();
+            Packages = new BindingList<Package>();
 
-            _mappingList.ListChanged += new ListChangedEventHandler(_mappingList_ListChanged);
-            _subAddonList.ListChanged += new ListChangedEventHandler(_subAddonList_ListChanged);
+            Mappings.ListChanged += _mappingList_ListChanged;
+            SubAddons.ListChanged += _subAddonList_ListChanged;
         }
 
         public Addon(string name)
             : this()
         {
-            _name = name;
-            NotifyPropertyChanged("Name");
+            Name = name;
+            OnPropertyChanged(() => Name);
         }
         #endregion
 
@@ -164,7 +133,7 @@ namespace Waddu.Core.BusinessObjects
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
-                Addon newSubAddon = _subAddonList[e.NewIndex];
+                var newSubAddon = SubAddons[e.NewIndex];
                 newSubAddon.SuperAddons.Add(this);
             }
         }
@@ -174,7 +143,7 @@ namespace Waddu.Core.BusinessObjects
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
-                Mapping newMapping = _mappingList[e.NewIndex];
+                var newMapping = Mappings[e.NewIndex];
                 newMapping.Addon = this;
             }
         }
@@ -182,10 +151,10 @@ namespace Waddu.Core.BusinessObjects
         public void LocalVersionUpdated()
         {
             // Notify Properties Changed
-            NotifyPropertyChanged("LastUpdated");
-            NotifyPropertyChanged("LocalVersion");
+            OnPropertyChanged(() => LastUpdated);
+            OnPropertyChanged(() => LocalVersion);
             // Delete the Preferred Mapping
-            this.PreferredMapping = null;
+            PreferredMapping = null;
         }
 
         /// <summary>
@@ -218,7 +187,7 @@ namespace Waddu.Core.BusinessObjects
             addonFolderPath = Path.Combine(addonFolderPath, Name);
 
             // Try by Changelog
-            foreach (string file in Directory.GetFiles(addonFolderPath, "Changelog*"))
+            foreach (var file in Directory.GetFiles(addonFolderPath, "Changelog*"))
             {
                 int start = file.IndexOf("-") + 1;
                 start = file.IndexOf("-", start) + 1;
@@ -286,19 +255,8 @@ namespace Waddu.Core.BusinessObjects
         /// </summary>
         public static string GetFolderPath()
         {
-            string folderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
+            var folderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
             return folderPath;
-        }
-        #endregion
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
         #endregion
 
@@ -311,7 +269,7 @@ namespace Waddu.Core.BusinessObjects
         {
             if (obj == null) { return false; }
             if (obj.GetType() != typeof(Addon)) { return false; }
-            return (this as Addon).Name.Equals((obj as Addon).Name);
+            return Name.Equals((obj as Addon).Name);
         }
 
         public override int GetHashCode()

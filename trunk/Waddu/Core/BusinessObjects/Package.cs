@@ -4,41 +4,26 @@ namespace Waddu.Core.BusinessObjects
 {
     public class Package
     {
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
-        private BindingList<Addon> _addonList;
-        public BindingList<Addon> Addons
-        {
-            get { return _addonList; }
-            set { _addonList = value; }
-        }
+        public BindingList<Addon> Addons { get; set; }
 
-        private BindingList<Mapping> _mappingList;
-        public BindingList<Mapping> Mappings
-        {
-            get { return _mappingList; }
-            set { _mappingList = value; }
-        }
+        public BindingList<Mapping> Mappings { get; set; }
 
         public Package(string name)
         {
-            _name = name;
-            _addonList = new BindingList<Addon>();
-            _mappingList = new BindingList<Mapping>();
+            Name = name;
+            Addons = new BindingList<Addon>();
+            Mappings = new BindingList<Mapping>();
 
-            _addonList.ListChanged += new ListChangedEventHandler(_addonList_ListChanged);
+            Addons.ListChanged += _addonList_ListChanged;
         }
 
         private void _addonList_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
-                Addon newAddon = _addonList[e.NewIndex];
+                Addon newAddon = Addons[e.NewIndex];
                 newAddon.Packages.Add(this);
             }
         }

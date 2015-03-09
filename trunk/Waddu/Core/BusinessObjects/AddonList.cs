@@ -10,26 +10,14 @@ namespace Waddu.Core.BusinessObjects
 {
     public class AddonList
     {
-        private static AddonList _instance;
-        public static AddonList Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new AddonList();
-                }
-                return _instance;
-            }
-            set { _instance = value; }
-        }
+        public static AddonList Instance = new AddonList();
 
         public List<Addon> Addons;
 
         private string GetNewestVersion()
         {
             string version;
-            bool success = WebHelper.GetString("http://waddu.flauschig.ch/mapping/latest.txt", out version);
+            var success = WebHelper.GetString("http://waddu.flauschig.ch/mapping/latest.txt", out version);
             if (!success)
             {
                 success = WebHelper.GetString("http://www.red-demon.com/waddu/mapping/latest.txt", out version);
@@ -43,7 +31,7 @@ namespace Waddu.Core.BusinessObjects
 
         private string GetLocalVersion(string xmlFile)
         {
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             try
             {
                 doc.Load(xmlFile);
@@ -58,7 +46,7 @@ namespace Waddu.Core.BusinessObjects
 
         public Addon GetAddon(string addonName)
         {
-            return Addons.Find(delegate(Addon obj) { return (obj.Name.ToUpper().Equals(addonName.ToUpper())); });
+            return Addons.Find(obj => (obj.Name.ToUpper().Equals(addonName.ToUpper())));
         }
 
         // Private Constructor
@@ -134,7 +122,7 @@ namespace Waddu.Core.BusinessObjects
                             // Get the Addon Name
                             string addonName = addonNode.Attributes["Name"].Value;
                             // Search the List if there is already an Addon with this Name
-                            Addon addon = addonList.Find(delegate(Addon ad) { return ad.Name.Equals(addonName); });
+                            Addon addon = addonList.Find(ad => ad.Name.Equals(addonName));
                             // If not, create it
                             if (addon == null)
                             {
@@ -172,7 +160,7 @@ namespace Waddu.Core.BusinessObjects
                                 foreach (XmlNode subAddonElement in subAddonListElement.ChildNodes)
                                 {
                                     string subAddonName = subAddonElement.Attributes["Name"].Value;
-                                    Addon subAddon = addonList.Find(delegate(Addon ad) { return ad.Name.Equals(subAddonName); });
+                                    Addon subAddon = addonList.Find(ad => ad.Name.Equals(subAddonName));
                                     if (subAddon == null)
                                     {
                                         subAddon = new Addon(subAddonName);
@@ -183,12 +171,12 @@ namespace Waddu.Core.BusinessObjects
                                     localAddons.Remove(subAddon);
 
                                     // Add the SubAddon to the List
-                                    Helpers.AddIfNeeded<Addon>(addonList, subAddon);
+                                    Helpers.AddIfNeeded(addonList, subAddon);
                                 }
                             }
 
                             // Add the Addon to the List
-                            Helpers.AddIfNeeded<Addon>(addonList, addon);
+                            Helpers.AddIfNeeded(addonList, addon);
                         }
                         // Package
                         else if (addonNode.Name == "Package")
@@ -208,12 +196,7 @@ namespace Waddu.Core.BusinessObjects
             }
 
             // Sort the List
-            addonList.Sort(
-                delegate(Addon x, Addon y)
-                {
-                    return string.Compare(x.Name, y.Name);
-                }
-            );
+            addonList.Sort((x, y) => String.CompareOrdinal(x.Name, y.Name));
 
             Addons.AddRange(addonList);
         }
