@@ -16,18 +16,19 @@ namespace Waddu.Core.AddonSites
         private string _xmlUrl = "http://www.wowinterface.com/patcher.php?id={tag}";
         private string _xmlVersionPattern = @"<UIVersion>(.*)</UIVersion>";
         private string _xmlFilePattern = @"<UIFileURL>(.*)</UIFileURL>";
-        private string _xmlDownloadPath = string.Empty;
+        private string _xmlDownloadPath = String.Empty;
+        private string _xmlVersionString = String.Empty;
 
-        private void ParseXmlSite(Mapping mapping, SiteAddon addon)
+        private void ParseXmlSite(Mapping mapping)
         {
             // Build the Url
-            string xmlurl = _xmlUrl.Replace("{tag}", mapping.AddonTag);
+            var xmlurl = _xmlUrl.Replace("{tag}", mapping.AddonTag);
             // Get the Html
-            string xml = string.Join("", WebHelper.GetHtml(xmlurl, mapping.AddonSiteId).ToArray());
+            var xml = string.Join("", WebHelper.GetHtml(xmlurl, mapping.AddonSiteId).ToArray());
             // Get the Document
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.LoadXml(xml);
-            addon.VersionString = doc.DocumentElement.SelectSingleNode("//UIVersion").InnerText;
+            _xmlVersionString = doc.DocumentElement.SelectSingleNode("//UIVersion").InnerText;
             _xmlDownloadPath = doc.DocumentElement.SelectSingleNode("//UIFileURL").InnerText;
         }
 
@@ -37,7 +38,8 @@ namespace Waddu.Core.AddonSites
             addon.Clear();
 
             // Parse the XML
-            ParseXmlSite(mapping, addon);
+            ParseXmlSite(mapping);
+            addon.VersionString = _xmlVersionString;
 
             // Build the Url
             string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
@@ -57,7 +59,7 @@ namespace Waddu.Core.AddonSites
         #region AddonSiteBase Overrides
         public override string GetVersion(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
@@ -67,7 +69,7 @@ namespace Waddu.Core.AddonSites
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
@@ -87,7 +89,7 @@ namespace Waddu.Core.AddonSites
 
         public override string GetFilePath(Mapping mapping)
         {
-            ParseXmlSite(mapping, null);
+            ParseXmlSite(mapping);
             return _xmlDownloadPath;
         }
         #endregion

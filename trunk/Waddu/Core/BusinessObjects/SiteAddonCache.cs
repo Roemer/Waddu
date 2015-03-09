@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Waddu.Core.BusinessObjects
 {
     public class SiteAddonCache
     {
-        private Dictionary<string, SiteAddon> _addonCache;
+        private readonly Dictionary<string, SiteAddon> _addonCache;
 
         public SiteAddonCache()
         {
