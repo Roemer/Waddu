@@ -14,9 +14,9 @@ namespace Waddu.Core.WorkItems
             };
 
             workerThread.InfoText = "Version Check for Waddu";
-            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for Waddu", workerThread.ThreadID);
-            bool success = false;
-            string version = string.Empty;
+            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for Waddu", workerThread.ThreadId);
+            var success = false;
+            var version = string.Empty;
             foreach (var path in remotePaths)
             {
                 success = WebHelper.GetString(path, out version);
@@ -26,23 +26,23 @@ namespace Waddu.Core.WorkItems
             {
                 if (version == GetType().Assembly.GetName().Version.ToString())
                 {
-                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: No Update for Waddu available: {1}", workerThread.ThreadID, version);
+                    Logger.Instance.AddLog(LogType.Information, "Thread #{0}: No Update for Waddu available: {1}", workerThread.ThreadId, version);
                 }
                 else
                 {
-                    MainForm.Instance.Invoke((MethodInvoker)delegate()
+                    MainForm.Instance.Invoke((MethodInvoker)(() =>
                     {
-                        using (UpdateAvailableForm dlg = new UpdateAvailableForm(version))
+                        using (var dlg = new UpdateAvailableForm(version))
                         {
                             dlg.StartPosition = FormStartPosition.CenterParent;
                             dlg.ShowDialog();
                         }
-                    });
+                    }));
                 }
             }
             else
             {
-                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Could not check the Version", workerThread.ThreadID);
+                Logger.Instance.AddLog(LogType.Warning, "Thread #{0}: Could not check the Version", workerThread.ThreadId);
             }
         }
     }

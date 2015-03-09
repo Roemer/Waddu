@@ -20,23 +20,18 @@ namespace Waddu.Core
             }
         }
 
-        private BindingList<WorkerThread> _workerThreadList;
-        public BindingList<WorkerThread> WorkerThreadList
-        {
-            get { return _workerThreadList; }
-        }
-
-        private BlockingQueue<WorkItemBase> _workQueue;
+        public BindingList<WorkerThread> WorkerThreadList { get; private set; }
+        private readonly BlockingQueue<WorkItemBase> _workQueue;
 
         public static void Initialize()
         {
             Logger.Instance.AddLog(LogType.Debug, "Initializing ThreadManager with {0} Threads", Config.Instance.NumberOfThreads);
             _instance = new ThreadManager();
 
-            for (int i = 0; i < Config.Instance.NumberOfThreads; i++)
+            for (var i = 0; i < Config.Instance.NumberOfThreads; i++)
             {
-                WorkerThread workerThread = new WorkerThread();
-                _instance._workerThreadList.Add(workerThread);
+                var workerThread = new WorkerThread();
+                _instance.WorkerThreadList.Add(workerThread);
             }
         }
 
@@ -46,7 +41,7 @@ namespace Waddu.Core
             _workQueue = new BlockingQueue<WorkItemBase>();
 
             // Initialize Worker Threads
-            _workerThreadList = new BindingList<WorkerThread>();
+            WorkerThreadList = new BindingList<WorkerThread>();
         }
 
         public void AddWork(WorkItemBase workItem)
@@ -62,7 +57,7 @@ namespace Waddu.Core
         public void Dispose()
         {
             // TODO: Clear Work Items
-            foreach (WorkerThread thread in _workerThreadList)
+            foreach (var thread in WorkerThreadList)
             {
                 // Tell the Thread to Stop
                 thread.Stop();

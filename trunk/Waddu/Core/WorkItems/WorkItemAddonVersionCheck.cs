@@ -5,8 +5,8 @@ namespace Waddu.Core.WorkItems
 {
     public class WorkItemAddonVersionCheck : WorkItemBase
     {
-        private Mapping _mapping;
-        private Addon _addon;
+        private readonly Mapping _mapping;
+        private readonly Addon _addon;
 
         private WorkItemAddonVersionCheck()
         {
@@ -28,15 +28,16 @@ namespace Waddu.Core.WorkItems
 
         public override void DoWork(WorkerThread workerThread)
         {
-            Addon addon = _addon;
-            Mapping mapping = _mapping;
+            var addon = _addon;
+            var mapping = _mapping;
+
             if (_addon == null)
             {
                 addon = mapping.Addon;
             }
 
             // Get Remote Version
-            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for {1}", workerThread.ThreadID, addon.Name);
+            Logger.Instance.AddLog(LogType.Information, "Thread #{0}: Version Check for {1}", workerThread.ThreadId, addon.Name);
 
             if (mapping != null)
             {
@@ -48,15 +49,15 @@ namespace Waddu.Core.WorkItems
             {
                 // All (or no) Mappings
                 workerThread.InfoText = string.Format("Get Versions for \"{0}\"", addon.Name);
-                foreach (Mapping map in addon.Mappings)
+                foreach (var map in addon.Mappings)
                 {
                     map.CheckRemote();
                 }
             }
 
             // Check if the Addon needs updating and which Mapping is the Best
-            AddonUpdateStats stats = UpdateStatusList.Get(addon.Name);
-            foreach (Mapping addonMapping in addon.Mappings)
+            var stats = UpdateStatusList.Get(addon.Name);
+            foreach (var addonMapping in addon.Mappings)
             {
                 if (stats != null)
                 {
@@ -104,12 +105,11 @@ namespace Waddu.Core.WorkItems
                 }
 
                 // Assign by Priority
-                int indexOld = Config.Instance.AddonSites.IndexOf(addon.PreferredMapping.AddonSiteId);
-                int indexNew = Config.Instance.AddonSites.IndexOf(addonMapping.AddonSiteId);
+                var indexOld = Config.Instance.AddonSites.IndexOf(addon.PreferredMapping.AddonSiteId);
+                var indexNew = Config.Instance.AddonSites.IndexOf(addonMapping.AddonSiteId);
                 if (indexNew >= 0 && indexNew < indexOld)
                 {
                     addon.PreferredMapping = addonMapping;
-                    continue;
                 }
             }
         }

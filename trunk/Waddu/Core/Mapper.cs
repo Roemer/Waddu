@@ -23,17 +23,17 @@ namespace Waddu.Core
 
         public static void CreateMapping(string mappingFile)
         {
-            Mapper map = new Mapper(mappingFile);
+            var map = new Mapper(mappingFile);
         }
 
         private void SaveXML(string mappingFile)
         {
-            string _xmlFile = mappingFile;
+            var _xmlFile = mappingFile;
             XmlDocument xmlDoc;
             File.Delete(_xmlFile);
             if (!File.Exists(_xmlFile))
             {
-                XmlTextWriter w = new XmlTextWriter(_xmlFile, null);
+                var w = new XmlTextWriter(_xmlFile, null);
                 w.WriteStartDocument();
                 w.WriteStartElement("Waddu_Mappings");
                 w.WriteStartAttribute("Version");
@@ -45,7 +45,7 @@ namespace Waddu.Core
                 w.WriteString(GameType.ConvertToString(GameType.Enum.WorldOfWarcraft));
                 w.WriteEndAttribute();
 
-                foreach (Addon addon in _addonList)
+                foreach (var addon in _addonList)
                 {
                     if (addon.Mappings.Count == 0)
                     {
@@ -61,7 +61,7 @@ namespace Waddu.Core
                     if (addon.Mappings.Count > 0)
                     {
                         w.WriteStartElement("Mappings");
-                        foreach (Mapping map in addon.Mappings)
+                        foreach (var map in addon.Mappings)
                         {
                             w.WriteStartElement("Mapping");
                             w.WriteStartAttribute("Site");
@@ -78,7 +78,7 @@ namespace Waddu.Core
                     if (addon.SubAddons.Count > 0)
                     {
                         w.WriteStartElement("SubAddons");
-                        foreach (Addon subAddon in addon.SubAddons)
+                        foreach (var subAddon in addon.SubAddons)
                         {
                             w.WriteStartElement("SubAddon");
                             w.WriteStartAttribute("Name");
@@ -120,7 +120,7 @@ namespace Waddu.Core
                     w.WriteEndElement();
                 }
 
-                foreach (Package package in _packageList)
+                foreach (var package in _packageList)
                 {
                     if (package.Mappings.Count == 0)
                     {
@@ -136,7 +136,7 @@ namespace Waddu.Core
                     if (package.Mappings.Count > 0)
                     {
                         w.WriteStartElement("Mappings");
-                        foreach (Mapping map in package.Mappings)
+                        foreach (var map in package.Mappings)
                         {
                             w.WriteStartElement("Mapping");
                             w.WriteStartAttribute("Site");
@@ -153,7 +153,7 @@ namespace Waddu.Core
                     if (package.Addons.Count > 0)
                     {
                         w.WriteStartElement("Addons");
-                        foreach (Addon addon in package.Addons)
+                        foreach (var addon in package.Addons)
                         {
                             w.WriteStartElement("Addon");
                             w.WriteStartAttribute("Name");
@@ -180,7 +180,7 @@ namespace Waddu.Core
 
         private Addon GetAddon(string addonName)
         {
-            Addon addon = _addonList.Find(delegate(Addon o) { return o.Name.Equals(addonName); });
+            var addon = _addonList.Find(o => o.Name.Equals(addonName));
             if (addon == null)
             {
                 addon = new Addon(addonName);
@@ -191,7 +191,7 @@ namespace Waddu.Core
 
         private Package GetPackage(string packageName)
         {
-            Package package = _packageList.Find(delegate(Package o) { return o.Name.Equals(packageName); });
+            var package = _packageList.Find(o => o.Name.Equals(packageName));
             if (package == null)
             {
                 package = new Package(packageName);

@@ -6,7 +6,7 @@ namespace Waddu.Core
 {
     public class BlockingQueue<T> : IDisposable
     {
-        private Queue<T> _queue = new Queue<T>();
+        private readonly Queue<T> _queue = new Queue<T>();
         private Semaphore _semaphore = new Semaphore(0, int.MaxValue);
 
         public void Enqueue(T data)

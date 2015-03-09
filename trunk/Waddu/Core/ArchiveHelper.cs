@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace Waddu.Core
 {
@@ -13,8 +13,8 @@ namespace Waddu.Core
 
         public static bool Exists7z()
         {
-            string appPath7z = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
-            string appPath7zFM = Path.Combine(Config.Instance.PathTo7z, "7zFM.exe");
+            var appPath7z = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
+            var appPath7zFM = Path.Combine(Config.Instance.PathTo7z, "7zFM.exe");
             return File.Exists(appPath7z) && File.Exists(appPath7zFM);
         }
 
@@ -25,20 +25,25 @@ namespace Waddu.Core
                 if (Exists7z())
                 {
                     // 7z
-                    string appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
-                    string cmdArgs = string.Format(@"x ""{0}"" -o""{1}"" -r -y", archiveFile, targetFolder);
-                    Process ProcessObj = new Process();
-                    ProcessObj.StartInfo.FileName = appPath;
-                    ProcessObj.StartInfo.Arguments = cmdArgs;
-                    ProcessObj.StartInfo.UseShellExecute = false;
-                    ProcessObj.StartInfo.CreateNoWindow = true;
-                    ProcessObj.Start();
-                    ProcessObj.WaitForExit();
+                    var appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
+                    var cmdArgs = string.Format(@"x ""{0}"" -o""{1}"" -r -y", archiveFile, targetFolder);
+                    var processObj = new Process
+                    {
+                        StartInfo =
+                        {
+                            FileName = appPath,
+                            Arguments = cmdArgs,
+                            UseShellExecute = false,
+                            CreateNoWindow = true
+                        }
+                    };
+                    processObj.Start();
+                    processObj.WaitForExit();
                 }
                 else
                 {
                     // SharpZipLib
-                    FastZip fz = new FastZip();
+                    var fz = new FastZip();
                     fz.ExtractZip(archiveFile, targetFolder, "");
                 }
             }
@@ -52,9 +57,9 @@ namespace Waddu.Core
 
         public static bool CheckIntegrity(string archiveFile, string addonName)
         {
-            bool baseFound = false;
-            List<string> folderList = GetRootFolders(archiveFile);
-            foreach (string folder in folderList)
+            var baseFound = false;
+            var folderList = GetRootFolders(archiveFile);
+            foreach (var folder in folderList)
             {
                 if (folder.ToUpper() == addonName.ToUpper())
                 {
@@ -67,25 +72,23 @@ namespace Waddu.Core
 
         public static void Open(string archiveFile)
         {
-            string appPath = Path.Combine(Config.Instance.PathTo7z, "7zFM.exe");
-            string cmdArgs = archiveFile;
-            Process ProcessObj = new Process();
-            ProcessObj.StartInfo.FileName = appPath;
-            ProcessObj.StartInfo.Arguments = cmdArgs;
-            ProcessObj.Start();
+            var appPath = Path.Combine(Config.Instance.PathTo7z, "7zFM.exe");
+            var cmdArgs = archiveFile;
+            var processObj = new Process { StartInfo = { FileName = appPath, Arguments = cmdArgs } };
+            processObj.Start();
         }
 
         public static List<string> GetRootFolders(string archiveFile)
         {
-            List<string> contentList = GetArchiveContent(archiveFile);
-            List<string> folderList = new List<string>();
-            foreach (string content in contentList)
+            var contentList = GetArchiveContent(archiveFile);
+            var folderList = new List<string>();
+            foreach (var content in contentList)
             {
-                int folderEndIndex = content.IndexOf(@"\");
+                var folderEndIndex = content.IndexOf(@"\");
                 if (folderEndIndex > 0)
                 {
-                    string folderName = content.Substring(0, folderEndIndex);
-                    Helpers.AddIfNeeded<string>(folderList, folderName);
+                    var folderName = content.Substring(0, folderEndIndex);
+                    Helpers.AddIfNeeded(folderList, folderName);
                 }
             }
             folderList.Sort();
@@ -98,30 +101,30 @@ namespace Waddu.Core
             string cmdArgs = string.Format(@"l ""{0}""", archiveFile);
 
             // Create a new process object
-            Process ProcessObj = new Process();
-            ProcessObj.StartInfo.FileName = appPath;
-            ProcessObj.StartInfo.Arguments = cmdArgs;
+            var processObj = new Process();
+            processObj.StartInfo.FileName = appPath;
+            processObj.StartInfo.Arguments = cmdArgs;
 
             // Hide DOS Window
-            ProcessObj.StartInfo.UseShellExecute = false;
-            ProcessObj.StartInfo.CreateNoWindow = true;
+            processObj.StartInfo.UseShellExecute = false;
+            processObj.StartInfo.CreateNoWindow = true;
 
             // This ensures that you get the output from the DOS application
-            ProcessObj.StartInfo.RedirectStandardOutput = true;
+            processObj.StartInfo.RedirectStandardOutput = true;
 
             // Start the process
-            ProcessObj.Start();
+            processObj.Start();
 
             // Now read the output of the DOS application
-            string Result = ProcessObj.StandardOutput.ReadToEnd();
+            var result = processObj.StandardOutput.ReadToEnd();
 
             // Wait that the process exits
-            ProcessObj.WaitForExit();
+            processObj.WaitForExit();
 
-            string[] strList = Result.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-            bool add = false;
-            List<string> contentList = new List<string>();
-            foreach (string line in strList)
+            var strList = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var add = false;
+            var contentList = new List<string>();
+            foreach (var line in strList)
             {
                 if (!add && line.Contains("-------------------"))
                 {

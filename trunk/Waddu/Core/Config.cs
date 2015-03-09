@@ -11,18 +11,7 @@ namespace Waddu.Core
     public class Config
     {
         // Instance
-        private static Config _instance;
-        public static Config Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new Config();
-                }
-                return _instance;
-            }
-        }
+        public static Config Instance = new Config();
 
         // Members
         private XmlDocument _xmlDoc;
@@ -71,19 +60,9 @@ namespace Waddu.Core
             set { _cursePassword = value; }
         }
 
-        private bool _savePassword = false;
-        public bool SavePassword
-        {
-            get { return _savePassword; }
-            set { _savePassword = value; }
-        }
+        public bool SavePassword { get; set; }
 
-        private bool _useCustomMapping = false;
-        public bool UseCustomMapping
-        {
-            get { return _useCustomMapping; }
-            set { _useCustomMapping = value; }
-        }
+        public bool UseCustomMapping { get; set; }
 
         private string _mappingFile = @".\mappings.xml";
         public string MappingFile
@@ -99,19 +78,9 @@ namespace Waddu.Core
             set { _logLevel = value; }
         }
 
-        private bool _preferNoLib = false;
-        public bool PreferNoLib
-        {
-            get { return _preferNoLib; }
-            set { _preferNoLib = value; }
-        }
+        public bool PreferNoLib { get; set; }
 
-        private bool _useOlderNoLib = false;
-        public bool UseOlderNoLib
-        {
-            get { return _useOlderNoLib; }
-            set { _useOlderNoLib = value; }
-        }
+        public bool UseOlderNoLib { get; set; }
 
         private string _pathTo7z = @"C:\Program Files\7-Zip";
         public string PathTo7z
@@ -145,17 +114,21 @@ namespace Waddu.Core
         // Constructor
         private Config()
         {
+            UseOlderNoLib = false;
+            PreferNoLib = false;
+            UseCustomMapping = false;
+            SavePassword = false;
             // Build config Path
-            string configFileName = "waddu_config.xml";
+            var configFileName = "waddu_config.xml";
             _configFilePath = Path.Combine(Application.StartupPath, configFileName);
 
             // Create File if it doesn't exist
             if (!File.Exists(_configFilePath))
             {
-                XmlTextWriter w = new XmlTextWriter(_configFilePath, null);
+                var w = new XmlTextWriter(_configFilePath, null);
                 w.WriteStartDocument();
                 w.WriteStartElement("Waddu_Config");
-                w.WriteAttributeString("Version", this.GetType().Assembly.GetName().Version.ToString());
+                w.WriteAttributeString("Version", GetType().Assembly.GetName().Version.ToString());
                 w.WriteEndElement();
                 w.WriteEndDocument();
                 w.Close();
@@ -225,31 +198,31 @@ namespace Waddu.Core
             // Get Addon Sites
             if (GetSettingValue("AddonSites", out value))
             {
-                string[] addonSiteList = value.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string addonSite in addonSiteList)
+                var addonSiteList = value.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var addonSite in addonSiteList)
                 {
                     _addonSites.Add((AddonSiteId)Enum.Parse(typeof(AddonSiteId), addonSite));
                 }
             }
             // Fill missing AddonSites
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.curse);
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.curseforge);
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.direct);
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowace);
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowinterface);
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowspecial);
-            Helpers.AddIfNeeded<AddonSiteId>(_addonSites, AddonSiteId.wowui);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.curse);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.curseforge);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.direct);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowace);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowinterface);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowspecial);
+            Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowui);
             // Get Ignored Addons
             if (GetSettingValue("IgnoredAddons", out value))
             {
-                string[] addonList = value.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                var addonList = value.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                 _ignoredAddons.AddRange(addonList);
             }
             // Get Preferred Mappings
             Dictionary<string, string> dict;
             if (GetSettingDict("PreferredMappings", out dict))
             {
-                foreach (KeyValuePair<string, string> kvp in dict)
+                foreach (var kvp in dict)
                 {
                     _preferredMappings.Add(kvp.Key, (AddonSiteId)Enum.Parse(typeof(AddonSiteId), kvp.Value));
                 }
@@ -258,13 +231,13 @@ namespace Waddu.Core
 
         private XmlElement GetSettingElement(string settingName)
         {
-            XmlElement settingElement = _xmlDoc.DocumentElement.SelectSingleNode(string.Format(@"settings/setting[@name=""{0}""]", settingName)) as XmlElement;
+            var settingElement = _xmlDoc.DocumentElement.SelectSingleNode(string.Format(@"settings/setting[@name=""{0}""]", settingName)) as XmlElement;
             return settingElement;
         }
 
         private bool GetSettingValue(string settingName, out string value)
         {
-            XmlElement settingElement = GetSettingElement(settingName);
+            var settingElement = GetSettingElement(settingName);
             if (settingElement != null)
             {
                 value = settingElement.ChildNodes[0].InnerText;
@@ -276,14 +249,14 @@ namespace Waddu.Core
 
         private bool GetSettingDict(string settingName, out Dictionary<string, string> dict)
         {
-            XmlElement settingElement = GetSettingElement(settingName);
+            var settingElement = GetSettingElement(settingName);
             dict = new Dictionary<string, string>();
             if (settingElement != null)
             {
                 foreach (XmlNode child in settingElement.ChildNodes)
                 {
-                    string key = child.Attributes["key"].Value;
-                    string value = child.Attributes["value"].Value;
+                    var key = child.Attributes["key"].Value;
+                    var value = child.Attributes["value"].Value;
                     dict.Add(key, value);
                 }
                 return true;
@@ -294,7 +267,7 @@ namespace Waddu.Core
         public void SaveSettings()
         {
             // Update Version
-            _xmlDoc.DocumentElement.Attributes["Version"].Value = this.GetType().Assembly.GetName().Version.ToString();
+            _xmlDoc.DocumentElement.Attributes["Version"].Value = GetType().Assembly.GetName().Version.ToString();
 
             // Save Settings
             SaveSetting("WowFolderPath", WowFolderPath);
@@ -302,14 +275,7 @@ namespace Waddu.Core
             SaveSetting("MoveToTrash", MoveToTrash.ToString());
             SaveSetting("NumberOfThreads", NumberOfThreads.ToString());
             SaveSetting("CurseLogin", CurseLogin);
-            if (SavePassword)
-            {
-                SaveSetting("CursePassword", CursePassword);
-            }
-            else
-            {
-                SaveSetting("CursePassword", "");
-            }
+            SaveSetting("CursePassword", SavePassword ? CursePassword : "");
             SaveSetting("SavePassword", SavePassword.ToString());
             SaveSetting("UseCustomMapping", UseCustomMapping.ToString());
             SaveSetting("MappingFile", MappingFile);
@@ -317,17 +283,17 @@ namespace Waddu.Core
             SaveSetting("PreferNoLib", PreferNoLib.ToString());
             SaveSetting("UseOlderNoLib", UseOlderNoLib.ToString());
             SaveSetting("PathTo7z", PathTo7z);
-            SaveSetting("AddonSites", Helpers.Join<AddonSiteId>("|", AddonSites));
-            SaveSetting("IgnoredAddons", Helpers.Join<string>("|", IgnoredAddons));
+            SaveSetting("AddonSites", Helpers.Join("|", AddonSites));
+            SaveSetting("IgnoredAddons", Helpers.Join("|", IgnoredAddons));
             SaveSettingDict("PreferredMappings", PreferredMappings);
             _xmlDoc.Save(_configFilePath);
         }
 
         private XmlElement CreateSetting(string settingName)
         {
-            XmlElement settingElement = _xmlDoc.CreateElement("setting");
+            var settingElement = _xmlDoc.CreateElement("setting");
             // Name Attribute
-            XmlAttribute nameAttribute = _xmlDoc.CreateAttribute("name");
+            var nameAttribute = _xmlDoc.CreateAttribute("name");
             nameAttribute.Value = settingName;
             settingElement.Attributes.Append(nameAttribute);
             return settingElement;
@@ -335,9 +301,9 @@ namespace Waddu.Core
 
         private XmlElement CreateSetting(string settingName, string value)
         {
-            XmlElement settingElement = CreateSetting(settingName);
+            var settingElement = CreateSetting(settingName);
             // Value Element
-            XmlElement valueElement = _xmlDoc.CreateElement("value");
+            var valueElement = _xmlDoc.CreateElement("value");
             valueElement.InnerText = value;
             settingElement.AppendChild(valueElement);
             return settingElement;
@@ -345,9 +311,9 @@ namespace Waddu.Core
 
         private void SaveSettingDict<TKey, TValue>(string settingName, IDictionary<TKey, TValue> dict)
         {
-            XmlElement settingListElement = FindElement(_xmlDoc.DocumentElement, "settings", true);
+            var settingListElement = FindElement(_xmlDoc.DocumentElement, "settings", true);
             // Setting Element
-            XmlElement settingElement = settingListElement.SelectSingleNode(string.Format(@"setting[@name=""{0}""]", settingName)) as XmlElement;
+            var settingElement = settingListElement.SelectSingleNode(string.Format(@"setting[@name=""{0}""]", settingName)) as XmlElement;
             if (settingElement == null)
             {
                 // Create Setting
@@ -364,13 +330,13 @@ namespace Waddu.Core
                 }
             }
 
-            foreach (KeyValuePair<TKey, TValue> kvp in dict)
+            foreach (var kvp in dict)
             {
-                XmlElement entryElement = _xmlDoc.CreateElement("entry");
-                XmlAttribute keyAttribute = _xmlDoc.CreateAttribute("key");
+                var entryElement = _xmlDoc.CreateElement("entry");
+                var keyAttribute = _xmlDoc.CreateAttribute("key");
                 keyAttribute.Value = kvp.Key.ToString();
                 entryElement.Attributes.Append(keyAttribute);
-                XmlAttribute valueAttribute = _xmlDoc.CreateAttribute("value");
+                var valueAttribute = _xmlDoc.CreateAttribute("value");
                 valueAttribute.Value = kvp.Value.ToString();
                 entryElement.Attributes.Append(valueAttribute);
                 settingElement.AppendChild(entryElement);
@@ -379,10 +345,10 @@ namespace Waddu.Core
 
         private void SaveSetting(string settingName, string value)
         {
-            XmlElement settingListElement = FindElement(_xmlDoc.DocumentElement, "settings", true);
+            var settingListElement = FindElement(_xmlDoc.DocumentElement, "settings", true);
 
             // Setting Element
-            XmlElement settingElement = settingListElement.SelectSingleNode(string.Format(@"setting[@name=""{0}""]", settingName)) as XmlElement;
+            var settingElement = settingListElement.SelectSingleNode(string.Format(@"setting[@name=""{0}""]", settingName)) as XmlElement;
             if (settingElement == null)
             {
                 // Create Setting
@@ -399,7 +365,7 @@ namespace Waddu.Core
 
         private XmlElement FindElement(XmlElement parentElement, string elementName, bool createIfNeeded)
         {
-            XmlElement subElement = parentElement.SelectSingleNode(elementName) as XmlElement;
+            var subElement = parentElement.SelectSingleNode(elementName) as XmlElement;
             if (subElement == null && createIfNeeded)
             {
                 // Create if it doesn't exist yet
@@ -440,7 +406,7 @@ namespace Waddu.Core
         }
         public void SetPreferredMapping(string addonName, AddonSiteId addonSiteId)
         {
-            Helpers.AddOrUpdate<string, AddonSiteId>(_preferredMappings, addonName, addonSiteId);
+            Helpers.AddOrUpdate(_preferredMappings, addonName, addonSiteId);
         }
         public bool GetPreferredMapping(Addon addon, out AddonSiteId preferredAddonSite)
         {
