@@ -10,10 +10,9 @@ Features:
   * Direct Link to the Addon Page
   * Integrated ChangeLog Viewer
 
-Pages:
-  * [Simple Manual how to update all your Addons](QuickStart.md)
-  * [Description of the GUI](GUI_Description.md)
-  * [Glossar](Glossar.md)
+Wiki:
+  * [Simple Manual how to update all your Addons](https://github.com/Roemer/Waddu/wiki/QuickStart)
+  * [Description of the GUI](https://github.com/Roemer/Waddu/wiki/GUI-Description)
 
 Download:
   * http://waddu.flauschig.ch
