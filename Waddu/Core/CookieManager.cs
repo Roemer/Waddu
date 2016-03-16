@@ -70,7 +70,7 @@ namespace Waddu.Core
             webRequest.ContentType = "application/x-www-form-urlencoded";
             webRequest.CookieContainer = cookies;
             // Write the Form Values into the Request Message
-            StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream());
+            var requestWriter = new StreamWriter(webRequest.GetRequestStream());
             requestWriter.Write(postData);
             requestWriter.Close();
 
@@ -104,13 +104,13 @@ namespace Waddu.Core
             // Setup
             HttpWebRequest webRequest = null;
             StreamReader responseReader = null;
-            string responseData = string.Empty;
+            var responseData = string.Empty;
 
             // Create an empty Cookie Container
-            CookieContainer cookies = new CookieContainer();
+            var cookies = new CookieContainer();
 
             // Get Cookies from Base URL
-            string baseUrl = "https://www.curseforge.com/home/login/";
+            var baseUrl = "https://legacy.curseforge.com/home/login/";
             webRequest = WebRequest.Create(baseUrl) as HttpWebRequest;
             webRequest.CookieContainer = cookies;
             responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
@@ -119,25 +119,25 @@ namespace Waddu.Core
 
             // Build POST Data
             //string postData = String.Format("next=%2F&kind=login&username={0}&password={1}", loginName, loginPassword);
-            string postData = string.Format("login-next=%2F&form_type=login&login-username={0}&login-password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
+            var postData = string.Format("login-next=%2F&form_type=login&login-username={0}&login-password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
 
             // Post to the Login Form
-            string loginUrl = "https://www.curseforge.com/home/login/";
+            var loginUrl = "https://legacy.curseforge.com/home/login/";
             webRequest = WebRequest.Create(loginUrl) as HttpWebRequest;
             webRequest.Method = "POST";
             webRequest.ContentType = "application/x-www-form-urlencoded";
             webRequest.CookieContainer = cookies;
             // Write the Form Values into the Request Mssage
-            StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream());
+            var requestWriter = new StreamWriter(webRequest.GetRequestStream());
             requestWriter.Write(postData);
             requestWriter.Close();
 
             try
             {
                 // Get the Response (and the Cookies) and forget Content
-                WebResponse resp = webRequest.GetResponse();
-                StreamReader respStream = new StreamReader(resp.GetResponseStream());
-                string respstr = respStream.ReadToEnd();
+                var resp = webRequest.GetResponse();
+                var respStream = new StreamReader(resp.GetResponseStream());
+                var respstr = respStream.ReadToEnd();
                 respStream.Close();
                 resp.Close();
             }
@@ -148,7 +148,7 @@ namespace Waddu.Core
                 var data = String.Empty;
                 if (webex.Response != null)
                 {
-                    StreamReader r = new StreamReader(webex.Response.GetResponseStream());
+                    var r = new StreamReader(webex.Response.GetResponseStream());
                     data = r.ReadToEnd();
                     r.Close();
                 }
