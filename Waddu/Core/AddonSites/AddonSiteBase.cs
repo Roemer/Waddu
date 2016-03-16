@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Waddu.Core.BusinessObjects;
 using Waddu.Types;
-using System.Collections.Generic;
 
 namespace Waddu.Core.AddonSites
 {

@@ -1,16 +1,12 @@
-﻿using System;
-
-namespace Waddu.Types
+﻿namespace Waddu.Types
 {
-    public sealed class GameType
+    public static class GameType
     {
         public enum Enum
         {
             WorldOfWarcraft,
             WarhammerOnline
         }
-
-        private GameType() { }
 
         public static string ConvertToString(Enum enumValue)
         {

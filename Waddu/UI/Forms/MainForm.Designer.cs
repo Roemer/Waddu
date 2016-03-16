@@ -1,11 +1,15 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using Waddu.UI.Controls;
+
+namespace Waddu.UI.Forms
 {
     partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,11 +33,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Dependencies", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Contains", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Part Of", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            var listViewGroup7 = new System.Windows.Forms.ListViewGroup("Dependencies", System.Windows.Forms.HorizontalAlignment.Left);
+            var listViewGroup8 = new System.Windows.Forms.ListViewGroup("Contains", System.Windows.Forms.HorizontalAlignment.Left);
+            var listViewGroup9 = new System.Windows.Forms.ListViewGroup("Part Of", System.Windows.Forms.HorizontalAlignment.Left);
+            var dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -943,82 +947,82 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
-        private System.Windows.Forms.ToolStripMenuItem tsmiExit;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.DataGridView dgvAddons;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddons;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCheckForUpdates;
-        private System.Windows.Forms.ToolStripMenuItem tsmWadduAllAddons;
-        private System.Windows.Forms.DataGridView dgvThreadActivity;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.DataGridView dgvLog;
-        private System.Windows.Forms.ContextMenuStrip ctxAddon;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddonUpdate;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddonCheckForUpdate;
-        private System.Windows.Forms.ContextMenuStrip ctxLog;
-        private System.Windows.Forms.ToolStripMenuItem tsmiClearLog;
-        private System.Windows.Forms.ContextMenuStrip ctxThread;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAbortThread;
-        private System.Windows.Forms.ToolStrip tsAddon;
-        private System.Windows.Forms.ToolStripMenuItem tsmiReloadLocalAddons;
-        private System.Windows.Forms.ToolStripDropDownButton tsddFilter;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFilterNotInstalled;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFilterInstalled;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFilterSubAddons;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFilterBlizzard;
-        private System.Windows.Forms.GroupBox gbAddons;
-        private System.Windows.Forms.GroupBox gbAddonDetails;
-        private Waddu.UI.Controls.SplitContainerEx splitContainerEx2;
-        private Waddu.UI.Controls.SplitContainerEx splitContainerEx1;
-        private Waddu.UI.Controls.SplitContainerEx splitContainerEx3;
-        private System.Windows.Forms.ToolStrip tsLog;
-        private System.Windows.Forms.ToolStripDropDownButton tsddLogLevel;
-        private System.Windows.Forms.ToolStripMenuItem tsmiLogDebug;
-        private System.Windows.Forms.ToolStripMenuItem tsmiLogInformation;
-        private System.Windows.Forms.ToolStripMenuItem tsmiLogWarning;
-        private System.Windows.Forms.ToolStripMenuItem tsmiLogError;
-        private System.Windows.Forms.DataGridView dgvMappings;
-        private System.Windows.Forms.GroupBox gbMappings;
-        private System.Windows.Forms.TextBox txtLocalVersion;
-        private System.Windows.Forms.Label lblLocalVersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColMappingSite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColMappingVersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColMappingLastUpdated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColThreadID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColThreadState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColThreadInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColLogMessage;
-        private System.Windows.Forms.ToolStripTextBox txtAddonFilter;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCollectUnknownAddons;
-        private System.Windows.Forms.ContextMenuStrip ctxMapping;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingCheckVersion;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingUpdate;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingInfo;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingDownload;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddonMappings;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingSetAsPreferred;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddonIgnore;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddonUnignore;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAdmin;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelpAbout;
-        private System.Windows.Forms.GroupBox gbRelations;
-        private System.Windows.Forms.ListView lvRelations;
-        private System.Windows.Forms.ColumnHeader chRelationsName;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMappingChangeLog;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLastUpdated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonLocalVersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColAddonPreferredMapping;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddonSetAsUpdated;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCheckAndUpdatdAddons;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem tsmiFile;
+        private ToolStripMenuItem tsmiExit;
+        private ToolStripMenuItem tsmiSettings;
+        private ToolStripSeparator toolStripMenuItem1;
+        private DataGridView dgvAddons;
+        private TextBox txtName;
+        private ToolStripMenuItem tsmiAddons;
+        private ToolStripMenuItem tsmiCheckForUpdates;
+        private ToolStripMenuItem tsmWadduAllAddons;
+        private DataGridView dgvThreadActivity;
+        private Label lblName;
+        private DataGridView dgvLog;
+        private ContextMenuStrip ctxAddon;
+        private ToolStripMenuItem tsmiAddonUpdate;
+        private ToolStripMenuItem tsmiAddonCheckForUpdate;
+        private ContextMenuStrip ctxLog;
+        private ToolStripMenuItem tsmiClearLog;
+        private ContextMenuStrip ctxThread;
+        private ToolStripMenuItem tsmiAbortThread;
+        private ToolStrip tsAddon;
+        private ToolStripMenuItem tsmiReloadLocalAddons;
+        private ToolStripDropDownButton tsddFilter;
+        private ToolStripMenuItem tsmiFilterNotInstalled;
+        private ToolStripMenuItem tsmiFilterInstalled;
+        private ToolStripMenuItem tsmiFilterSubAddons;
+        private ToolStripMenuItem tsmiFilterBlizzard;
+        private GroupBox gbAddons;
+        private GroupBox gbAddonDetails;
+        private SplitContainerEx splitContainerEx2;
+        private SplitContainerEx splitContainerEx1;
+        private SplitContainerEx splitContainerEx3;
+        private ToolStrip tsLog;
+        private ToolStripDropDownButton tsddLogLevel;
+        private ToolStripMenuItem tsmiLogDebug;
+        private ToolStripMenuItem tsmiLogInformation;
+        private ToolStripMenuItem tsmiLogWarning;
+        private ToolStripMenuItem tsmiLogError;
+        private DataGridView dgvMappings;
+        private GroupBox gbMappings;
+        private TextBox txtLocalVersion;
+        private Label lblLocalVersion;
+        private DataGridViewTextBoxColumn dgvColMappingSite;
+        private DataGridViewTextBoxColumn dgvColMappingVersion;
+        private DataGridViewTextBoxColumn dgvColMappingLastUpdated;
+        private DataGridViewTextBoxColumn dgvColThreadID;
+        private DataGridViewTextBoxColumn dgvColThreadState;
+        private DataGridViewTextBoxColumn dgvColThreadInfo;
+        private DataGridViewTextBoxColumn dgvColLogTime;
+        private DataGridViewTextBoxColumn dgvColLogType;
+        private DataGridViewTextBoxColumn dgvColLogMessage;
+        private ToolStripTextBox txtAddonFilter;
+        private ToolStripMenuItem tsmiHelp;
+        private ToolStripMenuItem tsmiCollectUnknownAddons;
+        private ContextMenuStrip ctxMapping;
+        private ToolStripMenuItem tsmiMappingCheckVersion;
+        private ToolStripMenuItem tsmiMappingUpdate;
+        private ToolStripMenuItem tsmiMappingInfo;
+        private ToolStripMenuItem tsmiMappingDownload;
+        private ToolStripMenuItem tsmiAddonMappings;
+        private ToolStripMenuItem tsmiMappingSetAsPreferred;
+        private ToolStripMenuItem tsmiAddonIgnore;
+        private ToolStripMenuItem tsmiAddonUnignore;
+        private ToolStripMenuItem tsmiAdmin;
+        private ToolStripMenuItem tsmiHelpAbout;
+        private GroupBox gbRelations;
+        private ListView lvRelations;
+        private ColumnHeader chRelationsName;
+        private ToolStripMenuItem tsmiMappingChangeLog;
+        private DataGridViewTextBoxColumn dgvColAddonName;
+        private DataGridViewTextBoxColumn dgvColAddonLastUpdated;
+        private DataGridViewTextBoxColumn dgvColAddonLocalVersion;
+        private DataGridViewTextBoxColumn dgvColAddonPreferredMapping;
+        private ToolStripMenuItem tsmiAddonSetAsUpdated;
+        private ToolStripMenuItem tsmiCheckAndUpdatdAddons;
+        private ToolStripSeparator toolStripMenuItem2;
 
     }
 }

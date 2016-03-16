@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace Waddu.UI.Forms
         static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         public string DownloadUrl = string.Empty;
-        public bool UseFile = false;
+        public bool UseFile;
         public string FileUrl = string.Empty;
 
         private readonly AddonSiteId _addonSiteId;
@@ -37,10 +38,10 @@ namespace Waddu.UI.Forms
             // Initialize Browser
             btnBack.Enabled = false;
             btnForward.Enabled = false;
-            webBrowser1.CanGoBackChanged += new EventHandler(webBrowser1_CanGoBackChanged);
-            webBrowser1.CanGoForwardChanged += new EventHandler(webBrowser1_CanGoForwardChanged);
+            webBrowser1.CanGoBackChanged += webBrowser1_CanGoBackChanged;
+            webBrowser1.CanGoForwardChanged += webBrowser1_CanGoForwardChanged;
             webBrowser1.ScriptErrorsSuppressed = true;
-            webBrowser1.NewWindow += new System.ComponentModel.CancelEventHandler(webBrowser1_NewWindow);
+            webBrowser1.NewWindow += webBrowser1_NewWindow;
 
             // Navigate
             webBrowser1.Navigate(url);
@@ -48,21 +49,21 @@ namespace Waddu.UI.Forms
 
         private void webBrowser1_CanGoBackChanged(object sender, EventArgs e)
         {
-            WebBrowser browser = sender as WebBrowser;
+            var browser = sender as WebBrowser;
             btnBack.Enabled = browser.CanGoBack;
         }
 
         private void webBrowser1_CanGoForwardChanged(object sender, EventArgs e)
         {
-            WebBrowser browser = sender as WebBrowser;
+            var browser = sender as WebBrowser;
             btnForward.Enabled = browser.CanGoForward;
         }
 
         private void DoClick(int x, int y)
         {
             // Emulate the Click
-            IntPtr handle = webBrowser1.Handle;
-            StringBuilder className = new StringBuilder(100);
+            var handle = webBrowser1.Handle;
+            var className = new StringBuilder(100);
             while (className.ToString() != "Internet Explorer_Server") // your mileage may vary with this classname
             {
                 handle = GetWindow(handle, 5); // 5 == child
@@ -74,8 +75,8 @@ namespace Waddu.UI.Forms
             }
             if (handle != IntPtr.Zero)
             {
-                IntPtr lParam = (IntPtr)((y << 16) | x); // X and Y coordinates of the click
-                IntPtr wParam = IntPtr.Zero; // change this if you want to simulate Ctrl-Click and such
+                var lParam = (IntPtr)((y << 16) | x); // X and Y coordinates of the click
+                var wParam = IntPtr.Zero; // change this if you want to simulate Ctrl-Click and such
                 const uint downCode = 0x201; // these codes are for single left clicks
                 const uint upCode = 0x202;
                 SendMessage(handle, downCode, wParam, lParam); // mousedown
@@ -105,7 +106,7 @@ namespace Waddu.UI.Forms
 
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            WebBrowser browser = sender as WebBrowser;
+            var browser = sender as WebBrowser;
 
             if (e.Url.AbsoluteUri.Contains(".zip") || e.Url.AbsoluteUri.Contains(".rar") || e.Url.AbsoluteUri.Contains(".7z"))
             {
@@ -127,15 +128,15 @@ namespace Waddu.UI.Forms
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            WebBrowser browser = sender as WebBrowser;
+            var browser = sender as WebBrowser;
 
             if (browser != null && browser.Document != null)
             {
                 // Search the Element
-                int foundElement = -1;
-                for (int i = 0; i < browser.Document.All.Count; i++)
+                var foundElement = -1;
+                for (var i = 0; i < browser.Document.All.Count; i++)
                 {
-                    HtmlElement tempEl = browser.Document.All[i];
+                    var tempEl = browser.Document.All[i];
                     if (tempEl.InnerHtml != null)
                     {
                         // WoWAce / CurseForge
@@ -170,15 +171,15 @@ namespace Waddu.UI.Forms
                 // Scroll the Flash to the Screen
                 if (foundElement >= 0)
                 {
-                    HtmlElement el2 = browser.Document.All[foundElement];
+                    var el2 = browser.Document.All[foundElement];
                     if (el2 != null)
                     {
                         // Scroll the Element into the View
                         el2.ScrollIntoView(true);
 
                         // Set the Right Position
-                        int x = 5;
-                        int y = 5;
+                        var x = 5;
+                        var y = 5;
 
                         // Fix Position
                         if (_addonSiteId == AddonSiteId.wowace || _addonSiteId == AddonSiteId.curseforge)
@@ -199,7 +200,7 @@ namespace Waddu.UI.Forms
             Console.WriteLine("webBrowser1_FileDownload");
         }
 
-        private void webBrowser1_NewWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        private void webBrowser1_NewWindow(object sender, CancelEventArgs e)
         {
             // Possibility to block Popups?
             //e.Cancel = true;
@@ -208,7 +209,7 @@ namespace Waddu.UI.Forms
 
         private void llInfoText_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (OpenFileDialog dlg = new OpenFileDialog())
+            using (var dlg = new OpenFileDialog())
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -227,7 +228,7 @@ namespace Waddu.UI.Forms
 
         public void ChangeUserAgent()
         {
-            string ua = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Creative AutoUpdate v1.40.01)";
+            var ua = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Creative AutoUpdate v1.40.01)";
             UrlMkSetSessionOption(URLMON_OPTION_USERAGENT, ua, ua.Length, 0);
         }
         #endregion

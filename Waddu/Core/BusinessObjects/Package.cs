@@ -23,7 +23,7 @@ namespace Waddu.Core.BusinessObjects
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
-                Addon newAddon = Addons[e.NewIndex];
+                var newAddon = Addons[e.NewIndex];
                 newAddon.Packages.Add(this);
             }
         }

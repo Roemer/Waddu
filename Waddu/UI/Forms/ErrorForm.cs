@@ -20,7 +20,7 @@ namespace Waddu.UI.Forms
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

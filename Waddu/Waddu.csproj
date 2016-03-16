@@ -93,7 +93,6 @@
     <Compile Include="Core\AddonSites\SiteWowSpecial.cs" />
     <Compile Include="Core\AddonSites\SiteWowUi.cs" />
     <Compile Include="Core\ArchiveHelper.cs" />
-    <Compile Include="Core\BlockingQueue.cs" />
     <Compile Include="Core\BusinessObjects\Addon.cs" />
     <Compile Include="Core\BusinessObjects\AddonList.cs" />
     <Compile Include="Core\BusinessObjects\AddonUpdateStats.cs" />

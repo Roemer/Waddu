@@ -115,9 +115,9 @@ namespace Waddu.Core
 
         public static void CenterFormTo(Form form, Form containerForm)
         {
-            Point point = new Point(); Size formSize = form.Size;
-            Rectangle workingArea = Screen.GetWorkingArea(containerForm);
-            Rectangle rect = containerForm.Bounds;
+            var point = new Point(); var formSize = form.Size;
+            var workingArea = Screen.GetWorkingArea(containerForm);
+            var rect = containerForm.Bounds;
             point.X = ((rect.Left + rect.Right) - formSize.Width) / 2;
             if (point.X < workingArea.X) point.X = workingArea.X;
             else if ((point.X + formSize.Width) > (workingArea.X + workingArea.Width))

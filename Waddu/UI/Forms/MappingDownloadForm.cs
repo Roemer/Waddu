@@ -17,27 +17,27 @@ namespace Waddu.UI.Forms
 
             _localPath = localPath;
 
-            Application.Idle += new EventHandler(OnLoaded);
+            Application.Idle += OnLoaded;
         }
 
         private void OnLoaded(object sender, EventArgs args)
         {
             // Remove the OnLoaded Event
-            Application.Idle -= new EventHandler(OnLoaded);
+            Application.Idle -= OnLoaded;
 
-            Thread t = new Thread(new ParameterizedThreadStart(ThreadProc));
+            var t = new Thread(ThreadProc);
             t.Start(this);
         }
 
         protected static void ThreadProc(object param)
         {
-            string[] remotePaths = new string[] {
+            var remotePaths = new string[] {
                 "http://waddu.flauschig.ch/mapping/waddu_mappings.xml",
                 "http://www.red-demon.com/waddu/mapping/waddu_mappings.xml"
             };
-            MappingDownloadForm form = param as MappingDownloadForm;
-            bool success = false;
-            foreach (string path in remotePaths)
+            var form = param as MappingDownloadForm;
+            var success = false;
+            foreach (var path in remotePaths)
             {
                 success = WebHelper.DownloadFile(path, form._localPath, form);
                 if (success) { break; }
@@ -53,7 +53,7 @@ namespace Waddu.UI.Forms
                 Invoke(new CloseEventHandler(CloseForm));
                 return;
             }
-            this.Close();
+            Close();
         }
 
         private delegate void SetStatusEventHandler(long curr, long tot);

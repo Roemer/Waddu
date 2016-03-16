@@ -14,7 +14,7 @@ namespace Waddu.UI.Forms
 {
     public partial class MainForm : Form
     {
-        public static MainForm Instance = null;
+        public static MainForm Instance;
 
         public MainForm()
         {
@@ -23,7 +23,7 @@ namespace Waddu.UI.Forms
             InitializeComponent();
 
             // Set the Version
-            this.Text += " v." + this.GetType().Assembly.GetName().Version;
+            Text += " v." + GetType().Assembly.GetName().Version;
 
             // Create / Update the Mapping File
             Mapper.CreateMapping(Path.Combine(Application.StartupPath, "waddu_mappings.xml"));
@@ -64,11 +64,11 @@ namespace Waddu.UI.Forms
             dgvColMappingLastUpdated.DataPropertyName = "LastUpdated";
 
             // Initialize Relation Display
-            lvRelations.Layout += new LayoutEventHandler(lvRelations_Layout);
+            lvRelations.Layout += lvRelations_Layout;
 
             // Initialize Logger
             SetLogLevel(Config.Instance.LogLevel);
-            Logger.Instance.LogEntry += new LogEntryEventHandler(Logger_LogEntry);
+            Logger.Instance.LogEntry += Logger_LogEntry;
 
             // Initialize the Thread Manager
             ThreadManager.Initialize();
@@ -80,12 +80,12 @@ namespace Waddu.UI.Forms
             dgvThreadActivity.DataSource = ThreadManager.Instance.WorkerThreadList;
 
             // Fire OnLoaded after everything is Done
-            Application.Idle += new EventHandler(OnLoaded);
+            Application.Idle += OnLoaded;
         }
 
         private void lvRelations_Layout(object sender, LayoutEventArgs e)
         {
-            ListView lv = sender as ListView;
+            var lv = sender as ListView;
             lv.Columns[0].Width = lv.ClientSize.Width - 5;
         }
 
@@ -93,7 +93,7 @@ namespace Waddu.UI.Forms
         private void OnLoaded(object sender, EventArgs args)
         {
             // Remove the OnLoaded Event
-            Application.Idle -= new EventHandler(OnLoaded);
+            Application.Idle -= OnLoaded;
 
             // Check for a WoW Folder
             if (!Directory.Exists(Config.Instance.WowFolderPath))
@@ -127,8 +127,8 @@ namespace Waddu.UI.Forms
 
         private void LoadLocalAddons()
         {
-            BindingList<Addon> dispList = new BindingList<Addon>();
-            foreach (Addon addon in AddonList.Instance.Addons)
+            var dispList = new BindingList<Addon>();
+            foreach (var addon in AddonList.Instance.Addons)
             {
                 // Filter out Blizzard Addons
                 if (!tsmiFilterBlizzard.Checked && addon.Mappings.Count > 0 && addon.Mappings[0].AddonSiteId == AddonSiteId.blizzard)
@@ -136,7 +136,7 @@ namespace Waddu.UI.Forms
                     continue;
                 }
 
-                bool addonExists = addon.IsInstalled;
+                var addonExists = addon.IsInstalled;
 
                 // Filter out Not Installed Addons
                 if (!tsmiFilterNotInstalled.Checked && !addonExists)
@@ -171,8 +171,8 @@ namespace Waddu.UI.Forms
         private string GetWoWFolder()
         {
             // Try get the Folder from the Registry
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Blizzard Entertainment\World of Warcraft");
-            string localWoWPath = string.Empty;
+            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Blizzard Entertainment\World of Warcraft");
+            var localWoWPath = string.Empty;
             if (key != null)
             {
                 localWoWPath = key.GetValue("InstallPath", "").ToString();
@@ -188,12 +188,12 @@ namespace Waddu.UI.Forms
 
         private void tsmiExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void tsmiSettings_Click(object sender, EventArgs e)
         {
-            using (SettingsForm dlg = new SettingsForm())
+            using (var dlg = new SettingsForm())
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -210,8 +210,8 @@ namespace Waddu.UI.Forms
 
         private void tsmiCheckForUpdates_Click(object sender, EventArgs e)
         {
-            BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
-            foreach (Addon addon in addonList)
+            var addonList = dgvAddons.DataSource as BindingList<Addon>;
+            foreach (var addon in addonList)
             {
                 if (!addon.IsIgnored)
                 {
@@ -222,8 +222,8 @@ namespace Waddu.UI.Forms
 
         private void tsmiUpdateAllAddons_Click(object sender, EventArgs e)
         {
-            BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
-            foreach (Addon addon in addonList)
+            var addonList = dgvAddons.DataSource as BindingList<Addon>;
+            foreach (var addon in addonList)
             {
                 if (!addon.IsIgnored)
                 {
@@ -234,9 +234,9 @@ namespace Waddu.UI.Forms
 
         private void tsmiCheckAndUpdatdAddons_Click(object sender, EventArgs e)
         {
-            BindingList<Addon> addonList = dgvAddons.DataSource as BindingList<Addon>;
+            var addonList = dgvAddons.DataSource as BindingList<Addon>;
             // Add Version Check
-            foreach (Addon addon in addonList)
+            foreach (var addon in addonList)
             {
                 if (!addon.IsIgnored)
                 {
@@ -244,7 +244,7 @@ namespace Waddu.UI.Forms
                 }
             }
             // Add Update
-            foreach (Addon addon in addonList)
+            foreach (var addon in addonList)
             {
                 if (!addon.IsIgnored)
                 {
@@ -267,16 +267,16 @@ namespace Waddu.UI.Forms
         #region Threads
         private void dgvThreadActivity_MouseClick(object sender, MouseEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
+            var dgv = sender as DataGridView;
             if (e.Button == MouseButtons.Right)
             {
-                DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
+                var h = dgv.HitTest(e.X, e.Y);
                 if (h.RowIndex >= 0)
                 {
                     // Select the Cell
                     dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
                     // Get the Addon
-                    WorkerThread thread = dgv.CurrentRow.DataBoundItem as WorkerThread;
+                    var thread = dgv.CurrentRow.DataBoundItem as WorkerThread;
 
                     // Assign the Thread
                     tsmiAbortThread.Tag = thread;
@@ -289,8 +289,8 @@ namespace Waddu.UI.Forms
 
         private void tsmiAbortThread_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            WorkerThread thread = tsmi.Tag as WorkerThread;
+            var tsmi = sender as ToolStripMenuItem;
+            var thread = tsmi.Tag as WorkerThread;
             thread.Abort();
         }
         #endregion
@@ -358,13 +358,13 @@ namespace Waddu.UI.Forms
             tsmiLogWarning.Checked = false;
             tsmiLogError.Checked = false;
 
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            var tsmi = sender as ToolStripMenuItem;
             if (tsmi != null)
             {
                 tsmi.Checked = true;
             }
 
-            LogType logLevel = GetLogLevel();
+            var logLevel = GetLogLevel();
 
             Config.Instance.LogLevel = logLevel;
             Config.Instance.SaveSettings();
@@ -378,8 +378,8 @@ namespace Waddu.UI.Forms
         // Collects all Unknown Addons
         private void tsmiCollectUnknownAddons_Click(object sender, EventArgs e)
         {
-            string unkAddons = string.Empty;
-            foreach (Addon addon in AddonList.Instance.Addons)
+            var unkAddons = string.Empty;
+            foreach (var addon in AddonList.Instance.Addons)
             {
                 if (addon.Mappings.Count == 0 && !addon.IsSubAddon)
                 {
@@ -388,7 +388,7 @@ namespace Waddu.UI.Forms
             }
             if (unkAddons != string.Empty)
             {
-                using (UnknownAddonsForm dlg = new UnknownAddonsForm())
+                using (var dlg = new UnknownAddonsForm())
                 {
                     dlg.UnknownAddonsText = unkAddons;
                     dlg.ShowDialog();
@@ -403,7 +403,7 @@ namespace Waddu.UI.Forms
         // Show About Screen
         private void tsmiHelpAbout_Click(object sender, EventArgs e)
         {
-            AboutForm form = new AboutForm();
+            var form = new AboutForm();
             Helpers.CenterFormTo(form, this);
             form.Show(this);
         }
@@ -412,10 +412,10 @@ namespace Waddu.UI.Forms
         #region Addon
         private void dgvAddons_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
+            var dgv = sender as DataGridView;
             if (dgv != null && e.RowIndex >= 0)
             {
-                Addon addon = dgv.Rows[e.RowIndex].DataBoundItem as Addon;
+                var addon = dgv.Rows[e.RowIndex].DataBoundItem as Addon;
                 if (addon != null)
                 {
                     if (addon.IsSubAddon && !addon.IsMain)
@@ -448,32 +448,32 @@ namespace Waddu.UI.Forms
 
         private void dgvAddons_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
+            var dgv = sender as DataGridView;
             if (e.StateChanged == DataGridViewElementStates.Selected)
             {
                 if (dgv.SelectedRows.Count > 0)
                 {
-                    Addon addon = e.Row.DataBoundItem as Addon;
+                    var addon = e.Row.DataBoundItem as Addon;
 
                     lvRelations.BeginUpdate();
                     lvRelations.Columns[0].Width = -2;
                     lvRelations.Items.Clear();
                     // Dependencies
-                    foreach (string dep in TocHelper.GetDependencies(addon))
+                    foreach (var dep in TocHelper.GetDependencies(addon))
                     {
-                        ListViewItem i = new ListViewItem(dep, lvRelations.Groups[0]);
+                        var i = new ListViewItem(dep, lvRelations.Groups[0]);
                         lvRelations.Items.Add(i);
                     }
                     // SubAddons
-                    foreach (Addon subAddon in addon.SubAddons)
+                    foreach (var subAddon in addon.SubAddons)
                     {
-                        ListViewItem i = new ListViewItem(subAddon.Name, lvRelations.Groups[1]);
+                        var i = new ListViewItem(subAddon.Name, lvRelations.Groups[1]);
                         lvRelations.Items.Add(i);
                     }
                     // SuperAddons
-                    foreach (Addon superAddon in addon.SuperAddons)
+                    foreach (var superAddon in addon.SuperAddons)
                     {
-                        ListViewItem i = new ListViewItem(superAddon.Name, lvRelations.Groups[2]);
+                        var i = new ListViewItem(superAddon.Name, lvRelations.Groups[2]);
                         lvRelations.Items.Add(i);
                     }
                     lvRelations.EndUpdate();
@@ -487,16 +487,16 @@ namespace Waddu.UI.Forms
 
         private void dgvAddons_MouseClick(object sender, MouseEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
+            var dgv = sender as DataGridView;
             if (e.Button == MouseButtons.Right)
             {
-                DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
+                var h = dgv.HitTest(e.X, e.Y);
                 if (h.RowIndex >= 0)
                 {
                     // Select the Cell
                     dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
                     // Get the Addon
-                    Addon addon = dgv.CurrentRow.DataBoundItem as Addon;
+                    var addon = dgv.CurrentRow.DataBoundItem as Addon;
 
                     // Assign the Addon
                     tsmiAddonCheckForUpdate.Tag = addon;
@@ -522,12 +522,12 @@ namespace Waddu.UI.Forms
                     if (addon.Mappings.Count > 1)
                     {
                         tsmiAddonMappings.Visible = true;
-                        foreach (Mapping map in addon.Mappings)
+                        foreach (var map in addon.Mappings)
                         {
-                            ToolStripMenuItem item = new ToolStripMenuItem();
+                            var item = new ToolStripMenuItem();
                             item.Text = map.AddonSiteId.ToString();
                             item.Tag = map;
-                            item.Click += new EventHandler(tsmiAddonMappingsItem_Click);
+                            item.Click += tsmiAddonMappingsItem_Click;
                             tsmiAddonMappings.DropDownItems.Add(item);
                         }
                     }
@@ -544,15 +544,15 @@ namespace Waddu.UI.Forms
 
         private void tsmiAddonCheckForUpdate_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            Addon addon = tsmi.Tag as Addon;
+            var tsmi = sender as ToolStripMenuItem;
+            var addon = tsmi.Tag as Addon;
             ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(addon));
         }
 
         private void tsmiAddonUpdate_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            Addon addon = tsmi.Tag as Addon;
+            var tsmi = sender as ToolStripMenuItem;
+            var addon = tsmi.Tag as Addon;
             ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(addon));
         }
 
@@ -561,8 +561,8 @@ namespace Waddu.UI.Forms
         /// </summary>
         private void tsmiAddonMappingsItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            Mapping map = tsmi.Tag as Mapping;
+            var tsmi = sender as ToolStripMenuItem;
+            var map = tsmi.Tag as Mapping;
             map.Addon.PreferredMapping = map;
             Config.Instance.SetPreferredMapping(map);
             Config.Instance.SaveSettings();
@@ -570,22 +570,22 @@ namespace Waddu.UI.Forms
 
         private void tsmiAddonIgnore_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            Addon addon = tsmi.Tag as Addon;
+            var tsmi = sender as ToolStripMenuItem;
+            var addon = tsmi.Tag as Addon;
             addon.IsIgnored = true;
         }
 
         private void tsmiAddonUnignore_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            Addon addon = tsmi.Tag as Addon;
+            var tsmi = sender as ToolStripMenuItem;
+            var addon = tsmi.Tag as Addon;
             addon.IsIgnored = false;
         }
 
         private void tsmiAddonSetAsUpdated_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            Addon addon = tsmi.Tag as Addon;
+            var tsmi = sender as ToolStripMenuItem;
+            var addon = tsmi.Tag as Addon;
             UpdateStatusList.Set(addon.Name, addon.LocalVersion);
             UpdateStatusList.Save();
             addon.LocalVersionUpdated();
@@ -598,10 +598,10 @@ namespace Waddu.UI.Forms
         /// </summary>
         private void dgvMappings_MouseClick(object sender, MouseEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
+            var dgv = sender as DataGridView;
             if (e.Button == MouseButtons.Right)
             {
-                DataGridView.HitTestInfo h = dgv.HitTest(e.X, e.Y);
+                var h = dgv.HitTest(e.X, e.Y);
                 if (h.RowIndex >= 0)
                 {
                     dgv.CurrentCell = dgv.Rows[h.RowIndex].Cells[h.ColumnIndex];
@@ -617,7 +617,7 @@ namespace Waddu.UI.Forms
         {
             if (dgvMappings.SelectedRows.Count > 0)
             {
-                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                var map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
                 ThreadManager.Instance.AddWork(new WorkItemAddonChangeLog(map));
             }
         }
@@ -629,7 +629,7 @@ namespace Waddu.UI.Forms
         {
             if (dgvMappings.SelectedRows.Count > 0)
             {
-                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                var map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
                 ThreadManager.Instance.AddWork(new WorkItemAddonVersionCheck(map));
             }
         }
@@ -641,7 +641,7 @@ namespace Waddu.UI.Forms
         {
             if (dgvMappings.SelectedRows.Count > 0)
             {
-                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                var map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
                 ThreadManager.Instance.AddWork(new WorkItemAddonUpdate(map));
             }
         }
@@ -650,7 +650,7 @@ namespace Waddu.UI.Forms
         {
             if (dgvMappings.SelectedRows.Count > 0)
             {
-                Mapping map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
+                var map = dgvMappings.SelectedRows[0].DataBoundItem as Mapping;
                 map.Addon.PreferredMapping = map;
 
                 Config.Instance.SetPreferredMapping(map);
@@ -660,13 +660,13 @@ namespace Waddu.UI.Forms
 
         private void tsmiMappingInfo_Click(object sender, EventArgs e)
         {
-            Mapping map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
+            var map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
             Process.Start(map.GetInfoLink());
         }
 
         private void tsmiMappingDownload_Click(object sender, EventArgs e)
         {
-            Mapping map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
+            var map = dgvMappings.CurrentRow.DataBoundItem as Mapping;
             Process.Start(map.GetFilePath());
         }
         #endregion
@@ -674,7 +674,7 @@ namespace Waddu.UI.Forms
         #region Admin
         private void tsmiAdmin_Click(object sender, EventArgs e)
         {
-            using (AdminForm dlg = new AdminForm())
+            using (var dlg = new AdminForm())
             {
                 dlg.ShowDialog();
             }

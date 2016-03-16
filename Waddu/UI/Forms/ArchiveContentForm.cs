@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using Waddu.Core;
 
@@ -15,19 +14,19 @@ namespace Waddu.UI.Forms
 
             _zipFile = zipFile;
 
-            List<string> lines = ArchiveHelper.GetArchiveContent(zipFile);
+            var lines = ArchiveHelper.GetArchiveContent(zipFile);
             txtContent.Text = Helpers.Join<string>(Environment.NewLine, lines);
 
             tvContent.BeginUpdate();
             tvContent.Nodes.Clear();
             tvContent.Nodes.Add("Archive", "Archive");
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
-                TreeNode node = tvContent.Nodes[0];
-                string[] nameList = line.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
-                for (int i=0; i<nameList.Length; i++)
+                var node = tvContent.Nodes[0];
+                var nameList = line.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+                for (var i=0; i<nameList.Length; i++)
                 {
-                    string name = nameList[i];
+                    var name = nameList[i];
                     if (!node.Nodes.ContainsKey(name))
                     {
                         node.Nodes.Add(name, name);

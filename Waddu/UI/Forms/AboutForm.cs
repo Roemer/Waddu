@@ -9,12 +9,12 @@ namespace Waddu.UI.Forms
         {
             InitializeComponent();
 
-            lblInfo.Text = "Waddu" + " v." + this.GetType().Assembly.GetName().Version;
+            lblInfo.Text = "Waddu" + " v." + GetType().Assembly.GetName().Version;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

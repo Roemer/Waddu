@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Windows.Forms;
 using Waddu.Types;
 using Waddu.Win32;
 
@@ -10,7 +11,11 @@ namespace Waddu.Core.BusinessObjects
     {
         #region Members
 
-        public string Name { get; private set; }
+        public string Name
+        {
+            get { return GetProperty<string>(); }
+            private set { SetProperty(value); }
+        }
 
         [DisplayName("Your Version")]
         public string LocalVersion
@@ -124,7 +129,6 @@ namespace Waddu.Core.BusinessObjects
             : this()
         {
             Name = name;
-            OnPropertyChanged(() => Name);
         }
         #endregion
 
@@ -183,15 +187,15 @@ namespace Waddu.Core.BusinessObjects
                 return "Not Installed";
             }
 
-            string addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
+            var addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
             addonFolderPath = Path.Combine(addonFolderPath, Name);
 
             // Try by Changelog
             foreach (var file in Directory.GetFiles(addonFolderPath, "Changelog*"))
             {
-                int start = file.IndexOf("-") + 1;
+                var start = file.IndexOf("-") + 1;
                 start = file.IndexOf("-", start) + 1;
-                int end = file.LastIndexOf(".txt");
+                var end = file.LastIndexOf(".txt");
                 if (start > 0 && end > 0)
                 {
                     return file.Substring(start, end - start);
@@ -208,7 +212,7 @@ namespace Waddu.Core.BusinessObjects
             // Special
             if (Name == "MarsPartyBuff")
             {
-                string versionFile = Path.Combine(addonFolderPath, "VERSION.TXT");
+                var versionFile = Path.Combine(addonFolderPath, "VERSION.TXT");
                 if (File.Exists(versionFile))
                 {
                     return File.ReadAllLines(versionFile)[0];
@@ -228,17 +232,17 @@ namespace Waddu.Core.BusinessObjects
         }
         public static DeleteType DeleteByName(string addonName)
         {
-            string addonPath = Path.Combine(Addon.GetFolderPath(), addonName);
+            var addonPath = Path.Combine(GetFolderPath(), addonName);
             if (!Directory.Exists(addonPath))
             {
                 return DeleteType.Inexistent;
             }
             if (Config.Instance.MoveToTrash)
             {
-                int ret = NativeMethods.MoveToRecycleBin(addonPath);
+                var ret = NativeMethods.MoveToRecycleBin(addonPath);
                 if (ret != 0)
                 {
-                    System.Windows.Forms.MessageBox.Show(string.Format("Move to bin failed: {0}", ret));
+                    MessageBox.Show(string.Format("Move to bin failed: {0}", ret));
                     return DeleteType.Failed;
                 }
                 return DeleteType.MovedToTrash;

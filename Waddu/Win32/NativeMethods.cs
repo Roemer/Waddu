@@ -11,7 +11,7 @@ namespace Waddu.Win32
         /// </summary>
         public static bool Is64Bit()
         {
-            int bits = IntPtr.Size * 8;
+            var bits = IntPtr.Size * 8;
             return (bits == 64);
         }
 
@@ -28,7 +28,7 @@ namespace Waddu.Win32
             {
                 return SHFileOperation32(lpFileOp);
             }
-            SHFILEOPSTRUCT64 shfileopstruct1 = new SHFILEOPSTRUCT64();
+            var shfileopstruct1 = new SHFILEOPSTRUCT64();
             shfileopstruct1.hwnd = lpFileOp.hwnd;
             shfileopstruct1.wFunc = lpFileOp.wFunc;
             shfileopstruct1.pFrom = lpFileOp.pFrom;
@@ -37,7 +37,7 @@ namespace Waddu.Win32
             shfileopstruct1.fAnyOperationsAborted = lpFileOp.fAnyOperationsAborted;
             shfileopstruct1.hNameMappings = lpFileOp.hNameMappings;
             shfileopstruct1.lpszProgressTitle = lpFileOp.lpszProgressTitle;
-            int ret = SHFileOperation64(shfileopstruct1);
+            var ret = SHFileOperation64(shfileopstruct1);
             lpFileOp.fAnyOperationsAborted = shfileopstruct1.fAnyOperationsAborted;
             return ret;
         }
@@ -45,12 +45,12 @@ namespace Waddu.Win32
         // Helpers
         public static int MoveToRecycleBin(string filePath)
         {
-            SHFILEOPSTRUCT shf = new SHFILEOPSTRUCT();
+            var shf = new SHFILEOPSTRUCT();
             shf.wFunc = SHFileOperationType.FO_DELETE;
             shf.fFlags = ShFileOperationFlags.FOF_ALLOWUNDO | ShFileOperationFlags.FOF_NOCONFIRMATION;
             shf.pFrom = filePath + "\0" + "\0";
 
-            int ret = SHFileOperation(shf);
+            var ret = SHFileOperation(shf);
             return ret;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using Waddu.Core.WorkItems;
 using Waddu.Types;
@@ -7,7 +8,7 @@ namespace Waddu.Core
 {
     public class ThreadManager
     {
-        private static ThreadManager _instance = null;
+        private static ThreadManager _instance;
         public static ThreadManager Instance
         {
             get
@@ -21,7 +22,7 @@ namespace Waddu.Core
         }
 
         public BindingList<WorkerThread> WorkerThreadList { get; private set; }
-        private readonly BlockingQueue<WorkItemBase> _workQueue;
+        private readonly BlockingCollection<WorkItemBase> _workQueue;
 
         public static void Initialize()
         {
@@ -38,7 +39,7 @@ namespace Waddu.Core
         private ThreadManager()
         {
             // Initialize Work Queue
-            _workQueue = new BlockingQueue<WorkItemBase>();
+            _workQueue = new BlockingCollection<WorkItemBase>();
 
             // Initialize Worker Threads
             WorkerThreadList = new BindingList<WorkerThread>();
@@ -46,12 +47,12 @@ namespace Waddu.Core
 
         public void AddWork(WorkItemBase workItem)
         {
-            _workQueue.Enqueue(workItem);
+            _workQueue.Add(workItem);
         }
 
         public WorkItemBase GetWork()
         {
-            return _workQueue.Dequeue();
+            return _workQueue.Take();
         }
 
         public void Dispose()
@@ -62,7 +63,7 @@ namespace Waddu.Core
                 // Tell the Thread to Stop
                 thread.Stop();
                 // Add Fake Work
-                _workQueue.Enqueue(new WorkItemCancel());
+                _workQueue.Add(new WorkItemCancel());
             }
         }
     }

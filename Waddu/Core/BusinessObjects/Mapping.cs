@@ -58,7 +58,7 @@ namespace Waddu.Core.BusinessObjects
         /// </summary>
         public void CheckRemote()
         {
-            AddonSiteBase addonSite = AddonSiteBase.GetSite(AddonSiteId);
+            var addonSite = AddonSiteBase.GetSite(AddonSiteId);
             RemoteVersion = addonSite.GetVersion(this);
             LastUpdated = addonSite.GetLastUpdated(this);
 
@@ -68,19 +68,19 @@ namespace Waddu.Core.BusinessObjects
 
         public string GetChangeLog()
         {
-            AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
+            var site = AddonSiteBase.GetSite(AddonSiteId);
             return site.GetChangeLog(this);
         }
 
         public string GetInfoLink()
         {
-            AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
+            var site = AddonSiteBase.GetSite(AddonSiteId);
             return site.GetInfoLink(this);
         }
 
         public string GetFilePath()
         {
-            AddonSiteBase site = AddonSiteBase.GetSite(AddonSiteId);
+            var site = AddonSiteBase.GetSite(AddonSiteId);
             return site.GetFilePath(this);
         }
 

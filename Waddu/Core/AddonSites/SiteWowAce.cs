@@ -18,30 +18,30 @@ namespace Waddu.Core.AddonSites
         private void ParseInfoSite(Mapping mapping)
         {
             // Clear the Caches
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
-            SiteAddon noLibAddon = _noLibCache.Get(mapping.AddonTag);
+            var noLibAddon = _noLibCache.Get(mapping.AddonTag);
             noLibAddon.Clear();
 
             // Build the Url
-            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            var url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             // Get the Html
-            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            var html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
             // Get the Document
-            HtmlDocument doc = new HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
             // Get the Row Object
-            HtmlNodeCollection rowNodes = doc.DocumentNode.SelectNodes("//table[@class='listing']/tbody/tr");
+            var rowNodes = doc.DocumentNode.SelectNodes("//table[@class='listing']/tbody/tr");
             // Use the first Row by default
-            HtmlNode fileRow = rowNodes[0];
+            var fileRow = rowNodes[0];
             HtmlNode noLibfileRow = null;
             if (Config.Instance.PreferNoLib)
             {
                 // Search for a NoLib Version
-                for (int i = 1; i < rowNodes.Count; i++)
+                for (var i = 1; i < rowNodes.Count; i++)
                 {
-                    HtmlNode rowNode = rowNodes[i];
+                    var rowNode = rowNodes[i];
                     // Check if the Filename Contains a nolib
                     if (rowNode.SelectSingleNode("td[6]").InnerText.Contains("-nolib"))
                     {
@@ -65,13 +65,13 @@ namespace Waddu.Core.AddonSites
         private void ParseRowInfo(HtmlNode htmlRow, SiteAddon addon)
         {
             // Get the Version and Link
-            HtmlNode fileNode = htmlRow.SelectSingleNode("td[@class='col-file']/a");
-            string fileUrl = fileNode.Attributes["href"].Value;
-            string version = fileNode.InnerText;
+            var fileNode = htmlRow.SelectSingleNode("td[@class='col-file']/a");
+            var fileUrl = fileNode.Attributes["href"].Value;
+            var version = fileNode.InnerText;
             // Get the Date
-            HtmlNode dateNode = htmlRow.SelectSingleNode("td[@class='col-date']/span");
-            string dateValue = dateNode.Attributes["data-epoch"].Value;
-            DateTime date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
+            var dateNode = htmlRow.SelectSingleNode("td[@class='col-date']/span");
+            var dateValue = dateNode.Attributes["data-epoch"].Value;
+            var date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
             // Assign the Values
             addon.VersionString = version;
             addon.FileUrl = string.Format(_fileUrl, fileUrl);
@@ -80,8 +80,8 @@ namespace Waddu.Core.AddonSites
 
         private SiteAddon GetSiteAddon(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
-            SiteAddon noLibAddon = _noLibCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
+            var noLibAddon = _noLibCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
@@ -101,10 +101,10 @@ namespace Waddu.Core.AddonSites
                 }
                 else
                 {
-                    string versionNoLib = noLibAddon.VersionString.Replace("-nolib", "");
+                    var versionNoLib = noLibAddon.VersionString.Replace("-nolib", "");
                     if (addon.VersionString.Length >= versionNoLib.Length)
                     {
-                        string versionWithLib = addon.VersionString.Substring(0, versionNoLib.Length);
+                        var versionWithLib = addon.VersionString.Substring(0, versionNoLib.Length);
                         // Versions are the same
                         if (versionWithLib == versionNoLib)
                         {
@@ -129,15 +129,15 @@ namespace Waddu.Core.AddonSites
 
         public override string GetChangeLog(Mapping mapping)
         {
-            string fileUrl = GetSiteAddon(mapping).FileUrl;
+            var fileUrl = GetSiteAddon(mapping).FileUrl;
 
             // Get the Html
-            string html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
+            var html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
             // Get the Document
-            HtmlDocument doc = new HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            string changeLog = doc.DocumentNode.SelectSingleNode("//div[@class='content-box-inner']").InnerHtml;
+            var changeLog = doc.DocumentNode.SelectSingleNode("//div[@class='content-box-inner']").InnerHtml;
             return changeLog;
         }
 
@@ -148,16 +148,16 @@ namespace Waddu.Core.AddonSites
 
         public override string GetFilePath(Mapping mapping)
         {
-            string fileUrl = GetSiteAddon(mapping).FileUrl;
+            var fileUrl = GetSiteAddon(mapping).FileUrl;
             // Get the Html
-            string html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
+            var html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
             // Get the Document
-            HtmlDocument doc = new HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            string downloadUrl = doc.DocumentNode.SelectSingleNode("//li[@class='user-action user-action-download']/span/a").GetAttributeValue("href", string.Empty);
+            var downloadUrl = doc.DocumentNode.SelectSingleNode("//li[@class='user-action user-action-download']/span/a").GetAttributeValue("href", string.Empty);
 
-            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.wowace, mapping.Addon.Name);
+            var form = new WebBrowserForm(fileUrl, AddonSiteId.wowace, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;

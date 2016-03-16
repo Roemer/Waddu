@@ -18,15 +18,7 @@ namespace Waddu.Core.BusinessObjects
         {
             string version;
             var success = WebHelper.GetString("http://waddu.flauschig.ch/mapping/latest.txt", out version);
-            if (!success)
-            {
-                success = WebHelper.GetString("http://www.red-demon.com/waddu/mapping/latest.txt", out version);
-            }
-            if (success)
-            {
-                return version;
-            }
-            return string.Empty;
+            return success ? version : string.Empty;
         }
 
         private string GetLocalVersion(string xmlFile)
@@ -56,28 +48,28 @@ namespace Waddu.Core.BusinessObjects
             Addons = new List<Addon>();
 
             // Get all Local Addons
-            string addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
-            List<Addon> localAddons = new List<Addon>();
+            var addonFolderPath = Path.Combine(Config.Instance.WowFolderPath, @"Interface\Addons");
+            var localAddons = new List<Addon>();
             if (Directory.Exists(addonFolderPath))
             {
-                foreach (string addonPath in Directory.GetDirectories(addonFolderPath))
+                foreach (var addonPath in Directory.GetDirectories(addonFolderPath))
                 {
-                    Addon addon = new Addon(Path.GetFileName(addonPath));
+                    var addon = new Addon(Path.GetFileName(addonPath));
                     localAddons.Add(addon);
                 }
             }
 
             // Load XML File
-            string localXml = Config.Instance.MappingFile;
+            var localXml = Config.Instance.MappingFile;
             if (!Config.Instance.UseCustomMapping)
             {
                 // Use Default Mapping
                 localXml = Path.Combine(Application.StartupPath, "mappings.xml");
-                bool getNewest = true;
+                var getNewest = true;
                 if (File.Exists(localXml))
                 {
-                    string localVersion = GetLocalVersion(localXml);
-                    string newestVersion = GetNewestVersion();
+                    var localVersion = GetLocalVersion(localXml);
+                    var newestVersion = GetNewestVersion();
                     if (newestVersion != string.Empty && localVersion == newestVersion)
                     {
                         getNewest = false;
@@ -88,14 +80,14 @@ namespace Waddu.Core.BusinessObjects
                 if (getNewest)
                 {
                     Logger.Instance.AddLog(LogType.Debug, "Download new Mapping from");
-                    using (MappingDownloadForm dlg = new MappingDownloadForm(localXml))
+                    using (var dlg = new MappingDownloadForm(localXml))
                     {
                         dlg.ShowDialog();
                     }
                 }
             }
 
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             Logger.Instance.AddLog(LogType.Debug, "Load Mapping from {0}", localXml);
             try
             {
@@ -108,7 +100,7 @@ namespace Waddu.Core.BusinessObjects
             }
 
             // Loop thru the Games
-            List<Addon> addonList = new List<Addon>();
+            var addonList = new List<Addon>();
             foreach (XmlNode gameNode in doc.DocumentElement.ChildNodes)
             {
                 if (gameNode.Attributes["Name"].Value == GameType.ConvertToString(GameType.Enum.WorldOfWarcraft))
@@ -120,9 +112,9 @@ namespace Waddu.Core.BusinessObjects
                         if (addonNode.Name == "Addon")
                         {
                             // Get the Addon Name
-                            string addonName = addonNode.Attributes["Name"].Value;
+                            var addonName = addonNode.Attributes["Name"].Value;
                             // Search the List if there is already an Addon with this Name
-                            Addon addon = addonList.Find(ad => ad.Name.Equals(addonName));
+                            var addon = addonList.Find(ad => ad.Name.Equals(addonName));
                             // If not, create it
                             if (addon == null)
                             {
@@ -135,14 +127,14 @@ namespace Waddu.Core.BusinessObjects
                             addon.IsMain = true;
 
                             // Loop thru the Mappings
-                            XmlNode mappingListElement = addonNode.SelectSingleNode("Mappings");
+                            var mappingListElement = addonNode.SelectSingleNode("Mappings");
                             if (mappingListElement != null)
                             {
                                 foreach (XmlNode mappingElement in mappingListElement.ChildNodes)
                                 {
-                                    string tag = mappingElement.Attributes["Tag"].Value;
-                                    AddonSiteId addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
-                                    Mapping mapping = new Mapping(tag, addonSiteId);
+                                    var tag = mappingElement.Attributes["Tag"].Value;
+                                    var addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
+                                    var mapping = new Mapping(tag, addonSiteId);
                                     // Skip wowui Mappings since they seem to have shut down
                                     if (mapping.AddonSiteId == AddonSiteId.wowui)
                                     {
@@ -154,13 +146,13 @@ namespace Waddu.Core.BusinessObjects
                             }
 
                             // Loop thru the SubAddons
-                            XmlNode subAddonListElement = addonNode.SelectSingleNode("SubAddons");
+                            var subAddonListElement = addonNode.SelectSingleNode("SubAddons");
                             if (subAddonListElement != null)
                             {
                                 foreach (XmlNode subAddonElement in subAddonListElement.ChildNodes)
                                 {
-                                    string subAddonName = subAddonElement.Attributes["Name"].Value;
-                                    Addon subAddon = addonList.Find(ad => ad.Name.Equals(subAddonName));
+                                    var subAddonName = subAddonElement.Attributes["Name"].Value;
+                                    var subAddon = addonList.Find(ad => ad.Name.Equals(subAddonName));
                                     if (subAddon == null)
                                     {
                                         subAddon = new Addon(subAddonName);
@@ -189,7 +181,7 @@ namespace Waddu.Core.BusinessObjects
 
             // We now have removed all Addons with Mapping and their SubAddons from the Local Addon List
             // Add the remaining Local Addons (with no Mapping) to the AddonList
-            foreach (Addon addon in localAddons)
+            foreach (var addon in localAddons)
             {
                 addon.IsUnhandled = true;
                 addonList.Add(addon);

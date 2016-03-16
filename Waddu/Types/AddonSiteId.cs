@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waddu.Types
+﻿namespace Waddu.Types
 {
     public enum AddonSiteId
     {

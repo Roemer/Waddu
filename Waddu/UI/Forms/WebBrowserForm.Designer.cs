@@ -1,11 +1,14 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Waddu.UI.Forms
 {
     partial class WebBrowserForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -141,12 +144,12 @@
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnForward;
-        private System.Windows.Forms.TextBox txtUrl;
-        private System.Windows.Forms.Button btnGo;
-        private System.Windows.Forms.LinkLabel llInfoText;
-        private System.Windows.Forms.Button btnRefresh;
+        private WebBrowser webBrowser1;
+        private Button btnBack;
+        private Button btnForward;
+        private TextBox txtUrl;
+        private Button btnGo;
+        private LinkLabel llInfoText;
+        private Button btnRefresh;
     }
 }

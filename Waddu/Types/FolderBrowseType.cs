@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waddu.Types
+﻿namespace Waddu.Types
 {
     public abstract class FolderBrowseType
     {
@@ -10,13 +8,13 @@ namespace Waddu.Types
             Folder7z
         }
 
-        public static string GetDescription(FolderBrowseType.Enum type)
+        public static string GetDescription(Enum type)
         {
-            if (type == FolderBrowseType.Enum.WoW)
+            if (type == Enum.WoW)
             {
                 return "Select your World of Warcraft Folder";
             }
-            else if (type == FolderBrowseType.Enum.Folder7z)
+            else if (type == Enum.Folder7z)
             {
                 return "Select your 7z Folder";
             }

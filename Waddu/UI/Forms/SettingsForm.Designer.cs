@@ -1,11 +1,14 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Waddu.UI.Forms
 {
     partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -543,44 +546,44 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblWoWPath;
-        private System.Windows.Forms.Button btnBrowseWoW;
-        private System.Windows.Forms.TextBox txtWoWPath;
-        private System.Windows.Forms.CheckBox chkDelete;
-        private System.Windows.Forms.CheckBox chkMoveToTrash;
-        private System.Windows.Forms.Label lblNumOfThreads;
-        private System.Windows.Forms.NumericUpDown numThreads;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox chkSavePassword;
-        private System.Windows.Forms.TextBox txtCursePassword;
-        private System.Windows.Forms.TextBox txtCurseLogin;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtMappingFile;
-        private System.Windows.Forms.CheckBox chkNoLib;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txt7zPath;
-        private System.Windows.Forms.Button btnBrowse7z;
-        private System.Windows.Forms.ListBox lbPriority;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.CheckBox chkUseCustomMapping;
-        private System.Windows.Forms.Button btnBrowseMapping;
-        private System.Windows.Forms.ListView lvIgnored;
-        private System.Windows.Forms.Button btnUnignore;
-        private System.Windows.Forms.Button btnRemovePreferred;
-        private System.Windows.Forms.ListView lvPreferred;
-        private System.Windows.Forms.ColumnHeader chIgnoredName;
-        private System.Windows.Forms.ColumnHeader chPreferredName;
-        private System.Windows.Forms.ColumnHeader chPreferredMapping;
-        private System.Windows.Forms.CheckBox chkUseOlderNoLib;
+        private Button btnOk;
+        private Button btnCancel;
+        private Label lblWoWPath;
+        private Button btnBrowseWoW;
+        private TextBox txtWoWPath;
+        private CheckBox chkDelete;
+        private CheckBox chkMoveToTrash;
+        private Label lblNumOfThreads;
+        private NumericUpDown numThreads;
+        private Label label1;
+        private GroupBox groupBox1;
+        private CheckBox chkSavePassword;
+        private TextBox txtCursePassword;
+        private TextBox txtCurseLogin;
+        private Label label2;
+        private Label label3;
+        private TextBox txtMappingFile;
+        private CheckBox chkNoLib;
+        private Label label4;
+        private TextBox txt7zPath;
+        private Button btnBrowse7z;
+        private ListBox lbPriority;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private GroupBox groupBox2;
+        private TabPage tabPage4;
+        private TabPage tabPage5;
+        private CheckBox chkUseCustomMapping;
+        private Button btnBrowseMapping;
+        private ListView lvIgnored;
+        private Button btnUnignore;
+        private Button btnRemovePreferred;
+        private ListView lvPreferred;
+        private ColumnHeader chIgnoredName;
+        private ColumnHeader chPreferredName;
+        private ColumnHeader chPreferredMapping;
+        private CheckBox chkUseOlderNoLib;
     }
 }

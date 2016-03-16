@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Waddu.Core;
@@ -15,9 +14,9 @@ namespace Waddu.UI.Forms
 
             // Initialize Priority List
             lbPriority.AllowDrop = true;
-            lbPriority.MouseDown += new MouseEventHandler(lbPriority_MouseDown);
-            lbPriority.DragEnter += new DragEventHandler(lbPriority_DragEnter);
-            lbPriority.DragDrop += new DragEventHandler(lbPriority_DragDrop);
+            lbPriority.MouseDown += lbPriority_MouseDown;
+            lbPriority.DragEnter += lbPriority_DragEnter;
+            lbPriority.DragDrop += lbPriority_DragDrop;
 
             InitializeSettings();
             SetChecks();
@@ -25,15 +24,15 @@ namespace Waddu.UI.Forms
 
         private void lbPriority_MouseDown(object sender, MouseEventArgs e)
         {
-            ListBox lb = sender as ListBox;
+            var lb = sender as ListBox;
             if (lb.Items.Count == 0)
             {
                 return;
             }
 
-            int index = lb.IndexFromPoint(e.X, e.Y);
-            object o = lb.Items[index];
-            DragDropEffects dde1 = DoDragDrop(o, DragDropEffects.Move);
+            var index = lb.IndexFromPoint(e.X, e.Y);
+            var o = lb.Items[index];
+            var dde1 = DoDragDrop(o, DragDropEffects.Move);
             if (dde1 == DragDropEffects.Move)
             {
                 if (o == ((ListBox)sender).Items[index])
@@ -57,11 +56,11 @@ namespace Waddu.UI.Forms
 
         private void lbPriority_DragDrop(object sender, DragEventArgs e)
         {
-            ListBox lb = sender as ListBox;
+            var lb = sender as ListBox;
             if (e.Data.GetDataPresent(typeof(AddonSiteId)))
             {
-                object o = e.Data.GetData(typeof(AddonSiteId));
-                int indexPos = lb.IndexFromPoint(lb.PointToClient(new Point(e.X, e.Y)));
+                var o = e.Data.GetData(typeof(AddonSiteId));
+                var indexPos = lb.IndexFromPoint(lb.PointToClient(new Point(e.X, e.Y)));
                 if (indexPos > -1)
                 {
                     lb.Items.Insert(indexPos, o);
@@ -87,17 +86,17 @@ namespace Waddu.UI.Forms
             chkNoLib.Checked = Config.Instance.PreferNoLib;
             chkUseOlderNoLib.Checked = Config.Instance.UseOlderNoLib;
             txt7zPath.Text = Config.Instance.PathTo7z;
-            foreach (AddonSiteId addonSite in Config.Instance.AddonSites)
+            foreach (var addonSite in Config.Instance.AddonSites)
             {
                 lbPriority.Items.Add(addonSite);
             }
-            foreach (string addonName in Config.Instance.IgnoredAddons)
+            foreach (var addonName in Config.Instance.IgnoredAddons)
             {
                 lvIgnored.Items.Add(addonName);
             }
-            foreach (KeyValuePair<string, AddonSiteId> kvp in Config.Instance.PreferredMappings)
+            foreach (var kvp in Config.Instance.PreferredMappings)
             {
-                ListViewItem i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
+                var i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
                 lvPreferred.Items.Add(i);
             }
         }
@@ -204,27 +203,27 @@ namespace Waddu.UI.Forms
             Config.Instance.IgnoredAddons.Clear();
             foreach (ListViewItem item in lvIgnored.Items)
             {
-                string addonName = item.Text;
+                var addonName = item.Text;
                 Config.Instance.AddIgnored(addonName);
             }
 
             Config.Instance.PreferredMappings.Clear();
             foreach (ListViewItem item in lvPreferred.Items)
             {
-                string addonName = item.Text;
-                AddonSiteId addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), item.SubItems[1].Text);
+                var addonName = item.Text;
+                var addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), item.SubItems[1].Text);
                 Config.Instance.SetPreferredMapping(addonName, addonSiteId);
             }
 
-            foreach (KeyValuePair<string, AddonSiteId> kvp in Config.Instance.PreferredMappings)
+            foreach (var kvp in Config.Instance.PreferredMappings)
             {
-                ListViewItem i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
+                var i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
                 lvPreferred.Items.Add(i);
             }
 
             Config.Instance.SaveSettings();
             CookieManager.ClearCookies();
-            this.Close();
+            Close();
         }
     }
 }

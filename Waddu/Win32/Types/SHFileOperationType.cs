@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waddu.Win32.Types
+﻿namespace Waddu.Win32.Types
 {
     public enum SHFileOperationType : uint
     {

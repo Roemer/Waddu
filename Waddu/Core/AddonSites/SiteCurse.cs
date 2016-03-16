@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
 using Waddu.Types;
 using Waddu.UI.Forms;
@@ -16,28 +15,28 @@ namespace Waddu.Core.AddonSites
 
         private void ParseInfoSite(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
 
             // Build the Url
-            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            var url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             // Get the Html
-            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            var html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
             if (string.IsNullOrEmpty(html))
             {
                 return;
             }
             // Get the Document
-            HtmlDocument doc = new HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
             // Get the Version
-            HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//li[@class='newest-file']");
-            string version = versionNode.InnerText.Replace("Newest File: ", string.Empty);
+            var versionNode = doc.DocumentNode.SelectSingleNode("//li[@class='newest-file']");
+            var version = versionNode.InnerText.Replace("Newest File: ", string.Empty);
             // Get the Date
-            HtmlNode dateNode = doc.DocumentNode.SelectSingleNode("//li[@class='updated']/abbr");
-            string dateValue = dateNode.Attributes["data-epoch"].Value;
-            DateTime date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
+            var dateNode = doc.DocumentNode.SelectSingleNode("//li[@class='updated']/abbr");
+            var dateValue = dateNode.Attributes["data-epoch"].Value;
+            var date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
 
             // Assign the Values
             addon.VersionString = version;
@@ -48,7 +47,7 @@ namespace Waddu.Core.AddonSites
         #region AddonSiteBase Overrides
         public override string GetVersion(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
@@ -58,7 +57,7 @@ namespace Waddu.Core.AddonSites
 
         public override DateTime GetLastUpdated(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
@@ -68,15 +67,15 @@ namespace Waddu.Core.AddonSites
 
         public override string GetChangeLog(Mapping mapping)
         {
-            string fileUrl = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            var fileUrl = _infoUrl.Replace("{tag}", mapping.AddonTag);
 
             // Get the Html
-            string html = string.Join("", WebHelper.GetHtml(fileUrl).ToArray());
+            var html = string.Join("", WebHelper.GetHtml(fileUrl).ToArray());
             // Get the Document
-            HtmlDocument doc = new HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            string changeLog = doc.DocumentNode.SelectSingleNode("//div[@id='tab-changes']").InnerHtml;
+            var changeLog = doc.DocumentNode.SelectSingleNode("//div[@id='tab-changes']").InnerHtml;
             return changeLog;
         }
 
@@ -87,15 +86,15 @@ namespace Waddu.Core.AddonSites
 
         public override string GetFilePath(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             if (addon.IsCollectRequired)
             {
                 ParseInfoSite(mapping);
             }
-            string fileUrl = addon.FileUrl;
+            var fileUrl = addon.FileUrl;
 
-            string downloadUrl = string.Empty;
-            WebBrowserForm form = new WebBrowserForm(fileUrl, AddonSiteId.curse, mapping.Addon.Name);
+            var downloadUrl = string.Empty;
+            var form = new WebBrowserForm(fileUrl, AddonSiteId.curse, mapping.Addon.Name);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;

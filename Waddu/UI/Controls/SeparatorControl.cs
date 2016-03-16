@@ -11,10 +11,10 @@ namespace Waddu.UI.Controls
     /// </summary>
     public class SeparatorControl : Control
     {
-        private Pen m_penGray = null;
-        private Pen m_penWhite = null;
+        private Pen m_penGray;
+        private Pen m_penWhite;
 
-        private int m_lineLength = 0;
+        private int m_lineLength;
         private LineMode m_lineMode = 0;
 
         // Enums
@@ -113,15 +113,15 @@ namespace Waddu.UI.Controls
             }
             set
             {
-                bool oldTop = (base.Anchor & AnchorStyles.Top) == AnchorStyles.Top;
-                bool oldBottom = (base.Anchor & AnchorStyles.Bottom) == AnchorStyles.Bottom;
-                bool oldLeft = (base.Anchor & AnchorStyles.Left) == AnchorStyles.Left;
-                bool oldRight = (base.Anchor & AnchorStyles.Right) == AnchorStyles.Right;
+                var oldTop = (base.Anchor & AnchorStyles.Top) == AnchorStyles.Top;
+                var oldBottom = (base.Anchor & AnchorStyles.Bottom) == AnchorStyles.Bottom;
+                var oldLeft = (base.Anchor & AnchorStyles.Left) == AnchorStyles.Left;
+                var oldRight = (base.Anchor & AnchorStyles.Right) == AnchorStyles.Right;
 
-                bool newTop = (value & AnchorStyles.Top) == AnchorStyles.Top;
-                bool newBottom = (value & AnchorStyles.Bottom) == AnchorStyles.Bottom;
-                bool newLeft = (value & AnchorStyles.Left) == AnchorStyles.Left;
-                bool newRight = (value & AnchorStyles.Right) == AnchorStyles.Right;
+                var newTop = (value & AnchorStyles.Top) == AnchorStyles.Top;
+                var newBottom = (value & AnchorStyles.Bottom) == AnchorStyles.Bottom;
+                var newLeft = (value & AnchorStyles.Left) == AnchorStyles.Left;
+                var newRight = (value & AnchorStyles.Right) == AnchorStyles.Right;
 
                 if (m_lineMode == LineMode.down || m_lineMode == LineMode.up)
                 {
@@ -184,11 +184,11 @@ namespace Waddu.UI.Controls
         {
             if (m_lineMode == LineMode.down || m_lineMode == LineMode.up)
             {
-                m_lineLength = this.Width;
+                m_lineLength = Width;
             }
             else
             {
-                m_lineLength = this.Height;
+                m_lineLength = Height;
             }
             base.OnSizeChanged(e);
         }
@@ -197,31 +197,31 @@ namespace Waddu.UI.Controls
         {
             e.Graphics.Clear(BackColor);
 
-            if (this.Visible == true)
+            if (Visible == true)
             {
                 if (m_lineMode == LineMode.down)
                 {
                     e.Graphics.DrawLine(m_penGray, new Point(0, 0), new Point(m_lineLength, 0));
                     e.Graphics.DrawLine(m_penWhite, new Point(0, 0 + 1), new Point(m_lineLength, 0 + 1));
-                    this.Size = new Size(m_lineLength, 2);
+                    Size = new Size(m_lineLength, 2);
                 }
                 else if (m_lineMode == LineMode.up)
                 {
                     e.Graphics.DrawLine(m_penGray, new Point(0, 0 + 1), new Point(m_lineLength, 0 + 1));
                     e.Graphics.DrawLine(m_penWhite, new Point(0, 0), new Point(m_lineLength, 0));
-                    this.Size = new Size(m_lineLength, 2);
+                    Size = new Size(m_lineLength, 2);
                 }
                 else if (m_lineMode == LineMode.left)
                 {
                     e.Graphics.DrawLine(m_penGray, new Point(0, 0), new Point(0, m_lineLength));
                     e.Graphics.DrawLine(m_penWhite, new Point(0 + 1, 0), new Point(0 + 1, m_lineLength));
-                    this.Size = new Size(2, m_lineLength);
+                    Size = new Size(2, m_lineLength);
                 }
                 else if (m_lineMode == LineMode.right)
                 {
                     e.Graphics.DrawLine(m_penGray, new Point(0 + 1, 0), new Point(0 + 1, m_lineLength));
                     e.Graphics.DrawLine(m_penWhite, new Point(0, 0), new Point(0, m_lineLength));
-                    this.Size = new Size(2, m_lineLength);
+                    Size = new Size(2, m_lineLength);
                 }
             }
 

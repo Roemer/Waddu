@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Xml;
 using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
@@ -34,7 +33,7 @@ namespace Waddu.Core.AddonSites
 
         private void ParseInfoSite(Mapping mapping)
         {
-            SiteAddon addon = _addonCache.Get(mapping.AddonTag);
+            var addon = _addonCache.Get(mapping.AddonTag);
             addon.Clear();
 
             // Parse the XML
@@ -42,17 +41,17 @@ namespace Waddu.Core.AddonSites
             addon.VersionString = _xmlVersionString;
 
             // Build the Url
-            string url = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            var url = _infoUrl.Replace("{tag}", mapping.AddonTag);
             // Get the Html
-            string html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
+            var html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
             // Get the Document
-            HtmlDocument doc = new HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            HtmlNode dateNode = doc.DocumentNode.SelectSingleNode("//div[@id='safe']");
-            string dateString = dateNode.InnerText.Replace("Updated: ", string.Empty);
+            var dateNode = doc.DocumentNode.SelectSingleNode("//div[@id='safe']");
+            var dateString = dateNode.InnerText.Replace("Updated: ", string.Empty);
             //DateTime dt = new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[0]), Convert.ToInt32(dateList[1]));
-            DateTime dt = DateTime.Parse(dateString, CultureInfo.CreateSpecificCulture("en-US"));
+            var dt = DateTime.Parse(dateString, CultureInfo.CreateSpecificCulture("en-US"));
             addon.VersionDate = dt;
         }
 

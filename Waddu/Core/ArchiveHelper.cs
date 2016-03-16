@@ -1,9 +1,9 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace Waddu.Core
 {
@@ -97,8 +97,8 @@ namespace Waddu.Core
 
         public static List<string> GetArchiveContent(string archiveFile)
         {
-            string appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
-            string cmdArgs = string.Format(@"l ""{0}""", archiveFile);
+            var appPath = Path.Combine(Config.Instance.PathTo7z, "7z.exe");
+            var cmdArgs = string.Format(@"l ""{0}""", archiveFile);
 
             // Create a new process object
             var processObj = new Process();

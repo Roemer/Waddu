@@ -31,12 +31,12 @@ namespace Waddu.UI.Controls
         private LineMode m_modeCenterLine = LineMode.Hidden;
         private LineMode m_modeDragLines = LineMode.Normal;
         private int m_dragLineWidth = 40;
-        private int m_dragLineOffset = 0;
-        private int m_panel1MaxSize = 0;
-        private int m_panel2MaxSize = 0;
+        private int m_dragLineOffset;
+        private int m_panel1MaxSize;
+        private int m_panel2MaxSize;
         private Pen m_penGray = new Pen(SystemColors.ControlDark, 1);
         private Pen m_penWhite = new Pen(Color.White, 1);
-        private int m_mouseDelta = 0;
+        private int m_mouseDelta;
         private int m_splitterDistanceBeforeCollapse;
         private int m_PanelSizeBeforeCollapse;
         private Panels m_alternativeCollapsePanel;
@@ -120,8 +120,8 @@ namespace Waddu.UI.Controls
         {
             SplitterWidth = 20;
 
-            this.SplitterMoved += new SplitterEventHandler(this.SplitterMovedHandler);
-            this.DoubleClick += new EventHandler(SplitContainerEx_DoubleClick);
+            SplitterMoved += SplitterMovedHandler;
+            DoubleClick += SplitContainerEx_DoubleClick;
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -136,7 +136,7 @@ namespace Waddu.UI.Controls
         {
             if (m_alternativeCollapsedDefault)
             {
-                this.AlternativeCollapse();
+                AlternativeCollapse();
             }
             base.OnCreateControl();
         }
@@ -146,7 +146,7 @@ namespace Waddu.UI.Controls
             base.OnResize(e);
             if (m_alternativeCollapsed)
             {
-                this.UpdateAlternativeCollapseSplitter();
+                UpdateAlternativeCollapseSplitter();
             }
         }
 
@@ -154,11 +154,11 @@ namespace Waddu.UI.Controls
         {
             if (m_alternativeCollapsed)
             {
-                this.AlternativeCollapseRestore();
+                AlternativeCollapseRestore();
             }
             else
             {
-                this.AlternativeCollapse();
+                AlternativeCollapse();
             }
         }
 
@@ -166,14 +166,14 @@ namespace Waddu.UI.Controls
         {
             if (!DesignMode)
             {
-                this.SplitterDistance = m_splitterDistanceBeforeCollapse;
+                SplitterDistance = m_splitterDistanceBeforeCollapse;
                 if (m_alternativeCollapsePanel == Panels.Panel1)
                 {
-                    this.Panel1MinSize = m_PanelSizeBeforeCollapse;
+                    Panel1MinSize = m_PanelSizeBeforeCollapse;
                 }
                 else
                 {
-                    this.Panel2MinSize = m_PanelSizeBeforeCollapse;
+                    Panel2MinSize = m_PanelSizeBeforeCollapse;
                 }
                 m_alternativeCollapsed = false;
             }
@@ -183,20 +183,20 @@ namespace Waddu.UI.Controls
         {
             if (!DesignMode)
             {
-                m_splitterDistanceBeforeCollapse = this.SplitterDistance;
+                m_splitterDistanceBeforeCollapse = SplitterDistance;
 
                 if (m_alternativeCollapsePanel == Panels.Panel1)
                 {
-                    m_PanelSizeBeforeCollapse = this.Panel1MinSize;
-                    this.Panel1MinSize = 0;
+                    m_PanelSizeBeforeCollapse = Panel1MinSize;
+                    Panel1MinSize = 0;
                 }
                 else
                 {
-                    m_PanelSizeBeforeCollapse = this.Panel2MinSize;
-                    this.Panel2MinSize = 0;
+                    m_PanelSizeBeforeCollapse = Panel2MinSize;
+                    Panel2MinSize = 0;
                 }
 
-                this.UpdateAlternativeCollapseSplitter();
+                UpdateAlternativeCollapseSplitter();
 
                 m_alternativeCollapsed = true;
             }
@@ -208,17 +208,17 @@ namespace Waddu.UI.Controls
             {
                 if (m_alternativeCollapsePanel == Panels.Panel1)
                 {
-                    this.SplitterDistance = 0;
+                    SplitterDistance = 0;
                 }
                 else
                 {
-                    if (this.Orientation == Orientation.Horizontal)
+                    if (Orientation == Orientation.Horizontal)
                     {
-                        this.SplitterDistance = this.Height;
+                        SplitterDistance = Height;
                     }
                     else
                     {
-                        this.SplitterDistance = this.Width;
+                        SplitterDistance = Width;
                     }
                 }
             }
@@ -228,13 +228,13 @@ namespace Waddu.UI.Controls
         {
             if (m_alternativeCollapsePanel != Panels.None)
             {
-                this.AlternativeCollapseToggle();
+                AlternativeCollapseToggle();
             }
         }
 
-        private void SplitterMovedHandler(System.Object sender, System.Windows.Forms.SplitterEventArgs e)
+        private void SplitterMovedHandler(Object sender, SplitterEventArgs e)
         {
-            this.SplitterDistance = this.SplitterDistance;
+            SplitterDistance = SplitterDistance;
         }
 
         #region Drawing Stuff
@@ -243,12 +243,12 @@ namespace Waddu.UI.Controls
             //e.Graphics.Clear(BackColor);
 
             // Get the current Splitter Rectangle
-            Rectangle splitRect = this.SplitterRectangle;
+            var splitRect = SplitterRectangle;
 
             // Check Orientation
-            if (this.Orientation == Orientation.Horizontal)
+            if (Orientation == Orientation.Horizontal)
             {
-                int centerStart = splitRect.Top + splitRect.Height / 2 - 1;
+                var centerStart = splitRect.Top + splitRect.Height / 2 - 1;
                 // Center Line
                 if (m_modeCenterLine != LineMode.Hidden)
                 {
@@ -271,8 +271,8 @@ namespace Waddu.UI.Controls
                 if (m_modeDragLines != LineMode.Hidden)
                 {
                     // Calculate x-Position where to start
-                    int xPos = splitRect.Width / 2 - m_dragLineWidth / 2;
-                    for (int i = -1; i <= 1; i++)
+                    var xPos = splitRect.Width / 2 - m_dragLineWidth / 2;
+                    for (var i = -1; i <= 1; i++)
                     {
                         DrawLine(e.Graphics, xPos, centerStart + m_dragLineOffset + i * 3, m_dragLineWidth, m_modeDragLines);
                     }
@@ -280,7 +280,7 @@ namespace Waddu.UI.Controls
             }
             else
             {
-                int centerStart = splitRect.Left + splitRect.Width / 2 - 1;
+                var centerStart = splitRect.Left + splitRect.Width / 2 - 1;
                 // Center Line
                 if (m_modeCenterLine != LineMode.Hidden)
                 {
@@ -303,17 +303,17 @@ namespace Waddu.UI.Controls
                 if (m_modeDragLines != LineMode.Hidden)
                 {
                     // Calculate y-Position where to start
-                    int yPos = splitRect.Height / 2 - m_dragLineWidth / 2;
-                    for (int i = -1; i <= 1; i++)
+                    var yPos = splitRect.Height / 2 - m_dragLineWidth / 2;
+                    for (var i = -1; i <= 1; i++)
                     {
                         DrawLine(e.Graphics, centerStart + m_dragLineOffset + i * 3, yPos, m_dragLineWidth, m_modeDragLines);
                     }
                 }
             }
 
-            if (this.Focused)
+            if (Focused)
             {
-                this.DrawFocus();
+                DrawFocus();
             }
         }
         private void DrawLine(Graphics g, int xFrom, int yFrom, int size, LineMode lm)
@@ -332,7 +332,7 @@ namespace Waddu.UI.Controls
                 pen2 = m_penGray;
             }
 
-            if (this.Orientation == Orientation.Horizontal)
+            if (Orientation == Orientation.Horizontal)
             {
                 g.DrawLine(pen1, new Point(xFrom, yFrom), new Point(xFrom + size, yFrom));
                 g.DrawLine(pen2, new Point(xFrom, yFrom + 1), new Point(xFrom + size, yFrom + 1));
@@ -347,106 +347,106 @@ namespace Waddu.UI.Controls
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (!this.IsSplitterFixed)
+            if (!IsSplitterFixed)
             {
                 if (e.KeyData == Keys.Right || e.KeyData == Keys.Down)
                 {
-                    this.SplitterDistance += 1;
+                    SplitterDistance += 1;
                 }
                 else if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
                 {
-                    this.SplitterDistance -= 1;
+                    SplitterDistance -= 1;
                 }
-                this.Invalidate();
+                Invalidate();
             }
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            this.DrawFocus();
+            DrawFocus();
         }
 
         private void DrawFocus()
         {
-            Rectangle r = this.SplitterRectangle;
-            Graphics g = Graphics.FromHwndInternal(this.Handle);
+            var r = SplitterRectangle;
+            var g = Graphics.FromHwndInternal(Handle);
             r.Inflate(-1, -1);
-            ControlPaint.DrawFocusRectangle(g, r, this.ForeColor, this.BackColor);
+            ControlPaint.DrawFocusRectangle(g, r, ForeColor, BackColor);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (this.Orientation.Equals(Orientation.Vertical))
+            if (Orientation.Equals(Orientation.Vertical))
             {
-                m_mouseDelta = this.SplitterDistance - e.X;
+                m_mouseDelta = SplitterDistance - e.X;
                 //Cursor.Current = System.Windows.Forms.Cursors.NoMoveHoriz;
                 //Cursor.Current = System.Windows.Forms.Cursors.SizeWE;
-                Cursor.Current = System.Windows.Forms.Cursors.VSplit;
+                Cursor.Current = Cursors.VSplit;
             }
             else
             {
-                m_mouseDelta = this.SplitterDistance - e.Y;
+                m_mouseDelta = SplitterDistance - e.Y;
                 //Cursor.Current = System.Windows.Forms.Cursors.NoMoveVert;
                 //Cursor.Current = System.Windows.Forms.Cursors.SizeNS;
-                Cursor.Current = System.Windows.Forms.Cursors.HSplit;
+                Cursor.Current = Cursors.HSplit;
             }
 
             // This disables the normal move behavior
-            this.IsSplitterFixed = true;
+            IsSplitterFixed = true;
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             m_mouseDelta = 0;
             // This allows the splitter to be moved normally again
-            this.IsSplitterFixed = false;
+            IsSplitterFixed = false;
 
-            Cursor.Current = System.Windows.Forms.Cursors.Default;
+            Cursor.Current = Cursors.Default;
 
-            if (this.Focused)
+            if (Focused)
             {
-                this.DrawFocus();
+                DrawFocus();
             }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             // Check to make sure the splitter won't be updated by the normal move behavior also
-            if (this.IsSplitterFixed)
+            if (IsSplitterFixed)
             {
                 // Make sure that the button used to move the splitter is the left mouse button
                 if (e.Button.Equals(MouseButtons.Left))
                 {
                     // Checks to see if the splitter is aligned Vertically
-                    if (this.Orientation.Equals(Orientation.Vertical))
+                    if (Orientation.Equals(Orientation.Vertical))
                     {
                         // Only move the splitter if the mouse is within the appropriate bounds
-                        if (e.X > 0 && e.X < this.Width)
+                        if (e.X > 0 && e.X < Width)
                         {
                             if (m_alternativeCollapsed)
                             {
-                                this.AlternativeCollapseRestore();
+                                AlternativeCollapseRestore();
                             }
 
                             // Move the splitter
-                            int newDistance = e.X + m_mouseDelta;
-                            this.SplitterDistance = (newDistance <= 0 ? 0 : newDistance);
+                            var newDistance = e.X + m_mouseDelta;
+                            SplitterDistance = (newDistance <= 0 ? 0 : newDistance);
                         }
                     }
                     // If it isn't aligned verically then it must be horizontal
                     else
                     {
                         // Only move the splitter if the mouse is within the appropriate bounds
-                        if (e.Y > 0 && e.Y < this.Height)
+                        if (e.Y > 0 && e.Y < Height)
                         {
                             if (m_alternativeCollapsed)
                             {
-                                this.AlternativeCollapseRestore();
+                                AlternativeCollapseRestore();
                             }
 
                             // Move the splitter
-                            int newDistance = e.Y + m_mouseDelta;
-                            this.SplitterDistance = (newDistance <= 0 ? 0 : newDistance);
+                            var newDistance = e.Y + m_mouseDelta;
+                            SplitterDistance = (newDistance <= 0 ? 0 : newDistance);
                         }
                     }
                 }
@@ -454,10 +454,10 @@ namespace Waddu.UI.Controls
                 else
                 {
                     // This allows the splitter to be moved normally again
-                    this.IsSplitterFixed = false;
+                    IsSplitterFixed = false;
                 }
 
-                this.Refresh();
+                Refresh();
             }
         }
 
@@ -470,15 +470,15 @@ namespace Waddu.UI.Controls
             }
             set
             {
-                if (this.Orientation == Orientation.Vertical)
+                if (Orientation == Orientation.Vertical)
                 {
                     if (value > m_panel1MaxSize && m_panel1MaxSize != 0)
                     {
                         value = m_panel1MaxSize;
                     }
-                    if ((value + this.SplitterWidth) < (base.Width - m_panel2MaxSize) && m_panel2MaxSize != 0)
+                    if ((value + SplitterWidth) < (Width - m_panel2MaxSize) && m_panel2MaxSize != 0)
                     {
-                        value = (base.Width - this.m_panel2MaxSize) - this.SplitterWidth;
+                        value = (Width - m_panel2MaxSize) - SplitterWidth;
                     }
 
                 }
@@ -488,9 +488,9 @@ namespace Waddu.UI.Controls
                     {
                         value = m_panel1MaxSize;
                     }
-                    if ((value + this.SplitterWidth) < (base.Height - m_panel2MaxSize) && m_panel2MaxSize != 0)
+                    if ((value + SplitterWidth) < (Height - m_panel2MaxSize) && m_panel2MaxSize != 0)
                     {
-                        value = (base.Height - this.m_panel2MaxSize) - this.SplitterWidth;
+                        value = (Height - m_panel2MaxSize) - SplitterWidth;
                     }
                 }
                 base.SplitterDistance = value;

@@ -1,11 +1,14 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Waddu.UI.Forms
 {
     partial class ChangeLogForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -56,6 +59,6 @@
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser wbChangeLog;
+        private WebBrowser wbChangeLog;
     }
 }

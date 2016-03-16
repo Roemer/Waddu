@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Waddu.UI.Forms
 {
@@ -8,7 +9,7 @@ namespace Waddu.UI.Forms
         {
             InitializeComponent();
 
-            lblLocalVersion.Text = this.GetType().Assembly.GetName().Version.ToString();
+            lblLocalVersion.Text = GetType().Assembly.GetName().Version.ToString();
             lblNewestVersion.Text = newestVersion;
 
             llInfoSite.Links[0].LinkData = "http://waddu.flauschig.ch";
@@ -17,8 +18,8 @@ namespace Waddu.UI.Forms
 
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string target = e.Link.LinkData as string;
-            System.Diagnostics.Process.Start(target);
+            var target = e.Link.LinkData as string;
+            Process.Start(target);
         }
     }
 }

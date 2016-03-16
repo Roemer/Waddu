@@ -1,11 +1,14 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Waddu.UI.Forms
 {
     partial class AdminForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -136,12 +139,12 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnCreateMapping;
-        private System.Windows.Forms.TextBox txtUrl;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtOut;
-        private System.Windows.Forms.Button btnCreateFromTag;
-        private System.Windows.Forms.ComboBox cbSite;
+        private GroupBox groupBox1;
+        private Button btnCreateMapping;
+        private TextBox txtUrl;
+        private Label label1;
+        private TextBox txtOut;
+        private Button btnCreateFromTag;
+        private ComboBox cbSite;
     }
 }

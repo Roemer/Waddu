@@ -1,11 +1,14 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Waddu.UI.Forms
 {
     partial class UnknownAddonsForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -86,8 +89,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnCopyToClipboard;
-        private System.Windows.Forms.TextBox txtUnknownAddons;
+        private Button btnClose;
+        private Button btnCopyToClipboard;
+        private TextBox txtUnknownAddons;
     }
 }

@@ -1,11 +1,15 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using Waddu.UI.Controls;
+
+namespace Waddu.UI.Forms
 {
     partial class ArchiveContentForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -145,11 +149,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtContent;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOpen;
-        private System.Windows.Forms.TreeView tvContent;
-        private Waddu.UI.Controls.SplitContainerEx splitContainerEx1;
+        private TextBox txtContent;
+        private Button btnOk;
+        private Button btnCancel;
+        private Button btnOpen;
+        private TreeView tvContent;
+        private SplitContainerEx splitContainerEx1;
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using System.Text.RegularExpressions;
 
 namespace Waddu.Core.BusinessObjects
 {
@@ -20,7 +20,7 @@ namespace Waddu.Core.BusinessObjects
 
         public static void Load()
         {
-            string filePath = GetFilePath();
+            var filePath = GetFilePath();
             if (File.Exists(filePath))
             {
                 var doc = new XmlDocument();
@@ -30,13 +30,13 @@ namespace Waddu.Core.BusinessObjects
                     var obj = new AddonUpdateStats();
                     obj.Name = node.Attributes["Name"].Value;
                     obj.Version = node.Attributes["Version"].Value;
-                    Match m = Regex.Match(node.Attributes["Date"].Value, @"(.*)\.(.*)\.(.*) (.*):(.*):(.*)");
-                    int year = Convert.ToInt32(m.Groups[1].Captures[0].Value);
-                    int month = Convert.ToInt32(m.Groups[2].Captures[0].Value);
-                    int day = Convert.ToInt32(m.Groups[3].Captures[0].Value);
-                    int hour = Convert.ToInt32(m.Groups[4].Captures[0].Value);
-                    int min = Convert.ToInt32(m.Groups[5].Captures[0].Value);
-                    int sec = Convert.ToInt32(m.Groups[6].Captures[0].Value);
+                    var m = Regex.Match(node.Attributes["Date"].Value, @"(.*)\.(.*)\.(.*) (.*):(.*):(.*)");
+                    var year = Convert.ToInt32(m.Groups[1].Captures[0].Value);
+                    var month = Convert.ToInt32(m.Groups[2].Captures[0].Value);
+                    var day = Convert.ToInt32(m.Groups[3].Captures[0].Value);
+                    var hour = Convert.ToInt32(m.Groups[4].Captures[0].Value);
+                    var min = Convert.ToInt32(m.Groups[5].Captures[0].Value);
+                    var sec = Convert.ToInt32(m.Groups[6].Captures[0].Value);
                     obj.LastUpdated = new DateTime(year, month, day, hour, min, sec);
                     AddonNameList.Add(obj);
                 }
@@ -71,18 +71,18 @@ namespace Waddu.Core.BusinessObjects
             // Lock the File Access for Thread-Safety
             lock (LockObject)
             {
-                string xmlFile = GetFilePath();
+                var xmlFile = GetFilePath();
                 if (File.Exists(xmlFile))
                 {
                     File.Delete(xmlFile);
                 }
 
-                XmlTextWriter w = new XmlTextWriter(xmlFile, null);
+                var w = new XmlTextWriter(xmlFile, null);
                 w.Formatting = Formatting.Indented;
                 w.WriteStartDocument();
                 w.WriteStartElement("WadduUpdateStatus");
 
-                foreach (AddonUpdateStats obj in AddonNameList)
+                foreach (var obj in AddonNameList)
                 {
                     w.WriteStartElement("Addon");
                     w.WriteStartAttribute("Name");

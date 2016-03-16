@@ -1,11 +1,14 @@
-﻿namespace Waddu.UI.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Waddu.UI.Forms
 {
     partial class ErrorForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -118,11 +121,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCopy;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtError;
-        private System.Windows.Forms.TextBox txtStackTrace;
+        private Button btnCopy;
+        private Button btnClose;
+        private Label label1;
+        private Label label2;
+        private TextBox txtError;
+        private TextBox txtStackTrace;
     }
 }
