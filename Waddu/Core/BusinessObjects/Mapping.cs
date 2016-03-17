@@ -1,56 +1,46 @@
 ﻿using System;
-using System.ComponentModel;
 using Waddu.Core.AddonSites;
 using Waddu.Types;
 
 namespace Waddu.Core.BusinessObjects
 {
-    public class Mapping : INotifyPropertyChanged
+    public class Mapping : ObservableObject
     {
-        #region Members
         public Addon Addon { get; set; }
         public Package Package { get; set; }
 
-        private string _addonTag;
-        public string AddonTag
-        {
-            get { return _addonTag; }
-            set { _addonTag = value; NotifyPropertyChanged("AddonTag"); }
-        }
-
-        private AddonSiteId _addonSiteId;
         public AddonSiteId AddonSiteId
         {
-            get { return _addonSiteId; }
-            set { _addonSiteId = value; NotifyPropertyChanged("AddonSiteId"); }
+            get { return GetProperty<AddonSiteId>(); }
+            set { SetProperty(value); }
         }
 
-        private string _remoteVersion;
+        public string AddonTag
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
         public string RemoteVersion
         {
-            get { return _remoteVersion; }
-            set { _remoteVersion = value; NotifyPropertyChanged("RemoteVersion"); }
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
         }
 
-        private DateTime _lastUpdated;
         public DateTime LastUpdated
         {
-            get { return _lastUpdated; }
-            set { _lastUpdated = value; NotifyPropertyChanged("LastUpdated"); }
+            get { return GetProperty<DateTime>(); }
+            set { SetProperty(value); }
         }
-        #endregion
 
-        #region Constructors
-        public Mapping(string addonTag, AddonSiteId addonSiteId)
+        public Mapping(AddonSiteId addonSiteId, string addonTag)
         {
-            _addonTag = addonTag;
-            _addonSiteId = addonSiteId;
+            AddonSiteId = addonSiteId;
+            AddonTag = addonTag;
 
-            _remoteVersion = string.Empty;
-            _lastUpdated = DateTime.MinValue;
+            RemoteVersion = String.Empty;
+            LastUpdated = DateTime.MinValue;
         }
-
-        #endregion
 
         #region Functions
         /// <summary>
@@ -91,17 +81,6 @@ namespace Waddu.Core.BusinessObjects
                 LastUpdated == DateTime.MinValue ? "?" : LastUpdated.ToShortDateString(),
                 AddonSiteId
             );
-        }
-        #endregion
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
         #endregion
     }

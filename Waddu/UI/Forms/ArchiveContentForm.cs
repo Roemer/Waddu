@@ -15,7 +15,7 @@ namespace Waddu.UI.Forms
             _zipFile = zipFile;
 
             var lines = ArchiveHelper.GetArchiveContent(zipFile);
-            txtContent.Text = Helpers.Join<string>(Environment.NewLine, lines);
+            txtContent.Text = Helpers.Join(Environment.NewLine, lines);
 
             tvContent.BeginUpdate();
             tvContent.Nodes.Clear();
@@ -23,7 +23,7 @@ namespace Waddu.UI.Forms
             foreach (var line in lines)
             {
                 var node = tvContent.Nodes[0];
-                var nameList = line.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+                var nameList = line.Split(new[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
                 for (var i=0; i<nameList.Length; i++)
                 {
                     var name = nameList[i];

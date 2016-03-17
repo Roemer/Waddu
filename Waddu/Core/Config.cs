@@ -14,8 +14,8 @@ namespace Waddu.Core
         public static Config Instance = new Config();
 
         // Members
-        private XmlDocument _xmlDoc;
-        private string _configFilePath;
+        private readonly XmlDocument _xmlDoc;
+        private readonly string _configFilePath;
 
         # region Settings
         private string _wowFolderPath = @"C:\Program Files\World of Warcraft";
@@ -201,7 +201,15 @@ namespace Waddu.Core
                 var addonSiteList = value.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var addonSite in addonSiteList)
                 {
-                    _addonSites.Add((AddonSiteId)Enum.Parse(typeof(AddonSiteId), addonSite));
+                    AddonSiteId result;
+                    if (Enum.TryParse(addonSite, out result))
+                    {
+                        _addonSites.Add(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unknown Addon Site: {0}", addonSite);
+                    }
                 }
             }
             // Fill missing AddonSites
@@ -211,7 +219,6 @@ namespace Waddu.Core
             Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowace);
             Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowinterface);
             Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowspecial);
-            Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowui);
             // Get Ignored Addons
             if (GetSettingValue("IgnoredAddons", out value))
             {
@@ -359,7 +366,7 @@ namespace Waddu.Core
             else
             {
                 // Update only
-                settingElement.ChildNodes[0].InnerText = value.ToString();
+                settingElement.ChildNodes[0].InnerText = value;
             }
         }
 

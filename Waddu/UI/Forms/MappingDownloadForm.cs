@@ -31,7 +31,7 @@ namespace Waddu.UI.Forms
 
         protected static void ThreadProc(object param)
         {
-            var remotePaths = new string[] {
+            var remotePaths = new[] {
                 "http://waddu.flauschig.ch/mapping/waddu_mappings.xml",
                 "http://www.red-demon.com/waddu/mapping/waddu_mappings.xml"
             };

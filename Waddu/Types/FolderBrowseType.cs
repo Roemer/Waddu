@@ -14,7 +14,7 @@
             {
                 return "Select your World of Warcraft Folder";
             }
-            else if (type == Enum.Folder7z)
+            if (type == Enum.Folder7z)
             {
                 return "Select your 7z Folder";
             }

@@ -92,28 +92,22 @@ namespace Waddu.Core.AddonSites
             {
                 return addon;
             }
-            else
+            // Force NoLib
+            if (Config.Instance.UseOlderNoLib)
             {
-                // Force NoLib
-                if (Config.Instance.UseOlderNoLib)
+                return noLibAddon;
+            }
+            var versionNoLib = noLibAddon.VersionString.Replace("-nolib", "");
+            if (addon.VersionString.Length >= versionNoLib.Length)
+            {
+                var versionWithLib = addon.VersionString.Substring(0, versionNoLib.Length);
+                // Versions are the same
+                if (versionWithLib == versionNoLib)
                 {
                     return noLibAddon;
                 }
-                else
-                {
-                    var versionNoLib = noLibAddon.VersionString.Replace("-nolib", "");
-                    if (addon.VersionString.Length >= versionNoLib.Length)
-                    {
-                        var versionWithLib = addon.VersionString.Substring(0, versionNoLib.Length);
-                        // Versions are the same
-                        if (versionWithLib == versionNoLib)
-                        {
-                            return noLibAddon;
-                        }
-                    }
-                    return addon;
-                }
             }
+            return addon;
         }
 
         #region AddonSiteBase Overrides

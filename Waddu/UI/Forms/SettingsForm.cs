@@ -96,7 +96,7 @@ namespace Waddu.UI.Forms
             }
             foreach (var kvp in Config.Instance.PreferredMappings)
             {
-                var i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
+                var i = new ListViewItem(new[] { kvp.Key, kvp.Value.ToString() });
                 lvPreferred.Items.Add(i);
             }
         }
@@ -217,7 +217,7 @@ namespace Waddu.UI.Forms
 
             foreach (var kvp in Config.Instance.PreferredMappings)
             {
-                var i = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
+                var i = new ListViewItem(new[] { kvp.Key, kvp.Value.ToString() });
                 lvPreferred.Items.Add(i);
             }
 

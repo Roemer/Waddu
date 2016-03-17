@@ -134,13 +134,7 @@ namespace Waddu.Core.BusinessObjects
                                 {
                                     var tag = mappingElement.Attributes["Tag"].Value;
                                     var addonSiteId = (AddonSiteId)Enum.Parse(typeof(AddonSiteId), mappingElement.Attributes["Site"].Value);
-                                    var mapping = new Mapping(tag, addonSiteId);
-                                    // Skip wowui Mappings since they seem to have shut down
-                                    if (mapping.AddonSiteId == AddonSiteId.wowui)
-                                    {
-                                        continue;
-                                    }
-                                    mapping.Addon = addon;
+                                    var mapping = new Mapping(addonSiteId, tag) { Addon = addon };
                                     addon.Mappings.Add(mapping);
                                 }
                             }

@@ -63,10 +63,6 @@ namespace Waddu.Core.AddonSites
                     {
                         site = new SiteWowInterface();
                     }
-                    else if (addonSiteId == AddonSiteId.wowui)
-                    {
-                        site = new SiteWowUi();
-                    }
                     else if (addonSiteId == AddonSiteId.curse)
                     {
                         site = new SiteCurse();

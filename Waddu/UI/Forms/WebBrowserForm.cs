@@ -155,12 +155,12 @@ namespace Waddu.UI.Forms
                             foundElement = i;
                             break;
                         }
-                        else if (_addonSiteId == AddonSiteId.curseforge && tempEl.InnerHtml.StartsWith("<LI class=\"user-action user-action-download\""))
+                        if (_addonSiteId == AddonSiteId.curseforge && tempEl.InnerHtml.StartsWith("<LI class=\"user-action user-action-download\""))
                         {
                             foundElement = i + 1;
                             break;
                         }
-                        else if (_addonSiteId == AddonSiteId.curse && tempEl.InnerHtml.StartsWith("\r\n<embed src=\"/Themes/Common/v6/flash/DownloadButton.swf"))
+                        if (_addonSiteId == AddonSiteId.curse && tempEl.InnerHtml.StartsWith("\r\n<embed src=\"/Themes/Common/v6/flash/DownloadButton.swf"))
                         {
                             foundElement = i;
                             break;

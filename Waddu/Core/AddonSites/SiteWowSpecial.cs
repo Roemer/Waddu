@@ -22,17 +22,17 @@ namespace Waddu.Core.AddonSites
                 return HandleMars(mapping, type);
             }
             // CT
-            else if (mapping.AddonTag.StartsWith("CT_"))
+            if (mapping.AddonTag.StartsWith("CT_"))
             {
                 return HandleCT(mapping, type);
             }
             // xchar
-            else if (mapping.AddonTag.StartsWith("xchar"))
+            if (mapping.AddonTag.StartsWith("xchar"))
             {
                 return Handlexchar(mapping, type);
             }
             // MobMap
-            else if (mapping.AddonTag == "MobMap")
+            if (mapping.AddonTag == "MobMap")
             {
                 return HandleMobMap(mapping, type);
             }
@@ -187,7 +187,7 @@ namespace Waddu.Core.AddonSites
                         if (m.Success)
                         {
                             var dateStr = m.Groups[1].Captures[0].Value;
-                            var dateList = dateStr.Split(new char[] { '.' });
+                            var dateList = dateStr.Split('.');
                             return new DateTime(Convert.ToInt32(dateList[2]), Convert.ToInt32(dateList[1]), Convert.ToInt32(dateList[0]));
                         }
                     }
@@ -219,7 +219,7 @@ namespace Waddu.Core.AddonSites
                 m = WebHelper.GetMatch(downPage, regex2);
                 return m.Groups[1].Captures[0].Value;
             }
-            else if (type == Type.Version)
+            if (type == Type.Version)
             {
                 var m = WebHelper.GetMatch(infoPage, @"<p><font face=""Verdana, Arial, Helvetica, sans-serif"">newest version : (.*)</font></p>");
                 if (m != null)

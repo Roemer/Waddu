@@ -197,7 +197,7 @@ namespace Waddu.UI.Controls
         {
             e.Graphics.Clear(BackColor);
 
-            if (Visible == true)
+            if (Visible)
             {
                 if (m_lineMode == LineMode.down)
                 {

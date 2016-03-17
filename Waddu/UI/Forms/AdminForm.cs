@@ -17,20 +17,19 @@ namespace Waddu.UI.Forms
 
             cbSite.DataSource = Enum.GetValues(typeof(AddonSiteId));
         }
-        
+
         private void CreateMappings(string tag, AddonSiteId siteId)
         {
             txtOut.Text = string.Empty;
 
-            var tagList = tag.Split(new char[] { ',' });
+            var tagList = tag.Split(',');
             foreach (var itTag in tagList)
             {
                 var currTag = itTag.Trim();
                 try
                 {
                     var site = AddonSiteBase.GetSite(siteId);
-                    var map = new Mapping(currTag, siteId);
-                    map.Addon = new Addon("tag");
+                    var map = new Mapping(siteId, currTag) { Addon = new Addon("tag") };
                     var downLink = site.GetFilePath(map);
                     var archiveFilePath = WebHelper.DownloadFileToTemp(downLink);
                     var cont = ArchiveHelper.GetArchiveContent(archiveFilePath);
@@ -40,7 +39,7 @@ namespace Waddu.UI.Forms
                         var index = s.IndexOf("\\");
                         if (index > 0)
                         {
-                            Helpers.AddIfNeeded<string>(folderList, s.Substring(0, index));
+                            Helpers.AddIfNeeded(folderList, s.Substring(0, index));
                         }
                     }
                     var main = string.Empty;

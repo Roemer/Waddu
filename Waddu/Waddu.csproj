@@ -91,7 +91,6 @@
     <Compile Include="Core\AddonSites\SiteWowAce.cs" />
     <Compile Include="Core\AddonSites\SiteWowInterface.cs" />
     <Compile Include="Core\AddonSites\SiteWowSpecial.cs" />
-    <Compile Include="Core\AddonSites\SiteWowUi.cs" />
     <Compile Include="Core\ArchiveHelper.cs" />
     <Compile Include="Core\BusinessObjects\Addon.cs" />
     <Compile Include="Core\BusinessObjects\AddonList.cs" />

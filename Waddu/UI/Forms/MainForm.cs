@@ -310,15 +310,15 @@ namespace Waddu.UI.Forms
             {
                 return LogType.Debug;
             }
-            else if (tsmiLogInformation.Checked)
+            if (tsmiLogInformation.Checked)
             {
                 return LogType.Information;
             }
-            else if (tsmiLogWarning.Checked)
+            if (tsmiLogWarning.Checked)
             {
                 return LogType.Warning;
             }
-            else if (tsmiLogError.Checked)
+            if (tsmiLogError.Checked)
             {
                 return LogType.Error;
             }

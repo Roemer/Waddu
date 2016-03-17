@@ -9,8 +9,6 @@ namespace Waddu.Core.BusinessObjects
 {
     public class Addon : ObservableObject
     {
-        #region Members
-
         public string Name
         {
             get { return GetProperty<string>(); }
@@ -42,6 +40,7 @@ namespace Waddu.Core.BusinessObjects
                 else { _addonType &= ~AddonType.Main; }
             }
         }
+
         public bool IsSubAddon
         {
             get { return (_addonType & AddonType.Sub) == AddonType.Sub; }
@@ -51,6 +50,7 @@ namespace Waddu.Core.BusinessObjects
                 else { _addonType &= ~AddonType.Sub; }
             }
         }
+
         public bool IsDepreciated
         {
             get { return (_addonType & AddonType.Depreciated) == AddonType.Depreciated; }
@@ -109,8 +109,6 @@ namespace Waddu.Core.BusinessObjects
         public BindingList<Mapping> Mappings { get; set; }
 
         public BindingList<Package> Packages { get; set; }
-
-        #endregion
 
         #region Constructors
         private Addon()
@@ -247,11 +245,8 @@ namespace Waddu.Core.BusinessObjects
                 }
                 return DeleteType.MovedToTrash;
             }
-            else
-            {
-                Directory.Delete(addonPath, true);
-                return DeleteType.Deleted;
-            }
+            Directory.Delete(addonPath, true);
+            return DeleteType.Deleted;
         }
 
         /// <summary>
