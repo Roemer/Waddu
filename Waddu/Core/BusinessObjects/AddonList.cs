@@ -10,8 +10,6 @@ namespace Waddu.Core.BusinessObjects
 {
     public class AddonList
     {
-        public static AddonList Instance = new AddonList();
-
         public List<Addon> Addons;
 
         private string GetNewestVersion()
@@ -41,8 +39,7 @@ namespace Waddu.Core.BusinessObjects
             return Addons.Find(obj => (obj.Name.ToUpper().Equals(addonName.ToUpper())));
         }
 
-        // Private Constructor
-        private AddonList()
+        public AddonList()
         {
             // Initialize List
             Addons = new List<Addon>();

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Waddu")]
-[assembly: AssemblyCopyright("Copyright ©  2008-2016")]
+[assembly: AssemblyCopyright("Copyright © 2008-2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

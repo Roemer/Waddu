@@ -16,6 +16,8 @@ namespace Waddu.UI.Forms
     {
         public static MainForm Instance;
 
+        private AddonList _addonList;
+
         public MainForm()
         {
             Instance = this;
@@ -127,8 +129,9 @@ namespace Waddu.UI.Forms
 
         private void LoadLocalAddons()
         {
+            _addonList = new AddonList();
             var dispList = new BindingList<Addon>();
-            foreach (var addon in AddonList.Instance.Addons)
+            foreach (var addon in _addonList.Addons)
             {
                 // Filter out Blizzard Addons
                 if (!tsmiFilterBlizzard.Checked && addon.Mappings.Count > 0 && addon.Mappings[0].AddonSiteId == AddonSiteId.blizzard)
@@ -197,7 +200,7 @@ namespace Waddu.UI.Forms
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    AddonList.Instance = null;
+                    _addonList = null;
                     LoadLocalAddons();
                 }
             }
@@ -379,7 +382,7 @@ namespace Waddu.UI.Forms
         private void tsmiCollectUnknownAddons_Click(object sender, EventArgs e)
         {
             var unkAddons = string.Empty;
-            foreach (var addon in AddonList.Instance.Addons)
+            foreach (var addon in _addonList.Addons)
             {
                 if (addon.Mappings.Count == 0 && !addon.IsSubAddon)
                 {
