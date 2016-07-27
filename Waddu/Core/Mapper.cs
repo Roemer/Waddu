@@ -3702,6 +3702,9 @@ namespace Waddu.Core
             GetAddon("PitBull_ProfileSwitcher").Mappings.Add(new Mapping(AddonSiteId.wowace, "pitbull_profile-switcher"));
             GetAddon("PitBull_QuickHealth").Mappings.Add(new Mapping(AddonSiteId.curse, "pit-bull_quick-health"));
             GetAddon("PitBull_QuickHealth").Mappings.Add(new Mapping(AddonSiteId.wowace, "pit-bull_quick-health"));
+            GetAddon("Plater").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "23940"));
+            GetAddon("Plater").Mappings.Add(new Mapping(AddonSiteId.curse, "plater-nameplates"));
+            GetAddon("Plater").Mappings.Add(new Mapping(AddonSiteId.curseforge, "plater-nameplates"));
             GetAddon("PlayerMenu").Mappings.Add(new Mapping(AddonSiteId.curse, "player-menu"));
             GetAddon("PlayerMenu").Mappings.Add(new Mapping(AddonSiteId.wowace, "player-menu"));
             GetAddon("PlayerNotes").Mappings.Add(new Mapping(AddonSiteId.curse, "player-notes"));
