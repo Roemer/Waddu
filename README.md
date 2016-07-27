@@ -16,3 +16,8 @@ Wiki:
 
 Download:
   * http://waddu.flauschig.ch
+
+### Build Status
+|Repo|Appveyor|
+|:---|:------------------|
+|[Waddu](https://github.com/Roemer/Waddu)|[![Build status](https://ci.appveyor.com/api/projects/status/bbhe51mavppkyerg?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/waddu)|
