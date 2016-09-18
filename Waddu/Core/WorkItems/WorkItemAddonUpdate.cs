@@ -68,7 +68,7 @@ namespace Waddu.Core.WorkItems
             }
 
             string archiveFilePath;
-            if (fileUrl.ToLower().StartsWith("http:"))
+            if (fileUrl.ToLower().StartsWith("http:") || fileUrl.ToLower().StartsWith("https:"))
             {
                 // Download
                 workerThread.InfoText = string.Format("DL from {0}: {1}", mapping.AddonSiteId, _addon.Name);
