@@ -10,8 +10,8 @@ namespace Waddu.Core.AddonSites
 {
     public class SiteCurseForge : AddonSiteBase
     {
-        private const string InfoUrl = "http://www.wowace.com/addons/{tag}/files/";
-        private const string FileUrl = "http://www.wowace.com{0}";
+        private const string InfoUrl = "http://www.curseforge.com/projects/{tag}/files/";
+        private const string FileUrl = "http://www.curseforge.com{0}";
         private readonly SiteAddonCache _addonCache = new SiteAddonCache();
         private readonly SiteAddonCache _noLibCache = new SiteAddonCache();
 
@@ -32,7 +32,7 @@ namespace Waddu.Core.AddonSites
             doc.LoadHtml(html);
 
             // Get the Row Object
-            var rowNodes = doc.DocumentNode.SelectNodes("//table[@class='listing']/tbody/tr");
+            var rowNodes = doc.DocumentNode.SelectNodes("//table//tr[@class='project-file-list-item']");
             // Use the first Row by default
             var fileRow = rowNodes[0];
             HtmlNode noLibfileRow = null;
@@ -65,11 +65,10 @@ namespace Waddu.Core.AddonSites
         private void ParseRowInfo(HtmlNode htmlRow, SiteAddon addon)
         {
             // Get the Version and Link
-            var fileNode = htmlRow.SelectSingleNode("td[@class='col-file']/a");
-            var fileUrl = fileNode.Attributes["href"].Value;
-            var version = fileNode.InnerText;
+            var fileUrl = htmlRow.SelectSingleNode("//a[@title='Download File']").Attributes["href"].Value;
+            var version = htmlRow.SelectSingleNode("//td[contains(@class, 'project-file-name')]/div/div[@class='project-file-name-container']/a").InnerText;
             // Get the Date
-            var dateNode = htmlRow.SelectSingleNode("td[@class='col-date']/span");
+            var dateNode = htmlRow.SelectSingleNode("td[@class='project-file-date-uploaded']/abbr");
             var dateValue = dateNode.Attributes["data-epoch"].Value;
             var date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
             // Assign the Values

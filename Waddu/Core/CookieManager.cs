@@ -52,7 +52,7 @@ namespace Waddu.Core
             var cookies = new CookieContainer();
 
             // Get Cookies from Base URL
-            var baseUrl = "https://www.wowace.com/home/login/";
+            var baseUrl = "https://www.wowace.com/login-modal";
             webRequest = WebRequest.Create(baseUrl) as HttpWebRequest;
             webRequest.CookieContainer = cookies;
             responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
@@ -64,7 +64,7 @@ namespace Waddu.Core
             var postData = string.Format("login-next=%2F&form_type=login&login-username={0}&login-password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
 
             // Post to the Login Form
-            var loginUrl = "https://www.wowace.com/home/login/";
+            var loginUrl = "https://www.wowace.com/login-modal";
             webRequest = WebRequest.Create(loginUrl) as HttpWebRequest;
             webRequest.Method = "POST";
             webRequest.ContentType = "application/x-www-form-urlencoded";
@@ -110,7 +110,7 @@ namespace Waddu.Core
             var cookies = new CookieContainer();
 
             // Get Cookies from Base URL
-            var baseUrl = "https://legacy.curseforge.com/home/login/";
+            var baseUrl = "https://www.curseforge.com/login-modal";
             webRequest = WebRequest.Create(baseUrl) as HttpWebRequest;
             webRequest.CookieContainer = cookies;
             responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
@@ -122,7 +122,7 @@ namespace Waddu.Core
             var postData = string.Format("login-next=%2F&form_type=login&login-username={0}&login-password={1}", Uri.EscapeDataString(loginName), Uri.EscapeDataString(loginPassword));
 
             // Post to the Login Form
-            var loginUrl = "https://legacy.curseforge.com/home/login/";
+            var loginUrl = "https://www.curseforge.com/login-modal";
             webRequest = WebRequest.Create(loginUrl) as HttpWebRequest;
             webRequest.Method = "POST";
             webRequest.ContentType = "application/x-www-form-urlencoded";
