@@ -1692,7 +1692,7 @@ namespace Waddu.Core
             GetAddon("DeclineDuel").Mappings.Add(new Mapping(AddonSiteId.curse, "decline-duel"));
             GetAddon("DeclineDuel").Mappings.Add(new Mapping(AddonSiteId.wowace, "decline-duel"));
             GetAddon("Decursive").Mappings.Add(new Mapping(AddonSiteId.curse, "decursive"));
-            GetAddon("Decursive").Mappings.Add(new Mapping(AddonSiteId.curseforge, "decursive"));
+            GetAddon("Decursive").Mappings.Add(new Mapping(AddonSiteId.wowace, "decursive"));
             GetAddon("Deformat").Mappings.Add(new Mapping(AddonSiteId.curse, "deformat"));
             GetAddon("Deformat").Mappings.Add(new Mapping(AddonSiteId.wowace, "deformat"));
             GetAddon("DelMapa").Mappings.Add(new Mapping(AddonSiteId.curse, "del-mapa"));
@@ -2533,6 +2533,8 @@ namespace Waddu.Core
             GetAddon("FuTextures").Mappings.Add(new Mapping(AddonSiteId.wowace, "futextures"));
             GetAddon("G15display").Mappings.Add(new Mapping(AddonSiteId.curse, "g15display"));
             GetAddon("G15display").Mappings.Add(new Mapping(AddonSiteId.wowace, "g15display"));
+            GetAddon("G910xmit").Mappings.Add(new Mapping(AddonSiteId.curse, "wow-g910-xmit"));
+            GetAddon("G910xmit").Mappings.Add(new Mapping(AddonSiteId.curseforge, "wow-g910-xmit"));
             GetAddon("GameLobby").Mappings.Add(new Mapping(AddonSiteId.curse, "game-lobby"));
             GetAddon("GameLobby").Mappings.Add(new Mapping(AddonSiteId.wowace, "game-lobby"));
             GetAddon("GameLobby_ConnectFour").Mappings.Add(new Mapping(AddonSiteId.curse, "game-lobby_connect-four"));
@@ -2920,6 +2922,8 @@ namespace Waddu.Core
             GetAddon("ImbeerenRaid").Mappings.Add(new Mapping(AddonSiteId.curse, "imbeeren-raid"));
             GetAddon("ImbeerenRaid").Mappings.Add(new Mapping(AddonSiteId.wowace, "imbeeren-raid"));
             GetAddon("ImprovedIgnore").Mappings.Add(new Mapping(AddonSiteId.curse, "improved-ignore"));
+            GetAddon("ImprovedNameplates").Mappings.Add(new Mapping(AddonSiteId.curse, "improved-nameplates"));
+            GetAddon("ImprovedNameplates").Mappings.Add(new Mapping(AddonSiteId.curseforge, "improved-nameplates"));
             GetAddon("ImprovedRWF").Mappings.Add(new Mapping(AddonSiteId.curse, "improved-rwf"));
             GetAddon("ImprovedRWF").Mappings.Add(new Mapping(AddonSiteId.wowace, "improved-rwf"));
             GetAddon("ImprovedTargetFrame").Mappings.Add(new Mapping(AddonSiteId.curse, "improved-target-frame"));
@@ -5143,7 +5147,7 @@ namespace Waddu.Core
             GetAddon("_NPCScan").Mappings.Add(new Mapping(AddonSiteId.curseforge, "npcscan"));
             GetAddon("_NPCScan").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "12995"));
             GetAddon("_NPCScan.Overlay").Mappings.Add(new Mapping(AddonSiteId.curse, "npcscan-overlay"));
-            GetAddon("_NPCScan.Overlay").Mappings.Add(new Mapping(AddonSiteId.curseforge, "npcscan-overlay"));
+            GetAddon("_NPCScan.Overlay").Mappings.Add(new Mapping(AddonSiteId.wowace, "npcscan-overlay"));
             GetAddon("_NPCScan.Overlay").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "14686"));
             GetPackage("Auctioneer Suite").Addons.Add(GetAddon("!Swatter"));
             GetPackage("Auctioneer Suite").Addons.Add(GetAddon("Auc-Advanced"));
