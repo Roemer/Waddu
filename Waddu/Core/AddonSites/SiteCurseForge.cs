@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Windows.Forms;
 using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
-using Waddu.Types;
-using Waddu.UI.Forms;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
     public class SiteCurseForge : AddonSiteBase
     {
-        private const string InfoUrl = "http://www.curseforge.com/projects/{tag}/files/";
-        private const string FileUrl = "http://www.curseforge.com{0}";
+        private const string InfoUrl = "https://wow.curseforge.com/projects/{tag}/files/";
+        private const string FileUrl = "https://wow.curseforge.com{0}";
         private readonly SiteAddonCache _addonCache = new SiteAddonCache();
         private readonly SiteAddonCache _noLibCache = new SiteAddonCache();
 
@@ -141,26 +138,7 @@ namespace Waddu.Core.AddonSites
 
         public override string GetFilePath(Mapping mapping)
         {
-            var fileUrl = GetSiteAddon(mapping).FileUrl;
-            // Get the Html
-            var html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
-            // Get the Document
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
-
-            var downloadUrl = doc.DocumentNode.SelectSingleNode("//li[@class='user-action user-action-download']/span/a").GetAttributeValue("href", string.Empty);
-
-            var form = new WebBrowserForm(fileUrl, AddonSiteId.curseforge, mapping.Addon.Name);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;
-            }
-            else
-            {
-                downloadUrl = string.Empty;
-            }
-
-            return downloadUrl;
+           return GetSiteAddon(mapping).FileUrl;
         }
         #endregion
     }

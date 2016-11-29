@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Windows.Forms;
 using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
-using Waddu.Types;
-using Waddu.UI.Forms;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
     public class SiteWowAce : AddonSiteBase
     {
-        private const string InfoUrl = "http://www.wowace.com/projects/{tag}/files/";
-        private const string FileUrl = "http://www.wowace.com{0}";
+        private const string InfoUrl = "https://www.wowace.com/projects/{tag}/files/";
+        private const string FileUrl = "https://www.wowace.com{0}";
         private readonly SiteAddonCache _addonCache = new SiteAddonCache();
         private readonly SiteAddonCache _noLibCache = new SiteAddonCache();
 
@@ -110,6 +106,7 @@ namespace Waddu.Core.AddonSites
         }
 
         #region AddonSiteBase Overrides
+
         public override string GetVersion(Mapping mapping)
         {
             return GetSiteAddon(mapping).VersionString;
@@ -141,27 +138,9 @@ namespace Waddu.Core.AddonSites
 
         public override string GetFilePath(Mapping mapping)
         {
-            var fileUrl = GetSiteAddon(mapping).FileUrl;
-            // Get the Html
-            var html = string.Join("", WebHelper.GetHtml(fileUrl, mapping.AddonSiteId).ToArray());
-            // Get the Document
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
-
-            var downloadUrl = doc.DocumentNode.SelectSingleNode("//li[@class='user-action user-action-download']/span/a").GetAttributeValue("href", string.Empty);
-
-            var form = new WebBrowserForm(fileUrl, AddonSiteId.wowace, mapping.Addon.Name);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;
-            }
-            else
-            {
-                downloadUrl = string.Empty;
-            }
-
-            return downloadUrl;
+            return GetSiteAddon(mapping).FileUrl;
         }
+
         #endregion
     }
 }
