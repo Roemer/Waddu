@@ -125,22 +125,16 @@ namespace Waddu.Core.AddonSites
             for (var i = 0; i < infoPage.Count; i++)
             {
                 var line = infoPage[i];
-
-                var m = Regex.Match(line, string.Format(@"<h2><a href=""(.*)"" title=""Click to download"">{0}</a>", mapping.AddonTag));
+                var m = Regex.Match(line, @"<h2><a title=""Click to download"" href=""(.*)"">.*</a>\((.*)\)</h2>");
                 if (m.Success)
                 {
                     if (type == Type.Download)
                     {
-                        return "http://www.ctmod.net" + m.Groups[1].Captures[0].Value;
+                        return m.Groups[1].Captures[0].Value;
                     }
                     if (type == Type.Version)
                     {
-                        var realLine = infoPage[i + 1];
-                        m = Regex.Match(realLine, @"\((.*)\)");
-                        if (m.Success)
-                        {
-                            return m.Groups[1].Captures[0].Value;
-                        }
+                        return m.Groups[2].Captures[0].Value;
                     }
                 }
             }

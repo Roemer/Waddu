@@ -454,6 +454,8 @@ namespace Waddu.Core
             GetAddon("Aperture").Mappings.Add(new Mapping(AddonSiteId.wowace, "aperture"));
             GetAddon("Ara_Broker_Guild_Friends").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "11205"));
             GetAddon("Ara_Broker_Money").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "11907"));
+            GetAddon("Ara_Broker_Reputations").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "14263"));
+            GetAddon("Ara_Broker_Reputations_Alts").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "19878"));
             GetAddon("Ara_Broker_SpecSwitcher").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "13246"));
             GetAddon("Arcana_ExperienceBroker").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "14690"));
             GetAddon("ArcHUD2").Mappings.Add(new Mapping(AddonSiteId.curse, "arc-hud2"));
@@ -1449,6 +1451,8 @@ namespace Waddu.Core
             GetAddon("CooldownToGo").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "8601"));
             GetAddon("CopyThat").Mappings.Add(new Mapping(AddonSiteId.curse, "wowace-copy-that"));
             GetAddon("CopyThat").Mappings.Add(new Mapping(AddonSiteId.wowace, "wowace-copy-that"));
+            GetAddon("CQuestCounter").Mappings.Add(new Mapping(AddonSiteId.curse, "cquestcounter"));
+            GetAddon("CQuestCounter").Mappings.Add(new Mapping(AddonSiteId.curseforge, "cquestcounter"));
             GetAddon("Cork").Mappings.Add(new Mapping(AddonSiteId.curse, "cork"));
             GetAddon("Cork").Mappings.Add(new Mapping(AddonSiteId.wowace, "cork"));
             GetAddon("CorkWheel").Mappings.Add(new Mapping(AddonSiteId.curse, "cork-wheel"));
@@ -2839,6 +2843,8 @@ namespace Waddu.Core
             GetAddon("HandyNotes_FlightMasters").Mappings.Add(new Mapping(AddonSiteId.wowace, "handy-notes_flight-masters"));
             GetAddon("HandyNotes_Guild").Mappings.Add(new Mapping(AddonSiteId.curse, "handynotes_guild"));
             GetAddon("HandyNotes_Guild").Mappings.Add(new Mapping(AddonSiteId.wowace, "handynotes_guild"));
+            GetAddon("HandyNotes_LegionTreasures").Mappings.Add(new Mapping(AddonSiteId.curse, "handynotes_legiontreasures"));
+            GetAddon("HandyNotes_LegionTreasures").Mappings.Add(new Mapping(AddonSiteId.wowace, "handynotes_legiontreasures"));
             GetAddon("HandyNotes_Mailboxes").Mappings.Add(new Mapping(AddonSiteId.curse, "handy-notes_mailboxes"));
             GetAddon("HandyNotes_Mailboxes").Mappings.Add(new Mapping(AddonSiteId.wowace, "handy-notes_mailboxes"));
             GetAddon("HandyNotes_Stables").Mappings.Add(new Mapping(AddonSiteId.curse, "handy-notes_stables"));
