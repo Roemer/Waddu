@@ -1515,6 +1515,7 @@ namespace Waddu.Core
             GetAddon("CT_Core").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_Core"));
             GetAddon("CT_ExpenseHistory").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_ExpenseHistory"));
             GetAddon("CT_MailMod").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_MailMod"));
+            GetAddon("CT_Library").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_Library"));
             GetAddon("CT_MapMod").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_MapMod"));
             GetAddon("CT_PartyBuffs").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_PartyBuffs"));
             GetAddon("CT_RaidTracker").Mappings.Add(new Mapping(AddonSiteId.wowspecial, "CT_RaidTracker"));
@@ -1633,6 +1634,7 @@ namespace Waddu.Core
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-Party-Legion"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-StatusBarTimers"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-TrialofValor"));
+            GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-TombofSargeras"));
             GetAddon("DBM-Core").SubAddons.Add(GetAddon("DBM-WorldEvents"));
             GetAddon("DBM-Draenor").Mappings.Add(new Mapping(AddonSiteId.curse, "deadly-boss-mods-wod"));
             GetAddon("DBM-Draenor").SubAddons.Add(GetAddon("DBM-BlackrockFoundry"));
@@ -4695,6 +4697,8 @@ namespace Waddu.Core
             GetAddon("teksLoot").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "8198"));
             GetAddon("tekticles").Mappings.Add(new Mapping(AddonSiteId.curse, "tekticles"));
             GetAddon("tekticles").Mappings.Add(new Mapping(AddonSiteId.wowace, "tekticles"));
+            GetAddon("Telemancy").Mappings.Add(new Mapping(AddonSiteId.curse, "telemancy"));
+            GetAddon("Telemancy").Mappings.Add(new Mapping(AddonSiteId.curseforge, "telemancy"));
             GetAddon("TestAlpha").Mappings.Add(new Mapping(AddonSiteId.curse, "test-alpha"));
             GetAddon("TestAlpha").Mappings.Add(new Mapping(AddonSiteId.wowace, "test-alpha"));
             GetAddon("texbrowser").Mappings.Add(new Mapping(AddonSiteId.curse, "texbrowser"));
@@ -5033,6 +5037,8 @@ namespace Waddu.Core
             GetAddon("WorldFlightMap").Mappings.Add(new Mapping(AddonSiteId.curse, "worldflightmap"));
             GetAddon("WorldFlightMap").Mappings.Add(new Mapping(AddonSiteId.curseforge, "worldflightmap"));
             GetAddon("WorldFlightMap").Mappings.Add(new Mapping(AddonSiteId.wowinterface, "23358"));
+            GetAddon("WorldQuestTracker").Mappings.Add(new Mapping(AddonSiteId.curse, "world-quest-tracker"));
+            GetAddon("WorldQuestTracker").Mappings.Add(new Mapping(AddonSiteId.curseforge, "world-quest-tracker"));
             GetAddon("WorldTradeCenter").Mappings.Add(new Mapping(AddonSiteId.curse, "world-trade-center"));
             GetAddon("WorldTradeCenter").Mappings.Add(new Mapping(AddonSiteId.wowace, "world-trade-center"));
             GetAddon("WoWEquip").Mappings.Add(new Mapping(AddonSiteId.curse, "wowequip"));
