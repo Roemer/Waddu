@@ -84,8 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AddonSites\AddonSiteBase.cs" />
+    <Compile Include="Core\AddonSites\CurseSiteBase.cs" />
     <Compile Include="Core\AddonSites\SiteBlizzard.cs" />
-    <Compile Include="Core\AddonSites\SiteCurse.cs" />
     <Compile Include="Core\AddonSites\SiteCurseForge.cs" />
     <Compile Include="Core\AddonSites\SiteDirect.cs" />
     <Compile Include="Core\AddonSites\SiteWowAce.cs" />

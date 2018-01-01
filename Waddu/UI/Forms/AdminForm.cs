@@ -82,16 +82,6 @@ namespace Waddu.UI.Forms
             CreateMappings(tag, GetSite());
         }
 
-        private string GetUrl()
-        {
-            var site = GetSite();
-            if (site == AddonSiteId.curse)
-            {
-                return "http://wow.curse.com/downloads/wow-addons/details/(.*).aspx";
-            }
-            return string.Empty;
-        }
-
         private AddonSiteId GetSite()
         {
             return (AddonSiteId)cbSite.SelectedItem;

@@ -5,7 +5,6 @@
         blizzard,
         wowace,
         curseforge,
-        curse,
         wowinterface,
         wowspecial,
         direct

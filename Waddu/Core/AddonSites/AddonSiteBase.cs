@@ -25,7 +25,7 @@ namespace Waddu.Core.AddonSites
         public string FormatVersion(Mapping mapping, string versionString)
         {
             var retString = versionString;
-            if (mapping.AddonSiteId == AddonSiteId.wowace || mapping.AddonSiteId == AddonSiteId.curseforge || mapping.AddonSiteId == AddonSiteId.curse)
+            if (mapping.AddonSiteId == AddonSiteId.wowace || mapping.AddonSiteId == AddonSiteId.curseforge)
             {
                 // Remove "AddonName-" if existent
                 if (retString.StartsWith(mapping.Addon.Name + "-"))
@@ -62,10 +62,6 @@ namespace Waddu.Core.AddonSites
                     else if (addonSiteId == AddonSiteId.wowinterface)
                     {
                         site = new SiteWowInterface();
-                    }
-                    else if (addonSiteId == AddonSiteId.curse)
-                    {
-                        site = new SiteCurse();
                     }
                     else if (addonSiteId == AddonSiteId.curseforge)
                     {

@@ -12,6 +12,7 @@ namespace Waddu.Core
 
         public static CookieContainer GetCookies(AddonSiteId addonSiteId)
         {
+            return null;
             lock (CookieDict)
             {
                 if (CookieDict.ContainsKey(addonSiteId))

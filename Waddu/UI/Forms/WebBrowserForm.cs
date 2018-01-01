@@ -160,11 +160,6 @@ namespace Waddu.UI.Forms
                             foundElement = i + 1;
                             break;
                         }
-                        if (_addonSiteId == AddonSiteId.curse && tempEl.InnerHtml.StartsWith("\r\n<embed src=\"/Themes/Common/v6/flash/DownloadButton.swf"))
-                        {
-                            foundElement = i;
-                            break;
-                        }
                     }
                 }
 

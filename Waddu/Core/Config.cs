@@ -213,7 +213,6 @@ namespace Waddu.Core
                 }
             }
             // Fill missing AddonSites
-            Helpers.AddIfNeeded(_addonSites, AddonSiteId.curse);
             Helpers.AddIfNeeded(_addonSites, AddonSiteId.curseforge);
             Helpers.AddIfNeeded(_addonSites, AddonSiteId.direct);
             Helpers.AddIfNeeded(_addonSites, AddonSiteId.wowace);
@@ -231,7 +230,11 @@ namespace Waddu.Core
             {
                 foreach (var kvp in dict)
                 {
-                    _preferredMappings.Add(kvp.Key, (AddonSiteId)Enum.Parse(typeof(AddonSiteId), kvp.Value));
+                    AddonSiteId result;
+                    if (Enum.TryParse(kvp.Value, out result))
+                    {
+                        _preferredMappings.Add(kvp.Key, result);
+                    }
                 }
             }
         }
@@ -422,7 +425,7 @@ namespace Waddu.Core
                 preferredAddonSite = _preferredMappings[addon.Name];
                 return true;
             }
-            preferredAddonSite = AddonSiteId.curse;
+            preferredAddonSite = AddonSiteId.curseforge;
             return false;
         }
         #endregion

@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Windows.Forms;
+using HtmlAgilityPack;
 using Waddu.Core.BusinessObjects;
-using Waddu.Types;
-using Waddu.UI.Forms;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace Waddu.Core.AddonSites
 {
-    public class SiteCurse : AddonSiteBase
+    public abstract class CurseSiteBase : AddonSiteBase
     {
-        private string _infoUrl = "http://www.curse.com/addons/wow/{tag}";
-        private string _downUrl = "http://www.curse.com/addons/wow/{tag}/download";
         private SiteAddonCache _addonCache = new SiteAddonCache();
+
+        protected abstract string InfoUrlFormat { get; }
+        protected abstract string DownloadUrlFormat { get; }
 
         private void ParseInfoSite(Mapping mapping)
         {
@@ -19,7 +17,7 @@ namespace Waddu.Core.AddonSites
             addon.Clear();
 
             // Build the Url
-            var url = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            var url = InfoUrlFormat.Replace("{tag}", mapping.AddonTag);
             // Get the Html
             var html = string.Join("", WebHelper.GetHtml(url, mapping.AddonSiteId).ToArray());
             if (string.IsNullOrEmpty(html))
@@ -31,16 +29,16 @@ namespace Waddu.Core.AddonSites
             doc.LoadHtml(html);
 
             // Get the Version
-            var versionNode = doc.DocumentNode.SelectSingleNode("//li[@class='newest-file']");
-            var version = versionNode.InnerText.Replace("Newest File: ", string.Empty);
+            var versionNode = doc.DocumentNode.SelectSingleNode("//ul[@class='cf-recentfiles']/li//div[@class='project-file-name-container']");
+            var version = versionNode.InnerText.Trim();
             // Get the Date
-            var dateNode = doc.DocumentNode.SelectSingleNode("//li[@class='updated']/abbr");
+            var dateNode = doc.DocumentNode.SelectSingleNode("//li/div[starts-with(text(), 'Last Released File')]/following-sibling::div/abbr");
             var dateValue = dateNode.Attributes["data-epoch"].Value;
             var date = UnixTimeStamp.GetDateTime(Convert.ToDouble(dateValue));
 
             // Assign the Values
             addon.VersionString = version;
-            addon.FileUrl = _downUrl.Replace("{tag}", mapping.AddonTag);
+            addon.FileUrl = DownloadUrlFormat.Replace("{tag}", mapping.AddonTag);
             addon.VersionDate = date;
         }
 
@@ -67,7 +65,7 @@ namespace Waddu.Core.AddonSites
 
         public override string GetChangeLog(Mapping mapping)
         {
-            var fileUrl = _infoUrl.Replace("{tag}", mapping.AddonTag);
+            var fileUrl = InfoUrlFormat.Replace("{tag}", mapping.AddonTag);
 
             // Get the Html
             var html = string.Join("", WebHelper.GetHtml(fileUrl).ToArray());
@@ -81,7 +79,7 @@ namespace Waddu.Core.AddonSites
 
         public override string GetInfoLink(Mapping mapping)
         {
-            return _infoUrl.Replace("{tag}", mapping.AddonTag);
+            return InfoUrlFormat.Replace("{tag}", mapping.AddonTag);
         }
 
         public override string GetFilePath(Mapping mapping)
@@ -93,18 +91,7 @@ namespace Waddu.Core.AddonSites
             }
             var fileUrl = addon.FileUrl;
 
-            var downloadUrl = string.Empty;
-            var form = new WebBrowserForm(fileUrl, AddonSiteId.curse, mapping.Addon.Name);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                downloadUrl = form.UseFile ? form.FileUrl : form.DownloadUrl;
-            }
-            else
-            {
-                downloadUrl = string.Empty;
-            }
-
-            return downloadUrl;
+            return fileUrl;
         }
         #endregion
     }
